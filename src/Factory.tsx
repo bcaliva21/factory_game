@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components'
 const FactoryContainer = styled.div`
     width: 80%;
     height: 100%;
-    background-color: white;
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -78,6 +78,7 @@ const FactoryRoofStackTwo = styled.div`
 
 const FactoryBody = styled.div`
     margin: auto;
+    margin-top: 25%;
     background-color: beige;
     height: 40%;
     position: relative;

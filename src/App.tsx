@@ -2,8 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Factory from './Factory'
+import Environment from './Environment'
 
 const AppBody = styled.div`
+    position: relative;
     width: 100vw;
     height: 98vh;
     display: flex;
@@ -15,6 +17,7 @@ function App() {
     return (
         <AppBody>
             <Factory />
+            <Environment />
         </AppBody>
     )
 }
