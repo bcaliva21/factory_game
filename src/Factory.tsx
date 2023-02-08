@@ -14,8 +14,8 @@ const FactoryContainer = styled.div`
 const FactoryRoofSection = styled.div`
     position: relative;
     border-right: calc(100vw / 16.75) solid transparent;
-    border-left: calc(100vw / 16.75) solid red;
-    border-bottom: calc(100vw / 36) solid red;
+    border-left: calc(100vw / 16.75) solid #901000;
+    border-bottom: calc(100vw / 36) solid #901000;
     border-top: calc(100vw / 36) solid transparent;
     display: inline-block;
     transform: translateY(calc(100vw / -18));
@@ -36,7 +36,7 @@ const DoorAwning = styled.div`
     width: 31%;
     height: 6%;
     margin-left: 47%;
-    background: green;
+    background: #b1a14e;
     bottom: 36%;
     position: absolute;
     z-index: 15;
@@ -64,7 +64,7 @@ const FactoryRoofStackOne = styled.div`
     right: 7vw;
     width: 5vw;
     height: 20vh;
-    background-color: beige;
+    background-color:  #ebebeb;
 `
 
 const FactoryRoofStackTwo = styled.div`
@@ -73,13 +73,13 @@ const FactoryRoofStackTwo = styled.div`
     right: 14vw;
     width: 5vw;
     height: 20vh;
-    background-color: beige;
+    background-color: #ebebeb;
 `
 
 const FactoryBody = styled.div`
     margin: auto;
     margin-top: 25%;
-    background-color: beige;
+    background-color: #ebebeb;
     height: 40%;
     position: relative;
 `
@@ -173,10 +173,24 @@ const OneSecDelaySmoke = styled.div`
     animation-delay: 1s;
 `
 
+const Placard = styled.div`
+    position: absolute;
+    color: black;
+    font-family: system-ui;
+    font-weight: bold;
+    background-color: #b1a14e;
+    border: medium inset #ffd700;
+    font-size: larger;
+    padding: 0.5% 1.5%;
+    top: 20.5vh;
+    left: 22vw;
+`
+
 const Factory = () => {
     return (
         <FactoryContainer>
         <FactoryBody>
+            <Placard>Bradley's Component Factory</Placard>
             <FactoryRoofStackOne>
                 <DramaticSmoke />
                 <SlowestSmoke />
@@ -203,7 +217,7 @@ const Factory = () => {
                 <FactoryWindow />
                 <FactoryWindow />
             </WindowContainer>
-            <DoorAwning />
+            {/* <DoorAwning /> */}
             <Door />
         </FactoryBody>
     </FactoryContainer>

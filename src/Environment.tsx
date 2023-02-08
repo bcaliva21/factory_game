@@ -14,7 +14,7 @@ const EnvironmentContainer = styled.div`
 const SkyContainer = styled.div`
     width: 100%;
     height: 50%;
-    background-color: skyblue;
+    background-color: #87cefa;
     position: relative;
     opacity: 0.85;
 `
@@ -22,7 +22,7 @@ const SkyContainer = styled.div`
 const GroundContainer = styled.div`
     width: 100%;
     height: 50%;
-    background-color: green;
+    background-color: #5c7515;
     opacity: 0.9;
 `
 
