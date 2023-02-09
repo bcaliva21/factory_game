@@ -29,7 +29,7 @@ const NightSkyContainer = styled.div`
 const GroundContainer = styled.div<{ time: boolean }>`
     width: 100%;
     height: 50%;
-    background-color: ${time => (time ? '#5c7515' : '#0e1103')};
+    background-color: ${({time}) => time ? '#5c7515' : '#0e1103'};
     opacity: 0.9;
 `
 
