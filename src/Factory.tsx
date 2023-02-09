@@ -2,13 +2,13 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 const FactoryContainer = styled.div`
-    width: 80%;
+    width: 70%;
     height: 100%;
     background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: -1;
+    z-index: 1;
 `
 
 const FactoryRoofSection = styled.div`
@@ -32,16 +32,6 @@ const WindowContainer = styled.div`
     justify-content: space-evenly;
 `
 
-const DoorAwning = styled.div`
-    width: 31%;
-    height: 6%;
-    margin-left: 47%;
-    background: #b1a14e;
-    bottom: 36%;
-    position: absolute;
-    z-index: 15;
-`
-
 const Door = styled.div`
     width: 25%;
     height: 36%;
@@ -50,12 +40,15 @@ const Door = styled.div`
     background: linear-gradient(180deg, rgba(203,203,203,1) 1%, rgba(159,159,159,1) 52%, rgba(103,103,103,1) 100%);
     position: absolute;
     bottom: 0;
+    border-right: 2px solid #ffd700;
+    border-left: 2px solid #ffd700;
 `
 
 const FactoryWindow = styled.div`
     background-color: skyblue;
     height: 100%;
     width: 10%;
+    border: 2px solid #ffd700;
 `
 
 const FactoryRoofStackOne = styled.div`
@@ -105,7 +98,7 @@ const DramaticSmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(30deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 6s;
@@ -117,7 +110,7 @@ const SlowestSmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(-30deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 5s;
@@ -129,7 +122,7 @@ const SlowSmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(-50deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 4s;
@@ -141,7 +134,7 @@ const NoDelaySmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(50deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 3s;
@@ -153,7 +146,7 @@ const HalfSecDelaySmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(60deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 3s;
@@ -166,7 +159,7 @@ const OneSecDelaySmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(-60deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 3s;
@@ -175,10 +168,10 @@ const OneSecDelaySmoke = styled.div`
 
 const Placard = styled.div`
     position: absolute;
-    color: black;
+    color: #ffd700;
     font-family: system-ui;
     font-weight: bold;
-    background-color: #b1a14e;
+    background-color: #901000;
     border: medium inset #ffd700;
     font-size: larger;
     padding: 0.5% 1.5%;
@@ -217,7 +210,6 @@ const Factory = () => {
                 <FactoryWindow />
                 <FactoryWindow />
             </WindowContainer>
-            {/* <DoorAwning /> */}
             <Door />
         </FactoryBody>
     </FactoryContainer>

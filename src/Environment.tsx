@@ -1,28 +1,35 @@
-import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import React, { useState } from 'react'
+import styled, { keyframes, css } from 'styled-components'
 
 const EnvironmentContainer = styled.div`
-    width: 80%;
+    width: 100%;
     height: 100%;
     background-color: white;
     position: absolute;
-    z-index: -2;
     display: flex;
     flex-direction: column;
 `
 
-const SkyContainer = styled.div`
+const DaySkyContainer = styled.div`
     width: 100%;
     height: 50%;
-    background-color: #87cefa;
+    background-color: #87cefa;;
     position: relative;
     opacity: 0.85;
 `
 
-const GroundContainer = styled.div`
+const NightSkyContainer = styled.div`
     width: 100%;
     height: 50%;
-    background-color: #5c7515;
+    background-color: #000080;
+    position: relative;
+    opacity: 0.85;
+`
+
+const GroundContainer = styled.div<{ time: boolean }>`
+    width: 100%;
+    height: 50%;
+    background-color: ${time => (time ? '#5c7515' : '#0e1103')};
     opacity: 0.9;
 `
 
@@ -34,6 +41,103 @@ const Sun = styled.div`
     border-radius: 50%;
     top: 4vw;
     left: 4vw;
+    &:hover {
+        cursor: pointer;
+    }
+`
+
+const Moon = styled.div`
+    width: 8vw;
+    height: 8vw;
+    background-color: #FFFFCC;
+    position: absolute;
+    border-radius: 50%;
+    top: 4vw;
+    left: 4vw;
+    &:hover {
+        cursor: pointer;
+    }
+`
+
+const MoonDarkSpot = styled.div`
+    width: 7vw;
+    height: 7vw;
+    background-color: #000080;
+    position: absolute;
+    border-radius: 50%;
+    top: 0vw;
+    left: 2vw;
+    &:hover {
+        cursor: pointer;
+    }
+`
+
+const CloudContainer = styled.div`
+    width: 12vw;
+    height: 12vw;
+    background-color: transparent;
+    position: absolute;
+    z-index; 100;
+`
+
+const CloudBlobLft = styled.div`
+    width: 1.5vw;
+    height: 2vh;
+    position: absolute;
+    border-radius: 50%;
+    top: 6vh;
+    left: 4vw;
+    background-color: white;
+`
+
+const CloudBlobRgt = styled.div`
+    width: 1.5vw;
+    height: 2vh;
+    position: absolute;
+    border-radius: 50%;
+    top: 6vh;
+    left: 5vw;
+    background-color: white;
+`
+
+const CloudBlobTopLft = styled.div`
+    width: 1vw;
+    height: 1vh;
+    position: absolute;
+    border-radius: 50%;
+    top: 5.15vh;
+    left: 4.25vw;
+    background-color: white;
+`
+
+const CloudBlobTopRgt = styled.div`
+    width: 1vw;
+    height: 1vh;
+    position: absolute;
+    border-radius: 50%;
+    top: 5.4vh;
+    left: 4.7vw;
+    background-color: white;
+`
+
+const CloudBlobBtm = styled.div`
+    width: 1.5vw;
+    height: 2vh;
+    position: absolute;
+    border-radius: 50%;
+    top: 7vh;
+    left: 4.5vw;
+    background-color: white;
+`
+
+const CloudBlobBtmRgt = styled.div`
+    width: 1.5vw;
+    height: 1.5vh;
+    position: absolute;
+    border-radius: 50%;
+    top: 7.4vh;
+    left: 5.2vw;
+    background-color: white;
 `
 
 const pulseVert = keyframes`
@@ -106,6 +210,7 @@ const SunRayRgt = styled.div`
     top: 3.5vw;
     left: 9.5vw;
     border-radius: 25%;
+    transform: rotate(90deg);
     animation: ${pulseHori} infinite ease-in-out;
     animation-duration: 12s;
     animation-delay: 0.8s;
@@ -119,6 +224,7 @@ const SunRayLft = styled.div`
     top: 3.5vw;
     left: -1.5vw;
     border-radius: 25%;
+    transform: rotate(90deg);
     animation: ${pulseHori} infinite ease-in-out;
     animation-duration: 12s;
     animation-delay: 0.12s;
@@ -178,25 +284,62 @@ const SunRayTopLft = styled.div`
     animation: ${pulseNeg45} infinite ease-in-out;
     animation-duration: 12s;
     animation-delay: 1.6s;
-` 
+`
+
+enum TimeOfDay {
+    DAY = 'day',
+    NIGHT = 'night',
+}
 
 const Environment = () => {
+    const [time, setTime] = useState<TimeOfDay>(TimeOfDay.DAY)
+
+    const flipTime = () => {
+        console.log('clicked')
+        time === TimeOfDay.DAY 
+            ? setTime(TimeOfDay.NIGHT) 
+            : setTime(TimeOfDay.DAY)
+    }
+
+    const renderEnvironment = () => {
+        if (time === TimeOfDay.DAY) {
+            return (
+                <DaySkyContainer>
+                    <Sun onClick={flipTime}>
+                        <SunRayBtm />
+                        <SunRayTop />
+                        <SunRayRgt />
+                        <SunRayLft />
+                        <SunRayBtmLft />
+                        <SunRayTopRgt />
+                        <SunRayBtmRgt />
+                        <SunRayTopLft />
+                    </Sun> 
+                </DaySkyContainer>
+            )
+        } else {
+            return (
+                <NightSkyContainer>
+                    <Moon onClick={flipTime}>
+                        <MoonDarkSpot />
+                        <CloudContainer>
+                            <CloudBlobLft />
+                            <CloudBlobRgt />
+                            <CloudBlobBtm />
+                            <CloudBlobTopLft />
+                            <CloudBlobTopRgt />     
+                            <CloudBlobBtmRgt />
+                        </CloudContainer>
+                    </Moon>
+                </NightSkyContainer>
+            )
+        }
+    }
 
     return (
         <EnvironmentContainer>
-            <SkyContainer>
-                <Sun>
-                    <SunRayBtm />
-                    <SunRayTop />
-                    <SunRayRgt />
-                    <SunRayLft />
-                    <SunRayBtmLft />
-                    <SunRayTopRgt />
-                    <SunRayBtmRgt />
-                    <SunRayTopLft />
-                </Sun>
-            </SkyContainer>
-            <GroundContainer />
+            {renderEnvironment()}
+            <GroundContainer time={TimeOfDay.DAY === time} />
         </EnvironmentContainer>
     )
 }
