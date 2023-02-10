@@ -2,20 +2,20 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 const FactoryContainer = styled.div`
-    width: 80%;
+    width: 70%;
     height: 100%;
-    background-color: white;
+    background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: -1;
+    z-index: 1;
 `
 
 const FactoryRoofSection = styled.div`
     position: relative;
     border-right: calc(100vw / 16.75) solid transparent;
-    border-left: calc(100vw / 16.75) solid red;
-    border-bottom: calc(100vw / 36) solid red;
+    border-left: calc(100vw / 16.75) solid #901000;
+    border-bottom: calc(100vw / 36) solid #901000;
     border-top: calc(100vw / 36) solid transparent;
     display: inline-block;
     transform: translateY(calc(100vw / -18));
@@ -32,16 +32,6 @@ const WindowContainer = styled.div`
     justify-content: space-evenly;
 `
 
-const DoorAwning = styled.div`
-    width: 31%;
-    height: 6%;
-    margin-left: 47%;
-    background: green;
-    bottom: 36%;
-    position: absolute;
-    z-index: 15;
-`
-
 const Door = styled.div`
     width: 25%;
     height: 36%;
@@ -50,12 +40,15 @@ const Door = styled.div`
     background: linear-gradient(180deg, rgba(203,203,203,1) 1%, rgba(159,159,159,1) 52%, rgba(103,103,103,1) 100%);
     position: absolute;
     bottom: 0;
+    border-right: 2px solid #ffd700;
+    border-left: 2px solid #ffd700;
 `
 
 const FactoryWindow = styled.div`
     background-color: skyblue;
     height: 100%;
     width: 10%;
+    border: 2px solid #ffd700;
 `
 
 const FactoryRoofStackOne = styled.div`
@@ -64,7 +57,7 @@ const FactoryRoofStackOne = styled.div`
     right: 7vw;
     width: 5vw;
     height: 20vh;
-    background-color: beige;
+    background-color:  #ebebeb;
 `
 
 const FactoryRoofStackTwo = styled.div`
@@ -73,12 +66,13 @@ const FactoryRoofStackTwo = styled.div`
     right: 14vw;
     width: 5vw;
     height: 20vh;
-    background-color: beige;
+    background-color: #ebebeb;
 `
 
 const FactoryBody = styled.div`
     margin: auto;
-    background-color: beige;
+    margin-top: 25%;
+    background-color: #ebebeb;
     height: 40%;
     position: relative;
 `
@@ -104,7 +98,7 @@ const DramaticSmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(30deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 6s;
@@ -116,7 +110,7 @@ const SlowestSmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(-30deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 5s;
@@ -128,7 +122,7 @@ const SlowSmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(-50deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 4s;
@@ -140,7 +134,7 @@ const NoDelaySmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(50deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 3s;
@@ -152,7 +146,7 @@ const HalfSecDelaySmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(60deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 3s;
@@ -165,17 +159,31 @@ const OneSecDelaySmoke = styled.div`
     position: absolute;
     background-color: lightgray;
     border-radius: 50%;
-    z-index: -1;
+    z-index: 1;
     transform: rotate(-60deg);
     animation: ${grow} infinite ease-in-out;
     animation-duration: 3s;
     animation-delay: 1s;
 `
 
+const Placard = styled.div`
+    position: absolute;
+    color: #ffd700;
+    font-family: system-ui;
+    font-weight: bold;
+    background-color: #901000;
+    border: medium inset #ffd700;
+    font-size: larger;
+    padding: 0.5% 1.5%;
+    top: 20.5vh;
+    left: 22vw;
+`
+
 const Factory = () => {
     return (
         <FactoryContainer>
         <FactoryBody>
+            <Placard>Bradley's Component Factory</Placard>
             <FactoryRoofStackOne>
                 <DramaticSmoke />
                 <SlowestSmoke />
@@ -202,7 +210,6 @@ const Factory = () => {
                 <FactoryWindow />
                 <FactoryWindow />
             </WindowContainer>
-            <DoorAwning />
             <Door />
         </FactoryBody>
     </FactoryContainer>
