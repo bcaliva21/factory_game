@@ -294,12 +294,10 @@ enum TimeOfDay {
 const Environment = () => {
     const [time, setTime] = useState<TimeOfDay>(TimeOfDay.DAY)
 
-    const flipTime = () => {
-        console.log('clicked')
-        time === TimeOfDay.DAY 
-            ? setTime(TimeOfDay.NIGHT) 
-            : setTime(TimeOfDay.DAY)
-    }
+    const flipTime = () => time === TimeOfDay.DAY 
+        ? setTime(TimeOfDay.NIGHT) 
+        : setTime(TimeOfDay.DAY)
+    
 
     const renderEnvironment = () => {
         if (time === TimeOfDay.DAY) {
