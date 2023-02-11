@@ -60,14 +60,25 @@ const Head = styled.div`
     background-color: white;
     border-radius: 50%;
     width: 35%;
-    height: 40%;
+    height: 25%;
+    position: relative;
     margin: auto;
-    margin-top: 5%;
+    margin-top: 3%;
+    border-top: calc(100vw / 125) solid yellow;
+`
+
+const HatRidge = styled.div`
+    background-color: yellow;
+    position: absolute;
+    top: 0;
+    left: -5%;
+    width: 110%;
+    height: 20%;
 `
 
 const Torso = styled.div`
     width: 40%;
-    height: 40%;
+    height: 35%;
     margin: auto;
     position: relative;
     background-color: #901000;
@@ -385,7 +396,9 @@ const Factory = () => {
                 <WindowContainer>
                     <FactoryWindow>
                         <Worker>
-                            <Head />
+                            <Head>
+                                <HatRidge />
+                            </Head>
                             <Torso>
                                 <Cover />
                                 <LeftUpperArm>
