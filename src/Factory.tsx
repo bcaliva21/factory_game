@@ -45,10 +45,188 @@ const Door = styled.div`
 `
 
 const FactoryWindow = styled.div`
-    background-color: skyblue;
     height: 100%;
     width: 10%;
+    position: relative;
+    background-color: skyblue;
     border: 2px solid #ffd700;
+`
+
+const Worker = styled.div`
+    width: 100%;
+    height: 100%;
+`
+const Head = styled.div`
+    background-color: white;
+    border-radius: 50%;
+    width: 35%;
+    height: 40%;
+    margin: auto;
+    margin-top: 5%;
+`
+
+const Torso = styled.div`
+    width: 40%;
+    height: 40%;
+    margin: auto;
+    position: relative;
+    background-color: #901000;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    z-index: 10;
+`
+
+const TorsoPocket = styled.div`
+    position: absolute;
+    width: 20%;
+    height: 30%;
+    background-color: #ffd700;
+    right: 15%;
+    top: 25%;
+    border-bottom-right-radius: 30%;
+    border-bottom-left-radius: 30%;
+`
+
+const LeftUpperArm = styled.div`
+    width: 25%;
+    height: 70%;
+    transform: rotate(120deg);
+    position: absolute;
+    left: -25%;
+    top: 5%;
+    z-index: 5;
+`
+
+const wave = keyframes`
+    0%, 100% {
+        transform: rotate(10deg);
+    }
+    50% {
+        transform: rotate(20deg);
+    }
+`
+
+const LeftForeArm = styled.div`
+    position: absolute;
+    width: 25%;
+    height: 70%;
+    left: -40%;
+    top: -32%;
+    z-index: 5;
+    transform: rotate(10deg);
+    animation: ${wave} infinite ease-in-out;
+    animation-duration: 6s;
+`
+
+const ForeArm = styled.div`
+    width: 100%;
+    height: 70%;
+    position: absolute;
+    background-color: #902001;
+    bottom: 0;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+`
+
+const Shoulder = styled.div`
+    width: 100%;
+    height: 35%;
+    position: absolute;
+    top: 0;
+    border-radius: 50%;
+    background-color: #902001;
+`
+
+const Arm = styled.div`
+    width: 100%;
+    height: 75%;
+    position: absolute;
+    top: 10%;
+    background-color: #902001;
+`
+
+const Cover = styled.div`
+    width: 25%;
+    height: 35%;
+    position: absolute;
+    top: 30%;
+    z-index: 100;
+    border-top-left-radius: 50%;
+    background-color: #901001;
+`
+
+const JointUpper = styled.div`
+    width: 100%;
+    height: 35%;
+    position: absolute;
+    top: 70%;
+    background-color: #902001;
+    border-radius: 50%;
+`
+
+const JointFore = styled.div`
+    width: 100%;
+    height: 36%;
+    position: absolute;
+    top: 65%;
+    background-color: #902001;
+    border-radius: 50%;
+`
+
+const Hand = styled.div`
+    width: 100%;
+    height: 35%;
+    position: absolute;
+    top: 5%;
+    background-color: navy;
+    border-radius: 50%;
+`
+const Pants = styled.div`
+    width: 40%;
+    height: 10%;
+    margin: auto;
+    position: relative;
+    background-color: navy;
+    border-top: 2px solid black;
+`
+
+const ClothingSplit = styled.div`
+    position: absolute;
+    width: 2%;
+    height: 100%;
+    background-color: white;
+    left: 50%;
+    border-top-right-radius: 50%;
+`
+
+const ClothingButton = styled.div<{ top: string }>`
+    position: absolute;
+    width: 5%;
+    height: 5%;
+    background-color: white;
+    left: 35%;
+    top: ${({ top }) => top && top};
+    border-radius: 50%;
+`
+
+const PantsPocketLeft = styled.div`
+    position: absolute;
+    width: 20%;
+    height: 50%;
+    top: 10%;
+    left: 3%;
+    background-color: blue;
+    border-bottom-right-radius: 50%;
+`
+
+const PantsPocketRight = styled.div`
+    position: absolute;
+    width: 20%;
+    height: 50%;
+    top: 10%;
+    right: 3%;
+    background-color: blue;
+    border-bottom-left-radius: 50%;
 `
 
 const FactoryRoofStackOne = styled.div`
@@ -182,37 +360,65 @@ const Placard = styled.div`
 const Factory = () => {
     return (
         <FactoryContainer>
-        <FactoryBody>
-            <Placard>Bradley's Component Factory</Placard>
-            <FactoryRoofStackOne>
-                <DramaticSmoke />
-                <SlowestSmoke />
-                <SlowSmoke/>
-                <NoDelaySmoke/>
-                <HalfSecDelaySmoke/>
-                <OneSecDelaySmoke/>
-            </FactoryRoofStackOne>
-            <FactoryRoofStackTwo>
-                <DramaticSmoke />
-                <SlowestSmoke />
-                <SlowSmoke/>
-                <NoDelaySmoke/>
-                <HalfSecDelaySmoke/>
-                <OneSecDelaySmoke/>
-            </FactoryRoofStackTwo>
-            <FactoryRoofSection />
-            <FactoryRoofSection />
-            <FactoryRoofSection />
-            <FactoryRoofSection />
-            <WindowContainer>
-                <FactoryWindow />
-                <FactoryWindow />
-                <FactoryWindow />
-                <FactoryWindow />
-            </WindowContainer>
-            <Door />
-        </FactoryBody>
-    </FactoryContainer>
+            <FactoryBody>
+                <Placard>Bradley's Component Factory</Placard>
+                <FactoryRoofStackOne>
+                    <DramaticSmoke />
+                    <SlowestSmoke />
+                    <SlowSmoke />
+                    <NoDelaySmoke />
+                    <HalfSecDelaySmoke />
+                    <OneSecDelaySmoke />
+                </FactoryRoofStackOne>
+                <FactoryRoofStackTwo>
+                    <DramaticSmoke />
+                    <SlowestSmoke />
+                    <SlowSmoke />
+                    <NoDelaySmoke />
+                    <HalfSecDelaySmoke />
+                    <OneSecDelaySmoke />
+                </FactoryRoofStackTwo>
+                <FactoryRoofSection />
+                <FactoryRoofSection />
+                <FactoryRoofSection />
+                <FactoryRoofSection />
+                <WindowContainer>
+                    <FactoryWindow>
+                        <Worker>
+                            <Head />
+                            <Torso>
+                                <Cover />
+                                <LeftUpperArm>
+                                    <JointUpper />
+                                    <Arm />
+                                    <Shoulder />
+                                </LeftUpperArm>
+                                <LeftForeArm>
+                                    <Hand />
+                                    <JointFore />
+                                    <ForeArm />
+                                </LeftForeArm>
+                                <ClothingSplit />
+                                <TorsoPocket />
+                                <ClothingButton top='30%' />
+                                <ClothingButton top='45%' />
+                                <ClothingButton top='60%' />
+                            </Torso>
+                            <Pants>
+                                <ClothingButton top='30%' />
+                                <ClothingSplit />
+                                <PantsPocketLeft />
+                                <PantsPocketRight />
+                            </Pants>
+                        </Worker>
+                    </FactoryWindow>
+                    <FactoryWindow />
+                    <FactoryWindow />
+                    <FactoryWindow />
+                </WindowContainer>
+                <Door />
+            </FactoryBody>
+        </FactoryContainer>
     )
 }
 
