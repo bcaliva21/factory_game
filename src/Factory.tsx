@@ -63,12 +63,12 @@ const Head = styled.div`
     height: 25%;
     position: relative;
     margin: auto;
-    margin-top: 3%;
-    border-top: calc(100vw / 125) solid yellow;
+    margin-top: 2%;
+    border-top: calc(100vw / 125) solid #ffd700;
 `
 
 const HatRidge = styled.div`
-    background-color: yellow;
+    background-color: #ffd700;
     position: absolute;
     top: 0;
     left: -5%;
@@ -76,8 +76,59 @@ const HatRidge = styled.div`
     height: 20%;
 `
 
-const Torso = styled.div`
+const SafetyGoggles = styled.div`
+    height: 30%;
+    width: 80%;
+    position: absolute;
+    top: 25%;
+    left: 10%;
+`
+
+const LeftLens = styled.div`
     width: 40%;
+    height: 100%;
+    position: absolute;
+    left: 3%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    background-color: #e8f4f8;
+`
+
+const RightLens = styled.div`
+    width: 40%;
+    height: 100%;
+    position: absolute;
+    right: 3%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    background-color: #e8f4f8;
+`
+
+const LeftWing = styled.div`
+    width: 20%;
+    height: 10%;
+    position: absolute;
+    left: -15%;
+    top: 5%;
+    background-color: black;
+`
+    // background-color: black;
+
+const RightWing = styled.div`
+    width: 20%;
+    height: 10%;
+    position: absolute;
+    right: -10%;
+    top: 5%;
+    background-color: black;
+`
+
+const Torso = styled.div`
+    width: 35%;
     height: 35%;
     margin: auto;
     position: relative;
@@ -103,10 +154,19 @@ const LeftUpperArm = styled.div`
     height: 70%;
     transform: rotate(120deg);
     position: absolute;
-    left: -25%;
+    left: -20%;
     top: 5%;
-    z-index: 5;
 `
+
+const RightUpperArm = styled.div`
+    width: 25%;
+    height: 70%;
+    position: absolute;
+    // background-color: white;
+    right: -15%;
+    top: 30%;
+    `
+    // transform: rotate(120deg);
 
 const wave = keyframes`
     0%, 100% {
@@ -121,7 +181,7 @@ const LeftForeArm = styled.div`
     position: absolute;
     width: 25%;
     height: 70%;
-    left: -40%;
+    left: -35%;
     top: -32%;
     z-index: 5;
     transform: rotate(10deg);
@@ -129,9 +189,19 @@ const LeftForeArm = styled.div`
     animation-duration: 6s;
 `
 
+const RightForeArm = styled.div`
+    position: absolute;
+    width: 25%;
+    height: 70%;
+    right: 2%;
+    top: 52%;
+    z-index: 5;
+    transform: rotate(-90deg);
+`
+
 const ForeArm = styled.div`
     width: 100%;
-    height: 70%;
+    height: 80%;
     position: absolute;
     background-color: #902001;
     bottom: 0;
@@ -181,24 +251,24 @@ const JointFore = styled.div`
     position: absolute;
     top: 65%;
     background-color: #902001;
-    border-radius: 50%;
-`
+    border-radius: 70%;
+    `
 
 const Hand = styled.div`
     width: 100%;
-    height: 35%;
+    height: 65%;
     position: absolute;
-    top: 5%;
+    top: -10%;
     background-color: navy;
     border-radius: 50%;
 `
 const Pants = styled.div`
-    width: 40%;
+    width: 35%;
     height: 10%;
     margin: auto;
     position: relative;
     background-color: navy;
-    border-top: 2px solid black;
+    border-top: 3px solid black;
 `
 
 const ClothingSplit = styled.div`
@@ -398,6 +468,12 @@ const Factory = () => {
                         <Worker>
                             <Head>
                                 <HatRidge />
+                                <SafetyGoggles>
+                                    <LeftLens />
+                                    <RightLens />
+                                    <LeftWing />
+                                    <RightWing />
+                                </SafetyGoggles>
                             </Head>
                             <Torso>
                                 <Cover />
@@ -411,6 +487,16 @@ const Factory = () => {
                                     <JointFore />
                                     <ForeArm />
                                 </LeftForeArm>
+                                <RightUpperArm>
+                                    <JointUpper />
+                                    <Arm />
+                                    <Shoulder />
+                                </RightUpperArm>
+                                <RightForeArm>
+                                    <Hand />
+                                    <JointFore />
+                                    <ForeArm />
+                                </RightForeArm>
                                 <ClothingSplit />
                                 <TorsoPocket />
                                 <ClothingButton top='30%' />
