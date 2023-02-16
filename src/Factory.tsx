@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import Worker from './Worker'
+import Inside from './Inside'
 
 const FactoryContainer = styled.div`
     width: 70%;
@@ -33,16 +34,38 @@ const WindowContainer = styled.div`
     justify-content: space-evenly;
 `
 
+const DoorText = styled.div`
+    width: 50%;
+    height 30%;
+    background-color: transparent;
+    color: transparent;
+    position: absolute;
+    top: 25%;
+    left: calc(100vw / 30);
+    transition: 0.5s ease-in-out;
+`
+
 const Door = styled.div`
     width: 25%;
     height: 36%;
     margin-left: 50%;
     background: rgb(203,203,203);
-    background: linear-gradient(180deg, rgba(203,203,203,1) 1%, rgba(159,159,159,1) 52%, rgba(103,103,103,1) 100%);
+    background: linear-gradient(180deg, rgba(89,89,89,1) 1%, rgba(51,51,51,1) 52%, rgba(13,13,13,1) 100%);
     position: absolute;
     bottom: 0;
     border-right: 2px solid #ffd700;
     border-left: 2px solid #ffd700;
+    transition: 0.5s ease-in-out;
+    
+    &:hover {
+        cursor: pointer;
+        opacity: 0.75;
+        ${DoorText} {
+            display: block;
+            transform: scale(1.2);
+            color: #ffd700;
+        }
+    }
 `
 
 const FactoryWindow = styled.div`
@@ -171,8 +194,6 @@ const OneSecDelaySmoke = styled.div`
 const Placard = styled.div`
     position: absolute;
     color: #ffd700;
-    font-family: system-ui;
-    font-weight: bold;
     background-color: #901000;
     border: medium inset #ffd700;
     font-size: larger;
@@ -182,6 +203,10 @@ const Placard = styled.div`
 `
 
 const Factory = () => {
+    const [isInside, setIsInside] = useState(false)
+
+    const handleDoorClick = () => setIsInside(!isInside)
+
     return (
         <FactoryContainer>
             <FactoryBody>
@@ -214,8 +239,13 @@ const Factory = () => {
                     <FactoryWindow />
                     <FactoryWindow />
                 </WindowContainer>
-                <Door />
+                <Door onClick={handleDoorClick}>    
+                    <DoorText>
+                        Click to enter
+                    </DoorText>
+                </Door>
             </FactoryBody>
+            <Inside isInside={isInside} setIsInside={setIsInside}/>
         </FactoryContainer>
     )
 }
