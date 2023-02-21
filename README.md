@@ -1,3 +1,3 @@
-Component Factory
+Factory Game
 
-> This repo is for me to practice making reusable react components and some other funs things like css.
+> This repo is for a simple scroll timing game.
