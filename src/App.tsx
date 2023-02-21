@@ -11,6 +11,8 @@ const AppBody = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: system-ui;
+    font-weight: bold;
 `
 
 function App() {
