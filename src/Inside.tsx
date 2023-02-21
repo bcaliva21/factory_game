@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import ConveyorBelt from './ConveyorBelt'
+import ComponentPicker from './ComponentPicker'
 
 interface InsideProps {
     isInside: boolean
@@ -14,7 +15,7 @@ const Container = styled.div<{ isInside: boolean }>`
     position: absolute;
     color: white;
     background-color: #b0d9ff;
-    display: ${({ isInside }) => isInside ? 'default' : 'none'};
+    display: ${({ isInside }) => (isInside ? 'default' : 'none')};
 `
 
 const Close = styled.button`
@@ -39,7 +40,7 @@ const Backdrop = styled.div<{ isInside: boolean }>`
     top: 10%;
     left: 10%;
     background-color: #000a13;
-    z-index:  ${({ isInside }) => isInside ? 100 : 0 };
+    z-index: ${({ isInside }) => (isInside ? 100 : 0)};
 `
 
 const WarningLight = styled.div<{ left: string }>`
@@ -47,7 +48,7 @@ const WarningLight = styled.div<{ left: string }>`
     height: 3%;
     position: absolute;
     top: 0;
-    left: ${({left}) => left};
+    left: ${({ left }) => left};
     background-color: red;
     border-top: 10px solid grey;
     border-right: 20px solid #000a13;
@@ -61,18 +62,28 @@ const BeamLeft = styled.div`
     position: absolute;
     top: 1%;
     left: 1px;
-    background: rgb(255,0,0);
-    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,250,0,1) 52%, rgba(255,246,0,1) 100%);
+    background: rgb(255, 0, 0);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 1) 0%,
+        rgba(255, 250, 0, 1) 52%,
+        rgba(255, 246, 0, 1) 100%
+    );
 `
-    
+
 const BeamRight = styled.div`
     width: 47%;
     height: 100%;
     position: absolute;
     top: 1%;
     right: 1px;
-    background: rgb(255,0,0);
-    background: linear-gradient(270deg, rgba(255,0,0,1) 0%, rgba(255,250,0,1) 52%, rgba(255,246,0,1) 100%);
+    background: rgb(255, 0, 0);
+    background: linear-gradient(
+        270deg,
+        rgba(255, 0, 0, 1) 0%,
+        rgba(255, 250, 0, 1) 52%,
+        rgba(255, 246, 0, 1) 100%
+    );
 `
 
 const Inside = ({ isInside, setIsInside }: InsideProps) => {
@@ -80,10 +91,11 @@ const Inside = ({ isInside, setIsInside }: InsideProps) => {
 
     return (
         <Container isInside={isInside}>
-        <Backdrop isInside={isInside}>
-            <Close onClick={handleClose}>close</Close>
-            <ConveyorBelt />
-        </Backdrop>
+            <Backdrop isInside={isInside}>
+                <Close onClick={handleClose}>close</Close>
+                <ComponentPicker />
+                <ConveyorBelt />
+            </Backdrop>
         </Container>
     )
 }
