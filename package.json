@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "serve": "npm run build && node lib/index.js",
     "preview": "vite preview",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npm run lint -- --fix"
@@ -23,6 +24,7 @@
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.6"
   },
+  "main": "lib/index.js",
   "devDependencies": {
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
@@ -37,6 +39,10 @@
     "lint-staged": "^13.1.1",
     "prettier": "^2.8.3",
     "typescript": "^4.9.3",
-    "vite": "^4.1.0"
+    "vite": "^4.1.0",
+    "apollo-server": "^2.0.0-beta.10",
+    "firebase-admin": "^5.12.1",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.2"
   }
 }
