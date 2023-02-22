@@ -1,16 +1,11 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 // components
 import ConveyorBelt from './ConveyorBelt'
 
 // state
-import { useAppDispatch, useAppState } from './state/appContext'
-
-interface InsideProps {
-    isInside: boolean
-    setIsInside: Function
-}
+import { useAppDispatch } from './state/appContext'
 
 const Container = styled.div`
     height: 100%;
@@ -50,7 +45,7 @@ const WarningLight = styled.div<{ left: string }>`
     height: 3%;
     position: absolute;
     top: 0;
-    left: ${({left}) => left};
+    left: ${({ left }) => left};
     background-color: red;
     border-top: 10px solid grey;
     border-right: 20px solid #000a13;
@@ -64,32 +59,43 @@ const BeamLeft = styled.div`
     position: absolute;
     top: 1%;
     left: 1px;
-    background: rgb(255,0,0);
-    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,250,0,1) 52%, rgba(255,246,0,1) 100%);
+    background: rgb(255, 0, 0);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 1) 0%,
+        rgba(255, 250, 0, 1) 52%,
+        rgba(255, 246, 0, 1) 100%
+    );
 `
-    
+
 const BeamRight = styled.div`
     width: 47%;
     height: 100%;
     position: absolute;
     top: 1%;
     right: 1px;
-    background: rgb(255,0,0);
-    background: linear-gradient(270deg, rgba(255,0,0,1) 0%, rgba(255,250,0,1) 52%, rgba(255,246,0,1) 100%);
+    background: rgb(255, 0, 0);
+    background: linear-gradient(
+        270deg,
+        rgba(255, 0, 0, 1) 0%,
+        rgba(255, 250, 0, 1) 52%,
+        rgba(255, 246, 0, 1) 100%
+    );
 `
 
 const Inside = ({}) => {
     const dispatch = useAppDispatch()
-    const handleClose = () => dispatch({
-        type: 'LEAVE',
-    })
+    const handleClose = () =>
+        dispatch({
+            type: 'LEAVE',
+        })
 
     return (
         <Container>
-        <Backdrop>
-            <Close onClick={handleClose}>close</Close>
-            <ConveyorBelt />
-        </Backdrop>
+            <Backdrop>
+                <Close onClick={handleClose}>close</Close>
+                <ConveyorBelt />
+            </Backdrop>
         </Container>
     )
 }

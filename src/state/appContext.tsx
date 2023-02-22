@@ -1,9 +1,6 @@
 import React, { createContext, useContext, useReducer, Dispatch } from 'react'
 
-interface AppState {
-    inside: boolean;
-    dispatch: Dispatch<any>;
-}
+import {AppState, AppActions} from './appInterfaces'
 
 const initialState = {
     inside: false,
@@ -12,7 +9,9 @@ const initialState = {
 
 export const AppContext = createContext(initialState)
 
-export const AppDispatchContext = createContext((() => undefined) as Dispatch<any>)
+export const AppDispatchContext = createContext(
+    (() => undefined) as Dispatch<any>
+)
 
 export function useAppState() {
     return useContext(AppContext)
@@ -22,11 +21,11 @@ export function useAppDispatch() {
     return useContext(AppDispatchContext)
 }
 
-const appReducer = (state: AppState, action: any) => {
-    switch(action.type) {
+const appReducer = (state: AppState, action: AppActions) => {
+    switch (action.type) {
         case 'ENTER': {
             return {
-                ...state, 
+                ...state,
                 inside: true,
             }
         }
@@ -37,22 +36,19 @@ const appReducer = (state: AppState, action: any) => {
             }
         }
         default: {
-            throw Error('Unknown action: ' + action.type);
+            throw Error('Unknown action: ' + action.type)
         }
     }
 }
 
 export const AppProvider = ({ children }: { children?: React.ReactNode }) => {
-    const [state, dispatch] = useReducer(
-        appReducer,
-        initialState,
-    )
+    const [state, dispatch] = useReducer(appReducer, initialState)
 
     return (
         <AppContext.Provider value={state}>
             <AppDispatchContext.Provider value={dispatch}>
-                { children }
+                {children}
             </AppDispatchContext.Provider>
         </AppContext.Provider>
-  )
+    )
 }
