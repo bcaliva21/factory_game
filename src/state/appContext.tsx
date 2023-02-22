@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useReducer, Dispatch } from 'react'
 
-import {AppState, AppActions} from './appInterfaces'
+import { AppState, AppActions } from './appInterfaces'
+import { ACTIONS } from './constants'
 
 const initialState = {
     inside: false,
@@ -21,15 +22,19 @@ export function useAppDispatch() {
     return useContext(AppDispatchContext)
 }
 
+const logger = (type: string) => console.log('DISPATCH ACTION: ', type)
+
 const appReducer = (state: AppState, action: AppActions) => {
     switch (action.type) {
-        case 'ENTER': {
+        case ACTIONS.ENTER: {
+            logger(ACTIONS.ENTER)
             return {
                 ...state,
                 inside: true,
             }
         }
-        case 'LEAVE': {
+        case ACTIONS.LEAVE: {
+            logger(ACTIONS.LEAVE) 
             return {
                 ...state,
                 inside: false,
