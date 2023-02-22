@@ -7,6 +7,7 @@ import Inside from './Inside'
 
 // state
 import { useAppDispatch, useAppState } from './state/appContext'
+import { ACTIONS } from './state/constants'
 
 const FactoryContainer = styled.div`
     width: 70%;
@@ -217,7 +218,7 @@ const Factory = () => {
     const state = useAppState()
     const handleDoorClick = () =>
         dispatch({
-            type: 'ENTER',
+            type: ACTIONS.ENTER,
         })
 
     return (

@@ -6,6 +6,7 @@ import ConveyorBelt from './ConveyorBelt'
 
 // state
 import { useAppDispatch } from './state/appContext'
+import { ACTIONS } from './state/constants'
 
 const Container = styled.div`
     height: 100%;
@@ -87,7 +88,7 @@ const Inside = ({}) => {
     const dispatch = useAppDispatch()
     const handleClose = () =>
         dispatch({
-            type: 'LEAVE',
+            type: ACTIONS.LEAVE,
         })
 
     return (
