@@ -65,7 +65,6 @@ const LeftWing = styled.div`
     top: 5%;
     background-color: black;
 `
-// background-color: black;
 
 const RightWing = styled.div`
     width: 20%;
@@ -111,11 +110,9 @@ const RightUpperArm = styled.div`
     width: 25%;
     height: 70%;
     position: absolute;
-    // background-color: white;
     right: -15%;
     top: 30%;
 `
-// transform: rotate(120deg);
 
 const wave = keyframes`
     0%, 100% {
