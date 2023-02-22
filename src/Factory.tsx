@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
+
+// components
 import Worker from './Worker'
 import Inside from './Inside'
+
+// state
+import { useAppDispatch, useAppState } from './state/appContext'
 
 const FactoryContainer = styled.div`
     width: 70%;
@@ -203,50 +208,58 @@ const Placard = styled.div`
 `
 
 const Factory = () => {
-    const [isInside, setIsInside] = useState(false)
-
-    const handleDoorClick = () => setIsInside(!isInside)
+    const dispatch = useAppDispatch()
+    const state = useAppState()
+    const handleDoorClick = () => dispatch({
+        type: 'ENTER',
+    })
 
     return (
         <FactoryContainer>
-            <FactoryBody>
-                <Placard>Bradley's Component Factory</Placard>
-                <FactoryRoofStackOne>
-                    <DramaticSmoke />
-                    <SlowestSmoke />
-                    <SlowSmoke />
-                    <NoDelaySmoke />
-                    <HalfSecDelaySmoke />
-                    <OneSecDelaySmoke />
-                </FactoryRoofStackOne>
-                <FactoryRoofStackTwo>
-                    <DramaticSmoke />
-                    <SlowestSmoke />
-                    <SlowSmoke />
-                    <NoDelaySmoke />
-                    <HalfSecDelaySmoke />
-                    <OneSecDelaySmoke />
-                </FactoryRoofStackTwo>
-                <FactoryRoofSection />
-                <FactoryRoofSection />
-                <FactoryRoofSection />
-                <FactoryRoofSection />
-                <WindowContainer>
-                    <FactoryWindow>
-                        <Worker />
-                    </FactoryWindow>
-                    <FactoryWindow />
-                    <FactoryWindow />
-                    <FactoryWindow />
-                </WindowContainer>
-                <Door onClick={handleDoorClick}>    
-                    <DoorText>
-                        Click to enter
-                    </DoorText>
-                </Door>
-            </FactoryBody>
-            <Inside isInside={isInside} setIsInside={setIsInside}/>
-        </FactoryContainer>
+            {
+                state.inside
+                    ? <Inside />
+                    :
+                    
+                    <FactoryBody>
+                        <Placard>Bradley's Component Factory</Placard>
+                        <FactoryRoofStackOne>
+                            <DramaticSmoke />
+                            <SlowestSmoke />
+                            <SlowSmoke />
+                            <NoDelaySmoke />
+                            <HalfSecDelaySmoke />
+                            <OneSecDelaySmoke />
+                        </FactoryRoofStackOne>
+                        <FactoryRoofStackTwo>
+                            <DramaticSmoke />
+                            <SlowestSmoke />
+                            <SlowSmoke />
+                            <NoDelaySmoke />
+                            <HalfSecDelaySmoke />
+                            <OneSecDelaySmoke />
+                        </FactoryRoofStackTwo>
+                        <FactoryRoofSection />
+                        <FactoryRoofSection />
+                        <FactoryRoofSection />
+                        <FactoryRoofSection />
+                        <WindowContainer>
+                            <FactoryWindow>
+                                <Worker />
+                            </FactoryWindow>
+                            <FactoryWindow />
+                            <FactoryWindow />
+                            <FactoryWindow />
+                        </WindowContainer>
+                        <Door onClick={handleDoorClick}>
+                            <DoorText>
+                                Click to enter
+                            </DoorText>
+                        </Door>
+                    </FactoryBody>
+                    
+            }
+            </FactoryContainer>
     )
 }
 

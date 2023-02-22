@@ -1,8 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
+// components
 import Factory from './Factory'
 import Environment from './Environment'
+
+// state
+import { AppProvider } from './state/appContext'
 
 const AppBody = styled.div`
     position: relative;
@@ -17,10 +21,12 @@ const AppBody = styled.div`
 
 function App() {
     return (
-        <AppBody>
-            <Factory />
-            <Environment />
-        </AppBody>
+        <AppProvider>
+            <AppBody>
+                <Factory />
+                <Environment />
+            </AppBody>
+        </AppProvider>
     )
 }
 

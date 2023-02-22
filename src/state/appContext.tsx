@@ -1,20 +1,18 @@
-import { createContext, useContext, useReducer } from 'react'
-
-type Props = {
-    children: string | JSX.Element | JSX.Element[] | (() => JSX.Element)
-}
+import React, { createContext, useContext, useReducer, Dispatch } from 'react'
 
 interface AppState {
     inside: boolean;
+    dispatch: Dispatch<any>;
 }
 
 const initialState = {
     inside: false,
+    dispatch: (() => undefined) as Dispatch<any>,
 }
 
 export const AppContext = createContext(initialState)
 
-export const AppDispatchContext = createContext(null)
+export const AppDispatchContext = createContext((() => undefined) as Dispatch<any>)
 
 export function useAppState() {
     return useContext(AppContext)
@@ -26,9 +24,16 @@ export function useAppDispatch() {
 
 const appReducer = (state: AppState, action: any) => {
     switch(action.type) {
-        case 'enter': {
-            return {...state, 
-                inside: action.inside,
+        case 'ENTER': {
+            return {
+                ...state, 
+                inside: true,
+            }
+        }
+        case 'LEAVE': {
+            return {
+                ...state,
+                inside: false,
             }
         }
         default: {
@@ -37,7 +42,7 @@ const appReducer = (state: AppState, action: any) => {
     }
 }
 
-export const AppProvider = ({ children }: Props) => {
+export const AppProvider = ({ children }: { children?: React.ReactNode }) => {
     const [state, dispatch] = useReducer(
         appReducer,
         initialState,

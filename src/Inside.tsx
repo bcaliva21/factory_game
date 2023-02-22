@@ -1,20 +1,24 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
+// components
 import ConveyorBelt from './ConveyorBelt'
+
+// state
+import { useAppDispatch, useAppState } from './state/appContext'
 
 interface InsideProps {
     isInside: boolean
     setIsInside: Function
 }
 
-const Container = styled.div<{ isInside: boolean }>`
+const Container = styled.div`
     height: 100%;
     width: 100%;
     position: absolute;
     color: white;
     background-color: #b0d9ff;
-    display: ${({ isInside }) => isInside ? 'default' : 'none'};
+    display: default;
 `
 
 const Close = styled.button`
@@ -32,14 +36,13 @@ const Close = styled.button`
     }
 `
 
-const Backdrop = styled.div<{ isInside: boolean }>`
+const Backdrop = styled.div`
     width: 80%;
     height: 80%;
     position: absolute;
     top: 10%;
     left: 10%;
     background-color: #000a13;
-    z-index:  ${({ isInside }) => isInside ? 100 : 0 };
 `
 
 const WarningLight = styled.div<{ left: string }>`
@@ -75,12 +78,15 @@ const BeamRight = styled.div`
     background: linear-gradient(270deg, rgba(255,0,0,1) 0%, rgba(255,250,0,1) 52%, rgba(255,246,0,1) 100%);
 `
 
-const Inside = ({ isInside, setIsInside }: InsideProps) => {
-    const handleClose = () => setIsInside(!isInside)
+const Inside = ({}) => {
+    const dispatch = useAppDispatch()
+    const handleClose = () => dispatch({
+        type: 'LEAVE',
+    })
 
     return (
-        <Container isInside={isInside}>
-        <Backdrop isInside={isInside}>
+        <Container>
+        <Backdrop>
             <Close onClick={handleClose}>close</Close>
             <ConveyorBelt />
         </Backdrop>
