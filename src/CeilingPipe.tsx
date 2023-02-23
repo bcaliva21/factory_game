@@ -63,11 +63,13 @@ const CeilingPipe = () => {
         <PipeContainer>
             <PipeSection>
                 <PipeWindow>
-                    <Item />
+                    <Item color="red" />
                 </PipeWindow>
             </PipeSection>
             <PipeSection>
-                <PipeWindow />
+                <PipeWindow>
+                    <Item color="blue" />
+                </PipeWindow>
             </PipeSection>
             <PipeSection />
             <FunnelSection />
