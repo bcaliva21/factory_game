@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import ConveyorBelt from './ConveyorBelt'
+import CeilingPipe from './CeilingPipe'
 
 interface InsideProps {
     isInside: boolean
@@ -64,7 +65,7 @@ const BeamLeft = styled.div`
     background: rgb(255,0,0);
     background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,250,0,1) 52%, rgba(255,246,0,1) 100%);
 `
-    
+
 const BeamRight = styled.div`
     width: 47%;
     height: 100%;
@@ -83,6 +84,7 @@ const Inside = ({ isInside, setIsInside }: InsideProps) => {
         <Backdrop isInside={isInside}>
             <Close onClick={handleClose}>close</Close>
             <ConveyorBelt />
+            <CeilingPipe />
         </Backdrop>
         </Container>
     )
