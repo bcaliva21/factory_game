@@ -57,7 +57,6 @@ const TopBelt = styled.div`
     z-index: 105;
     animation: ${forward} infinite linear;
     animation-duration: 3s;
-
 `
 
 const BottomBelt = styled.div`
@@ -73,7 +72,6 @@ const BottomBelt = styled.div`
 `
 
 const ConveyorBelt = () => {
-
     return (
         <ConveyorBeltContainer>
             <LeftLeg />

@@ -49,14 +49,19 @@ const Door = styled.div`
     width: 25%;
     height: 36%;
     margin-left: 50%;
-    background: rgb(203,203,203);
-    background: linear-gradient(180deg, rgba(89,89,89,1) 1%, rgba(51,51,51,1) 52%, rgba(13,13,13,1) 100%);
+    background: rgb(203, 203, 203);
+    background: linear-gradient(
+        180deg,
+        rgba(89, 89, 89, 1) 1%,
+        rgba(51, 51, 51, 1) 52%,
+        rgba(13, 13, 13, 1) 100%
+    );
     position: absolute;
     bottom: 0;
     border-right: 2px solid #ffd700;
     border-left: 2px solid #ffd700;
     transition: 0.5s ease-in-out;
-    
+
     &:hover {
         cursor: pointer;
         opacity: 0.75;
@@ -82,7 +87,7 @@ const FactoryRoofStackOne = styled.div`
     right: 7vw;
     width: 5vw;
     height: 20vh;
-    background-color:  #ebebeb;
+    background-color: #ebebeb;
 `
 
 const FactoryRoofStackTwo = styled.div`
@@ -239,13 +244,11 @@ const Factory = () => {
                     <FactoryWindow />
                     <FactoryWindow />
                 </WindowContainer>
-                <Door onClick={handleDoorClick}>    
-                    <DoorText>
-                        Click to enter
-                    </DoorText>
+                <Door onClick={handleDoorClick}>
+                    <DoorText>Enter</DoorText>
                 </Door>
             </FactoryBody>
-            <Inside isInside={isInside} setIsInside={setIsInside}/>
+            <Inside isInside={isInside} setIsInside={setIsInside} />
         </FactoryContainer>
     )
 }
