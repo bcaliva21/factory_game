@@ -7,8 +7,8 @@ const RawItem = styled.div<{ color: string }>`
     background-color: ${({ color }) => color};
 `
 
-const Item = () => {
-    return <RawItem color="red" />
+const Item = ({ color }: { color: string }) => {
+    return <RawItem color={color} />
 }
 
 export default Item
