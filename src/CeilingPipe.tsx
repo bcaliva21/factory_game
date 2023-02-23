@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import Item from './Item'
+
 const PipeContainer = styled.div`
     position: absolute;
     height: 400px;
@@ -51,13 +53,18 @@ const PipeWindow = styled.div`
     background-color: lightblue;
     margin: auto;
     margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 const CeilingPipe = () => {
     return (
         <PipeContainer>
             <PipeSection>
-                <PipeWindow />
+                <PipeWindow>
+                    <Item />
+                </PipeWindow>
             </PipeSection>
             <PipeSection>
                 <PipeWindow />
