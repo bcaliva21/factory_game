@@ -1,7 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 
+// components
 import Item from './Item'
+
+// helpers
+// import ITEM_ANIMATIONS from './animations/item-animations'
 
 const PipeContainer = styled.div`
     position: absolute;
@@ -11,7 +15,6 @@ const PipeContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
 `
 
 const PipeSection = styled.div`
@@ -31,18 +34,18 @@ const FunnelSection = styled.div`
     width: 105px;
     bottom: 70px;
     transform: rotate(45deg);
-    z-index: 7;
+    z-index: 6;
     border: solid silver 2px;
 `
 
 const Cover = styled.div`
     position: absolute;
-    background-color: black;
+    background-color: #000a13;
     width: 155px;
     height: 90px;
     bottom: 35px;
     z-index: 8;
-    border-top: solid silver 7px;
+    border-top: solid silver 10px;
 `
 
 const PipeWindow = styled.div`
@@ -64,12 +67,12 @@ const CeilingPipe = () => {
         <PipeContainer>
             <PipeSection>
                 <PipeWindow>
-                    <Item color="red" />
+                    <Item color="red" animation={''} />
                 </PipeWindow>
             </PipeSection>
             <PipeSection>
                 <PipeWindow>
-                    <Item color="blue" />
+                    <Item color="blue" animation={''} />
                 </PipeWindow>
             </PipeSection>
             <PipeSection />
