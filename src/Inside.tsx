@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components'
 
 import ConveyorBelt from './ConveyorBelt'
 import CeilingPipe from './CeilingPipe'
+import DropArea from './DropArea'
 
 interface InsideProps {
     isInside: boolean
@@ -81,11 +82,12 @@ const Inside = ({ isInside, setIsInside }: InsideProps) => {
 
     return (
         <Container isInside={isInside}>
-        <Backdrop isInside={isInside}>
-            <Close onClick={handleClose}>close</Close>
-            <ConveyorBelt />
-            <CeilingPipe />
-        </Backdrop>
+            <Backdrop isInside={isInside}>
+                <Close onClick={handleClose}>close</Close>
+                <CeilingPipe />
+                <DropArea />
+                <ConveyorBelt />
+            </Backdrop>
         </Container>
     )
 }
