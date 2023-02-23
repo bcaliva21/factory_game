@@ -42,11 +42,26 @@ const Cover = styled.div`
     border-top: solid silver 7px;
 `
 
+const PipeWindow = styled.div`
+    position: relative;
+    width: 65px;
+    height: 65px;
+    border-radius: 5%;
+    border: solid black 1px;
+    background-color: lightblue;
+    margin: auto;
+    margin-top: 10px;
+`
+
 const CeilingPipe = () => {
     return (
         <PipeContainer>
-            <PipeSection />
-            <PipeSection />
+            <PipeSection>
+                <PipeWindow />
+            </PipeSection>
+            <PipeSection>
+                <PipeWindow />
+            </PipeSection>
             <PipeSection />
             <FunnelSection />
             <Cover />
