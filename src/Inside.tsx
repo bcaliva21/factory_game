@@ -7,9 +7,6 @@ import CeilingPipe from './CeilingPipe'
 import DropArea from './DropArea'
 import Item from './Item'
 
-// helpers
-import ITEM_ANIMATIONS from './animations/item-animations'
-
 interface InsideProps {
     isInside: boolean
     setIsInside: Function
@@ -103,7 +100,7 @@ const Inside = ({ isInside, setIsInside }: InsideProps) => {
                 <DropArea>
                     <Item
                         color="green"
-                        animation={ITEM_ANIMATIONS.dropToBelt}
+                        animation="drop"
                     />
                 </DropArea>
                 <ConveyorBelt />

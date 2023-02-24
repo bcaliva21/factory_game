@@ -40,12 +40,19 @@ const FunnelSection = styled.div`
 
 const Cover = styled.div`
     position: absolute;
-    background-color: #000a13;
+    background-color: silver;
     width: 155px;
     height: 90px;
     bottom: 35px;
     z-index: 8;
     border-top: solid silver 10px;
+`
+const CoverHole = styled.div`
+    position: relative;
+    background-color: black;
+    width: 100px;
+    height: 75px;
+    margin: auto;
 `
 
 const PipeWindow = styled.div`
@@ -77,7 +84,9 @@ const CeilingPipe = () => {
             </PipeSection>
             <PipeSection />
             <FunnelSection />
-            <Cover />
+            <Cover>
+                <CoverHole />
+            </Cover>
         </PipeContainer>
     )
 }
