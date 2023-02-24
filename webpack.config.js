@@ -34,7 +34,7 @@ module.exports = [
     },
     {
         name: 'server',
-        entry: './server/index.tsx',
+        entry: './server/index.ts',
         module: {
             rules: [
                 {
