@@ -60,7 +60,7 @@ const PipeWindow = styled.div`
     position: relative;
     width: calc(100vw / 24);
     height: calc(100vw / 24);
-    border-radius: 5%;
+    border-radius: 6%;
     border: solid black 1px;
     background-color: lightblue;
     margin: auto;
