@@ -2,17 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 
 const DropContainer = styled.div`
-    height: 305px;
-    width: 1050px;
+    height: calc(100vw / 3);
+    width: 60vw;
     position: absolute;
-    right: 275px;
-    bottom: 100px;
+    right: calc((80vw / 12));
+    top: 350px;
     z-index: 10;
     display: flex;
     justify-content: center;
+    background-color: transparent;
 `
 
 const DropArea = ({ children }: { children: React.ReactNode }) => <DropContainer>{children}</DropContainer>
-
 
 export default DropArea

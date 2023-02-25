@@ -9,19 +9,20 @@ import Item from './Item'
 
 const PipeContainer = styled.div`
     position: absolute;
-    height: 400px;
-    width: 250px;
-    right: 175px;
+    height: calc(100vw / 4);
+    width: calc(100vw / 8);
+    right: calc(80vw / 24);
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: red;
 `
 
 const PipeSection = styled.div`
     position: relative;
     background-color: grey;
-    height: 90px;
-    width: 100px;
+    height: calc(100vw / 18);
+    width: calc(100vw / 16);
     z-index: 6;
     border: solid black 1px;
     border-top: solid silver 10px;
@@ -30,9 +31,9 @@ const PipeSection = styled.div`
 const FunnelSection = styled.div`
     position: absolute;
     background-color: grey;
-    height: 105px;
-    width: 105px;
-    bottom: 70px;
+    height: calc(100vw / 16);
+    width: calc(100vw / 16);
+    bottom: calc(100vw / 20);
     transform: rotate(45deg);
     z-index: 6;
     border: solid silver 2px;
@@ -41,24 +42,24 @@ const FunnelSection = styled.div`
 const Cover = styled.div`
     position: absolute;
     background-color: silver;
-    width: 155px;
-    height: 90px;
-    bottom: 35px;
+    width: calc(100vw / 10);
+    height: calc(100vw / 16);
+    bottom: calc(100vw / 40);
     z-index: 8;
     border-top: solid silver 10px;
 `
 const CoverHole = styled.div`
     position: relative;
     background-color: black;
-    width: 100px;
-    height: 75px;
+    width: calc(100vw / 16);
+    height: calc(100vw / 20);
     margin: auto;
 `
 
 const PipeWindow = styled.div`
     position: relative;
-    width: 65px;
-    height: 65px;
+    width: calc(100vw / 24);
+    height: calc(100vw / 24);
     border-radius: 5%;
     border: solid black 1px;
     background-color: lightblue;
