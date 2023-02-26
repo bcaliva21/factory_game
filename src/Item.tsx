@@ -3,19 +3,19 @@ import styled, { keyframes, css } from 'styled-components'
 
 const dropToBelt = keyframes`
     0% {
-        bottom: 350px;
+        top: 0;
         right: 0;
     }
     50% {
-        bottom: 0;
+        top: 100%;
         right: 0;
     }
     99% {
-        bottom: 0;
+        top: 100%;
         right: 100%;
     }
     100% {
-        bottom: 0;
+        top: 100%;
         right: 100%;
         display: none;
         visibility: hidden;
