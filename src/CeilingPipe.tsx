@@ -15,7 +15,7 @@ const PipeContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: red;
+    background-color: transparent;
 `
 
 const PipeSection = styled.div`
