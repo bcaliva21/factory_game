@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 const DropContainer = styled.div`
-    height: calc(100vw / 3);
+    height: calc(80vh / 2);
     width: 60vw;
     position: absolute;
-    right: calc((80vw / 12));
-    top: 350px;
+    right: calc((80vw / 6));
+    top: 30%;
     z-index: 10;
     display: flex;
     justify-content: center;
