@@ -2,8 +2,14 @@ const path = require('path')
 
 module.exports = [
     {
-        name: 'client',
-        entry: './src/index.tsx',
+        entry: {
+            client: './client/index.tsx',
+            server: './server/index.ts',
+        },
+        output: {
+            filename: '[name].js',
+            path: path.resolve(__dirname, 'dist'),
+        },
         module: {
             rules: [
                 {
@@ -19,10 +25,18 @@ module.exports = [
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js'],
-        },
-        output: {
-            filename: 'bundle.js',
-            path: path.resolve(__dirname, 'dist'),
+            fallback: {
+                    "fs": false,
+                    "tls": false,
+                    "net": false,
+                    "path": false,
+                    "zlib": false,
+                    "http": false,
+                    "https": false,
+                    "stream": false,
+                    "crypto": false,
+                    "crypto-browserify": require.resolve('crypto-browserify'),
+            }
         },
         devServer: {
             static: {
@@ -30,37 +44,6 @@ module.exports = [
             },
             compress: true,
             port: 9000,
-        },
-    },
-    {
-        name: 'server',
-        entry: './server/index.ts',
-        module: {
-            rules: [
-                {
-                    test: /\.tsx?$/,
-                    use: 'ts-loader',
-                    exclude: /node_modules/,
-                },
-                {
-                    test: /\.css$/i,
-                    use: ['style-loader', 'css-loader'],
-                },
-            ],
-        },
-        resolve: {
-            extensions: ['.tsx', '.ts', '.js'],
-        },
-        output: {
-            filename: 'bundle.js',
-            path: path.resolve(__dirname, 'lib'),
-        },
-        devServer: {
-            static: {
-                directory: path.join(__dirname, 'lib'),
-            },
-            compress: true,
-            port: 8080,
         },
     },
 ]

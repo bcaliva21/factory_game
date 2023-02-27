@@ -9,7 +9,7 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "noEmit": false,
     "outDir": "./dist/",
     "noImplicitAny": true,
@@ -18,6 +18,6 @@
     "jsx": "react",
     "allowJs": true,
   },
-  "include": ["src"],
+  "include": ["client"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

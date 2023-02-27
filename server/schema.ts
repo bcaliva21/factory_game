@@ -1,19 +1,19 @@
-const { gql } = require('apollo-server')
+// const { gql } = require('apollo-server')
 
-const schema = gql`
-    type User {
-        name: String!
-        email: String!
-        id: String!
-        highScores: [HighScore]!
-    }
+// const schema = gql`
+//     type User {
+//         name: String!
+//         email: String!
+//         id: String!
+//         highScores: [HighScore]!
+//     }
 
-    type HighScore {
-        id: String!
-        userId: String!
-        score: Number!
-        date: Timestamp!
-    }
-`
+//     type HighScore {
+//         id: String!
+//         userId: String!
+//         score: Number!
+//         date: Timestamp!
+//     }
+// `
 
-module.exports = schema
+// module.exports = schema
