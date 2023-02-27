@@ -38,15 +38,6 @@ const forward = keyframes`
     }
 `
 
-const backward = keyframes`
-    0% {
-        left: 2%;
-    }
-    100% {
-        left: 6%;
-    }
-`
-
 const TopBelt = styled.div`
     position: absolute;
     background-color: transparent;
@@ -67,7 +58,7 @@ const BottomBelt = styled.div`
     bottom: 15%;
     left: 2%;
     z-index: 105;
-    animation: ${backward} infinite linear;
+    animation: ${forward} infinite linear;
     animation-duration: 3s;
 `
 
