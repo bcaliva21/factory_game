@@ -1,7 +1,12 @@
 {
   "compilerOptions": {
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext",
+      "es2020"
+    ],
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -13,11 +18,26 @@
     "noEmit": false,
     "outDir": "./dist/",
     "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
+    "module": "es2020",
+    "target": "es2020",
     "jsx": "react",
     "allowJs": true,
+    // https://www.typescriptlang.org/tsconfig#compilerOptions
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "types": [
+      "node"
+    ],
   },
-  "include": ["src"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
