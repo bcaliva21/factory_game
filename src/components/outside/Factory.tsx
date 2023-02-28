@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import Worker from './Worker'
-import Inside from './Inside'
+import { Inside } from '../inside'
 
 const FactoryContainer = styled.div`
     width: 70%;

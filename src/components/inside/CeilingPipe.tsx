@@ -4,9 +4,6 @@ import styled from 'styled-components'
 // components
 import Item from './Item'
 
-// helpers
-// import ITEM_ANIMATIONS from './animations/item-animations'
-
 const PipeContainer = styled.div`
     position: absolute;
     height: calc(80vh / 2);

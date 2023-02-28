@@ -1,10 +1,10 @@
 import react from 'react'
 import styled, { keyframes, css } from 'styled-components'
 
-import down from '../assets/arrow-down.svg'
-import left from '../assets/arrow-left.svg'
-import right from '../assets/arrow-right.svg'
-import up from '../assets/arrow-up.svg'
+import down from '../../assets/arrow-down.svg'
+import left from '../../assets/arrow-left.svg'
+import right from '../../assets/arrow-right.svg'
+import up from '../../assets/arrow-up.svg'
 
 const dropToBelt = keyframes`
     0% {
