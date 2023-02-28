@@ -5,7 +5,8 @@ import express from 'express';
 import http from 'http';
 import cors from 'cors';
 import bodyParser from 'body-parser';
-import { typeDefs, resolvers } from './schema';
+// TODO: figure out how to get rid of the .js hack
+import { typeDefs, resolvers } from './schema.js';
 
 // Required logic for integrating with Express
 const app = express();
