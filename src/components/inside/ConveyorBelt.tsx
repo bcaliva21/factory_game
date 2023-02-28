@@ -37,6 +37,7 @@ const Case = styled.div`
     background-color: transparent;
     border: 3px solid black;
     border-radius: 10px;
+    z-index: 5;
 `
 
 const CaseLine = styled.div`
@@ -44,6 +45,7 @@ const CaseLine = styled.div`
     position: absolute;
     bottom: 25%;
     border: 2px solid black;
+    z-index: 10;
 `
 
 const blinkGreen = keyframes`
