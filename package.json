@@ -2,9 +2,11 @@
   "name": "component_factory",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "build": "webpack",
     "dev": "webpack server",
+    "serve": "cd server && ts-node --esm index.ts",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npm run lint -- --fix"
   },
@@ -17,9 +19,13 @@
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   },
   "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemon": "^2.0.20",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",
