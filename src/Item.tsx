@@ -4,7 +4,6 @@ import styled, { keyframes, css } from 'styled-components'
 import down from './assets/arrow-down.svg'
 import left from './assets/arrow-left.svg'
 import right from './assets/arrow-right.svg'
-// @ts-ignore
 import up from './assets/arrow-up.svg'
 
 const dropToBelt = keyframes`
@@ -34,21 +33,20 @@ const dropItem = css`
     animation-fill-mode: forwards;
 `
 
+const Arrow = styled.img`
+    position: relative;
+`
+
 const ComposableItem = styled.div<{ color: string; animation: string; }>`
     position: absolute;
     width: 35px;
     height: 35px;
     background-color: ${({ color }) => color};
+    display: flex;
+    align-items: center;
+    justify-content: center;
     ${({ animation }) => 
         animation === 'drop' && dropItem}
-`
-
-const Arrow = styled.img`
-    // height: 20px;
-    // width: 20px;
-    position: absolute;
-    top: 7px;
-    left: 6px;
 `
 
 const Item = ({
@@ -58,9 +56,19 @@ const Item = ({
     color: string
     animation: string
 }) => {
+    const determineArrow = () => {
+        switch (color) {
+            case 'green':
+                return up
+            case 'red':
+                return down
+            case 'blue':
+                return right
+        }
+    }
     return (
         <ComposableItem color={color} animation={animation}>
-            <Arrow src={up} width={20} height={20} />
+            <Arrow src={determineArrow()} width={20} height={20} />
         </ComposableItem>
         )
 }
