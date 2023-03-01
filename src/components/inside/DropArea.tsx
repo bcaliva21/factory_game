@@ -13,7 +13,7 @@ const DropContainer = styled.div`
     background-color: transparent;
 `
 
-const DropArea = ({ children }: { children: react.ReactNode }) => (
+const DropArea = ({ children }: { children: React.ReactNode }) => (
     <DropContainer>{children}</DropContainer>
 )
 
