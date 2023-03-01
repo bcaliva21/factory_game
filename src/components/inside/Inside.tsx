@@ -6,6 +6,7 @@ import ConveyorBelt from './ConveyorBelt'
 import CeilingPipe from './CeilingPipe'
 import DropArea from './DropArea'
 import Item from './Item'
+import OpenDialogue from './OpenDialogue'
 
 import close from '../../assets/close'
 
@@ -121,6 +122,7 @@ const Inside = ({ isInside, setIsInside }: InsideProps) => {
                         <path d={close}/>
                     </Close>
                 </Banner>
+                <OpenDialogue></OpenDialogue>
                 <CeilingPipe />
                 <DropArea>
                     <Item
