@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import react, { useState } from 'react'
 import styled, { keyframes, css } from 'styled-components'
 
 const EnvironmentContainer = styled.div`

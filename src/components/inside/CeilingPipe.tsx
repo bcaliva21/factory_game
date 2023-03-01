@@ -1,4 +1,4 @@
-import React from 'react'
+import react from 'react'
 import styled from 'styled-components'
 
 // components
@@ -67,19 +67,36 @@ const PipeWindow = styled.div`
     justify-content: center;
 `
 
-const CeilingPipe = () => {
+const CeilingPipe = ({ gameInProgress }: { gameInProgress: boolean }) => {
+
     return (
         <PipeContainer>
-            <PipeSection>
-                <PipeWindow>
-                    <Item color="red" animation={''} />
-                </PipeWindow>
-            </PipeSection>
-            <PipeSection>
-                <PipeWindow>
-                    <Item color="blue" animation={''} />
-                </PipeWindow>
-            </PipeSection>
+            {gameInProgress
+                ?
+                <>
+                    <PipeSection>
+                        <PipeWindow>
+                            <Item color="red" animation={''} />
+                        </PipeWindow>
+                    </PipeSection>
+                    <PipeSection>
+                        <PipeWindow>
+                            <Item color="blue" animation={''} />
+                        </PipeWindow>
+                    </PipeSection>
+                </>
+                :
+                <>
+                    <PipeSection>
+                        <PipeWindow>
+                        </PipeWindow>
+                    </PipeSection>
+                    <PipeSection>
+                        <PipeWindow>
+                        </PipeWindow>
+                    </PipeSection>
+                </>
+            }
             <PipeSection />
             <FunnelSection />
             <Cover>

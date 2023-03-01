@@ -1,4 +1,4 @@
-import React from 'react'
+import react from 'react'
 import styled, { keyframes } from 'styled-components'
 
 const WorkerContainer = styled.div`

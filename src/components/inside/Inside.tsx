@@ -1,4 +1,4 @@
-import React from 'react'
+import react, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 // components
@@ -113,24 +113,28 @@ const BeamRight = styled.div`
 
 const Inside = ({ isInside, setIsInside }: InsideProps) => {
     const handleClose = () => setIsInside(!isInside)
+    const [gameInProgress, setGameInProgress] = useState(false)
 
     return (
         <Container isInside={isInside}>
             <Backdrop isInside={isInside}>
                 <Banner>
                     <Close xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" onClick={handleClose}>
-                        <path d={close}/>
+                        <path d={close} />
                     </Close>
                 </Banner>
                 <OpenDialogue></OpenDialogue>
-                <CeilingPipe />
+                <CeilingPipe gameInProgress={gameInProgress} />
                 <DropArea>
-                    <Item
-                        color="green"
-                        animation="drop"
-                    />
+                    {gameInProgress
+                        &&
+                        <Item
+                            color="green"
+                            animation="drop"
+                        />
+                    }
                 </DropArea>
-                <ConveyorBelt />
+                <ConveyorBelt gameInProgress={gameInProgress} setGameInProgress={setGameInProgress} />
             </Backdrop>
         </Container>
     )

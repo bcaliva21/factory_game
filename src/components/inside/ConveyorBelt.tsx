@@ -1,4 +1,4 @@
-import React from 'react'
+import react from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import power from '../../assets/power-btn'
@@ -17,16 +17,18 @@ const radiate = keyframes`
     }
     50% {
         fill: green;
-        stroke: black;
     }
 `
 
-const PowerButton = styled.svg`
+const PowerButton = styled.svg<{ gameInProgress: boolean }>`
     position: absolute;
     bottom: 0;
     left: 10%;
     width: 25%;
     height: 25%;
+    fill: ${({ gameInProgress }) => gameInProgress && 'green' };
+    stroke: ${({ gameInProgress }) => gameInProgress && 'black' };
+    stroke-width: 10px;
     &: hover {
         cursor: pointer;
         animation: ${radiate} infinite linear;
@@ -162,9 +164,9 @@ const BottomBelt = styled.div`
     animation-duration: 3s;
 `
 
-const ConveyorBelt = () => {
+const ConveyorBelt = ({ gameInProgress, setGameInProgress }: { gameInProgress: boolean, setGameInProgress: Function }) => {
     const powerButtonClick = () => {
-        console.log('powerButtonClick: clicked!')
+        setGameInProgress(true)
     }
 
     return (
@@ -172,7 +174,7 @@ const ConveyorBelt = () => {
             <LeftLeg>
                 <HDContainer>
                     <Case>
-                        <PowerButton xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" onClick={powerButtonClick}>
+                        <PowerButton xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" onClick={powerButtonClick} gameInProgress={gameInProgress}>
                             <path d={power}/>
                         </PowerButton>
                         <CaseLine />

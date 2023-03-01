@@ -35,8 +35,6 @@ const ControlsContainer = styled.div`
 `
 
 const OpenDialogue = () => {
-    // <span>.</span>
-    // <span>.</span>
     return (
         <DialogueContainer>
             <Title>Welcome to factory_game</Title>
@@ -44,7 +42,7 @@ const OpenDialogue = () => {
                 Push ←↑→↓ to keep the conveyor belt clean
             </Text>
             <Text>
-                Any mistake will be fatal to the factory.
+                Any mistake will break the conveyor belt...
             </Text>
             <Text>
                 Good luck!
