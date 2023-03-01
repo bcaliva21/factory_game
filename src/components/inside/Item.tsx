@@ -31,10 +31,10 @@ const dropItem = css`
     animation-fill-mode: forwards;
 `
 
-const Arrow = styled.svg`
+const Arrow = styled.svg<{ upOrDown: boolean }>`
     width: 20px;
     height: 20px;
-    position: relative;
+    padding-left: ${({ upOrDown }) => upOrDown ? '8px' : '0'};
 `
 
 const ComposableItem = styled.div<{ color: string; animation: string; }>`
@@ -66,9 +66,10 @@ const Item = ({
                 return right
         }
     }
+    const isUpOrDownArrow = () => color === 'green' || color === 'red'
     return (
         <ComposableItem color={color} animation={animation}>
-            <Arrow xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <Arrow xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" upOrDown={isUpOrDownArrow()}>
                 <path d={determineArrow()} />
             </Arrow>
         </ComposableItem>
