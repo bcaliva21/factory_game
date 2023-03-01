@@ -1,12 +1,37 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
+import power from '../../assets/power-btn'
+
 const ConveyorBeltContainer = styled.div`
     position: absolute;
     background-color: yellow;
     width: 100%;
     height: 30%;
     bottom: 0;
+`
+
+const radiate = keyframes`
+    0%, 100% {
+        fill: black;
+    }
+    50% {
+        fill: green;
+        stroke: black;
+    }
+`
+
+const PowerButton = styled.svg`
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 25%;
+    height: 25%;
+    &: hover {
+        cursor: pointer;
+        animation: ${radiate} infinite linear;
+        animation-duration: 2s;
+    }
 `
 
 const LeftLeg = styled.div`
@@ -32,8 +57,8 @@ const HDContainer = styled.div`
 
 const Case = styled.div`
     position: relative;
-    width: 50%;
-    height: 50%;
+    width: 70%;
+    height: 100%;
     background-color: transparent;
     border: 3px solid black;
     border-radius: 10px;
@@ -56,9 +81,20 @@ const blinkGreen = keyframes`
         background-color: transparent;
     }
 `
+
+const blinkYellow = keyframes`
+    from {
+        background-color: yellow;
+    }
+    to {
+        background-color: transparent;
+    }
+`
+
+
     
 const BlinkingLightGreen = styled.div`
-    width: 5%;
+    width: 7%;
     height: 5%;
     background-color: transparent;
     position: absolute;
@@ -69,18 +105,9 @@ const BlinkingLightGreen = styled.div`
     animation: ${blinkGreen} infinite;
     animation-duration: 1s;
 `
-
-const blinkYellow = keyframes`
-    from {
-        background-color: yellow;
-    }
-    to {
-        background-color: transparent;
-    }
-`
     
 const BlinkingLightYellow = styled.div`
-    width: 5%;
+    width: 7%;
     height: 5%;
     background-color: transparent;
     position: absolute;
@@ -136,11 +163,18 @@ const BottomBelt = styled.div`
 `
 
 const ConveyorBelt = () => {
+    const powerButtonClick = () => {
+        console.log('powerButtonClick: clicked!')
+    }
+
     return (
         <ConveyorBeltContainer>
             <LeftLeg>
                 <HDContainer>
                     <Case>
+                        <PowerButton xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" onClick={powerButtonClick}>
+                            <path d={power}/>
+                        </PowerButton>
                         <CaseLine />
                         <BlinkingLightGreen />
                         <BlinkingLightYellow />
