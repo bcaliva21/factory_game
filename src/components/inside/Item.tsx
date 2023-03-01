@@ -1,10 +1,10 @@
 import react from 'react'
 import styled, { keyframes, css } from 'styled-components'
 
-import down from '../../assets/arrow-down.svg'
-import left from '../../assets/arrow-left.svg'
-import right from '../../assets/arrow-right.svg'
-import up from '../../assets/arrow-up.svg'
+import down from '../../assets/arrow-down'
+import left from '../../assets/arrow-left'
+import right from '../../assets/arrow-right'
+import up from '../../assets/arrow-up'
 
 const dropToBelt = keyframes`
     0% {
@@ -31,7 +31,9 @@ const dropItem = css`
     animation-fill-mode: forwards;
 `
 
-const Arrow = styled.img`
+const Arrow = styled.svg`
+    width: 20px;
+    height: 20px;
     position: relative;
 `
 
@@ -66,7 +68,9 @@ const Item = ({
     }
     return (
         <ComposableItem color={color} animation={animation}>
-            <Arrow src={determineArrow()} width={20} height={20} />
+            <Arrow xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path d={determineArrow()} />
+            </Arrow>
         </ComposableItem>
         )
 }

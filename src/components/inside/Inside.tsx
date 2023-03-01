@@ -7,12 +7,22 @@ import CeilingPipe from './CeilingPipe'
 import DropArea from './DropArea'
 import Item from './Item'
 
-import close from '../../assets/close.svg'
+import close from '../../assets/close'
 
 interface InsideProps {
     isInside: boolean
     setIsInside: Function
 }
+
+const radiate = keyframes`
+    0%, 100% {
+        fill: black;
+    }
+    50% {
+        fill: red;
+        stroke: black;
+    }
+`
 
 const Banner = styled.div`
     width: 100%;
@@ -31,13 +41,19 @@ const Container = styled.div<{ isInside: boolean }>`
     display: ${({ isInside }) => (isInside ? 'default' : 'none')};
 `
 
-const Close = styled.img`
+const Close = styled.svg`
+    height: 20%;
+    align-items: center;
+    justify-content: center;
     position: absolute;
+    fill: black;
     top: 10%;
-    right: 1.5%;
+    right: 1%;
 
     &:hover {
         cursor: pointer;
+        animation: ${radiate} infinite linear;
+        animation-duration: 2s;
     }
 `
 
@@ -101,7 +117,9 @@ const Inside = ({ isInside, setIsInside }: InsideProps) => {
         <Container isInside={isInside}>
             <Backdrop isInside={isInside}>
                 <Banner>
-                    <Close onClick={handleClose} src={close} height={25} width={25} />
+                    <Close xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" onClick={handleClose}>
+                        <path d={close}/>
+                    </Close>
                 </Banner>
                 <CeilingPipe />
                 <DropArea>
