@@ -1,5 +1,5 @@
-import react, { useState } from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import React, { useState } from 'react'
+import styled, { keyframes } from 'styled-components'
 
 const EnvironmentContainer = styled.div`
     width: 100%;

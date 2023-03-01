@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 const DialogueContainer = styled.div`
@@ -38,18 +38,10 @@ const OpenDialogue = () => {
     return (
         <DialogueContainer>
             <Title>Welcome to factory_game</Title>
-            <Text>
-                Push ←↑→↓ to keep the conveyor belt clean
-            </Text>
-            <Text>
-                Any mistake will break the conveyor belt...
-            </Text>
-            <Text>
-                Good luck!
-            </Text>
-            <Text>
-                Press the CPU power button to start
-            </Text>
+            <Text>Push ←↑→↓ to keep the conveyor belt clean</Text>
+            <Text>Any mistake will break the conveyor belt...</Text>
+            <Text>Good luck!</Text>
+            <Text>Press the CPU power button to start</Text>
             <ControlsContainer>
                 <button>close</button>
             </ControlsContainer>

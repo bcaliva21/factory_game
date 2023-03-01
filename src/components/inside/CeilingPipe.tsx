@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 // components
@@ -68,11 +68,9 @@ const PipeWindow = styled.div`
 `
 
 const CeilingPipe = ({ gameInProgress }: { gameInProgress: boolean }) => {
-
     return (
         <PipeContainer>
-            {gameInProgress
-                ?
+            {gameInProgress ? (
                 <>
                     <PipeSection>
                         <PipeWindow>
@@ -85,18 +83,16 @@ const CeilingPipe = ({ gameInProgress }: { gameInProgress: boolean }) => {
                         </PipeWindow>
                     </PipeSection>
                 </>
-                :
+            ) : (
                 <>
                     <PipeSection>
-                        <PipeWindow>
-                        </PipeWindow>
+                        <PipeWindow></PipeWindow>
                     </PipeSection>
                     <PipeSection>
-                        <PipeWindow>
-                        </PipeWindow>
+                        <PipeWindow></PipeWindow>
                     </PipeSection>
                 </>
-            }
+            )}
             <PipeSection />
             <FunnelSection />
             <Cover>

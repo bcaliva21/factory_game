@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 import styled from 'styled-components'
 
 const DropContainer = styled.div`
@@ -13,6 +13,8 @@ const DropContainer = styled.div`
     background-color: transparent;
 `
 
-const DropArea = ({ children }: { children: react.ReactNode }) => <DropContainer>{children}</DropContainer>
+const DropArea = ({ children }: { children: react.ReactNode }) => (
+    <DropContainer>{children}</DropContainer>
+)
 
 export default DropArea

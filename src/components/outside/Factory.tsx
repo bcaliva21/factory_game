@@ -1,4 +1,4 @@
-import react, { useState } from 'react'
+import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
 import Worker from './Worker'
 import { Inside } from '../inside'

@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
 
 import power from '../../assets/power-btn'
@@ -26,8 +26,8 @@ const PowerButton = styled.svg<{ gameInProgress: boolean }>`
     left: 10%;
     width: 25%;
     height: 25%;
-    fill: ${({ gameInProgress }) => gameInProgress && 'green' };
-    stroke: ${({ gameInProgress }) => gameInProgress && 'black' };
+    fill: ${({ gameInProgress }) => gameInProgress && 'green'};
+    stroke: ${({ gameInProgress }) => gameInProgress && 'black'};
     stroke-width: 10px;
     &: hover {
         cursor: pointer;
@@ -93,8 +93,6 @@ const blinkYellow = keyframes`
     }
 `
 
-
-    
 const BlinkingLightGreen = styled.div`
     width: 7%;
     height: 5%;
@@ -107,7 +105,7 @@ const BlinkingLightGreen = styled.div`
     animation: ${blinkGreen} infinite;
     animation-duration: 1s;
 `
-    
+
 const BlinkingLightYellow = styled.div`
     width: 7%;
     height: 5%;
@@ -118,7 +116,7 @@ const BlinkingLightYellow = styled.div`
     border: 1px solid yellow;
     border-radius: 5%;
     animation: ${blinkYellow} infinite;
-    animation-duration: 1.50s;
+    animation-duration: 1.5s;
 `
 
 const RightLeg = styled.div`
@@ -145,18 +143,24 @@ const moveBeltForward = css`
     animation-duration: 3s;
 `
 
-const Belt = styled.div<{ top: string, gameInProgress: boolean }>`
+const Belt = styled.div<{ top: string; gameInProgress: boolean }>`
     position: absolute;
     background-color: transparent;
     border: 5px dashed black;
     width: 90%;
-    top: ${({ top }) => top };
+    top: ${({ top }) => top};
     left: 6%;
     z-index: 105;
-    ${({ gameInProgress }) => gameInProgress && moveBeltForward }
+    ${({ gameInProgress }) => gameInProgress && moveBeltForward}
 `
 
-const ConveyorBelt = ({ gameInProgress, setGameInProgress }: { gameInProgress: boolean, setGameInProgress: Function }) => {
+const ConveyorBelt = ({
+    gameInProgress,
+    setGameInProgress,
+}: {
+    gameInProgress: boolean
+    setGameInProgress: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
     const powerButtonClick = () => {
         setGameInProgress(true)
     }
@@ -166,8 +170,13 @@ const ConveyorBelt = ({ gameInProgress, setGameInProgress }: { gameInProgress: b
             <LeftLeg>
                 <HDContainer>
                     <Case>
-                        <PowerButton xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" onClick={powerButtonClick} gameInProgress={gameInProgress}>
-                            <path d={power}/>
+                        <PowerButton
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 512 512"
+                            onClick={powerButtonClick}
+                            gameInProgress={gameInProgress}
+                        >
+                            <path d={power} />
                         </PowerButton>
                         <CaseLine />
                         <BlinkingLightGreen />
@@ -176,8 +185,8 @@ const ConveyorBelt = ({ gameInProgress, setGameInProgress }: { gameInProgress: b
                 </HDContainer>
             </LeftLeg>
             <RightLeg />
-            <Belt top='15%' gameInProgress={gameInProgress} />
-            <Belt top='80%' gameInProgress={gameInProgress} />
+            <Belt top="15%" gameInProgress={gameInProgress} />
+            <Belt top="80%" gameInProgress={gameInProgress} />
         </ConveyorBeltContainer>
     )
 }
