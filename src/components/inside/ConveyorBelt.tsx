@@ -1,5 +1,5 @@
 import react from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 import power from '../../assets/power-btn'
 
@@ -140,28 +140,20 @@ const forward = keyframes`
     }
 `
 
-const TopBelt = styled.div`
-    position: absolute;
-    background-color: transparent;
-    border: 5px dashed black;
-    width: 90%;
-    top: 15%;
-    left: 6%;
-    z-index: 105;
+const moveBeltForward = css`
     animation: ${forward} infinite linear;
     animation-duration: 3s;
 `
 
-const BottomBelt = styled.div`
+const Belt = styled.div<{ top: string, gameInProgress: boolean }>`
     position: absolute;
     background-color: transparent;
     border: 5px dashed black;
     width: 90%;
-    bottom: 15%;
-    left: 2%;
+    top: ${({ top }) => top };
+    left: 6%;
     z-index: 105;
-    animation: ${forward} infinite linear;
-    animation-duration: 3s;
+    ${({ gameInProgress }) => gameInProgress && moveBeltForward }
 `
 
 const ConveyorBelt = ({ gameInProgress, setGameInProgress }: { gameInProgress: boolean, setGameInProgress: Function }) => {
@@ -184,8 +176,8 @@ const ConveyorBelt = ({ gameInProgress, setGameInProgress }: { gameInProgress: b
                 </HDContainer>
             </LeftLeg>
             <RightLeg />
-            <TopBelt />
-            <BottomBelt />
+            <Belt top='15%' gameInProgress={gameInProgress} />
+            <Belt top='80%' gameInProgress={gameInProgress} />
         </ConveyorBeltContainer>
     )
 }
