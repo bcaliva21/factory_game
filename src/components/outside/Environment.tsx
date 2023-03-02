@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
 const EnvironmentContainer = styled.div`
     width: 100%;
@@ -13,7 +13,7 @@ const EnvironmentContainer = styled.div`
 const DaySkyContainer = styled.div`
     width: 100%;
     height: 50%;
-    background-color: #87cefa;;
+    background-color: #87cefa;
     position: relative;
     opacity: 0.85;
 `
@@ -29,7 +29,7 @@ const NightSkyContainer = styled.div`
 const GroundContainer = styled.div<{ time: boolean }>`
     width: 100%;
     height: 50%;
-    background-color: ${({time}) => time ? '#5c7515' : '#0e1103'};
+    background-color: ${({ time }) => (time ? '#5c7515' : '#0e1103')};
     opacity: 0.9;
 `
 
@@ -49,7 +49,7 @@ const Sun = styled.div`
 const Moon = styled.div`
     width: 8vw;
     height: 8vw;
-    background-color: #FFFFCC;
+    background-color: #ffffcc;
     position: absolute;
     border-radius: 50%;
     top: 4vw;
@@ -294,10 +294,10 @@ enum TimeOfDay {
 const Environment = () => {
     const [time, setTime] = useState<TimeOfDay>(TimeOfDay.DAY)
 
-    const flipTime = () => time === TimeOfDay.DAY 
-        ? setTime(TimeOfDay.NIGHT) 
-        : setTime(TimeOfDay.DAY)
-    
+    const flipTime = () =>
+        time === TimeOfDay.DAY
+            ? setTime(TimeOfDay.NIGHT)
+            : setTime(TimeOfDay.DAY)
 
     const renderEnvironment = () => {
         if (time === TimeOfDay.DAY) {
@@ -312,7 +312,7 @@ const Environment = () => {
                         <SunRayTopRgt />
                         <SunRayBtmRgt />
                         <SunRayTopLft />
-                    </Sun> 
+                    </Sun>
                 </DaySkyContainer>
             )
         } else {
@@ -325,7 +325,7 @@ const Environment = () => {
                             <CloudBlobRgt />
                             <CloudBlobBtm />
                             <CloudBlobTopLft />
-                            <CloudBlobTopRgt />     
+                            <CloudBlobTopRgt />
                             <CloudBlobBtmRgt />
                         </CloudContainer>
                     </Moon>

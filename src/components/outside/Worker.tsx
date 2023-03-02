@@ -65,7 +65,7 @@ const LeftWing = styled.div`
     top: 5%;
     background-color: black;
 `
-    // background-color: black;
+// background-color: black;
 
 const RightWing = styled.div`
     width: 20%;
@@ -114,8 +114,8 @@ const RightUpperArm = styled.div`
     // background-color: white;
     right: -15%;
     top: 30%;
-    `
-    // transform: rotate(120deg);
+`
+// transform: rotate(120deg);
 
 const wave = keyframes`
     0%, 100% {
@@ -201,7 +201,7 @@ const JointFore = styled.div`
     top: 65%;
     background-color: #902001;
     border-radius: 70%;
-    `
+`
 
 const Hand = styled.div`
     width: 100%;
@@ -262,50 +262,50 @@ const PantsPocketRight = styled.div`
 const Worker = () => {
     return (
         <WorkerContainer>
-        <Head>
-            <HatRidge />
-            <SafetyGoggles>
-                <LeftLens />
-                <RightLens />
-                <LeftWing />
-                <RightWing />
-            </SafetyGoggles>
-        </Head>
-        <Torso>
-            <Cover />
-            <LeftUpperArm>
-                <JointUpper />
-                <Arm />
-                <Shoulder />
-            </LeftUpperArm>
-            <LeftForeArm>
-                <Hand />
-                <JointFore />
-                <ForeArm />
-            </LeftForeArm>
-            <RightUpperArm>
-                <JointUpper />
-                <Arm />
-                <Shoulder />
-            </RightUpperArm>
-            <RightForeArm>
-                <Hand />
-                <JointFore />
-                <ForeArm />
-            </RightForeArm>
-            <ClothingSplit />
-            <TorsoPocket />
-            <ClothingButton top='30%' />
-            <ClothingButton top='45%' />
-            <ClothingButton top='60%' />
-        </Torso>
-        <Pants>
-            <ClothingButton top='30%' />
-            <ClothingSplit />
-            <PantsPocketLeft />
-            <PantsPocketRight />
-        </Pants>
-    </WorkerContainer>
+            <Head>
+                <HatRidge />
+                <SafetyGoggles>
+                    <LeftLens />
+                    <RightLens />
+                    <LeftWing />
+                    <RightWing />
+                </SafetyGoggles>
+            </Head>
+            <Torso>
+                <Cover />
+                <LeftUpperArm>
+                    <JointUpper />
+                    <Arm />
+                    <Shoulder />
+                </LeftUpperArm>
+                <LeftForeArm>
+                    <Hand />
+                    <JointFore />
+                    <ForeArm />
+                </LeftForeArm>
+                <RightUpperArm>
+                    <JointUpper />
+                    <Arm />
+                    <Shoulder />
+                </RightUpperArm>
+                <RightForeArm>
+                    <Hand />
+                    <JointFore />
+                    <ForeArm />
+                </RightForeArm>
+                <ClothingSplit />
+                <TorsoPocket />
+                <ClothingButton top="30%" />
+                <ClothingButton top="45%" />
+                <ClothingButton top="60%" />
+            </Torso>
+            <Pants>
+                <ClothingButton top="30%" />
+                <ClothingSplit />
+                <PantsPocketLeft />
+                <PantsPocketRight />
+            </Pants>
+        </WorkerContainer>
     )
 }
 

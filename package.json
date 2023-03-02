@@ -3,8 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack server",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "npm run lint -- --fix"
   },
@@ -17,11 +18,15 @@
     "*.{js,jsx,ts,tsx}": "eslint --cache --fix"
   },
   "dependencies": {
+    "@babel/plugin-proposal-export-default-from": "^7.18.10",
+    "@vitejs/plugin-react": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "vite": "^4.1.4"
   },
   "devDependencies": {
+    "@types/node": "^18.14.2",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/styled-components": "^5.1.26",

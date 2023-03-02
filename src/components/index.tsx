@@ -1,8 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Factory from './Factory'
-import Environment from './Environment'
+import { Factory, Environment } from './outside'
 
 const AppBody = styled.div`
     position: relative;
