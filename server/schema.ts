@@ -24,8 +24,31 @@ export const typeDefs = `
       }
 `
 
+const Users = [
+    {
+        name: 'Jimmy',
+        email: 'jimmy@gmail.com',
+    },
+    {
+        name: 'Claire',
+        email: 'claire@gmail.com',
+    },
+];
+
+const HighScores = [
+    {
+        score: 100,
+        user: Users[0]
+    },
+    {
+        score: 101,
+        user: Users[1]
+    },
+]
+
 export const resolvers = {
     Query: {
-        users: () => [],
+        users: () => Users,
+        highScores: () => HighScores,
     },
 }
