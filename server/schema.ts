@@ -10,45 +10,12 @@ export const typeDefs = `
     }
 
     type Query {
-        users: [User]
-        highScores: [HighScore]
+        users: [User]!
+        highScores: [HighScore]!
     }
-
-    query GetHighScores {
-        highScores {
-          score
-          user {
-            name
-          }
-        }
-      }
 `
 
-const Users = [
-    {
-        name: 'Jimmy',
-        email: 'jimmy@gmail.com',
-    },
-    {
-        name: 'Claire',
-        email: 'claire@gmail.com',
-    },
-];
-
-const HighScores = [
-    {
-        score: 100,
-        user: Users[0]
-    },
-    {
-        score: 101,
-        user: Users[1]
-    },
-]
-
-export const resolvers = {
-    Query: {
-        users: () => Users,
-        highScores: () => HighScores,
-    },
-}
+// TODO add mutations for db writing
+// type Mutation {
+//     addHighScore(score: Float, user: User): HighScore
+// }
