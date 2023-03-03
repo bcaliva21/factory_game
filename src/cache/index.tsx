@@ -15,7 +15,7 @@ export const cache: InMemoryCache = new InMemoryCache({
 });
 
 // init values
-const isInsideVarIntialValue: boolean = false
+const isInsideVarIntialValue = false
 
 // helpers
 export const isInsideVar: ReactiveVar<boolean> = makeVar<boolean>(isInsideVarIntialValue)
