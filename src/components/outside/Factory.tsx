@@ -1,7 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useQuery } from '@apollo/client'
 import styled, { keyframes } from 'styled-components'
+
+// components
 import Worker from './Worker'
-import { Inside } from '../inside'
+
+// cache
+import { GET_IS_INSIDE } from '../../cache/queries'
+import { isInsideVar } from '../../cache/'
 
 const FactoryContainer = styled.div`
     width: 70%;
@@ -208,9 +214,13 @@ const Placard = styled.div`
 `
 
 const Factory = () => {
-    const [isInside, setIsInside] = useState(false)
+    const { data, loading, error } = useQuery(GET_IS_INSIDE)
 
-    const handleDoorClick = () => setIsInside(!isInside)
+    if (loading) console.log('what to do...')
+    if (error) console.log('with these.')
+
+    const isInside = data.isInside
+    const handleDoorClick = () => isInsideVar(!isInside)
 
     return (
         <FactoryContainer>
@@ -248,7 +258,6 @@ const Factory = () => {
                     <DoorText>Enter</DoorText>
                 </Door>
             </FactoryBody>
-            <Inside isInside={isInside} setIsInside={setIsInside} />
         </FactoryContainer>
     )
 }
