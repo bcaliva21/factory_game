@@ -10,7 +10,7 @@ import OpenDialogue from './OpenDialogue'
 
 import close from '../../assets/close'
 
-interface InsideProps {
+type InsideProps = {
     isInside: boolean
     setIsInside: React.Dispatch<React.SetStateAction<boolean>>
 }
