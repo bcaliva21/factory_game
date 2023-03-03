@@ -17,5 +17,5 @@ export const cache: InMemoryCache = new InMemoryCache({
 // init values
 const isInsideVarIntialValue: boolean = false
 
-// getters/setters (note these ARE NOT reactive, use './queries' for access to reactive variables)
+// helpers
 export const isInsideVar: ReactiveVar<boolean> = makeVar<boolean>(isInsideVarIntialValue)
