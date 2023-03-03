@@ -9,6 +9,7 @@ export const typeDefs = `
     type User {
         id: Int!
         name: String!
+        email: String!
         highScores: [HighScore!]!
     }
 

@@ -2,7 +2,6 @@ import { PrismaClient, User, HighScore } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-// TODO: fix the types for typescript
 const resolvers = {
     Query: {
         users: async (): Promise<User[]> => {
