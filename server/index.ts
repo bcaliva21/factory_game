@@ -6,7 +6,7 @@ import http from 'http'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import { typeDefs } from './schema.js'
-import { resolvers } from './resolvers.js'
+import resolvers from './resolvers.js'
 
 // Required logic for integrating with Express
 const app = express()

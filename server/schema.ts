@@ -1,21 +1,29 @@
 export const typeDefs = `
-    type HighScore {
-        score: Float
-        user: User
+    type Query {
+        users: [User!]!
+        user(id: Int!): User!
+        highScores: [HighScore!]!
+        highScore(id: Int!): HighScore!
     }
 
     type User {
-        name: String
-        email: String
+        id: Int!
+        name: String!
+        highScores: [HighScore!]!
     }
 
-    type Query {
-        users: [User]!
-        highScores: [HighScore]!
+    type HighScore {
+        id: Int!
+        score: Int!
+        user: User!
     }
 `
 
-// TODO add mutations for db writing
 // type Mutation {
-//     addHighScore(score: Float, user: User): HighScore
+//   createUser(name: String!): User!
+//   createHighScore(userId: Int!, score: Int!): HighScore!
+//   updateUser(id: Int!, name: String): User!
+//   updateHighScore(id: Int!, score: Int!): HighScore!
+//   deleteUser(id: Int!): User!
+//   deleteHighScore(id: Int!): HighScore!
 // }
