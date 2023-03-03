@@ -12,7 +12,7 @@ export const cache: InMemoryCache = new InMemoryCache({
             }
         }
     }
-});
+})
 
 // init values
 const isInsideVarIntialValue = false
