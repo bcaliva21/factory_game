@@ -1,6 +1,9 @@
 import React from 'react'
 import styled, { keyframes, css } from 'styled-components'
 
+// helpers
+import { KEYCODES } from '../constants'
+
 import down from '../../assets/arrow-down'
 // import left from '../../assets/arrow-left'
 import right from '../../assets/arrow-right'
@@ -48,8 +51,8 @@ const ComposableItem = styled.div<{ color: string; animation: string }>`
     ${({ animation }) => animation === 'drop' && dropItem}
 `
 
-const Item = ({ color, animation }: { color: string; animation: string }) => {
-    const determineArrow = () => {
+const Item = ({ animation, color, id }: { animation: string; color: string; id?: string }) => {
+    const determineArrowSVG = () => {
         switch (color) {
             case 'green':
                 return up
@@ -62,14 +65,16 @@ const Item = ({ color, animation }: { color: string; animation: string }) => {
 
     const isUpOrDownArrow = () => color === 'green' || color === 'red'
 
+
+
     return (
-        <ComposableItem color={color} animation={animation}>
+        <ComposableItem color={color} animation={animation} id={id} >
             <Arrow
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
                 upOrDown={isUpOrDownArrow()}
             >
-                <path d={determineArrow()} />
+                <path d={determineArrowSVG()} />
             </Arrow>
         </ComposableItem>
     )

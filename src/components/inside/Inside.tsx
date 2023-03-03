@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 // components
@@ -6,7 +6,8 @@ import ConveyorBelt from './ConveyorBelt'
 import CeilingPipe from './CeilingPipe'
 import DropArea from './DropArea'
 import Item from './Item'
-import OpenDialogue from './OpenDialogue'
+
+import { KEYCODES } from '../constants'
 
 import close from '../../assets/close'
 
@@ -115,6 +116,25 @@ const Inside = ({ isInside, setIsInside }: InsideProps) => {
     const handleClose = () => setIsInside(!isInside)
     const [gameInProgress, setGameInProgress] = useState<boolean>(false)
 
+    useEffect(() => {
+        window.addEventListener('keydown', (event) => {
+            const keycode = event.keyCode
+
+            const itemOnBelt = document.getElementById('on-belt')
+            console.log('itemOnBelt: ', itemOnBelt)
+
+            if (keycode === KEYCODES.UP) itemOnBelt?.remove()
+
+            // eventually... 
+            // switch (keycode) {
+            //     case KEYCODES.DOWN:
+            //     case KEYCODES.LEFT:
+            //     case KEYCODES.RIGHT:
+            //     case KEYCODES.UP:
+            // }
+        })
+    }, [])
+
     return (
         <Container isInside={isInside}>
             <Backdrop isInside={isInside}>
@@ -127,10 +147,9 @@ const Inside = ({ isInside, setIsInside }: InsideProps) => {
                         <path d={close} />
                     </Close>
                 </Banner>
-                <OpenDialogue></OpenDialogue>
                 <CeilingPipe gameInProgress={gameInProgress} />
                 <DropArea>
-                    {gameInProgress && <Item color="green" animation="drop" />}
+                    {gameInProgress && <Item animation="drop" color="green" id="on-belt"/>}
                 </DropArea>
                 <ConveyorBelt
                     gameInProgress={gameInProgress}
