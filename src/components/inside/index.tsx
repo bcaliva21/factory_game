@@ -3,12 +3,11 @@ import styled, { keyframes } from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_IS_INSIDE } from '../../cache/queries'
-import { isInsideVar } from '../../cache/'
-
+import { GET_IS_INSIDE_AND_GAME_IN_PROGRESS } from '../../cache/queries'
+import { isInsideVar, gameInProgressVar } from '../../cache/'
 
 // components
-import ConveyorBelt from './ConveyorBelt'
+import ConveyorBelt from './conveyor-belt/'
 import CeilingPipe from './CeilingPipe'
 import DropArea from './DropArea'
 import Item from './Item'
@@ -42,6 +41,14 @@ const Container = styled.div`
     border-top-left-radius: 5%; 
     border-top-right-radius: 5%;
     background-color: #3d3d3d;
+`
+
+const CeilingDesign = styled.div`
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 10%;
+    background-color: yellow;
 `
 
 const Close = styled.svg`
@@ -113,17 +120,19 @@ const Backdrop = styled.div`
 // `
 
 const Inside = () => {
-    const { data, loading, error } = useQuery(GET_IS_INSIDE)
+    const { data, loading, error } = useQuery(GET_IS_INSIDE_AND_GAME_IN_PROGRESS)
 
     if (error) console.log('We need to...')
     if (loading) console.log('think of what to do for these cases')
 
     const isInside = data.isInside
+    const gameInProgress = data.gameInProgress
+
     const handleClose = () => isInsideVar(!isInside)
-    const [gameInProgress, setGameInProgress] = useState<boolean>(false)
 
     return (
         <Container>
+            <CeilingDesign />
             <Backdrop>
                 <Banner>
                     <Close
@@ -138,10 +147,7 @@ const Inside = () => {
                 <DropArea>
                     {gameInProgress && <Item color="green" animation="drop" />}
                 </DropArea>
-                <ConveyorBelt
-                    gameInProgress={gameInProgress}
-                    setGameInProgress={setGameInProgress}
-                />
+                <ConveyorBelt />
             </Backdrop>
         </Container>
     )
