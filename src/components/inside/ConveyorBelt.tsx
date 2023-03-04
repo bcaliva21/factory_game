@@ -116,7 +116,7 @@ const blinkRed = keyframes`
 const BlinkingLightGreen = styled.div`
     width: 7%;
     height: 5%;
-    background-color: transparent;
+    background-color: black;
     position: absolute;
     bottom: 10%;
     right: 20%;
@@ -129,7 +129,7 @@ const BlinkingLightGreen = styled.div`
 const BlinkingLightYellow = styled.div`
     width: 7%;
     height: 5%;
-    background-color: transparent;
+    background-color: black;
     position: absolute;
     bottom: 10%;
     right: 30%;
@@ -142,7 +142,7 @@ const BlinkingLightYellow = styled.div`
 const BlinkingLightRed = styled.div`
     width: 7%;
     height: 5%;
-    background-color: transparent;
+    background-color: black;
     position: absolute;
     bottom: 10%;
     right: 9%;
