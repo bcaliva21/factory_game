@@ -102,7 +102,7 @@ const ConveyorBelt = () => {
     const populateRightPositions = () => {
         const positions: string[] = []
         const multiplier: number = 7
-        for (let i = 1; i < 15; i++) {
+        for (let i = 1; i < 14; i++) {
             positions.push(`${i * multiplier}%`)
         }
         return positions

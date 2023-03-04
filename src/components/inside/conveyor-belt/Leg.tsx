@@ -9,26 +9,36 @@ import { gameInProgressVar } from '../../../cache/'
 import power from '../../../assets/power-btn'
 
 // animations
-const radiatePower = keyframes`
+const glowFillAndStroke = keyframes`
     0%, 100% {
         fill: black;
         stroke: black;
         stoke-width: 10px;
     }
     50% {
-        fill: #64a500;
-        stroke: black;
+        fill: #ffe34d;
+        stroke: #ffe34d;
         stoke-width: 10px;
     }
 `
 
-const glowCase = keyframes`
+const makePowerGlow = css`
+    animation: ${glowFillAndStroke} infinite linear;
+    animation-duration: 2s;
+` 
+
+const glowBorder = keyframes`
     0%, 100% {
-        background-color: #ebf5ff;
+        border: 2px solid black;
     }
     50% {
-        background-color: #ffe34d;
+        border: 2px solid #ffe34d;
     }  
+`
+
+const makeBorderGlow = css`
+    animation: ${glowBorder} infinite linear;
+    animation-duration: 2s;
 `
 
 const blinkGreen = keyframes`
@@ -101,9 +111,9 @@ const LeftLeg = styled.div`
     position: absolute;
     background-color: grey;
     width: 10%;
-    height: 120%;
+    height: 140%;
     left: 0;
-    bottom: 0;
+    bottom: -10%;
     z-index: 110;
 `
 
@@ -111,44 +121,55 @@ const RightLeg = styled.div`
     position: absolute;
     background-color: grey;
     width: 10%;
-    height: 100%;
+    height: 140%;
     right: 0;
-    bottom: 0;
+    bottom: -10%;
     z-index: 110;
 `
 
-const PowerButton = styled.svg<{ gameInProgress: boolean }>`
+const Foot = styled.div`
+    width: 120%;
+    height: 10%;
+    background-color: #6c6c6c;
     position: absolute;
-    top: 8%;
-    left: 24%;
-    width: 50%;
-    height: 50%;
-    animation: ${radiatePower} infinite linear;
-    animation-duration: 2s;
-    &: hover {
-        cursor: pointer;
-    }
+    bottom: -5%;
+    left: -10%;
 `
 
-const HDContainer = styled.div`
+const ControlsContainer = styled.div`
     position: absolute;
     top: 5%;
     left: -20%;
-    background-color: red;
+    background-color: #282828;
     width: 140%;
     height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
-const Case = styled.div`
-    position: relative;
-    width: 70%;
-    height: 100%;
-    background-color: #ebf5ff;
-    border: 3px solid black;
-    border-radius: 10px;
+const PowerContainer = styled.div<{ gameInProgress: boolean }>`
+    width: 50%;
+    height: 60%;
+    background-color: #6c6c6c;
+    border: 2px solid ${({ gameInProgress }) => gameInProgress ? '#004b00' : 'black' };
     z-index: 5;
-    animation: ${glowCase} infinite linear;
-    animation-duration: 2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ${({ gameInProgress }) => !gameInProgress && makeBorderGlow }
+`
+
+const PowerButton = styled.svg<{ gameInProgress: boolean }>`
+    width: 70%;
+    height: 70%;
+    ${({ gameInProgress }) => !gameInProgress && makePowerGlow }
+    stroke: ${({ gameInProgress }) => gameInProgress ? '#004b00' : 'black' };
+    fill: ${({ gameInProgress }) => gameInProgress ? '#004b00' : 'black' };
+    stoke-width: 10px;
+    &: hover {
+        cursor: pointer;
+    }
 `
 
 const CaseLine = styled.div`
@@ -174,8 +195,9 @@ const Leg = ({ side }: { side: string; }) => {
         side === 'left'
             ? (
                 <LeftLeg>
-                    <HDContainer>
-                        <Case>
+                    <Foot />
+                    <ControlsContainer>
+                        <PowerContainer gameInProgress={gameInProgress}>
                             <PowerButton
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 512 512"
@@ -184,15 +206,19 @@ const Leg = ({ side }: { side: string; }) => {
                             >
                                 <path d={power} />
                             </PowerButton>
-                            <CaseLine />
+                        </PowerContainer>
+                            {/* <CaseLine />
                             <BlinkingLightGreen />
                             <BlinkingLightYellow />
-                            <BlinkingLightRed />
-                        </Case>
-                    </HDContainer>
+                            <BlinkingLightRed /> */}
+                    </ControlsContainer>
                 </LeftLeg>
             )
-            : <RightLeg />
+            : (
+            <RightLeg>
+                <Foot />
+            </RightLeg>
+            )
     )
 }
 
