@@ -16,6 +16,7 @@ const AppBody = styled.div`
     justify-content: center;
     font-family: system-ui;
     font-weight: bold;
+    background-color: #0c0c0c;
 `
 
 function App() {
