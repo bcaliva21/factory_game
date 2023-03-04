@@ -176,6 +176,14 @@ const moveBeltForward = css`
     animation-duration: 3s;
 `
 
+const BeltContainer = styled.div`
+    position: absolute;
+    top: 15%;
+    height: 70%;
+    width: 100%;
+    background-color: #feffff;
+`
+
 const Belt = styled.div<{ top: string; gameInProgress: boolean }>`
     position: absolute;
     background-color: transparent;
@@ -187,12 +195,45 @@ const Belt = styled.div<{ top: string; gameInProgress: boolean }>`
     ${({ gameInProgress }) => gameInProgress && moveBeltForward}
 `
 
-const BeltContainer = styled.div`
-    position: absolute;
-    top: 15%;
-    height: 70%;
+const WheelsContainer = styled.div`
     width: 100%;
-    background-color: #feffff;
+    height: 20%;
+    background-color: red;
+    position: absolute;
+    top: 60%;
+`
+
+const rotate = keyframes`
+    0% {
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
+`
+
+const rotateWheel = css`
+    animation: ${rotate} infinite linear;
+    animation-duration: 2s;
+`
+
+const Wheel = styled.div<{ gameInProgress: boolean; right: string; }>`
+    width: calc(100vh / 40);
+    height: calc(100vh / 40);
+    position: absolute;
+    top: 8%;
+    right: ${({ right }) => right};
+    background-color: yellow;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    ${({ gameInProgress }) => gameInProgress && rotateWheel}
+`
+
+const Spoke = styled.div`
+    height: 50%;
+    width: 0;
+    border: 1px solid black;
 `
 
 const TrickyDiv = styled.div`
@@ -213,6 +254,17 @@ const ConveyorBelt = ({
     const powerButtonClick = () => {
         setGameInProgress(true)
     }
+    
+    const populateRightPositions = () => {
+        const positions = []
+        const multiplier = 7
+        for (let i = 1; i < 15; i++) {
+            positions.push(`${i * multiplier}%`)
+        }
+        return positions
+    }
+
+    const RIGHT_POSITIONS = populateRightPositions()
 
     return (
         <ConveyorBeltContainer>
@@ -237,7 +289,14 @@ const ConveyorBelt = ({
             </LeftLeg>
             <RightLeg />
             <BeltContainer>
-                <Belt top="15%" gameInProgress={gameInProgress} />
+                <Belt top="55%" gameInProgress={gameInProgress} />
+                <WheelsContainer>
+                    {RIGHT_POSITIONS.map(position => (
+                    <Wheel gameInProgress={gameInProgress} right={position}>
+                        <Spoke />
+                    </Wheel>
+                    ))}
+                </WheelsContainer>
                 <Belt top="80%" gameInProgress={gameInProgress} />
             </BeltContainer>
         </ConveyorBeltContainer>

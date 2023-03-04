@@ -39,6 +39,9 @@ const Container = styled.div`
     position: absolute;
     color: white;
     background-color: #b0d9ff;
+    border-top-left-radius: 5%; 
+    border-top-right-radius: 5%;
+    background-color: #3d3d3d;
 `
 
 const Close = styled.svg`
@@ -63,7 +66,7 @@ const Backdrop = styled.div`
     position: absolute;
     top: 10%;
     left: 10%;
-    background-color: #000a13;
+    background-color: #3d3d3d;
 `
 
 // const WarningLight = styled.div<{ left: string }>`
