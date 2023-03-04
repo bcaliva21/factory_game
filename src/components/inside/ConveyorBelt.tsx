@@ -5,7 +5,7 @@ import power from '../../assets/power-btn'
 
 const ConveyorBeltContainer = styled.div`
     position: absolute;
-    background-color: #000a13;
+    background-color: #3d3d3d;
     width: 100%;
     height: 30%;
     bottom: 0;
@@ -39,7 +39,7 @@ const PowerButton = styled.svg<{ gameInProgress: boolean }>`
 
 const LeftLeg = styled.div`
     position: absolute;
-    background-color: #001f3a;
+    background-color: grey;
     width: 10%;
     height: 100%;
     left: 0;
@@ -154,7 +154,7 @@ const BlinkingLightRed = styled.div`
 
 const RightLeg = styled.div`
     position: absolute;
-    background-color: #001f3a;
+    background-color: grey;
     width: 10%;
     height: 100%;
     right: 0;
@@ -181,12 +181,10 @@ const BeltContainer = styled.div`
     top: 15%;
     height: 70%;
     width: 100%;
-    background-color: #feffff;
 `
 
 const Belt = styled.div<{ top: string; gameInProgress: boolean }>`
     position: absolute;
-    background-color: transparent;
     border: 5px dashed #000a13;
     width: 90%;
     top: ${({ top }) => top};
@@ -198,7 +196,6 @@ const Belt = styled.div<{ top: string; gameInProgress: boolean }>`
 const WheelsContainer = styled.div`
     width: 100%;
     height: 20%;
-    background-color: red;
     position: absolute;
     top: 60%;
 `
@@ -222,7 +219,7 @@ const Wheel = styled.div<{ gameInProgress: boolean; right: string; }>`
     position: absolute;
     top: 8%;
     right: ${({ right }) => right};
-    background-color: yellow;
+    background-color: grey;
     border: 2px solid black;
     border-radius: 50%;
     display: flex;
@@ -234,14 +231,6 @@ const Spoke = styled.div`
     height: 50%;
     width: 0;
     border: 1px solid black;
-`
-
-const TrickyDiv = styled.div`
-    position: absolute;
-    top: 0;
-    height: 15%;
-    width: 100%;
-    background-color: #000a13;
 `
 
 const ConveyorBelt = ({
@@ -268,7 +257,6 @@ const ConveyorBelt = ({
 
     return (
         <ConveyorBeltContainer>
-            <TrickyDiv />
             <LeftLeg>
                 <HDContainer>
                     <Case>
