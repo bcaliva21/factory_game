@@ -68,12 +68,14 @@ const Close = styled.svg`
 `
 
 const Backdrop = styled.div`
-    width: 80%;
+    width: 100%;
     height: 80%;
     position: absolute;
     top: 10%;
-    left: 10%;
-    background-color: #3d3d3d;
+    // background-color: #3d3d3d;
+    background-color: red;
+    display: flex;
+    justify-content: center;
 `
 
 // const WarningLight = styled.div<{ left: string }>`

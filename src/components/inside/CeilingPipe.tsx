@@ -8,7 +8,7 @@ const PipeContainer = styled.div`
     position: absolute;
     height: calc(80vh / 2);
     width: calc(100vw / 8);
-    right: calc(80vw / 10);
+    right: calc(100vw / 5);
     display: flex;
     flex-direction: column;
     align-items: center;
