@@ -72,7 +72,7 @@ const InsideMiddle = styled.div`
 const InsideTop = styled.div`
     position: absolute;
     top: 5%;
-    left: 2%;
+    left: 3%;
     border-right: calc(100vw / 50) solid transparent;
     border-left: calc(100vw / 50) solid black;
     border-bottom: calc(100vw / 180) solid black;
@@ -192,7 +192,7 @@ const adjustLeft = css`
 
 const VerticalLine = styled.div<{ right?: string; left?: string }>`
     height: 90%;
-    border: 1px solid black;
+    border: 2px solid black;
     ${({ right }) => right && adjustRight}
     ${({ left }) => left && adjustLeft}
     z-index: 200;

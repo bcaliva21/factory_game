@@ -21,7 +21,7 @@ const LeftDoor = styled.div`
 
 const LeftDoorMask = styled.div`
     width: 45%;
-    height: 85%;
+    height: 86%;
     position: absolute;
     top: 7%;
     left: 5%;
@@ -30,7 +30,7 @@ const LeftDoorMask = styled.div`
 
 const RightDoor = styled.div`
     width: 45%;
-    height: 85%;
+    height: 86%;
     position: absolute;
     top: 7%;
     right: 5%;
@@ -59,7 +59,7 @@ const KnobContainer = styled.div`
     display: block;
 `
 
-const InsideMiddle = styled.div`
+const OutsideMiddle = styled.div`
     width: 10%;
     height: 86%;
     background-color: skyblue;
@@ -69,7 +69,7 @@ const InsideMiddle = styled.div`
     display: none;
 `
 
-const InsideTop = styled.div`
+const OutsideTop = styled.div`
     position: absolute;
     top: 7%;
     left: 4%;
@@ -82,7 +82,7 @@ const InsideTop = styled.div`
     display: none;
 `
 
-const InsideBot = styled.div`
+const OutsideBot = styled.div`
     position: absolute;
     bottom: 7%;
     left: 4%;
@@ -119,13 +119,13 @@ const DoorFrame = styled.div`
         ${LeftDoorVerticalLine} {
             display: block;
         }
-        ${InsideTop} {
+        ${OutsideTop} {
             display: block;
         }
-        ${InsideMiddle} {
+        ${OutsideMiddle} {
             display: block;
         }
-        ${InsideBot} {
+        ${OutsideBot} {
             display: block;
         }    
     }
@@ -192,7 +192,7 @@ const adjustLeft = css`
 
 const VerticalLine = styled.div<{ right?: string; left?: string }>`
     height: 90%;
-    border: 1px solid black;
+    border: 2px solid black;
     ${({ right }) => right && adjustRight}
     ${({ left }) => left && adjustLeft}
     z-index: 10;
@@ -217,9 +217,9 @@ const ExitDoor = ({ handleClose }: { handleClose: () => void }) => {
     return (
         <ExitDoorContainer>
             <DoorFrame onClick={handleClose}>
-            <InsideMiddle />
-                <InsideTop />
-                <InsideBot />
+                <OutsideMiddle />
+                <OutsideTop />
+                <OutsideBot />
                 <LeftDoorMask />
                 <LeftDoor>
                     <LeftDoorVerticalLine />
