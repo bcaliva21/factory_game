@@ -11,6 +11,7 @@ import ConveyorBelt from './conveyor-belt/'
 import CeilingPipe from './CeilingPipe'
 import DropArea from './DropArea'
 import Item from './Item'
+import ExitDoor from './ExitDoor'
 
 import close from '../../assets/close'
 
@@ -134,17 +135,8 @@ const Inside = () => {
 
     return (
         <Container>
-            <CeilingDesign />
             <Backdrop>
-                <Banner>
-                    <Close
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 512 512"
-                        onClick={handleClose}
-                    >
-                        <path d={close} />
-                    </Close>
-                </Banner>
+                <ExitDoor handleClose={handleClose}/>
                 <CeilingPipe gameInProgress={gameInProgress} />
                 <DropArea>
                     {gameInProgress && <Item color="green" animation="drop" />}

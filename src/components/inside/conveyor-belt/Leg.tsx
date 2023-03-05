@@ -121,9 +121,9 @@ const RightLeg = styled.div`
     position: absolute;
     background-color: grey;
     width: 10%;
-    height: 140%;
+    height: 120%;
     right: 0;
-    bottom: -10%;
+    bottom: -7%;
     z-index: 110;
 `
 

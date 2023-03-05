@@ -35,7 +35,6 @@ const moveBeltForward = css`
 const BeltContainer = styled.div`
     position: absolute;
     top: 15%;
-
     height: 70%;
     width: 100%;
 `
