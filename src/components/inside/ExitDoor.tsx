@@ -62,7 +62,7 @@ const KnobContainer = styled.div`
 const InsideMiddle = styled.div`
     width: 10%;
     height: 86%;
-    background-color: yellow;
+    background-color: skyblue;
     position: absolute;
     left: 39%;
     z-index: 100;
@@ -74,8 +74,8 @@ const InsideTop = styled.div`
     top: 7%;
     left: 4%;
     border-right: calc(100vw / 41) solid transparent;
-    border-left: calc(100vw / 50) solid yellow;
-    border-bottom: calc(100vw / 200) solid yellow;
+    border-left: calc(100vw / 50) solid skyblue;
+    border-bottom: calc(100vw / 200) solid skyblue;
     border-top: calc(100vw / 200) solid transparent;
     transform: rotate(180deg);
     z-index: 100;
@@ -87,8 +87,8 @@ const InsideBot = styled.div`
     bottom: 7%;
     left: 4%;
     border-right: calc(100vw / 41) solid transparent;
-    border-left: calc(100vw / 50) solid yellow;
-    border-bottom: calc(100vw / 200) solid yellow;
+    border-left: calc(100vw / 50) solid skyblue;
+    border-bottom: calc(100vw / 200) solid skyblue;
     border-top: calc(100vw / 200) solid transparent;
     transform: scaleX(-1);
     z-index: 100;
