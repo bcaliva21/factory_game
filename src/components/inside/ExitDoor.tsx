@@ -195,7 +195,7 @@ const VerticalLine = styled.div<{ right?: string; left?: string }>`
     border: 1px solid black;
     ${({ right }) => right && adjustRight}
     ${({ left }) => left && adjustLeft}
-    z-index: 200;
+    z-index: 10;
 `
 
 const HorizontalTop = styled.div`
