@@ -47,29 +47,6 @@ const LeftDoorVerticalLine = styled.div`
     display: none;
 `
 
-const LeftDoorTopDiagLine = styled.div`
-    width: 80%;
-    height: 0;
-    border: 1px solid black;
-    transform: rotate(9deg);
-    position: absolute;
-    top: 6%;
-    left: -2%;
-    display: none;
-`
-
-const LeftDoorBotDiagLine = styled.div`
-    width: 80%;
-    height: 0;
-    border: 1px solid black;
-    transform: rotate(-9deg);
-    position: absolute;
-    bottom: 4%;
-    left: -2%;
-    display: none;
-`
-
-
 const KnobContainer = styled.div`
     height: 20%;
     width: 15%;
@@ -80,6 +57,42 @@ const KnobContainer = styled.div`
     align-items: center;
     justify-content: center;
     display: block;
+`
+
+const InsideMiddle = styled.div`
+    width: 10%;
+    height: 90%;
+    background-color: black;
+    position: absolute;
+    left: 40%;
+    z-index: 100;
+    display: none;
+`
+
+const InsideTop = styled.div`
+    position: absolute;
+    top: 5%;
+    left: 2%;
+    border-right: calc(100vw / 50) solid transparent;
+    border-left: calc(100vw / 50) solid black;
+    border-bottom: calc(100vw / 180) solid black;
+    border-top: calc(100vw / 180) solid transparent;
+    transform: rotate(180deg);
+    z-index: 100;
+    display: none;
+`
+
+const InsideBot = styled.div`
+    position: absolute;
+    bottom: 5%;
+    left: 1%;
+    border-right: calc(100vw / 45) solid transparent;
+    border-left: calc(100vw / 45) solid black;
+    border-bottom: calc(100vw / 160) solid black;
+    border-top: calc(100vw / 160) solid transparent;
+    transform: scaleX(-1);
+    z-index: 100;
+    display: none;
 `
 
 const DoorFrame = styled.div`
@@ -106,12 +119,15 @@ const DoorFrame = styled.div`
         ${LeftDoorVerticalLine} {
             display: block;
         }
-        ${LeftDoorTopDiagLine} {
-            display: block;
-        }        
-        ${LeftDoorBotDiagLine} {
+        ${InsideTop} {
             display: block;
         }
+        ${InsideMiddle} {
+            display: block;
+        }
+        ${InsideBot} {
+            display: block;
+        }    
     }
 `
 
@@ -201,11 +217,12 @@ const EnterDoor = ({ handleEnter }: { handleEnter: () => void }) => {
     return (
         <EnterDoorContainer>
             <DoorFrame onClick={handleEnter}>
+                <InsideMiddle />
+                <InsideTop />
+                <InsideBot />
                 <LeftDoorMask />
                 <LeftDoor>
                     <LeftDoorVerticalLine />
-                    <LeftDoorTopDiagLine />
-                    <LeftDoorBotDiagLine />
                     <OpenKnobContainer>
                         <OpenKnobCase>
                             <OpenKnob />
