@@ -27,8 +27,22 @@ const forward = keyframes`
     }
 `
 
+const backward = keyframes`
+    0% {
+        left: 2%;
+    }
+    100% {
+        left: 6%;
+    }
+`
+
 const moveBeltForward = css`
     animation: ${forward} infinite linear;
+    animation-duration: 3s;
+`
+
+const moveBeltBackward = css`
+    animation: ${backward} infinite linear;
     animation-duration: 3s;
 `
 
@@ -39,7 +53,7 @@ const BeltContainer = styled.div`
     width: 100%;
 `
 
-const Belt = styled.div<{ top: string; gameInProgress: boolean }>`
+const Belt = styled.div<{ top: string; gameInProgress: boolean; }>`
     position: absolute;
     border: 5px dashed #000a13;
     width: 90%;
@@ -47,7 +61,7 @@ const Belt = styled.div<{ top: string; gameInProgress: boolean }>`
     left: 6%;
     z-index: 1;
     background-color: grey;
-    ${({ gameInProgress }) => gameInProgress && moveBeltForward}
+    ${({ gameInProgress, top }) => gameInProgress && top === '55%' ? moveBeltForward : moveBeltBackward }
 `
 
 const WheelsContainer = styled.div`
