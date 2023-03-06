@@ -3,15 +3,36 @@ import styled, { keyframes } from 'styled-components'
 
 import { TinyItem, generateRandomColor } from '../utils/'
 
+const travel = keyframes`
+    0% {
+        transform: scaleX(1);
+        right: -10%;
+    }
+    50% {
+        transform: scaleX(1);
+        right: 35%;
+    }
+    51% {
+        transform: scaleX(-1);
+        right: 35%;
+    }
+    100% {
+        transform: scaleX(-1);
+        right: -10%;
+    }
+`
+
 const ForkLiftContainer = styled.div`
     width: 10%;
     height: 20%;
     position: absolute;
     top: 35%;
-    right: 35%;
+    right: -10%;
     display: flex;
     align-items: end;
     justify-content: center;
+    animation: ${travel} infinite linear;
+    animation-duration: 10s;
 `
 
 const ForkLiftBody = styled.div`
@@ -202,11 +223,6 @@ const HubCap = styled.div`
     justify-content: center;
 `
 
-const HubCapLine = styled.div`
-    height: 100%;
-    border: 1px solid black;
-`
-
 const ForkLift = () => {
 
     const populateRow = () => {
@@ -251,16 +267,12 @@ const ForkLift = () => {
                 </ForkLiftCab>
                 <WheelHole left={'10%'}>
                     <ForkLiftWheel>
-                        <HubCap>
-                            <HubCapLine />
-                        </HubCap>
+                        <HubCap />
                     </ForkLiftWheel>
                 </WheelHole>
                 <WheelHole left={'60%'}>
                     <ForkLiftWheel>
-                        <HubCap>
-                            <HubCapLine />
-                        </HubCap>
+                        <HubCap />
                     </ForkLiftWheel>
                 </WheelHole>
             </ForkLiftBody>
