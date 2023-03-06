@@ -14,13 +14,6 @@ model User {
   id         Int         @id @default(autoincrement())
   name       String
   email      String      @unique
-  highScores HighScore[]
+  highScore  Int
   createdAt  DateTime    @default(now())
-}
-
-model HighScore {
-  score    Int
-  author   User? @relation(fields: [authorId], references: [id])
-  authorId Int?
-  id       Int   @id @default(autoincrement())
 }
