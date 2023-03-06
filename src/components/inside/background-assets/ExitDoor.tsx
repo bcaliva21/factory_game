@@ -153,7 +153,7 @@ const OpenKnobContainer = styled.div`
     height: 20%;
     width: 15%;
     position: absolute;
-    top: 40%;~
+    top: 40%;
     right: 25%;
     display: flex;
     align-items: center;

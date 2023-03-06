@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { TinyItem, generateRandomColor } from './utils'
+import { TinyItem, generateRandomColor } from '../utils'
 
 const PileOfItemsContainer = styled.div`
     width: 8%;

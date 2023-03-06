@@ -11,10 +11,11 @@ import ConveyorBelt from './conveyor-belt/'
 import CeilingPipe from './CeilingPipe'
 import DropArea from './DropArea'
 import Item from './Item'
-import ExitDoor from './ExitDoor'
+import ExitDoor from './background-assets/ExitDoor'
 import Windows from './Windows'
-import PileOfItems from './PileOfItems'
-import Scaffolding from './Scaffolding'
+import PileOfItems from './background-assets/PileOfItems'
+import Scaffolding from './background-assets/Scaffolding'
+import ForkLift from './background-assets/ForkLift'
 
 const Container = styled.div`
     height: 100%;
@@ -97,7 +98,10 @@ const Inside = () => {
             <Backdrop>
                 <Windows />
                 <PileOfItems />
-                <Scaffolding />
+                <ForkLift />
+                <Scaffolding top={'15%'} left={'20%'} />
+                <Scaffolding top={'15%'} left={'30%'} />
+                <Scaffolding top={'15%'} left={'40%'} />
                 <ExitDoor handleClose={handleClose}/>
                 <CeilingPipe gameInProgress={gameInProgress} />
                 <DropArea>

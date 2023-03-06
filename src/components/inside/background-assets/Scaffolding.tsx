@@ -1,15 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { TinyItem, generateRandomColor } from './utils'
+import { TinyItem, generateRandomColor } from '../utils'
 
-const ScaffoldingContainer = styled.div`
+const ScaffoldingContainer = styled.div<{ top: string; left: string; }>`
     width: 10%;
     height: 40%;
     background-color: transparent;
     position: absolute;
-    top: 15%;
-    left: 40%;
+    top: ${({ top }) => top };
+    left: ${({ left }) => left };
 `
 
 const HorizontalBar = styled.div<{ bottom: string; }>`
@@ -55,25 +55,24 @@ const DiagBarRight = styled.div<{ bottom: string; }>`
 `
 
 const RowOnScaffolding = styled.div`
-    width: 39%;
+    width: 100%;
     height: 11px;
     display: flex;
     flex-direction: row;
     justify-content: center;
 `
 
-const ItemsContainer = styled.div`
+const ItemsContainer = styled.div<{ bottom: string; }>`
     width: 40%;
     height: 20%;
     position: absolute;
-    bottom: 6%;
+    bottom: ${({ bottom }) => bottom };
     left: 31%;
     display: flex;
     flex-direction: column-reverse;
-    background-color: yellow;
 `
 
-const Scaffolding = () => {
+const Scaffolding = ({ top, left }: { top: string; left: string; }) => {
 
     const renderLadderRungs = () => {
         const rungs = []
@@ -85,21 +84,9 @@ const Scaffolding = () => {
         )
     }
 
-    const populateBottomRow = () => {
+    const populateRow = () => {
         const row = []
-        for (let i = 0; i < 5; i++) {
-            row.push(i)
-        }
-        return (
-            <RowOnScaffolding>
-                {row.map(item => <TinyItem key={item} color={generateRandomColor()} />)}
-            </RowOnScaffolding>
-        )
-    }
-
-    const populateBottomNextRow = () => {
-        const row = []
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < 6; i++) {
             row.push(i)
         }
         return (
@@ -110,12 +97,39 @@ const Scaffolding = () => {
     }
 
     return (
-        <ScaffoldingContainer>
+        <ScaffoldingContainer top={top} left={left} >
             {renderLadderRungs()}
-            <ItemsContainer>
-            {populateBottomRow()}
-            {populateBottomNextRow()}
-
+            <ItemsContainer bottom={'6%'}>
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+            </ItemsContainer>
+            <ItemsContainer bottom={'26%'}>
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+            </ItemsContainer>
+            <ItemsContainer bottom={'46%'}>
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+            </ItemsContainer>
+            <ItemsContainer bottom={'66%'}>
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+            </ItemsContainer>
+            <ItemsContainer bottom={'86%'}>
+                {populateRow()}
+                {populateRow()}
             </ItemsContainer>
             <HorizontalBar bottom={'0'}/>
             <RowOnScaffolding />
