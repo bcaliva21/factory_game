@@ -11,15 +11,16 @@ generator client {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  name        String
-  email       String
-  highScores  HighScore[]
+  id         Int         @id @default(autoincrement())
+  name       String
+  email      String      @unique
+  highScores HighScore[]
+  createdAt  DateTime    @default(now())
 }
 
 model HighScore {
-  id        Int    @id @default(autoincrement())
-  score     Int
-  user      User   @relation(fields: [userId], references: [id])
-  userId    Int
+  score    Int
+  author   User? @relation(fields: [authorId], references: [id])
+  authorId Int?
+  id       Int   @id @default(autoincrement())
 }
