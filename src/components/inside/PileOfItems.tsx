@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const PileOfItemsContainer = styled.div`
-    width: 5%;
+    width: 8%;
     height: 15%;
     position: absolute;
     left: 11.5%;

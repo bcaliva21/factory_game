@@ -60,7 +60,7 @@ const KnobContainer = styled.div`
 `
 
 const OutsideMiddle = styled.div`
-    width: 8%;
+    width: 10%;
     height: 68%;
     background-color: skyblue;
     position: absolute;
@@ -99,7 +99,7 @@ const DoorFrame = styled.div`
     position: absolute;
     bottom: 0;
     left: 10%;
-    width: 80%;
+    width: 70%;
     height: 60%;
     border: 2px solid black;
     border-bottom: none;
@@ -127,7 +127,7 @@ const DoorFrame = styled.div`
         }
         ${OutsideBot} {
             display: block;
-        }    
+        }
     }
 `
 
@@ -153,7 +153,7 @@ const OpenKnobContainer = styled.div`
     height: 20%;
     width: 15%;
     position: absolute;
-    top: 40%;
+    top: 40%;~
     right: 25%;
     display: flex;
     align-items: center;
@@ -191,7 +191,7 @@ const adjustLeft = css`
 `
 
 const VerticalLine = styled.div<{ right?: string; left?: string }>`
-    height: 88%;
+    height: 86%;
     border: 2px solid black;
     ${({ right }) => right && adjustRight}
     ${({ left }) => left && adjustLeft}
@@ -201,7 +201,7 @@ const VerticalLine = styled.div<{ right?: string; left?: string }>`
 const HorizontalTop = styled.div`
     position: absolute;
     top: 3%;
-    width: 90%;
+    width: 84%;
     border: 3px solid black;
 `
 
@@ -209,7 +209,7 @@ const HorizontalBot = styled.div`
     position: absolute;
     bottom: -4%;
     width: 106%;
-    border: 8px solid black;
+    border: 4px solid black;
 `
 
 const ExitDoor = ({ handleClose }: { handleClose: () => void }) => {

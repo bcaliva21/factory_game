@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import styled, { keyframes } from 'styled-components'
+import React from 'react'
+import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
 import { GET_IS_INSIDE_AND_GAME_IN_PROGRESS } from '../../cache/queries'
-import { isInsideVar, gameInProgressVar } from '../../cache/'
+import { isInsideVar } from '../../cache/'
 
 // components
 import ConveyorBelt from './conveyor-belt/'
@@ -14,26 +14,7 @@ import Item from './Item'
 import ExitDoor from './ExitDoor'
 import Windows from './Windows'
 import PileOfItems from './PileOfItems'
-
-import close from '../../assets/close'
-
-const radiate = keyframes`
-    0%, 100% {
-        fill: black;
-    }
-    50% {
-        fill: red;
-        stroke: black;
-    }
-`
-
-const Banner = styled.div`
-    width: 100%;
-    height: 20%;
-    background-color: white;
-    position: absolute;
-    top: 0;
-`
+import Scaffolding from './Scaffolding'
 
 const Container = styled.div`
     height: 100%;
@@ -41,17 +22,9 @@ const Container = styled.div`
     position: absolute;
     color: white;
     background-color: #b0d9ff;
-    border-top-left-radius: 5%; 
+    border-top-left-radius: 5%;
     border-top-right-radius: 5%;
     background-color: #3d3d3d;
-`
-
-const CeilingDesign = styled.div`
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: 10%;
-    background-color: yellow;
 `
 
 const Backdrop = styled.div`
@@ -124,6 +97,7 @@ const Inside = () => {
             <Backdrop>
                 <Windows />
                 <PileOfItems />
+                <Scaffolding />
                 <ExitDoor handleClose={handleClose}/>
                 <CeilingPipe gameInProgress={gameInProgress} />
                 <DropArea>
