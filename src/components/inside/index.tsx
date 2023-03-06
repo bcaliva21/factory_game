@@ -12,6 +12,8 @@ import CeilingPipe from './CeilingPipe'
 import DropArea from './DropArea'
 import Item from './Item'
 import ExitDoor from './ExitDoor'
+import Windows from './Windows'
+import PileOfItems from './PileOfItems'
 
 import close from '../../assets/close'
 
@@ -52,29 +54,13 @@ const CeilingDesign = styled.div`
     background-color: yellow;
 `
 
-const Close = styled.svg`
-    height: 20%;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    fill: black;
-    top: 10%;
-    right: 1%;
-
-    &:hover {
-        cursor: pointer;
-        animation: ${radiate} infinite linear;
-        animation-duration: 2s;
-    }
-`
-
 const Backdrop = styled.div`
     width: 100%;
     height: 80%;
     position: absolute;
     top: 10%;
     // background-color: #3d3d3d;
-    background-color: red;
+    background-color: lightgrey;
     display: flex;
     justify-content: center;
 `
@@ -136,6 +122,8 @@ const Inside = () => {
     return (
         <Container>
             <Backdrop>
+                <Windows />
+                <PileOfItems />
                 <ExitDoor handleClose={handleClose}/>
                 <CeilingPipe gameInProgress={gameInProgress} />
                 <DropArea>
