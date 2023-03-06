@@ -2,10 +2,10 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 const ExitDoorContainer = styled.div`
-    width: calc(100vw/ 8);
-    height: calc(100vh/ 4);
+    width: calc(100vw/ 16);
+    height: calc(100vh/ 8);
     position: absolute;
-    left: 0;
+    left: 5%;
     top: 30vh;
 `
 
@@ -60,23 +60,23 @@ const KnobContainer = styled.div`
 `
 
 const OutsideMiddle = styled.div`
-    width: 10%;
-    height: 86%;
+    width: 8%;
+    height: 68%;
     background-color: skyblue;
     position: absolute;
-    left: 39%;
+    left: 40%;
     z-index: 100;
     display: none;
 `
 
 const OutsideTop = styled.div`
     position: absolute;
-    top: 7%;
+    top: 11%;
     left: 4%;
-    border-right: calc(100vw / 41) solid transparent;
-    border-left: calc(100vw / 50) solid skyblue;
-    border-bottom: calc(100vw / 200) solid skyblue;
-    border-top: calc(100vw / 200) solid transparent;
+    border-right: calc(100vw / 82) solid transparent;
+    border-left: calc(100vw / 100) solid skyblue;
+    border-bottom: calc(100vw / 475) solid skyblue;
+    border-top: calc(100vw / 475) solid transparent;
     transform: rotate(180deg);
     z-index: 100;
     display: none;
@@ -84,12 +84,12 @@ const OutsideTop = styled.div`
 
 const OutsideBot = styled.div`
     position: absolute;
-    bottom: 7%;
+    bottom: 16%;
     left: 4%;
-    border-right: calc(100vw / 41) solid transparent;
-    border-left: calc(100vw / 50) solid skyblue;
-    border-bottom: calc(100vw / 200) solid skyblue;
-    border-top: calc(100vw / 200) solid transparent;
+    border-right: calc(100vw / 82) solid transparent;
+    border-left: calc(100vw / 100) solid skyblue;
+    border-bottom: calc(100vw / 450) solid skyblue;
+    border-top: calc(100vw / 450) solid transparent;
     transform: scaleX(-1);
     z-index: 100;
     display: none;
@@ -191,7 +191,7 @@ const adjustLeft = css`
 `
 
 const VerticalLine = styled.div<{ right?: string; left?: string }>`
-    height: 90%;
+    height: 88%;
     border: 2px solid black;
     ${({ right }) => right && adjustRight}
     ${({ left }) => left && adjustLeft}
