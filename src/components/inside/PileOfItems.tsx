@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { TinyItem, generateRandomColor } from './utils'
+
 const PileOfItemsContainer = styled.div`
     width: 8%;
     height: 15%;
@@ -18,20 +20,8 @@ const Row = styled.div`
     flex-direction: row;
     justify-content: center;
 `
-const TinyItem = styled.div<{ color: string; }>`
-    width: 10px;
-    height: 10px;
-    background-color: ${({ color }) => color };
-    margin-right: 1px;
-`
 
 const PileOfItems = () => {
-    const RGBArray = ['red', 'blue', 'green']
-    const generateRandomColor = () => {
-        const randomIndex = Math.floor(Math.random() * 3)
-        return RGBArray[randomIndex]
-    }
-
     const populateBottomRow = () => {
         const row = []
         for (let i = 0; i < 9; i++) {

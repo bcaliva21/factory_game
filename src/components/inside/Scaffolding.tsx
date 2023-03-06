@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { TinyItem, generateRandomColor } from './utils'
+
 const ScaffoldingContainer = styled.div`
     width: 10%;
     height: 40%;
@@ -52,6 +54,25 @@ const DiagBarRight = styled.div<{ bottom: string; }>`
     transform: rotate(-40deg);
 `
 
+const RowOnScaffolding = styled.div`
+    width: 39%;
+    height: 11px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`
+
+const ItemsContainer = styled.div`
+    width: 40%;
+    height: 20%;
+    position: absolute;
+    bottom: 6%;
+    left: 31%;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: yellow;
+`
+
 const Scaffolding = () => {
 
     const renderLadderRungs = () => {
@@ -64,10 +85,40 @@ const Scaffolding = () => {
         )
     }
 
+    const populateBottomRow = () => {
+        const row = []
+        for (let i = 0; i < 5; i++) {
+            row.push(i)
+        }
+        return (
+            <RowOnScaffolding>
+                {row.map(item => <TinyItem key={item} color={generateRandomColor()} />)}
+            </RowOnScaffolding>
+        )
+    }
+
+    const populateBottomNextRow = () => {
+        const row = []
+        for (let i = 0; i < 5; i++) {
+            row.push(i)
+        }
+        return (
+            <RowOnScaffolding>
+                {row.map(item => <TinyItem key={item} color={generateRandomColor()} />)}
+            </RowOnScaffolding>
+        )
+    }
+
     return (
         <ScaffoldingContainer>
             {renderLadderRungs()}
+            <ItemsContainer>
+            {populateBottomRow()}
+            {populateBottomNextRow()}
+
+            </ItemsContainer>
             <HorizontalBar bottom={'0'}/>
+            <RowOnScaffolding />
             <HorizontalBar bottom={'5%'}/>
             <DiagBarLeft  bottom={'15%'}/>
             <DiagBarRight bottom={'35%'} />
