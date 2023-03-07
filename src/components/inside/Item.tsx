@@ -4,7 +4,7 @@ import styled, { keyframes, css } from 'styled-components'
 import { KEYCODES } from '../constants'
 
 import down from '../../assets/arrow-down'
-// import left from '../../assets/arrow-left'
+import left from '../../assets/arrow-left'
 import right from '../../assets/arrow-right'
 import up from '../../assets/arrow-up'
 
@@ -59,6 +59,8 @@ const Item = ({ color, animation, id }: { color: string; animation: string; id: 
                 return down
             case 'blue':
                 return right
+            case 'yellow':
+                return left
         }
     }
 

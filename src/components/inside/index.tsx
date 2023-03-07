@@ -96,7 +96,7 @@ const Inside = () => {
     }
 
     const userInputIsCorrect = (item: (HTMLElement | null), userInput: number): boolean => {
-        const upperCaseItemColor = item?.style.stroke.toUpperCase() | 'TERMINATE'
+        const upperCaseItemColor = item?.style.stroke.toUpperCase()
         const correctKeycode = COLORS_TO_KEYCODES[upperCaseItemColor]
         return correctKeycode === userInput
     }
@@ -106,8 +106,9 @@ const Inside = () => {
             const userInput = event.keyCode
             const itemInPlay = document.getElementById('in-play')
 
-            if (userInputIsCorrect(itemInPlay, userInput)) resetCycle(itemInPlay)
+            if (!userInputIsCorrect(itemInPlay, userInput)) breakCycle()
 
+            resetCycle(itemInPlay)
         })
     }, [])
 

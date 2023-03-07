@@ -7,8 +7,7 @@ export const KEYCODES = {
 
 export const COLORS_TO_KEYCODES = {
     RED: 40,
-    // YELLOW: 37,
+    YELLOW: 37,
     BLUE: 39,
     GREEN: 38,
-    TERMINATE: 999,
 }

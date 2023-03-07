@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 // constants
-export const RGBArray = ['red', 'blue', 'green']
+export const RGBArray = ['red', 'blue', 'green', 'yellow']
 
 // styled components
 export const TinyItem = styled.div<{ color: string; }>`
@@ -21,6 +21,6 @@ export const MiniItem = styled.div<{ color: string; }>`
 
 // helper functions
 export const generateRandomColor = () => {
-    const randomIndex = Math.floor(Math.random() * 3)
+    const randomIndex = Math.floor(Math.random() * 4)
     return RGBArray[randomIndex]
 }
