@@ -11,3 +11,5 @@ export const COLORS_TO_KEYCODES = {
     BLUE: 39,
     GREEN: 38,
 }
+
+export const COLORS = ['red', 'blue', 'green', 'yellow']

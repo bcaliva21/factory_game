@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { renderToStaticMarkup } from "react-dom/server"
+
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 
@@ -7,7 +7,8 @@ import { useQuery } from '@apollo/client'
 import { GET_IS_INSIDE_AND_GAME_IN_PROGRESS } from '../../cache/queries'
 import { isInsideVar } from '../../cache/'
 
-import { KEYCODES, COLORS_TO_KEYCODES } from '../constants'
+// helpers
+import { game } from './utils'
 
 // components
 import ConveyorBelt from './conveyor-belt/'
@@ -76,43 +77,14 @@ const Backdrop = styled.div`
 
 const Inside = () => {
 
-    const createDivAndGenerateNewItem = () => {
-        const div = document.createElement('div')
-        const itemAsHTML = renderToStaticMarkup(
-            <Item color={generateRandomColor()} animation={'drop'} id={'in-play'} />
-        )
-
-        div.innerHTML = itemAsHTML
-
-        return div
-    }
-
-    const breakCycle = () => {
-
-    }
-
-    const resetCycle = (item: (HTMLElement | null)) => {
-        const dropContainer = document.getElementById('drop-container')
-        const div = createDivAndGenerateNewItem()
-
-        item?.remove()
-        dropContainer?.append(div)
-    }
-
-    const userInputIsCorrect = (item: (HTMLElement | null), userInput: number): boolean => {
-        const upperCaseItemColor = item?.style.stroke.toUpperCase()
-        const correctKeycode = COLORS_TO_KEYCODES[upperCaseItemColor]
-        return correctKeycode === userInput
-    }
-
     useEffect(() => {
         window.addEventListener('keydown', (event) => {
             const userInput = event.keyCode
             const itemInPlay = document.getElementById('in-play')
 
-            if (!userInputIsCorrect(itemInPlay, userInput)) breakCycle()
+            if (!game.userInputIsCorrect(itemInPlay, userInput)) game.breakCycle()
 
-            resetCycle(itemInPlay)
+            game.resetCycle(itemInPlay)
         })
     }, [])
 
