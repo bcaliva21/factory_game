@@ -76,24 +76,33 @@ const Backdrop = styled.div`
 
 const Inside = () => {
 
-    const resetCycle = (itemToRemove) => {
+    const createDivAndGenerateNewItem = () => {
         const div = document.createElement('div')
-        const html = renderToStaticMarkup(
+        const itemAsHTML = renderToStaticMarkup(
             <Item color={generateRandomColor()} animation={'drop'} id={'in-play'} />
         )
-        div.innerHTML = html
+
+        div.innerHTML = itemAsHTML
+
+        return div
+    }
+
+    const resetCycle = () => {
         const dropContainer = document.getElementById('drop-container')
-        itemToRemove.remove()
+        const itemOnBelt = document.getElementById('in-play')
+        const div = createDivAndGenerateNewItem()
+
+        itemOnBelt?.remove()
         dropContainer?.append(div)
     }
 
     useEffect(() => {
         window.addEventListener('keydown', (event) => {
             const keycode = event.keyCode
-
             const itemOnBelt = document.getElementById('in-play')
+            console.log(itemOnBelt?.style.stroke)
 
-            if (keycode === KEYCODES.UP) resetCycle(itemOnBelt)
+            if (keycode === KEYCODES.UP) resetCycle()
 
             // eventually...
             // switch (keycode) {

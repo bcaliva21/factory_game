@@ -65,11 +65,12 @@ const Item = ({ color, animation, id }: { color: string; animation: string; id: 
     const isUpOrDownArrow = () => color === 'green' || color === 'red'
 
     return (
-        <ComposableItem color={color} animation={animation} id={id}>
+        <ComposableItem color={color} animation={animation} id={id} style={{ stroke: color }}>
             <Arrow
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
                 upOrDown={isUpOrDownArrow()}
+                color={color}
             >
                 <path d={determineArrowSVG()} />
             </Arrow>
