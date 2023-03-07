@@ -1,5 +1,12 @@
 import styled from 'styled-components'
+import { useQuery } from '@apollo/client'
 import { renderToStaticMarkup } from 'react-dom/server'
+
+// cache
+import { GET_GAME_IN_PROGRESS } from '../../../cache/queries'
+import { gameInProgressVar } from '../../../cache/'
+
+// constants
 import { COLORS_TO_KEYCODES, COLORS } from '../../constants'
 
 // components
@@ -26,9 +33,27 @@ export const generateRandomColor = () => {
     return COLORS[randomIndex]
 }
 
+export const createDivAndGenerateNewItem = () => {
+    const div = document.createElement('div')
+    const itemAsHTML = renderToStaticMarkup(
+        <Item color={generateRandomColor()} animation={'drop'} id={'in-play'} />
+    )
+
+    div.innerHTML = itemAsHTML
+
+    return div
+}
+
 // game object
 export const game = {
-    init: () => { },
+    start: () => {
+        gameInProgressVar(true)
+        console.log('Game Start')
+        // start timer/score
+    },
+    over: () => {
+        gameInProgressVar(false)
+    },
     resetCycle: (item: (HTMLElement | null)) => {
         // add a function to cycle through itemsInQueue
 
@@ -45,15 +70,4 @@ export const game = {
         const correctKeycode = COLORS_TO_KEYCODES[upperCaseItemColor]
         return correctKeycode === userInput
     },
-}
-
-export const createDivAndGenerateNewItem = () => {
-    const div = document.createElement('div')
-    const itemAsHTML = renderToStaticMarkup(
-        <Item color={generateRandomColor()} animation={'drop'} id={'in-play'} />
-    )
-
-    div.innerHTML = itemAsHTML
-
-    return div
 }

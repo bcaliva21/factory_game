@@ -4,8 +4,11 @@ import { useQuery } from '@apollo/client'
 
 // cache
 import { GET_GAME_IN_PROGRESS } from '../../../cache/queries'
-import { gameInProgressVar } from '../../../cache/'
 
+// helpers
+import { game } from '../utils'
+
+// svg
 import power from '../../../assets/power-btn'
 
 // animations
@@ -185,11 +188,9 @@ const Leg = ({ side }: { side: string; }) => {
     if (error) console.log('oops...')
     if (loading) console.log('loading...')
 
-    const gameInProgress = data.gameInProgress
+    const gameInProgress: boolean = data.gameInProgress
 
-    const powerButtonClick = () => {
-        gameInProgressVar(true)
-    }
+    const powerButtonClick = () => !gameInProgress && game.start()
 
     return (
         side === 'left'
