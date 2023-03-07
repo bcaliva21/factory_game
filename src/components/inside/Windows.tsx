@@ -16,7 +16,7 @@ const Window = styled.div`
     height: 20%;
     width: 1.5%;
     background-color: skyblue;
-    margin-right: 17%;
+    margin-right: 7.5%;
     border: 1px solid #ffd700;
 `
 

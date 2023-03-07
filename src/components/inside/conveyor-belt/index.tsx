@@ -10,8 +10,8 @@ import Leg from './Leg'
 const ConveyorBeltContainer = styled.div`
     position: absolute;
     background-color: transparent;
-    width: 80%;
-    height: 30%;
+    width: 84%;
+    height: 48%;
     bottom: 0;
 `
 

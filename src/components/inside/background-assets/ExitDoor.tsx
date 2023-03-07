@@ -5,8 +5,8 @@ const ExitDoorContainer = styled.div`
     width: calc(100vw/ 16);
     height: calc(100vh/ 8);
     position: absolute;
-    left: 5%;
-    top: 30vh;
+    left: 10%;
+    bottom: 0;
 `
 
 const LeftDoor = styled.div`

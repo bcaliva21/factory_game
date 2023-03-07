@@ -4,11 +4,11 @@ import styled from 'styled-components'
 import { MiniItem, generateRandomColor } from '../utils'
 
 const PileOfItemsContainer = styled.div`
-    width: 16%;
+    width: 18%;
     height: 15%;
     position: absolute;
-    left: 2%;
-    top: 20vh;
+    left: 20%;
+    bottom: 0;
     display: flex;
     flex-direction: column-reverse;
 `
