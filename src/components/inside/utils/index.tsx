@@ -5,7 +5,6 @@ import { COLORS_TO_KEYCODES, COLORS } from '../../constants'
 // components
 import Item from '../Item'
 
-
 // styled components
 export const TinyItem = styled.div<{ color: string; }>`
     width: 10px;
@@ -20,7 +19,6 @@ export const MiniItem = styled.div<{ color: string; }>`
     background-color: ${({ color }) => color};
     margin-right: 1px;
 `
-
 
 // helper functions
 export const generateRandomColor = () => {
@@ -42,7 +40,8 @@ export const game = {
     },
     breakCycle: () => { },
     userInputIsCorrect: (item: (HTMLElement | null), userInput: number): boolean => {
-        const upperCaseItemColor = item?.style.stroke.toUpperCase()
+        if (item === null) return false
+        const upperCaseItemColor = item.style.stroke
         const correctKeycode = COLORS_TO_KEYCODES[upperCaseItemColor]
         return correctKeycode === userInput
     },
