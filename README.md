@@ -22,6 +22,12 @@
 1. Spin up local db with docker
 ```docker-compose up -d```
     1a.  To seed the db with mock data from ./prisma/seed run ```npx prisma db seed```
+    
+> if you are getting prisma errors try the following commands in order. 
+> ```docker-compose up -d```
+>```npx prisma generate```
+>```npx prisma migrate dev```
+>```npx prisma db seed``` 
 
 2. Build local files
 ```npm run build```
