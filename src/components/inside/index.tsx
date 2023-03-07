@@ -7,7 +7,7 @@ import { useQuery } from '@apollo/client'
 import { GET_IS_INSIDE_AND_GAME_IN_PROGRESS } from '../../cache/queries'
 import { isInsideVar } from '../../cache/'
 
-import { KEYCODES } from '../constants'
+import { KEYCODES, COLORS_TO_KEYCODES } from '../constants'
 
 // components
 import ConveyorBelt from './conveyor-belt/'
@@ -87,30 +87,28 @@ const Inside = () => {
         return div
     }
 
-    const resetCycle = () => {
+    const resetCycle = (item: (HTMLElement | null)) => {
         const dropContainer = document.getElementById('drop-container')
-        const itemOnBelt = document.getElementById('in-play')
         const div = createDivAndGenerateNewItem()
 
-        itemOnBelt?.remove()
+        item?.remove()
         dropContainer?.append(div)
+    }
+
+    const userInputIsCorrect = (item: (HTMLElement | null), userInput: number): boolean => {
+        const upperCaseItemColor = item?.style.stroke.toUpperCase() | 'TERMINATE'
+        const correctKeycode = COLORS_TO_KEYCODES[upperCaseItemColor]
+        return correctKeycode === userInput
     }
 
     useEffect(() => {
         window.addEventListener('keydown', (event) => {
-            const keycode = event.keyCode
+            const userInput = event.keyCode
             const itemOnBelt = document.getElementById('in-play')
             console.log(itemOnBelt?.style.stroke)
 
-            if (keycode === KEYCODES.UP) resetCycle()
+            if (userInputIsCorrect(itemOnBelt, userInput)) resetCycle(itemOnBelt)
 
-            // eventually...
-            // switch (keycode) {
-            //     case KEYCODES.DOWN:
-            //     case KEYCODES.LEFT:
-            //     case KEYCODES.RIGHT:
-            //     case KEYCODES.UP:
-            // }
         })
     }, [])
 
