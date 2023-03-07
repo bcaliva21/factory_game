@@ -104,10 +104,9 @@ const Inside = () => {
     useEffect(() => {
         window.addEventListener('keydown', (event) => {
             const userInput = event.keyCode
-            const itemOnBelt = document.getElementById('in-play')
-            console.log(itemOnBelt?.style.stroke)
+            const itemInPlay = document.getElementById('in-play')
 
-            if (userInputIsCorrect(itemOnBelt, userInput)) resetCycle(itemOnBelt)
+            if (userInputIsCorrect(itemInPlay, userInput)) resetCycle(itemInPlay)
 
         })
     }, [])
