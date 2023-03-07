@@ -11,6 +11,13 @@ export const TinyItem = styled.div<{ color: string; }>`
     margin-right: 1px;
 `
 
+export const MiniItem = styled.div<{ color: string; }>`
+    width: 5px;
+    height: 5px;
+    background-color: ${({ color }) => color };
+    margin-right: 1px;
+`
+
 
 // helper functions
 export const generateRandomColor = () => {

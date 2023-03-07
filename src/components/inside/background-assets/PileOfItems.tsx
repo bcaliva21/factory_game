@@ -1,94 +1,52 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { TinyItem, generateRandomColor } from '../utils'
+import { MiniItem, generateRandomColor } from '../utils'
 
 const PileOfItemsContainer = styled.div`
-    width: 8%;
+    width: 16%;
     height: 15%;
     position: absolute;
-    left: 11.5%;
-    top: 31vh;
+    left: 2%;
+    top: 20vh;
     display: flex;
     flex-direction: column-reverse;
 `
 
 const Row = styled.div`
     width: 100%;
-    height: 11px;
+    height: 6px;
     display: flex;
     flex-direction: row;
     justify-content: center;
 `
 
 const PileOfItems = () => {
-    const populateBottomRow = () => {
+    const populateRow = (numberOfItems: number) => {
         const row = []
-        for (let i = 0; i < 9; i++) {
+        for (let i = 0; i < numberOfItems; i++) {
             row.push(i)
         }
         return (
             <Row>
-                {row.map(key => <TinyItem key={key} color={generateRandomColor()} />)}
+                {row.map(key => <MiniItem key={key} color={generateRandomColor()} />)}
             </Row>
         )
     }
 
-    const populateNext = () => {
-        const row = []
-        for (let i = 0; i < 7; i++) {
-            row.push(i)
+    const populatePileOfItemsContainer = () => {
+        const rowAccumulator = []
+        for (let i = 41; i > 0; i-=2) {
+            rowAccumulator.push(populateRow(i))
         }
-        return (
-            <Row>
-                {row.map(key => <TinyItem key={key} color={generateRandomColor()} />)}
-            </Row>
-        )
-    }
-
-    const populateMiddle = () => {
-        const row = []
-        for (let i = 0; i < 5; i++) {
-            row.push(i)
-        }
-        return (
-            <Row>
-                {row.map(key => <TinyItem key={key} color={generateRandomColor()} />)}
-            </Row>
-        )
-    }
-
-    const populateNextToLast = () => {
-        const row = []
-        for (let i = 0; i < 3; i++) {
-            row.push(i)
-        }
-        return (
-            <Row>
-                {row.map(key => <TinyItem key={key} color={generateRandomColor()} />)}
-            </Row>
-        )
-    }
-
-    const populateLast = () => {
-        const row = []
-        for (let i = 0; i < 1; i++) {
-            row.push(i)
-        }
-        return (
-            <Row>
-                {row.map(key => <TinyItem key={key} color={generateRandomColor()} />)}
-            </Row>
-        )
+        return (<>
+            {rowAccumulator.map(row => row)}
+        </>)
     }
 
     return (
         <PileOfItemsContainer>
-            {populateBottomRow()}
-            {populateNext()}
-            {populateMiddle()}
-            {populateNextToLast()}
-            {populateLast()}
+            {populatePileOfItemsContainer()}
         </PileOfItemsContainer>
     )
 }

@@ -16,7 +16,7 @@ import Windows from './Windows'
 import PileOfItems from './background-assets/PileOfItems'
 import Scaffolding from './background-assets/Scaffolding'
 import ForkLift from './background-assets/ForkLift'
-import ForkLiftDoor from './background-assets/ForkLiftDoor'
+import Incinerator from './background-assets/incinerator'
 
 const Container = styled.div`
     height: 100%;
@@ -99,7 +99,7 @@ const Inside = () => {
             <Backdrop>
                 <Windows />
                 <PileOfItems />
-                <ForkLiftDoor />
+                <Incinerator />
                 <ForkLift />
                 <Scaffolding top={'15%'} left={'20%'} />
                 <Scaffolding top={'15%'} left={'30%'} />

@@ -6,7 +6,8 @@ import { TinyItem, generateRandomColor } from '../utils/'
 const travel = keyframes`
     0% {
         transform: scaleX(1);
-        right: -10%;
+        right: 0;
+        display: none;
     }
     50% {
         transform: scaleX(1);
@@ -18,7 +19,8 @@ const travel = keyframes`
     }
     100% {
         transform: scaleX(-1);
-        right: -10%;
+        right: 0;
+        display: none;
     }
 `
 
@@ -39,9 +41,10 @@ const ForkLiftBody = styled.div`
     width: 40%;
     height: 28%;
     border-radius: 5%;
-    background-color: #901000;
+    background-color: gold;
     margin-bottom: 1%;
     position: relative;
+    border-right: 3px solid black;
 `
 
 const ForkLiftCab = styled.div`
@@ -50,7 +53,7 @@ const ForkLiftCab = styled.div`
     left: 10%;
     height: 100%;
     width: 40%;
-    background-color: gold;
+    background-color: black;
     border-radius: 5%;
     display: flex;
     align-items: center;
@@ -64,7 +67,6 @@ const LiftComponent = styled.div`
     top: -80%;
     left: -60%;
 `
-
 
 const CargoContainer = styled.div`
     width: 70%;
@@ -184,9 +186,9 @@ const BodyToWheel = styled.div`
 const CoverTopFront = styled.div`
     position: absolute;
     top: 0;
-    height: 40%;
+    height: 100%;
     width: 10%;
-    background-color: lightgrey;
+    background-color: black;
     border-radius: 5%;
 `
 
