@@ -14,8 +14,6 @@ const IncineratorContainer = styled.div`
     display: flex;
     align-items: end;
     justify-content: center;
-    // border-top-right-radius: 20%;
-    // border-top-left-radius: 20%;
 `
 
 const IncineratorRoofDecor = styled.div`
@@ -23,7 +21,7 @@ const IncineratorRoofDecor = styled.div`
     top: -5%;
     width: 120%;
     height: 20%;
-    background-color: black;
+    background-color: #282828;
     border: grey solid 1px;
     z-index: 1;
 `

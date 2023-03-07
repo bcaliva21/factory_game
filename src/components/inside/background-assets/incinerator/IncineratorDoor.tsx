@@ -7,13 +7,13 @@ const IncineratorDoorContainer = styled.div`
     position: relative;
     display: flex;
     flex-direction: row-reverse;
-    border-top: 10px solid black;
-    border-right: 5px solid black;
-    border-left: 2px solid black;
+    border-top: 10px solid #282828;
+    border-right: 5px solid #282828;
+    border-left: 2px solid #282828;
 `
 
 const STRONGSIDE = styled.div`
-    background-color: black;
+    background-color: #282828;
     height: 100%;
     width: 80%;
     z-index: 20;
@@ -31,13 +31,8 @@ const IncineratorDoor = () => {
 
     return (
         <IncineratorDoorContainer>
-            <WEAKSIDE>
-
-            </WEAKSIDE>
-            <STRONGSIDE>
-
-            </STRONGSIDE>
-
+            <WEAKSIDE />
+            <STRONGSIDE />
         </IncineratorDoorContainer>
     )
 }
