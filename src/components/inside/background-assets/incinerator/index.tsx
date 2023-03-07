@@ -35,11 +35,7 @@ const ExhaustPipeRight = styled.div`
     height: 70%;
     width: 25%;
     background-color: #ebebeb;
-    border-bottom-right-radius: 2%;
-    border-bottom-left-radius: 2%;
     z-index: 0;
-    border-right: 2px solid black;
-    border-left: 2px solid black;
 `
 
 const ExhaustPipeLeft = styled.div`
@@ -49,11 +45,7 @@ const ExhaustPipeLeft = styled.div`
     height: 70%;
     width: 25%;
     background-color: #ebebeb;
-    border-bottom-right-radius: 2%;
-    border-bottom-left-radius: 2%;
     z-index: 0;
-    border-right: 2px solid black;
-    border-left: 2px solid black;
 `
 
 const Incinerator = () => {
