@@ -4,15 +4,12 @@ import { useQuery } from '@apollo/client'
 
 // cache
 import { GET_GAME_IN_PROGRESS } from '../../../cache/queries'
-import { gameInProgressVar } from '../../../cache'
-
-import power from '../../assets/power-btn'
 
 import Leg from './Leg'
 
 const ConveyorBeltContainer = styled.div`
     position: absolute;
-    background-color: #3d3d3d;
+    background-color: transparent;
     width: 80%;
     height: 30%;
     bottom: 0;
@@ -61,7 +58,7 @@ const Belt = styled.div<{ top: string; gameInProgress: boolean; }>`
     left: 6%;
     z-index: 1;
     background-color: grey;
-    ${({ gameInProgress, top }) => gameInProgress && top === '55%' ? moveBeltForward : moveBeltBackward }
+    ${({ gameInProgress, top }) => gameInProgress && top === '55%' ? moveBeltForward : gameInProgress && moveBeltBackward }
 `
 
 const WheelsContainer = styled.div`
