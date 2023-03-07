@@ -46,13 +46,21 @@ export const createDivAndGenerateNewItem = () => {
 
 // game object
 export const game = {
+    score: 0,
     start: () => {
+        console.log('|----------Game Start-----------|')
+        const startTime = Date.now()
         gameInProgressVar(true)
-        console.log('Game Start')
-        // start timer/score
+
+        setInterval(() => {
+            const score = Date.now() - startTime
+            console.log('score: ', score)
+            game.score = score
+        }, 10)
     },
     over: () => {
         gameInProgressVar(false)
+        // save game.score
     },
     resetCycle: (item: (HTMLElement | null)) => {
         // add a function to cycle through itemsInQueue
