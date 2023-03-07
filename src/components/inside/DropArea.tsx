@@ -14,7 +14,7 @@ const DropContainer = styled.div`
 `
 
 const DropArea = ({ children }: { children: React.ReactNode }) => (
-    <DropContainer>{children}</DropContainer>
+    <DropContainer id={'drop-container'}>{children}</DropContainer>
 )
 
 export default DropArea
