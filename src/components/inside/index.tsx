@@ -76,19 +76,6 @@ const Backdrop = styled.div`
 `
 
 const Inside = () => {
-
-    useEffect(() => {
-        window.addEventListener('keydown', (event) => {
-            const userInput = event.keyCode
-            const itemInPlay = document.getElementById('in-play')
-
-            if (!game.userInputIsCorrect(itemInPlay, userInput)) game.breakCycle()
-
-            game.resetCycle(itemInPlay)
-        })
-    }, [])
-
-
     const { data, loading, error } = useQuery(GET_IS_INSIDE_AND_GAME_IN_PROGRESS)
 
     if (error) console.log('We need to...')
@@ -96,6 +83,19 @@ const Inside = () => {
 
     const isInside = data.isInside
     const gameInProgress = data.gameInProgress
+
+    useEffect(() => {
+        if (gameInProgress) {
+            window.addEventListener('keydown', (event) => {
+                const userInput = event.keyCode
+                const itemInPlay = document.getElementById('in-play')
+    
+                if (!game.userInputIsCorrect(itemInPlay, userInput)) game.breakCycle()
+    
+                game.resetCycle(itemInPlay)
+            })
+        }
+    }, [gameInProgress])
 
     const handleClose = () => isInsideVar(!isInside)
 
