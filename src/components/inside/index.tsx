@@ -87,6 +87,10 @@ const Inside = () => {
         return div
     }
 
+    const breakCycle = () => {
+
+    }
+
     const resetCycle = (item: (HTMLElement | null)) => {
         const dropContainer = document.getElementById('drop-container')
         const div = createDivAndGenerateNewItem()
