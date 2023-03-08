@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 
-import { TinyItem, generateRandomColor } from '../utils/'
+import { setRemoveCargoTimeout ,setAppendCargoTimeout, CargoContainer populateRow } from './helpers'
 
 const travel = keyframes`
     0% {
@@ -66,25 +66,6 @@ const LiftComponent = styled.div`
     position: absolute;
     top: -80%;
     left: -60%;
-`
-
-const CargoContainer = styled.div`
-    width: 70%;
-    height: 60%;
-    position: absolute;
-    bottom: 10%;
-    right: 20%;
-    border-bottom: 3px solid tan;
-    display: flex;
-    flex-direction: column-reverse;
-    justify-content: end;
-`
-
-const CargoRow = styled.div`
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 11px;
 `
 
 const LiftToBodyConnector = styled.div`
@@ -226,24 +207,16 @@ const HubCap = styled.div`
 `
 
 const ForkLift = () => {
-
-    const populateRow = () => {
-        const row = []
-        for (let i = 0; i < 3; i++) {
-            row.push(i)
-        }
-        return (
-            <CargoRow>
-                {row.map(item => <TinyItem key={item} color={generateRandomColor()} />)}
-            </CargoRow>
-        )
-    }
+    useEffect(() => {
+        setRemoveCargoTimeout()
+        setAppendCargoTimeout()
+    }, [])
 
     return (
         <ForkLiftContainer>
             <ForkLiftBody>
-                <LiftComponent>
-                    <CargoContainer>
+                <LiftComponent id={'lift-component'}>
+                    <CargoContainer id={'cargo-container'}>
                         {populateRow()}
                         {populateRow()}
                         {populateRow()}

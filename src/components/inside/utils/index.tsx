@@ -44,6 +44,8 @@ export const createDivAndGenerateNewItem = () => {
     return div
 }
 
+
+
 // game object
 export const game = {
     score: 0,
