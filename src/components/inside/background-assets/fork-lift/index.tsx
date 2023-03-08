@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 
-import { setRemoveCargoTimeout ,setAppendCargoTimeout, CargoContainer populateRow } from './helpers'
+import { setRemoveCargoTimeout ,setAppendCargoTimeout, CargoContainer, populateRow } from './helpers'
 
 const travel = keyframes`
     0% {
         transform: scaleX(1);
-        right: 0;
+        right: 5%;
         display: none;
     }
     50% {
@@ -19,7 +19,7 @@ const travel = keyframes`
     }
     100% {
         transform: scaleX(-1);
-        right: 0;
+        right: 5%;
         display: none;
     }
 `

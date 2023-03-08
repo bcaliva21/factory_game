@@ -11,17 +11,17 @@ import { isInsideVar } from '../../cache/'
 import { game } from './utils'
 
 // components
-import ConveyorBelt from './conveyor-belt/'
+import ConveyorBelt from './conveyor-belt'
 import CeilingPipe from './CeilingPipe'
 import DropArea from './DropArea'
 import Item from './Item'
-import ExitDoor from './background-assets/ExitDoor'
+import ExitDoor from './background-assets/doors/ExitDoor'
 import Windows from './Windows'
 import PileOfItems from './background-assets/PileOfItems'
 import Scaffolding from './background-assets/Scaffolding'
-import ForkLift from './background-assets/ForkLift'
+import ForkLift from './background-assets/fork-lift'
 import Incinerator from './background-assets/incinerator'
-import { generateRandomColor } from './utils'
+import Collector from './background-assets/collector'
 
 const Container = styled.div`
     height: 100%;
@@ -114,6 +114,7 @@ const Inside = () => {
                 </Background>
                 <Windows />
                 <Incinerator />
+                <Collector />
                 <ForkLift />
                 <Scaffolding top={'15%'} left={'30%'} />
                 <Scaffolding top={'15%'} left={'40%'} />
