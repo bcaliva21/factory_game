@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import { setRemoveCargoTimeout ,setAppendCargoTimeout, CargoContainer, populateRow } from './helpers'
+import Wheels from './Wheels'
 
 const travel = keyframes`
     0% {
@@ -173,39 +174,6 @@ const CoverTopFront = styled.div`
     border-radius: 5%;
 `
 
-const WheelHole = styled.div<{ left: string; }>`
-    position: absolute;
-    bottom: -20%;
-    left: ${({ left }) => left};
-    height: 45%;
-    width: 30%;
-    background-color: lightgrey;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
-
-const ForkLiftWheel = styled.div`
-    width: 80%;
-    height: 80%;
-    background-color: black;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
-
-const HubCap = styled.div`
-    width: 50%;
-    height: 50%;
-    background-color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`
-
 const ForkLift = () => {
     useEffect(() => {
         setRemoveCargoTimeout()
@@ -240,16 +208,7 @@ const ForkLift = () => {
                         </DriverContainer>
                     </CabWindow>
                 </ForkLiftCab>
-                <WheelHole left={'10%'}>
-                    <ForkLiftWheel>
-                        <HubCap />
-                    </ForkLiftWheel>
-                </WheelHole>
-                <WheelHole left={'60%'}>
-                    <ForkLiftWheel>
-                        <HubCap />
-                    </ForkLiftWheel>
-                </WheelHole>
+                <Wheels />
             </ForkLiftBody>
         </ForkLiftContainer>
     )
