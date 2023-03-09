@@ -46,7 +46,8 @@ const PipeSectionExtentionReversed = styled.div`
     width: calc(100vw / 16);
     border: solid black 1px;
 	border-top-right-radius: 20%;
-	border-bottom: solid silver 10px;
+	border-bottom-right-radius: 20%;
+	margin-bottom: 10px;
 `
 
 
