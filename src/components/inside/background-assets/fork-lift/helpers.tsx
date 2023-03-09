@@ -43,9 +43,9 @@ export const setRemoveCargoTimeout = () => {
     setTimeout(() => {
         setInterval(() => {
             removeCargo()
-        }, 10000)
+        }, 20000)
         removeCargo()
-    }, 5000)
+    }, 10000)
 }
 
 export const appendCargo = () => {
@@ -63,11 +63,11 @@ export const appendCargo = () => {
     liftComponent?.append(div)
 }
 
-export const setAppendCargoTimeout = () => {        
+export const setAppendCargoTimeout = () => {
     setTimeout(() => {
         appendCargo()
         setInterval(() => {
             appendCargo()
-        }, 10000)
-    }, 10000)
+        }, 20000)
+    }, 20000)
 }

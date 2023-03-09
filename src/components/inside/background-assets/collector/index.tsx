@@ -86,6 +86,22 @@ const WEAKSIDE = styled.div`
     z-index: 0;
 `
 
+const BuildingStripe = styled.div`
+    width: 102%;
+    height: 2%;
+    background-color: slategrey;
+    position: absolute;
+    top: 45%;
+`
+
+const BuildingStripeTwo = styled.div`
+    width: 102%;
+    height: 2%;
+    background-color: slategrey;
+    position: absolute;
+    top: 48%;
+`
+
 const Collector = () => {
     const populateRow = (n: number) => {
         const row: number[] = []
@@ -119,6 +135,8 @@ const Collector = () => {
                     <WEAKSIDE />
                 </CollectorDoorContainer>
             </CollectorBottomSection>
+            <BuildingStripe />
+            <BuildingStripeTwo />
             <ItemSectionGlass />
             <CollectorItemSection>
                 {populateContainer()}

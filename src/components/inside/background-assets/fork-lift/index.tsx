@@ -35,7 +35,7 @@ const ForkLiftContainer = styled.div`
     align-items: end;
     justify-content: center;
     animation: ${travel} infinite linear;
-    animation-duration: 10s;
+    animation-duration: 20s;
 `
 
 const ForkLiftBody = styled.div`
