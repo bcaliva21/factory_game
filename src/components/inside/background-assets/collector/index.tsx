@@ -34,7 +34,6 @@ const CollectorItemSection = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: end;
-    opacity: 0.5;
 `
 
 const ItemSectionGlass = styled.div`
@@ -48,7 +47,7 @@ const ItemSectionGlass = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: end;
-    opacity: 0.5
+    opacity: 0.5;
     z-index: 50;
 `
 
