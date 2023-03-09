@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { TinyItem, generateRandomColor } from '../../utils'
+
 const CollectorContainer = styled.div`
     width: 18%;
     height: 35%;
@@ -25,11 +27,29 @@ const CollectorBottomSection = styled.div`
 
 const CollectorItemSection = styled.div`
     height: 30%;
-    width: 80%;
+    width: 84%;
     position: relative;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    opacity: 0.5;
+`
+
+const ItemSectionGlass = styled.div`
+    height: 35%;
+    width: 84%;
+    position: absolute;
+    top: 5%;
     background-color: skyblue;
     border-top-right-radius: 50%;
     border-top-left-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    opacity: 0.5
+    z-index: 50;
 `
 
 const CollectorDoorContainer = styled.div`
@@ -41,6 +61,15 @@ const CollectorDoorContainer = styled.div`
     border-top: 10px solid #282828;
     border-right: 5px solid #282828;
     border-left: 5px solid #282828;
+`
+
+const ItemCollectorRow = styled.div`
+    display: flex;
+    flex-direction: row;
+    height: 11px;
+    widht: 100%;
+    align-items: center;
+    justify-content: center;
 `
 
 const STRONGSIDE = styled.div`
@@ -59,16 +88,41 @@ const WEAKSIDE = styled.div`
 `
 
 const Collector = () => {
+    const populateRow = (n: number) => {
+        const row: number[] = []
+        for (let i = 0; i < n; i ++) {
+            row.push(i)
+        }
+        return (
+            <ItemCollectorRow>
+                {row.map(item => <TinyItem color={generateRandomColor()} key={`${item}-item`} />)}
+            </ItemCollectorRow>
+        )
+    }
+
+    const populateContainer = () => {
+        return([
+            populateRow(7),
+            populateRow(11),
+            populateRow(18),
+            populateRow(19),
+            populateRow(20),
+            populateRow(20),
+            populateRow(21),
+        ])
+    }
 
     return (
         <CollectorContainer>
             <CollectorBottomSection>
                 <CollectorDoorContainer>
-                    <STRONGSIDE />        
-                    <WEAKSIDE />                        
+                    <STRONGSIDE />
+                    <WEAKSIDE />
                 </CollectorDoorContainer>
             </CollectorBottomSection>
+            <ItemSectionGlass />
             <CollectorItemSection>
+                {populateContainer()}
             </CollectorItemSection>
         </CollectorContainer>
     )
