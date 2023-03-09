@@ -30,7 +30,7 @@ const VerticalPipingContainer = styled.div`
 
 const PipeSectionExtention = styled.div`
     position: relative;
-    background-color: grey;
+    background-color: slategrey;
 	margin-bottom: 10px;
     height: calc(calc(80vh / 2) / 6);
     width: calc(100vw / 16);
@@ -41,7 +41,7 @@ const PipeSectionExtention = styled.div`
 
 const PipeSectionExtentionReversed = styled.div`
     position: relative;
-    background-color: grey;
+    background-color: slategrey;
     height: calc(calc(80vh / 2) / 6);
     width: calc(100vw / 16);
     border: solid black 1px;
@@ -52,7 +52,7 @@ const PipeSectionExtentionReversed = styled.div`
 
 
 const PipeVerticalSection= styled.div`
-    background-color: grey;
+    background-color: slategrey;
 	margin-bottom: 10px;
     height: calc(calc(80vh / 2) / 6);
     width: calc(100vw / 16);
@@ -64,7 +64,7 @@ const PipeVerticalSection= styled.div`
 
 const PipeSection = styled.div`
     position: relative;
-    background-color: grey;
+    background-color: slategrey;
     height: calc(calc(80vh / 2) / 6);
     width: calc(100vw / 16);
     z-index: 6;
@@ -74,13 +74,13 @@ const PipeSection = styled.div`
 
 const FunnelSection = styled.div`
     position: absolute;
-    background-color: grey;
+    background-color: slategrey;
     height: calc(100vw / 20);
     width: calc(100vw / 20);
     bottom: 30%;
     transform: rotate(45deg);
     z-index: 6;
-    border: solid silver 2px;
+    border: solid black 1px;
 `
 
 const Cover = styled.div`
@@ -90,7 +90,7 @@ const Cover = styled.div`
     height: calc(100vh / 12);
     bottom: 20%;
     z-index: 8;
-    border-top: solid silver 10px;
+	border-top: solid silver 15px;
 `
 const CoverHole = styled.div`
     position: relative;

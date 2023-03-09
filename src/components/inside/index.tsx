@@ -22,6 +22,7 @@ import Scaffolding from './background-assets/Scaffolding'
 import ForkLift from './background-assets/fork-lift'
 import Incinerator from './background-assets/incinerator'
 import Collector from './background-assets/collector'
+import Piping from './background-assets/Piping'
 
 const Container = styled.div`
     height: 100%;
@@ -111,6 +112,7 @@ const Inside = () => {
                 <Background>
                     <ExitDoor handleClose={handleClose}/>
                     <PileOfItems />
+					<Piping />
                 </Background>
                 <Windows />
                 <Incinerator />

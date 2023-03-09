@@ -99,7 +99,7 @@ const BuildingStripeTwo = styled.div`
     height: 2%;
     background-color: slategrey;
     position: absolute;
-    top: 48%;
+	top: 48%;
 `
 
 const Collector = () => {
@@ -123,7 +123,7 @@ const Collector = () => {
             populateRow(19),
             populateRow(20),
             populateRow(20),
-            populateRow(21),
+			populateRow(21)
         ])
     }
 
