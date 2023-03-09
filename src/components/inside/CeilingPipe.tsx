@@ -15,6 +15,52 @@ const PipeContainer = styled.div`
     background-color: transparent;
 `
 
+const VerticalPipingContainer = styled.div`
+	position: absolute;
+	top: calc(calc(-80vh / 2) / 6);
+	right: 0%;
+	width: 30%;
+	height: 10%;
+	z-index: 10;
+	display: flex;
+	flex-direction: row;
+	align-items: end;
+	justify-content: start;
+`
+
+const PipeSectionExtention = styled.div`
+    position: relative;
+    background-color: grey;
+	margin-bottom: 10px;
+    height: calc(calc(80vh / 2) / 6);
+    width: calc(100vw / 16);
+    border: solid black 1px;
+	border-top-left-radius: 20%;
+	border-right: solid silver 10px;
+`
+
+const PipeSectionExtentionReversed = styled.div`
+    position: relative;
+    background-color: grey;
+    height: calc(calc(80vh / 2) / 6);
+    width: calc(100vw / 16);
+    border: solid black 1px;
+	border-top-right-radius: 20%;
+	border-bottom: solid silver 10px;
+`
+
+
+const PipeVerticalSection= styled.div`
+    background-color: grey;
+	margin-bottom: 10px;
+    height: calc(calc(80vh / 2) / 6);
+    width: calc(100vw / 16);
+    z-index: 6;
+    border: solid black 1px;
+	border-right: solid silver 10px;
+`
+
+
 const PipeSection = styled.div`
     position: relative;
     background-color: grey;
@@ -69,36 +115,45 @@ const PipeWindow = styled.div`
 
 const CeilingPipe = ({ gameInProgress }: { gameInProgress: boolean }) => {
     return (
-        <PipeContainer>
-            {gameInProgress ? (
+		<>
+			<VerticalPipingContainer>
+				<PipeSectionExtention />
+				<PipeVerticalSection />
+				<PipeVerticalSection />
+				<PipeSectionExtentionReversed />
+			</VerticalPipingContainer>
+			<PipeContainer>
+			            {gameInProgress ? (
                 <>
                     <PipeSection>
-                        <PipeWindow>
-                            <Item color="red" animation={''} />
-                        </PipeWindow>
-                    </PipeSection>
+				        <PipeWindow>
+			                <Item color="red" animation={''} />
+		                </PipeWindow>
+	                </PipeSection>
                     <PipeSection>
-                        <PipeWindow>
-                            <Item color="blue" animation={''} />
-                        </PipeWindow>
-                    </PipeSection>
-                </>
-            ) : (
-                <>
-                    <PipeSection>
-                        <PipeWindow></PipeWindow>
-                    </PipeSection>
-                    <PipeSection>
-                        <PipeWindow></PipeWindow>
-                    </PipeSection>
-                </>
-            )}
-            <PipeSection />
-            <FunnelSection />
-            <Cover>
-                <CoverHole />
-            </Cover>
-        </PipeContainer>
+						<PipeWindow>
+					        <Item color="blue" animation={''} />
+				        </PipeWindow>
+			        </PipeSection>
+		        </>
+	            ) : (
+				    <>
+			            <PipeSection>
+		                    <PipeWindow></PipeWindow>
+	                    </PipeSection>
+						<PipeSection>
+					        <PipeWindow></PipeWindow>
+				        </PipeSection>
+			        </>
+		        )}
+	            <PipeSection />
+				<FunnelSection />
+				<Cover>
+					<CoverHole />
+				</Cover>
+			</PipeContainer>
+		</>
+
     )
 }
 
