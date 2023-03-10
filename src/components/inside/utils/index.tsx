@@ -27,6 +27,23 @@ export const MiniItem = styled.div<{ color: string; }>`
     margin-right: 1px;
 `
 
+// types
+export enum GAME_STATE_TYPES {
+	NOT_STARTED = 'not_started',
+	STARTED = 'started',
+	OVER = 'over',
+}
+
+export interface IGame {
+	score: number,
+	id: number,
+	state: GAME_STATE_TYPES,
+	start: () => void,
+	resetCycle: (item: (HTMLElement | null)) => void,
+	breakCycle: () => void,
+	userInputIsCorrect: (item: (HTMLElement | null), userInput: number) => boolean ,
+}
+
 // helper functions
 export const generateRandomColor = () => {
     const randomIndex = Math.floor(Math.random() * 4)
@@ -47,9 +64,10 @@ export const createDivAndGenerateNewItem = () => {
 
 
 // game object
-export const game = {
+export const game: IGame = {
     score: 0,
-	id: 0, 
+	id: 0,
+	state: GAME_STATE_TYPES.NOT_STARTED,
     start: () => {
         console.log('|----------Game Start-----------|')
         const startTime = Date.now()
@@ -60,10 +78,6 @@ export const game = {
             console.log('score: ', score)
             game.score = score
         }, 10)
-    },
-    over: () => {
-        gameInProgressVar(false)
-        // save game.score
     },
     resetCycle: (item: (HTMLElement | null)) => {
         // add a function to cycle through itemsInQueue
@@ -77,6 +91,7 @@ export const game = {
     breakCycle: () => { 
 		gameInProgressVar(false)
 		clearInterval(game.id)
+		game.state = GAME_STATE_TYPES.OVER
 		console.log('final score: ', game.score)
 		// save game score
 	},
