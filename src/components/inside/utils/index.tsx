@@ -35,7 +35,6 @@ export enum GAME_STATE_TYPES {
 }
 
 export interface IGame {
-	score: number,
 	id: number,
 	start: () => void,
 	resetCycle: (item: (HTMLElement | null)) => void,
@@ -67,7 +66,6 @@ export const createDivAndGenerateNewItem = () => {
 
 // game object
 export const game: IGame = {
-    score: 0,
 	id: 0,
     start: () => {
         console.log('|----------Game Start-----------|')
