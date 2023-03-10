@@ -48,6 +48,11 @@ const ANIMATION_TIMINGS: string[] = ['9s', '8s', '7s', '6s', '5s', '4s', '3s', '
 export const isGameInProgress = (gameState: GAME_STATE_TYPES) => {
 	return gameState === GAME_STATE_TYPES.IN_PROGRESS
 }
+
+export const isGameOver = (gameState: GAME_STATE_TYPES) => {
+	return gameState === GAME_STATE_TYPES.OVER
+}
+
 export const generateRandomColor = () => {
     const randomIndex = Math.floor(Math.random() * 4)
     return COLORS[randomIndex]
