@@ -3,8 +3,8 @@ import { useQuery } from '@apollo/client'
 import { renderToStaticMarkup } from 'react-dom/server'
 
 // cache
-import { GET_GAME_IN_PROGRESS } from '../../../cache/queries'
-import { gameInProgressVar } from '../../../cache/'
+import { GET_GAME_STATE } from '../../../cache/queries'
+import { gameStateVar } from '../../../cache'
 
 // constants
 import { COLORS_TO_KEYCODES, COLORS } from '../../constants'
@@ -37,7 +37,6 @@ export enum GAME_STATE_TYPES {
 export interface IGame {
 	score: number,
 	id: number,
-	state: GAME_STATE_TYPES,
 	start: () => void,
 	resetCycle: (item: (HTMLElement | null)) => void,
 	breakCycle: () => void,
@@ -70,12 +69,10 @@ export const createDivAndGenerateNewItem = () => {
 export const game: IGame = {
     score: 0,
 	id: 0,
-	state: GAME_STATE_TYPES.NOT_STARTED,
     start: () => {
         console.log('|----------Game Start-----------|')
         const startTime = Date.now()
-        gameInProgressVar(true)
-
+		gameStateVar(GAME_STATE_TYPES.IN_PROGRESS)
 		game.id = setInterval(() => {
             const score = Date.now() - startTime
             console.log('score: ', score)
@@ -91,10 +88,9 @@ export const game: IGame = {
         item?.remove()
         dropContainer?.append(div)
     },
-    breakCycle: () => { 
-		gameInProgressVar(false)
+    breakCycle: () => {
+		gameStateVar(GAME_STATE_TYPES.OVER)
 		clearInterval(game.id)
-		game.state = GAME_STATE_TYPES.OVER
 		console.log('final score: ', game.score)
 		// save game score
 	},
