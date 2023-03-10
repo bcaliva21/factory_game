@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
@@ -8,7 +8,7 @@ import { GET_GAME_STATE_AND_IS_INSIDE } from '../../cache/queries'
 import { isInsideVar } from '../../cache/'
 
 // helpers
-import { game, isGameInProgress } from './utils'
+import { game, isGameInProgress, isGameOver } from './utils'
 
 // components
 import ConveyorBelt from './conveyor-belt'
@@ -76,7 +76,7 @@ const Backdrop = styled.div`
     justify-content: center;
 `
 
-const GameoverModal = styled.div`
+const GameoverModal = styled.div<{ gameIsOver: boolean; }>`
 	width: 20%;
 	height: 10%;
 	opacity: 0.75;
@@ -87,6 +87,7 @@ const GameoverModal = styled.div`
 	position: absolute;
 	bottom: 30%;
 	right: 50%;
+	display: ${({ gameIsOver }) => gameIsOver ? 'block' : 'none' };
 `
 
 const Inside = () => {
@@ -98,7 +99,8 @@ const Inside = () => {
     const isInside = data.isInside
 	const gameState = data.gameState
 
-	const gameInProgress: boolean = isGameInProgress(gameState) 
+	const gameInProgress: boolean = isGameInProgress(gameState)
+	const gameIsOver: boolean = isGameOver(gameState)
 
     useEffect(() => {
         if (gameInProgress) {
@@ -119,7 +121,7 @@ const Inside = () => {
 
     return (
 		<>
-			<GameoverModal>You Lose</GameoverModal>
+			<GameoverModal gameIsOver={gameIsOver} >You Lose</GameoverModal>
 			<Container>
 				 <Backdrop>
                  <Foreground>
