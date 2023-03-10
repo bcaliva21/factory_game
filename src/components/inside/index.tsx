@@ -76,6 +76,14 @@ const Backdrop = styled.div`
     justify-content: center;
 `
 
+const GameoverVeil = styled.div`
+	width: 100%;
+	height: 100%;
+	opacity: 0.3;
+	z-index: 1000;
+	background-color: red;
+`
+
 const Inside = () => {
     const { data, loading, error } = useQuery(GET_IS_INSIDE_AND_GAME_IN_PROGRESS)
 
@@ -91,9 +99,11 @@ const Inside = () => {
                 const userInput = event.keyCode
                 const itemInPlay = document.getElementById('in-play')
     
-                if (!game.userInputIsCorrect(itemInPlay, userInput)) game.breakCycle()
-    
-                game.resetCycle(itemInPlay)
+                if (game.userInputIsCorrect(itemInPlay, userInput)) {
+					game.resetCycle(itemInPlay)
+				} else {
+					game.breakCycle()
+				} 
             })
         }
     }, [gameInProgress])
@@ -101,9 +111,10 @@ const Inside = () => {
     const handleClose = () => isInsideVar(!isInside)
 
     return (
-        <Container>
-            <Backdrop>
-                <Foreground>
+		<>
+			<Container>
+				 <Backdrop>
+                 <Foreground>
                     <ConveyorBelt />
                 </Foreground>
                 <Midground>
@@ -124,8 +135,10 @@ const Inside = () => {
                 <DropArea>
                     {gameInProgress && <Item color="green" animation="drop" id="in-play"/>}
                 </DropArea>
-            </Backdrop>
-        </Container>
+				</Backdrop>
+			</Container>
+		</>
+
     )
 }
 
