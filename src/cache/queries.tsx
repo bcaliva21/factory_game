@@ -19,3 +19,9 @@ export const GET_IS_INSIDE_AND_GAME_IN_PROGRESS = gql`
     }
 `
 
+export const GET_GAME_STATE = gql`
+	query GetGameState {
+		gameState @client
+	}
+`
+

@@ -30,7 +30,7 @@ export const MiniItem = styled.div<{ color: string; }>`
 // types
 export enum GAME_STATE_TYPES {
 	NOT_STARTED = 'not_started',
-	STARTED = 'started',
+	IN_PROGRESS = 'in_progress',
 	OVER = 'over',
 }
 
@@ -45,6 +45,9 @@ export interface IGame {
 }
 
 // helper functions
+export const isGameInProgress = (gameState: GAME_STATE_TYPES) => {
+	return gameState === GAME_STATE_TYPES.IN_PROGRESS
+}
 export const generateRandomColor = () => {
     const randomIndex = Math.floor(Math.random() * 4)
     return COLORS[randomIndex]

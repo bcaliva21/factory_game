@@ -3,10 +3,10 @@ import styled, { css, keyframes } from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_GAME_IN_PROGRESS } from '../../../cache/queries'
+import { GET_GAME_STATE } from '../../../cache/queries'
 
 // helpers
-import { game } from '../utils'
+import { game, isGameInProgress } from '../utils'
 
 // svg
 import power from '../../../assets/power-btn'
@@ -183,12 +183,14 @@ const CaseLine = styled.div`
 `
 
 const Leg = ({ side }: { side: string; }) => {
-    const { data, loading, error } = useQuery(GET_GAME_IN_PROGRESS)
+    const { data, loading, error } = useQuery(GET_GAME_STATE)
 
     if (error) console.log('oops...')
     if (loading) console.log('loading...')
 
-    const gameInProgress: boolean = data.gameInProgress
+	const gameState = data.gameState
+
+    const gameInProgress: boolean = isGameInProgress(gameState) 
 
     const powerButtonClick = () => !gameInProgress && game.start()
 

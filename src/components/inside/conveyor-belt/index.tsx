@@ -3,9 +3,10 @@ import styled, { css, keyframes } from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_GAME_IN_PROGRESS } from '../../../cache/queries'
+import { GET_GAME_STATE } from '../../../cache/queries'
 
 import Leg from './Leg'
+import { GAME_STATE_TYPES, isGameInProgress } from '../utils'
 
 const ConveyorBeltContainer = styled.div`
     position: absolute;
@@ -102,12 +103,14 @@ const Spoke = styled.div`
 `
 
 const ConveyorBelt = () => {
-    const { data, loading, error } = useQuery(GET_GAME_IN_PROGRESS)
+    const { data, loading, error } = useQuery(GET_GAME_STATE)
 
     if (error) console.log('oops...')
     if (loading) console.log('loading...')
 
-    const gameInProgress = data.gameInProgress
+    const gameState = data.gameState
+	
+	const gameInProgress = isGameInProgress(gameState)
 
     const populateRightPositions = () => {
         const positions: string[] = []
