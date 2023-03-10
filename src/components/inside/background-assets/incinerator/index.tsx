@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 // components
 import IncineratorDoor from './IncineratorDoor'
+import IncineratorDecor from './IncineratorDecor'
 
 const IncineratorContainer = styled.div`
     background-color: #901000;
@@ -54,6 +55,7 @@ const Incinerator = () => {
             <ExhaustPipeRight />
             <ExhaustPipeLeft />
             <IncineratorDoor />
+			<IncineratorDecor />
         </IncineratorContainer>
     )
 }
