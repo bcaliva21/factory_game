@@ -76,12 +76,17 @@ const Backdrop = styled.div`
     justify-content: center;
 `
 
-const GameoverVeil = styled.div`
-	width: 100%;
-	height: 100%;
-	opacity: 0.3;
+const GameoverModal = styled.div`
+	width: 20%;
+	height: 10%;
+	opacity: 0.75;
 	z-index: 1000;
-	background-color: red;
+	background-color: black;
+	color: white;
+	border: 2px solid white;
+	position: absolute;
+	bottom: 30%;
+	right: 50%;
 `
 
 const Inside = () => {
@@ -112,6 +117,7 @@ const Inside = () => {
 
     return (
 		<>
+			<GameoverModal>You Lose</GameoverModal>
 			<Container>
 				 <Backdrop>
                  <Foreground>
