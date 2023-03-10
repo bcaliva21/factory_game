@@ -6,11 +6,6 @@ export const GET_IS_INSIDE = gql`
     }
 `
 
-export const GET_GAME_IN_PROGRESS = gql`
-    query GetGameInProgress {
-        gameInProgress @client
-    }
-`
 
 export const GET_IS_INSIDE_AND_GAME_IN_PROGRESS = gql`
     query GetIsInsideAndGameInProgress {
