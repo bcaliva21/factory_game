@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_GAME_STATE } from '../../../cache/queries'
+import { GET_GAME_SCORE_AND_GAME_STATE } from '../../../cache/queries'
 
 // helpers
 import { game, isGameInProgress } from '../utils'
@@ -182,13 +182,23 @@ const CaseLine = styled.div`
     border: 3px solid black;
 `
 
+const ScoreContainer = styled.div`
+	height: 20%;
+	width: 100%;
+	position: absolute;
+	background-color: white;
+	color: black;
+	bottom: 30%;
+`
+
 const Leg = ({ side }: { side: string; }) => {
-    const { data, loading, error } = useQuery(GET_GAME_STATE)
+    const { data, loading, error } = useQuery(GET_GAME_SCORE_AND_GAME_STATE)
 
     if (error) console.log('oops...')
     if (loading) console.log('loading...')
 
 	const gameState = data.gameState
+	const gameScore = data.gameScore
 
     const gameInProgress: boolean = isGameInProgress(gameState) 
 
@@ -215,6 +225,10 @@ const Leg = ({ side }: { side: string; }) => {
                             <BlinkingLightYellow />
                             <BlinkingLightRed /> */}
                     </ControlsContainer>
+						<ScoreContainer>
+							{gameScore}
+						</ScoreContainer>
+
                 </LeftLeg>
             )
             : (

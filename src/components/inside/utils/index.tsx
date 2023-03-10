@@ -4,7 +4,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 
 // cache
 import { GET_GAME_STATE } from '../../../cache/queries'
-import { gameStateVar } from '../../../cache'
+import { gameStateVar, gameScoreVar } from '../../../cache'
 
 // constants
 import { COLORS_TO_KEYCODES, COLORS } from '../../constants'
@@ -43,6 +43,8 @@ export interface IGame {
 	userInputIsCorrect: (item: (HTMLElement | null), userInput: number) => boolean ,
 }
 
+const ANIMATION_TIMINGS: string[] = ['9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s', '1s', '0.75s', '0.5s', '0.25s', '0.2s', '0.15s', '0.1s']
+
 // helper functions
 export const isGameInProgress = (gameState: GAME_STATE_TYPES) => {
 	return gameState === GAME_STATE_TYPES.IN_PROGRESS
@@ -63,8 +65,6 @@ export const createDivAndGenerateNewItem = () => {
     return div
 }
 
-
-
 // game object
 export const game: IGame = {
     score: 0,
@@ -75,8 +75,8 @@ export const game: IGame = {
 		gameStateVar(GAME_STATE_TYPES.IN_PROGRESS)
 		game.id = setInterval(() => {
             const score = Date.now() - startTime
-            console.log('score: ', score)
-            game.score = score
+            // console.log('score: ', score)
+			gameScoreVar(score)
         }, 10)
     },
     resetCycle: (item: (HTMLElement | null)) => {

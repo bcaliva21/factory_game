@@ -15,6 +15,11 @@ export const cache: InMemoryCache = new InMemoryCache({
 						return gameStateVar()
 					}
 				},
+				gameScore: {
+					read() {
+						return gameScoreVar()
+					}
+				},
            }
         }
     }
@@ -23,8 +28,10 @@ export const cache: InMemoryCache = new InMemoryCache({
 // init values
 const isInsideVarIntialValue = false
 const gameStateVarInitialValue = GAME_STATE_TYPES.NOT_STARTED
+const gameScoreVarInitialValue = 0
 
 // helpers
 export const isInsideVar: ReactiveVar<boolean> = makeVar<boolean>(isInsideVarIntialValue)
 export const gameStateVar: ReactiveVar<GAME_STATE_TYPES> = makeVar<GAME_STATE_TYPES>(gameStateVarInitialValue)
+export const gameScoreVar: ReactiveVar<number> = makeVar<number>(gameScoreVarInitialValue)
 

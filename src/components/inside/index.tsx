@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_IS_INSIDE_AND_GAME_STATE } from '../../cache/queries'
+import { GET_GAME_STATE_AND_IS_INSIDE } from '../../cache/queries'
 import { isInsideVar } from '../../cache/'
 
 // helpers
@@ -90,13 +90,14 @@ const GameoverModal = styled.div`
 `
 
 const Inside = () => {
-    const { data, loading, error } = useQuery(GET_IS_INSIDE_AND_GAME_STATE) 
+    const { data, loading, error } = useQuery(GET_GAME_STATE_AND_IS_INSIDE)
 
     if (error) console.log('We need to...')
     if (loading) console.log('think of what to do for these cases')
 
     const isInside = data.isInside
-	const gameState = data.gameState	
+	const gameState = data.gameState
+
 	const gameInProgress: boolean = isGameInProgress(gameState) 
 
     useEffect(() => {

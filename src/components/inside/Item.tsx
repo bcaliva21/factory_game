@@ -27,7 +27,7 @@ const dropToBelt = keyframes`
 
 const dropItem = css`
     animation: ${dropToBelt} linear;
-    animation-duration: 8s;
+    animation-duration: 3s;
     animation-fill-mode: forwards;
 `
 
