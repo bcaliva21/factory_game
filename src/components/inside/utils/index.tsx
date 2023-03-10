@@ -49,12 +49,13 @@ export const createDivAndGenerateNewItem = () => {
 // game object
 export const game = {
     score: 0,
+	id: 0, 
     start: () => {
         console.log('|----------Game Start-----------|')
         const startTime = Date.now()
         gameInProgressVar(true)
 
-        setInterval(() => {
+		game.id = setInterval(() => {
             const score = Date.now() - startTime
             console.log('score: ', score)
             game.score = score
@@ -73,7 +74,12 @@ export const game = {
         item?.remove()
         dropContainer?.append(div)
     },
-    breakCycle: () => { },
+    breakCycle: () => { 
+		gameInProgressVar(false)
+		clearInterval(game.id)
+		console.log('final score: ', game.score)
+		// save game score
+	},
     userInputIsCorrect: (item: (HTMLElement | null), userInput: number): boolean => {
         if (item === null) return false
         const upperCaseItemColor = item.style.stroke
