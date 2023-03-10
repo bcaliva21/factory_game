@@ -114,7 +114,7 @@ const LeftLeg = styled.div`
     position: absolute;
     background-color: grey;
     width: 10%;
-    height: 140%;
+    height: 160%;
     left: 0;
     bottom: -10%;
     z-index: 110;
