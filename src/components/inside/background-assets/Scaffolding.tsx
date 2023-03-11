@@ -10,6 +10,7 @@ const ScaffoldingContainer = styled.div<{ top: string; left: string; }>`
     position: absolute;
     top: ${({ top }) => top };
     left: ${({ left }) => left };
+	z-index: 10;
 `
 
 const HorizontalBar = styled.div<{ bottom: string; }>`
