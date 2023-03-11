@@ -15,11 +15,12 @@ const DecorContainer = styled.div`
 const HighScoreContainer = styled.div`
 	width: 40%;
 	height: 40%;
-    background: linear-gradient(-45deg, rgba(100,100,100,0.22), rgba(200,200,200,0.25));
-    box-shadow: 6px 6px 8px 0 rgba(0, 0, 0, 0.25),
-    -4px -4px 6px 0 rgba(200, 200, 200, 0.3);
-	background: linear-gradient(-45deg, rgba(0,0,0,0.22), rgba(200,200,200,0.25));
-	border-radius: 10px;
+    // background: linear-gradient(-45deg, rgba(100,100,100,0.22), rgba(200,200,200,0.25));
+    box-shadow: 1px 2px 8px 0 rgba(0, 0, 0, 0.25),
+    -6px -6px 8px 0 rgba(145, 20, 0, 1);
+	background: linear-gradient(-45deg, rgba(0,0,0,0.22), rgba(100,100,100,0.25));
+	border: 1px outset #901000;
+	border-radius: 5%;
 `
 
 const NamePlate = styled.div`
