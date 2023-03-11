@@ -4,7 +4,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 
 // cache
 import { GET_GAME_STATE } from '../../../cache/queries'
-import { gameStateVar, gameScoreVar } from '../../../cache'
+import { gameStateVar, gameScoreVar, difficultyVar, itemsRemovedCountVar } from '../../../cache'
 
 // constants
 import { COLORS_TO_KEYCODES, COLORS } from '../../constants'
@@ -53,6 +53,16 @@ export const isGameOver = (gameState: GAME_STATE_TYPES) => {
 	return gameState === GAME_STATE_TYPES.OVER
 }
 
+export const incrementDifficulty = () => difficultyVar(difficultyVar() + 1)
+
+export const incrementItemsRemovedCount = () => itemsRemovedCountVar(itemsRemovedCountVar() + 1)
+
+export const difficultyNeedsIncrement = () => {
+	const itemsRemovedCount = itemsRemovedCountVar()
+	const remainder = itemsRemovedCount % 10
+	return remainder === 0
+}
+
 export const generateRandomColor = () => {
     const randomIndex = Math.floor(Math.random() * 4)
     return COLORS[randomIndex]
@@ -84,7 +94,12 @@ export const game: IGame = {
     },
     resetCycle: (item: (HTMLElement | null)) => {
         // add a function to cycle through itemsInQueue
+		// increment itemsCorrectCount
+		// check if conditions are met to increment difficulty
+		console.log('itemsRemovedCountVar before: ', itemsRemovedCountVar())
+		incrementItemsRemovedCount()
 
+		console.log('itemsRemovedCountVar after: ', itemsRemovedCountVar())
         const dropContainer = document.getElementById('drop-container')
         const div = createDivAndGenerateNewItem()
 
@@ -94,7 +109,7 @@ export const game: IGame = {
     breakCycle: () => {
 		gameStateVar(GAME_STATE_TYPES.OVER)
 		clearInterval(game.id)
-		console.log('final score: ', game.score)
+		console.log('|________final score________| ', gameScoreVar())
 		// save game score
 	},
     userInputIsCorrect: (item: (HTMLElement | null), userInput: number): boolean => {
