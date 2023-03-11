@@ -110,6 +110,7 @@ const Inside = () => {
     
                 if (game.userInputIsCorrect(itemInPlay, userInput)) {
 					game.resetCycle(itemInPlay)
+					return
 				} else {
 					game.breakCycle()
 				} 
