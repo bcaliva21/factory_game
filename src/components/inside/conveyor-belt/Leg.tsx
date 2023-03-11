@@ -186,9 +186,36 @@ const ScoreContainer = styled.div`
 	height: 20%;
 	width: 100%;
 	position: absolute;
-	background-color: white;
-	color: black;
 	bottom: 30%;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+`
+
+const Score = styled.div`
+	color: #dcdcdc;    
+	box-shadow: 1px 2px 8px 0 rgba(0, 0, 0, 0.25),
+    -6px -6px 8px 0 rgba(50, 50, 50, 0,25); 
+	background: linear-gradient(-45deg, rgba(0,0,0,0.22), rgba(100,100,100,0.25));
+	border: 1px outset #6c6c6c;
+	border-radius: 5%;
+	width: 70%;
+	height: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`
+
+const Screen = styled.div`
+	width: 90%;
+	height: 90%;
+	background-color: black;
+	font-family: 'Press Start 2P', cursive;
+	font-size: 12px;
+	border: 1px inset #6c6c6c;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `
 
 const Leg = ({ side }: { side: string; }) => {
@@ -226,7 +253,11 @@ const Leg = ({ side }: { side: string; }) => {
                             <BlinkingLightRed /> */}
                     </ControlsContainer>
 						<ScoreContainer>
-							{gameScore}
+							<Score>
+								<Screen>
+									{gameScore}
+								</Screen>
+							</Score>
 						</ScoreContainer>
 
                 </LeftLeg>
