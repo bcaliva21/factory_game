@@ -103,13 +103,15 @@ const BuildingStripeTwo = styled.div`
 `
 
 const Collector = () => {
+	let keyMultiplier: number = 0
     const populateRow = (n: number) => {
         const row: number[] = []
         for (let i = 0; i < n; i ++) {
             row.push(i)
         }
+		keyMultiplier += 1
         return (
-            <ItemCollectorRow>
+            <ItemCollectorRow key={`collector-row_${keyMultiplier}`}>
                 {row.map(item => <TinyItem color={generateRandomColor()} key={`${item}-item`} />)}
             </ItemCollectorRow>
         )

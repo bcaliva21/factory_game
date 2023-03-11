@@ -22,14 +22,17 @@ const Row = styled.div`
 `
 
 const PileOfItems = () => {
+	let keyMultiplier: number = 0 
     const populateRow = (numberOfItems: number) => {
         const row = []
         for (let i = 0; i < numberOfItems; i++) {
             row.push(i)
         }
+		keyMultiplier += 1
+
         return (
-            <Row>
-                {row.map(key => <MiniItem key={key} color={generateRandomColor()} />)}
+			<Row key={`row_${keyMultiplier}`} >
+                {row.map(key => <MiniItem key={`miniItem_${key * keyMultiplier}`} color={generateRandomColor()} />)}
             </Row>
         )
     }

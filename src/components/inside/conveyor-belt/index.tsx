@@ -131,7 +131,7 @@ const ConveyorBelt = () => {
                 <Belt top="55%" gameInProgress={gameInProgress} />
                 <WheelsContainer>
                     {RIGHT_POSITIONS.map(position => (
-                    <Wheel gameInProgress={gameInProgress} right={position}>
+                    <Wheel gameInProgress={gameInProgress} right={position} key={`wheel_${position}`}>
                         <Spoke />
                     </Wheel>
                     ))}
