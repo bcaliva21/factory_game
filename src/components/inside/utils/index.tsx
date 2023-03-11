@@ -25,6 +25,7 @@ export const MiniItem = styled.div<{ color: string; }>`
     height: 5px;
     background-color: ${({ color }) => color};
     margin-right: 1px;
+	margin-top: 1px;
 `
 
 // types

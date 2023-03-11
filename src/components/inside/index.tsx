@@ -163,14 +163,16 @@ const Inside = () => {
                 </Midground>
                 <Background>
                     <ExitDoor handleClose={handleClose}/>
-                    <PileOfItems />
+                    <PileOfItems left={'25%'} />
+                    <PileOfItems left={'70%'} />
 					<Piping />
                 </Background>
                 <Windows />
                 <Incinerator />
                 <Collector />
                 <ForkLift />
-                <Scaffolding top={'15%'} left={'30%'} />
+                <Scaffolding top={'15%'} left={'20%'} />
+                <Scaffolding top={'15%'} left={'0'} />
                 <Scaffolding top={'15%'} left={'40%'} />
                 <CeilingPipe gameInProgress={gameInProgress} />
                 <DropArea>

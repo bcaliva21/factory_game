@@ -3,11 +3,11 @@ import styled from 'styled-components'
 
 import { MiniItem, generateRandomColor } from '../utils'
 
-const PileOfItemsContainer = styled.div`
+const PileOfItemsContainer = styled.div<{ left: string; }>`
     width: 18%;
     height: 15%;
     position: absolute;
-    left: 20%;
+	left: ${({ left }) => left }; 
     bottom: 0;
     display: flex;
     flex-direction: column-reverse;
@@ -21,7 +21,7 @@ const Row = styled.div`
     justify-content: center;
 `
 
-const PileOfItems = () => {
+const PileOfItems = ({ left }: { left: string }) => {
 	let keyMultiplier: number = 0 
     const populateRow = (numberOfItems: number) => {
         const row = []
@@ -48,7 +48,7 @@ const PileOfItems = () => {
     }
 
     return (
-        <PileOfItemsContainer>
+        <PileOfItemsContainer left={left} >
             {populatePileOfItemsContainer()}
         </PileOfItemsContainer>
     )
