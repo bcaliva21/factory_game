@@ -32,6 +32,11 @@ export const cache: InMemoryCache = new InMemoryCache({
 						return difficultyVar()
 					}
 				},
+				itemsCorrectCount: {
+					read() {
+						return itemsCorrectCountVar()
+					}
+				},
            }
         }
     }
@@ -42,10 +47,12 @@ const isInsideVarIntialValue = false
 const gameStateVarInitialValue = GAME_STATE_TYPES.NOT_STARTED
 const gameScoreVarInitialValue = 0
 const difficultyVarInitialValue = 0
+const itemsCorrectCountVarInitialValue = 0
 
 // helpers
 export const isInsideVar: ReactiveVar<boolean> = makeVar<boolean>(isInsideVarIntialValue)
 export const gameStateVar: ReactiveVar<GAME_STATE_TYPES> = makeVar<GAME_STATE_TYPES>(gameStateVarInitialValue)
 export const gameScoreVar: ReactiveVar<number> = makeVar<number>(gameScoreVarInitialValue)
 export const difficultyVar: ReactiveVar<number> = makeVar<number>(difficultyVarInitialValue)
+export const itemsCorrectCountVar: ReactiveVar<number> = makeVar<number>(itemsCorrectCountVarInitialValue)
 
