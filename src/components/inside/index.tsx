@@ -78,16 +78,26 @@ const Backdrop = styled.div`
 
 const GameoverModal = styled.div<{ gameIsOver: boolean; }>`
 	width: 20%;
-	height: 10%;
+	height: 15%;
 	opacity: 0.75;
 	z-index: 1000;
 	background-color: black;
 	color: white;
 	border: 2px solid white;
+	position: relative;
+	display: ${({ gameIsOver }) => gameIsOver ? 'flex' : 'none' };
+	align-items: center;
+	justify-content: center;
+`
+
+const ModalContainer = styled.div`
+	width: 100%;
+	height: 40%;
 	position: absolute;
-	bottom: 30%;
-	right: 50%;
-	display: ${({ gameIsOver }) => gameIsOver ? 'block' : 'none' };
+	bottom: 0;
+	display: flex;
+	align-items: start;
+	justify-content: center;
 `
 
 const Inside = () => {
@@ -122,8 +132,10 @@ const Inside = () => {
 
     return (
 		<>
-			<GameoverModal gameIsOver={gameIsOver} >You Lose</GameoverModal>
 			<Container>
+				<ModalContainer>
+					<GameoverModal gameIsOver={gameIsOver} >You Lose</GameoverModal>
+				</ModalContainer>
 				 <Backdrop>
                  <Foreground>
                     <ConveyorBelt />
