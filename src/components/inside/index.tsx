@@ -8,7 +8,7 @@ import { GET_GAME_STATE_AND_IS_INSIDE } from '../../cache/queries'
 import { isInsideVar } from '../../cache/'
 
 // helpers
-import { game, isGameInProgress, isGameOver } from './utils'
+import { game, isGameInProgress, isGameOver, startGame } from './utils'
 
 // components
 import ConveyorBelt from './conveyor-belt'
@@ -80,7 +80,6 @@ const GameoverModal = styled.div<{ gameIsOver: boolean; }>`
 	width: 20%;
 	height: 15%;
 	opacity: 0.75;
-	z-index: 1000;
 	background-color: black;
 	color: white;
 	border: 2px solid white;
@@ -88,6 +87,8 @@ const GameoverModal = styled.div<{ gameIsOver: boolean; }>`
 	display: ${({ gameIsOver }) => gameIsOver ? 'flex' : 'none' };
 	align-items: center;
 	justify-content: center;
+	flex-direction: column;
+	padding: 5px 0;
 `
 
 const ModalContainer = styled.div`
@@ -98,6 +99,19 @@ const ModalContainer = styled.div`
 	display: flex;
 	align-items: start;
 	justify-content: center;
+	z-index: 100;
+`
+
+const ResetButton = styled.div`
+	width: 20%;
+	height: 50%;
+	text-align: center;
+	text-justify: center;
+	&:hover {
+		color: green;
+		cursor: pointer;
+	}
+	padding-top: 5px;
 `
 
 const Inside = () => {
@@ -111,6 +125,7 @@ const Inside = () => {
 
 	const gameInProgress: boolean = isGameInProgress(gameState)
 	const gameIsOver: boolean = isGameOver(gameState)
+	const resetClick = () => startGame(gameInProgress)
 
     useEffect(() => {
         if (gameInProgress) {
@@ -134,7 +149,10 @@ const Inside = () => {
 		<>
 			<Container>
 				<ModalContainer>
-					<GameoverModal gameIsOver={gameIsOver} >You Lose</GameoverModal>
+					<GameoverModal gameIsOver={gameIsOver} >
+						You Lose
+						<ResetButton onClick={resetClick} >Reset</ResetButton>
+					</GameoverModal>
 				</ModalContainer>
 				 <Backdrop>
                  <Foreground>
