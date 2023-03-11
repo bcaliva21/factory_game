@@ -11,6 +11,7 @@ const PileOfItemsContainer = styled.div<{ left: string; }>`
     bottom: 0;
     display: flex;
     flex-direction: column-reverse;
+	z-index: 5;
 `
 
 const Row = styled.div`

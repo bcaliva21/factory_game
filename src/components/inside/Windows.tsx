@@ -10,6 +10,7 @@ const WindowsContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
+	z-index: 1;
 `
 
 const Window = styled.div`

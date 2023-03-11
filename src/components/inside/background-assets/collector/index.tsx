@@ -13,6 +13,7 @@ const CollectorContainer = styled.div`
     align-items: center;
     justify-content: end;
     flex-direction: column-reverse;
+	z-index: 10;
 `
 
 const CollectorBottomSection = styled.div`

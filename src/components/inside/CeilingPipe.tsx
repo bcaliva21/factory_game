@@ -13,6 +13,7 @@ const PipeContainer = styled.div`
     flex-direction: column;
     align-items: center;
     background-color: transparent;
+	z-index: 10;
 `
 
 const VerticalPipingContainer = styled.div`
