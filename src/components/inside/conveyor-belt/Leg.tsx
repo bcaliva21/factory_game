@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client'
 import { GET_GAME_SCORE_AND_GAME_STATE } from '../../../cache/queries'
 
 // helpers
-import { game, isGameInProgress } from '../utils'
+import { game, isGameInProgress, startGame } from '../utils'
 
 // svg
 import power from '../../../assets/power-btn'
@@ -202,7 +202,7 @@ const Leg = ({ side }: { side: string; }) => {
 
     const gameInProgress: boolean = isGameInProgress(gameState) 
 
-    const powerButtonClick = () => !gameInProgress && game.start()
+	const powerButtonClick = () => startGame(gameInProgress)
 
     return (
         side === 'left'
@@ -214,7 +214,7 @@ const Leg = ({ side }: { side: string; }) => {
                             <PowerButton
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 512 512"
-                                onClick={powerButtonClick}
+								onClick={powerButtonClick}
                                 gameInProgress={gameInProgress}
                             >
                                 <path d={power} />

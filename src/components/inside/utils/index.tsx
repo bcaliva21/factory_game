@@ -63,6 +63,8 @@ export const difficultyNeedsIncrement = () => {
 	return remainder === 0
 }
 
+export const startGame = (gameInProgress: boolean) => !gameInProgress && game.start()
+
 export const generateRandomColor = () => {
     const randomIndex = Math.floor(Math.random() * 4)
     return COLORS[randomIndex]
