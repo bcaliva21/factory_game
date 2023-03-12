@@ -115,7 +115,7 @@ const PipeWindow = styled.div`
     justify-content: center;
 `
 
-const CeilingPipe = ({ gameInProgress }: { gameInProgress: boolean }) => {
+const CeilingPipe = () => {
     const { data, error, loading } = useQuery(GET_ITEMS)
 
     if (error) console.log('oops, there is an error')

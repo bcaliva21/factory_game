@@ -235,7 +235,7 @@ const Inside = () => {
                     <Scaffolding top={'15%'} left={'20%'} />
                     <Scaffolding top={'15%'} left={'0'} />
                     <Scaffolding top={'15%'} left={'40%'} />
-                    <CeilingPipe gameInProgress={gameInProgress} />
+                    <CeilingPipe />
                     <DropArea>
                         {/* consume the itemProps from cache */}
                         {gameInProgress && (
@@ -243,7 +243,6 @@ const Inside = () => {
                                 color={items[2].color}
                                 animation={'drop'}
                                 id={'in-play'}
-                                className={'drop'}
                             />
                         )}
                     </DropArea>
