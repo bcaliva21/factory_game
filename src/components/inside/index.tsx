@@ -192,11 +192,15 @@ const Inside = () => {
     useEffect(() => {
         if (intervalId) killTimingInterval()
 
-        const id = setTimeout(() => {
-            game.breakCycle()
-        }, timeUntilGameOver)
-        setIntervalId(id)
-    }, [items])
+		if (gameInProgress) {
+			const id = setTimeout(() => {
+				game.breakCycle()
+
+			}, timeUntilGameOver)
+
+			setIntervalId(id)
+		}
+            }, [items])
 
     useEffect(() => {
         if (gameInProgress) {
