@@ -115,7 +115,7 @@ const ResetButton = styled.div`
 `
 
 const Inside = () => {
-	const [intervalId, setIntervalId] = useState(0)
+	const [intervalId, setIntervalId] = useState(null)
     const { data, loading, error } = useQuery(GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS)
 
     if (error) console.log('We need to...')
@@ -130,27 +130,33 @@ const Inside = () => {
 	const timeUntilGameOver = convertAnimationTimingToMS(difficulty)
 
 	const setTimingInterval = () => {	
-		setIntervalId(setInterval(() => {
+		setIntervalId(setTimeout(() => {
 			game.breakCycle()
 		}, timeUntilGameOver))
 	}
 
 	const killTimingInterval = () => {
-		clearInterval(intervalId)
+		clearTimeout(intervalId)
+		console.log('killed')
 	}
-	
+
+	useEffect(() => {
+		if (intervalId) killTimingInterval()
+
+		const id = setTimeout(() => {
+			game.breakCycle()
+		}, timeUntilGameOver)
+		console.log('id: ', id)
+		setIntervalId(id)
+	}, [items])
+
     useEffect(() => {
         if (gameInProgress) {
-			// setInterval based on ANIMATION_TIMING[difficulty].split('s')[0]
-			setTimingInterval()
-
             window.addEventListener('keydown', (event) => {
                 const userInput = event.keyCode
     
                 if (game.userInputIsCorrect(userInput)) {
-					killTimingInterval()
 					game.resetCycle()
-					setTimingInterval()
 				} else {
 					game.breakCycle()
 				} 
