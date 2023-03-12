@@ -178,7 +178,7 @@ const Inside = () => {
 
     const handleKeydownEvent = useCallback(
         (event: React.KeyboardEvent<HTMLInputElement>): void => {
-            const userInput = event.keyCode
+            const userInput = event.key
             console.log(userInput)
             if (game.userInputIsCorrect(userInput)) {
                 game.resetCycle()
