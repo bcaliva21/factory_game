@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components'
 
 // components
 import Worker from './Worker'
+import EnterDoor from './EnterDoor'
 
 // cache
 import { GET_IS_INSIDE } from '../../cache/queries'
@@ -49,34 +50,6 @@ const DoorText = styled.div`
     top: 25%;
     left: calc(100vw / 30);
     transition: 0.5s ease-in-out;
-`
-
-const Door = styled.div`
-    width: 25%;
-    height: 36%;
-    margin-left: 50%;
-    background: rgb(203, 203, 203);
-    background: linear-gradient(
-        180deg,
-        rgba(89, 89, 89, 1) 1%,
-        rgba(51, 51, 51, 1) 52%,
-        rgba(13, 13, 13, 1) 100%
-    );
-    position: absolute;
-    bottom: 0;
-    border-right: 2px solid #ffd700;
-    border-left: 2px solid #ffd700;
-    transition: 0.5s ease-in-out;
-
-    &:hover {
-        cursor: pointer;
-        opacity: 0.75;
-        ${DoorText} {
-            display: block;
-            transform: scale(1.2);
-            color: #ffd700;
-        }
-    }
 `
 
 const FactoryWindow = styled.div`
@@ -254,9 +227,7 @@ const Factory = () => {
                     <FactoryWindow />
                     <FactoryWindow />
                 </WindowContainer>
-                <Door onClick={handleDoorClick}>
-                    <DoorText>Enter</DoorText>
-                </Door>
+                <EnterDoor handleEnter={handleDoorClick} />
             </FactoryBody>
         </FactoryContainer>
     )

@@ -9,8 +9,9 @@ import { GET_IS_INSIDE } from '../cache/queries'
 
 const AppBody = styled.div`
     position: relative;
-    width: 100vw;
     height: 98vh;
+    width: 98vw;
+    margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;

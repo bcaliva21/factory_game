@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useQuery } from '@apollo/client'
 
+import { GET_ITEMS } from '../../cache/queries' 
 // components
 import Item from './Item'
 
@@ -8,16 +10,64 @@ const PipeContainer = styled.div`
     position: absolute;
     height: calc(80vh / 2);
     width: calc(100vw / 8);
-    right: calc(80vw / 10);
+    right: calc(100vw / 5);
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: transparent;
+	z-index: 10;
 `
+
+const VerticalPipingContainer = styled.div`
+	position: absolute;
+	top: calc(calc(-80vh / 2) / 6);
+	right: 0%;
+	width: 30%;
+	height: 10%;
+	z-index: 10;
+	display: flex;
+	flex-direction: row;
+	align-items: end;
+	justify-content: start;
+`
+
+const PipeSectionExtention = styled.div`
+    position: relative;
+    background-color: slategrey;
+	margin-bottom: 10px;
+    height: calc(calc(80vh / 2) / 6);
+    width: calc(100vw / 16);
+    border: solid black 1px;
+	border-top-left-radius: 20%;
+	border-right: solid silver 10px;
+`
+
+const PipeSectionExtentionReversed = styled.div`
+    position: relative;
+    background-color: slategrey;
+    height: calc(calc(80vh / 2) / 6);
+    width: calc(100vw / 16);
+    border: solid black 1px;
+	border-top-right-radius: 20%;
+	border-bottom-right-radius: 20%;
+	margin-bottom: 10px;
+`
+
+
+const PipeVerticalSection= styled.div`
+    background-color: slategrey;
+	margin-bottom: 10px;
+    height: calc(calc(80vh / 2) / 6);
+    width: calc(100vw / 16);
+    z-index: 6;
+    border: solid black 1px;
+	border-right: solid silver 10px;
+`
+
 
 const PipeSection = styled.div`
     position: relative;
-    background-color: grey;
+    background-color: slategrey;
     height: calc(calc(80vh / 2) / 6);
     width: calc(100vw / 16);
     z-index: 6;
@@ -27,13 +77,13 @@ const PipeSection = styled.div`
 
 const FunnelSection = styled.div`
     position: absolute;
-    background-color: grey;
+    background-color: slategrey;
     height: calc(100vw / 20);
     width: calc(100vw / 20);
     bottom: 30%;
     transform: rotate(45deg);
     z-index: 6;
-    border: solid silver 2px;
+    border: solid black 1px;
 `
 
 const Cover = styled.div`
@@ -43,7 +93,7 @@ const Cover = styled.div`
     height: calc(100vh / 12);
     bottom: 20%;
     z-index: 8;
-    border-top: solid silver 10px;
+	border-top: solid silver 15px;
 `
 const CoverHole = styled.div`
     position: relative;
@@ -68,37 +118,52 @@ const PipeWindow = styled.div`
 `
 
 const CeilingPipe = ({ gameInProgress }: { gameInProgress: boolean }) => {
+	const { data, error, loading } = useQuery(GET_ITEMS)
+
+	if (error) console.log('oops, there is an error')
+	if (loading) console.log('sorry, still loading')
+
+	const [ itemInQueueLast, itemInQueueNext ] = data.items
     return (
-        <PipeContainer>
-            {gameInProgress ? (
+		<>
+			<VerticalPipingContainer>
+				<PipeSectionExtention />
+				<PipeVerticalSection />
+				<PipeVerticalSection />
+				<PipeSectionExtentionReversed />
+			</VerticalPipingContainer>
+			<PipeContainer>
+			            {gameInProgress ? (
                 <>
                     <PipeSection>
-                        <PipeWindow>
-                            <Item color="red" animation={''} />
-                        </PipeWindow>
-                    </PipeSection>
+				        <PipeWindow>
+			                <Item color={itemInQueueLast.color} animation={itemInQueueLast.animation} />
+		                </PipeWindow>
+	                </PipeSection>
                     <PipeSection>
-                        <PipeWindow>
-                            <Item color="blue" animation={''} />
-                        </PipeWindow>
-                    </PipeSection>
-                </>
-            ) : (
-                <>
-                    <PipeSection>
-                        <PipeWindow></PipeWindow>
-                    </PipeSection>
-                    <PipeSection>
-                        <PipeWindow></PipeWindow>
-                    </PipeSection>
-                </>
-            )}
-            <PipeSection />
-            <FunnelSection />
-            <Cover>
-                <CoverHole />
-            </Cover>
-        </PipeContainer>
+						<PipeWindow>
+					        <Item color={itemInQueueNext.color} animation={itemInQueueNext.animation} />
+				        </PipeWindow>
+			        </PipeSection>
+		        </>
+	            ) : (
+				    <>
+			            <PipeSection>
+		                    <PipeWindow></PipeWindow>
+	                    </PipeSection>
+						<PipeSection>
+					        <PipeWindow></PipeWindow>
+				        </PipeSection>
+			        </>
+		        )}
+	            <PipeSection />
+				<FunnelSection />
+				<Cover>
+					<CoverHole />
+				</Cover>
+			</PipeContainer>
+		</>
+
     )
 }
 
