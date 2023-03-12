@@ -2,8 +2,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 const EnterDoorContainer = styled.div`
-    width: calc(100vw/ 8);
-    height: calc(100vh/ 4.5);
+    width: calc(100vw / 8);
+    height: calc(100vh / 4.5);
     position: absolute;
     bottom: 1.5%;
     left: 23vw;
@@ -127,7 +127,7 @@ const DoorFrame = styled.div`
         }
         ${InsideBot} {
             display: block;
-        }    
+        }
     }
 `
 
@@ -213,7 +213,6 @@ const HorizontalBot = styled.div`
 `
 
 const EnterDoor = ({ handleEnter }: { handleEnter: () => void }) => {
-
     return (
         <EnterDoorContainer>
             <DoorFrame onClick={handleEnter}>

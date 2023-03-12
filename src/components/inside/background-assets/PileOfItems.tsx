@@ -3,15 +3,15 @@ import styled from 'styled-components'
 
 import { MiniItem, generateRandomColor } from '../utils'
 
-const PileOfItemsContainer = styled.div<{ left: string; }>`
+const PileOfItemsContainer = styled.div<{ left: string }>`
     width: 18%;
     height: 15%;
     position: absolute;
-	left: ${({ left }) => left }; 
+    left: ${({ left }) => left};
     bottom: 0;
     display: flex;
     flex-direction: column-reverse;
-	z-index: 5;
+    z-index: 5;
 `
 
 const Row = styled.div`
@@ -23,33 +23,36 @@ const Row = styled.div`
 `
 
 const PileOfItems = ({ left }: { left: string }) => {
-	let keyMultiplier: number = 0 
+    let keyMultiplier: number = 0
     const populateRow = (numberOfItems: number) => {
         const row = []
         for (let i = 0; i < numberOfItems; i++) {
             row.push(i)
         }
-		keyMultiplier += 1
+        keyMultiplier += 1
 
         return (
-			<Row key={`row_${keyMultiplier}`} >
-                {row.map(key => <MiniItem key={`miniItem_${key * keyMultiplier}`} color={generateRandomColor()} />)}
+            <Row key={`row_${keyMultiplier}`}>
+                {row.map((key) => (
+                    <MiniItem
+                        key={`miniItem_${key * keyMultiplier}`}
+                        color={generateRandomColor()}
+                    />
+                ))}
             </Row>
         )
     }
 
     const populatePileOfItemsContainer = () => {
         const rowAccumulator = []
-        for (let i = 41; i > 0; i-=2) {
+        for (let i = 41; i > 0; i -= 2) {
             rowAccumulator.push(populateRow(i))
         }
-        return (<>
-            {rowAccumulator.map(row => row)}
-        </>)
+        return <>{rowAccumulator.map((row) => row)}</>
     }
 
     return (
-        <PileOfItemsContainer left={left} >
+        <PileOfItemsContainer left={left}>
             {populatePileOfItemsContainer()}
         </PileOfItemsContainer>
     )

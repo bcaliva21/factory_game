@@ -43,7 +43,11 @@ const Arrow = styled.svg<{ upOrDown: boolean }>`
     padding-left: ${({ upOrDown }) => (upOrDown ? '8px' : '0')};
 `
 
-const ComposableItem = styled.div<{ color: string; animation: string; animationDuration: string; }>`
+const ComposableItem = styled.div<{
+    color: string
+    animation: string
+    animationDuration: string
+}>`
     position: absolute;
     width: 35px;
     height: 35px;
@@ -52,17 +56,25 @@ const ComposableItem = styled.div<{ color: string; animation: string; animationD
     align-items: center;
     justify-content: center;
     ${({ animation }) => animation === 'drop' && dropItem}
-	animation-duration: ${({ animationDuration }) => animationDuration };
+    animation-duration: ${({ animationDuration }) => animationDuration};
 `
 
-const Item = ({ color, animation, id }: { color: string; animation: string; id: string; }) => {
-	const { data, loading, error } = useQuery(GET_DIFFICULTY)
+const Item = ({
+    color,
+    animation,
+    id,
+}: {
+    color: string
+    animation: string
+    id: string
+}) => {
+    const { data, loading, error } = useQuery(GET_DIFFICULTY)
 
-	if (error) console.log('handle error')
-	if (loading) console.log('still loading..\.')
+    if (error) console.log('handle error')
+    if (loading) console.log('still loading...')
 
-	const difficulty = data.difficulty
-	const animationDuration = ANIMATION_TIMINGS[difficulty]
+    const difficulty = data.difficulty
+    const animationDuration = ANIMATION_TIMINGS[difficulty]
 
     const determineArrowSVG = () => {
         switch (color) {
@@ -80,7 +92,13 @@ const Item = ({ color, animation, id }: { color: string; animation: string; id: 
     const isUpOrDownArrow = () => color === 'green' || color === 'red'
 
     return (
-        <ComposableItem animationDuration={animationDuration} id={id} color={color} animation={animation} style={{ stroke: color }}>
+        <ComposableItem
+            animationDuration={animationDuration}
+            id={id}
+            color={color}
+            animation={animation}
+            style={{ stroke: color }}
+        >
             <Arrow
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"
