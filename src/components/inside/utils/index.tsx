@@ -110,9 +110,9 @@ export const game: IGame = {
 		incrementItemsRemovedCount()
 		const [ itemInQueueLast, itemInQueueNext, ] = itemsVar()
 		const removeMe = document.getElementById('in-play')
-		removeMe?.style.animation = 'none'
+		removeMe.style.animation = 'none'
 		void removeMe?.offsetWidth
-		removeMe?.style.animation = ''
+		removeMe.style.animation = ''
 
 		itemsVar([].concat([generateItemProps(''), itemInQueueLast, itemInQueueNext]))
     },
