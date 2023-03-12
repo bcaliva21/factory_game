@@ -55,6 +55,7 @@ export interface IGame {
 	start: () => void,
 	resetCycle: () => void,
 	breakCycle: () => void,
+	clearState: () => void,
 	userInputIsCorrect:  (userInput: number) => boolean ,
 }
 
@@ -91,7 +92,7 @@ export const generateRandomColor = () => {
 }
 
 export const convertAnimationTimingToMS = (difficulty: number) => {
-	return 1000 * parseFloat(ANIMATION_TIMINGS[difficulty].split('s')[0])
+	return 1250 * parseFloat(ANIMATION_TIMINGS[difficulty].split('s')[0])
 }
 
 const generateItemProps = (animation: string) => ({
@@ -108,6 +109,7 @@ const generateItemsForGameStart = () => {
 export const game: IGame = {
 	id: 0,
     start: () => {
+		game.clearState()
 		itemsVar(generateItemsForGameStart())
         console.log('|----------Game Start-----------|')
 		console.log('init items: ', itemsVar())
@@ -115,7 +117,7 @@ export const game: IGame = {
 		gameStateVar(GAME_STATE_TYPES.IN_PROGRESS)
 		game.id = setInterval(() => {
             const score = Date.now() - startTime
-			gameScoreVar(score)
+			gameScoreVar(score + (itemsRemovedCountVar() * 1000))
         }, 10)
     },
     resetCycle: () => {
@@ -142,10 +144,17 @@ export const game: IGame = {
 		console.log('|________final score________| ', gameScoreVar())
 		// save game score
 	},
-    userInputIsCorrect: (userInput: number): boolean => {
-		const items = itemsVar()
-        if (items[2] === undefined) return false
-        const upperCaseItemColor = items[2].color 
+	clearState: () => {
+		gameScoreVar(0)
+		itemsRemovedCountVar(0)
+		difficultyVar(0)
+		gameStateVar(GAME_STATE_TYPES.IN_PROGRESS)
+		itemsVar([])
+	},
+	userInputIsCorrect: (userInput: number): boolean => {
+		console.log('userinputiscorrect itemsVar: ', itemsVar())
+        if (itemsVar()[2] === undefined) return false
+        const upperCaseItemColor = itemsVar()[2].color 
         const correctKeycode = COLORS_TO_KEYCODES[upperCaseItemColor]
         return correctKeycode === userInput
     },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
@@ -9,6 +9,10 @@ import { isInsideVar } from '../../cache/'
 
 // helpers
 import { game, isGameInProgress, isGameOver, startGame, ItemProps, convertAnimationTimingToMS } from './utils'
+
+interface Listener<T> {
+	(event: T): any;
+}
 
 // components
 import ConveyorBelt from './conveyor-belt'
@@ -140,29 +144,38 @@ const Inside = () => {
 		console.log('killed')
 	}
 
+	const handleKeydownEvent = useCallback((event: React.KeyboardEvent<HTMLInputElement>): void => {
+            const userInput = event.keyCode
+			console.log(userInput)
+            if (game.userInputIsCorrect(userInput)) {
+					game.resetCycle()
+				} else {
+					game.breakCycle()
+            }
+	}, [])
+
 	useEffect(() => {
 		if (intervalId) killTimingInterval()
 
 		const id = setTimeout(() => {
 			game.breakCycle()
 		}, timeUntilGameOver)
-		console.log('id: ', id)
 		setIntervalId(id)
 	}, [items])
 
     useEffect(() => {
         if (gameInProgress) {
-            window.addEventListener('keydown', (event) => {
-                const userInput = event.keyCode
-    
-                if (game.userInputIsCorrect(userInput)) {
-					game.resetCycle()
-				} else {
-					game.breakCycle()
-				} 
-            })
-        }
-    }, [gameInProgress])
+			window.addEventListener('keydown', handleKeydownEvent, true)
+		}
+		
+		return () => {
+			window.removeEventListener('keydown', handleKeydownEvent, true)
+		}
+	}, [gameInProgress])
+
+	// useEffect(() => {
+		// window.removeEventListener('keydown', handleKeydownEvent, true)
+	// }, [])
 
     return (
 		<>
