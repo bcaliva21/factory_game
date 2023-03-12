@@ -6,7 +6,7 @@ import IncineratorDoor from './IncineratorDoor'
 import IncineratorDecor from './IncineratorDecor'
 
 const IncineratorContainer = styled.div`
-    background-color: #901000;
+	background-color: #901000;
     width: 20%;
     height: 45%;
     position: absolute;
@@ -14,7 +14,7 @@ const IncineratorContainer = styled.div`
     right: 30%;
     display: flex;
     align-items: end;
-    justify-content: center;
+	justify-content: center;
 `
 
 const IncineratorRoofDecor = styled.div`

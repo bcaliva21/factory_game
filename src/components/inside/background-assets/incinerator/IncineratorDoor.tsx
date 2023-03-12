@@ -8,17 +8,20 @@ const IncineratorDoorContainer = styled.div`
     display: flex;
     align-items: end;
     flex-direction: row-reverse;
-    border-top: 10px solid #282828;
-    border-right: 5px solid #282828;
-    border-left: 2px solid #282828;
-    background-color: #282828;
+	border-top: 10px solid #080808;
+	box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.25),
+		-6px -6px 8px 0 rgba(95, 20, 20, 0.5);
+
 `
 
 const STRONGSIDE = styled.div`
     background-color: #282828;
-    height: 80%;
+    height: 100%;
     width: 80%;
     z-index: 20;
+	border-left: 5px inset #282828;
+	border-right: 8px solid #888888;
+	border-top: 5px inset #282828;
 `
 
 const WEAKSIDE = styled.div`
@@ -29,9 +32,11 @@ const WEAKSIDE = styled.div`
         rgba(232, 232, 232, 1) 47%,
         rgba(196, 192, 192, 1) 100%
     );
-    height: 80%;
+    height: 100%;
     width: 20%;
     z-index: 0;
+	border-top: 5px inset black;
+	border-right: 6px inset #282828;
 `
 
 const IncineratorDoor = () => {
