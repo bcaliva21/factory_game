@@ -1,16 +1,17 @@
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
-import { renderToStaticMarkup } from 'react-dom/server'
+import { unmountComponentAtNode } from 'react-dom'
 
 // cache
-import { GET_GAME_STATE } from '../../../cache/queries'
-import { gameStateVar, gameScoreVar, difficultyVar, itemsRemovedCountVar } from '../../../cache'
+// import { GET_GAME_STATE } from '../../../cache/queries'
+import { gameStateVar, gameScoreVar, difficultyVar, itemsVar, itemsRemovedCountVar } from '../../../cache'
 
 // constants
 import { COLORS_TO_KEYCODES, COLORS } from '../../constants'
 
 // components
 import Item from '../Item'
+import { renderToStaticMarkup, renderToStaticNodeStream } from 'react-dom/server'
 
 // styled components
 export const TinyItem = styled.div<{ color: string; }>`
@@ -38,9 +39,14 @@ export enum GAME_STATE_TYPES {
 export interface IGame {
 	id: number,
 	start: () => void,
-	resetCycle: (item: (HTMLElement | null)) => void,
+	resetCycle: () => void,
 	breakCycle: () => void,
-	userInputIsCorrect: (item: (HTMLElement | null), userInput: number) => boolean ,
+	userInputIsCorrect:  (userInput: number) => boolean ,
+}
+
+export interface ItemProps {
+	color: string;
+	animation: string;
 }
 
 const ANIMATION_TIMINGS: string[] = ['9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s', '1s', '0.75s', '0.5s', '0.25s', '0.2s', '0.15s', '0.1s']
@@ -71,22 +77,23 @@ export const generateRandomColor = () => {
     return COLORS[randomIndex]
 }
 
-export const createDivAndGenerateNewItem = () => {
-    const div = document.createElement('div')
-    const itemAsHTML = renderToStaticMarkup(
-        <Item color={generateRandomColor()} animation={'drop'} id={'in-play'} />
-    )
+const generateItemProps = (animation: string) => ({
+	animation,
+	color: generateRandomColor(),
+})
 
-    div.innerHTML = itemAsHTML
-
-    return div
+const generateItemsForGameStart = () => {
+	const initialItems = [generateItemProps(''), generateItemProps(''), generateItemProps('drop')]
+	return initialItems
 }
 
 // game object
 export const game: IGame = {
 	id: 0,
     start: () => {
+		itemsVar(generateItemsForGameStart())
         console.log('|----------Game Start-----------|')
+		console.log('init items: ', itemsVar())
         const startTime = Date.now()
 		gameStateVar(GAME_STATE_TYPES.IN_PROGRESS)
 		game.id = setInterval(() => {
@@ -95,19 +102,19 @@ export const game: IGame = {
 			gameScoreVar(score)
         }, 10)
     },
-    resetCycle: (item: (HTMLElement | null)) => {
+	// MAKE CHANGES TO THE CACHE TO TRIGGER RERENDER
+    resetCycle: () => {
         // add a function to cycle through itemsInQueue
 		// increment itemsCorrectCount
 		// check if conditions are met to increment difficulty
-		console.log('itemsRemovedCountVar before: ', itemsRemovedCountVar())
 		incrementItemsRemovedCount()
+		const [ itemInQueueLast, itemInQueueNext, ] = itemsVar()
+		const removeMe = document.getElementById('in-play')
+		removeMe?.style.animation = 'none'
+		void removeMe?.offsetWidth
+		removeMe?.style.animation = ''
 
-		console.log('itemsRemovedCountVar after: ', itemsRemovedCountVar())
-        const dropContainer = document.getElementById('drop-container')
-        const div = createDivAndGenerateNewItem()
-
-        item?.remove()
-        dropContainer?.append(div)
+		itemsVar([].concat([generateItemProps(''), itemInQueueLast, itemInQueueNext]))
     },
     breakCycle: () => {
 		gameStateVar(GAME_STATE_TYPES.OVER)
@@ -115,9 +122,10 @@ export const game: IGame = {
 		console.log('|________final score________| ', gameScoreVar())
 		// save game score
 	},
-    userInputIsCorrect: (item: (HTMLElement | null), userInput: number): boolean => {
-        if (item === null) return false
-        const upperCaseItemColor = item.style.stroke
+    userInputIsCorrect: (userInput: number): boolean => {
+		const items = itemsVar()
+        if (items[2] === undefined) return false
+        const upperCaseItemColor = items[2].color 
         const correctKeycode = COLORS_TO_KEYCODES[upperCaseItemColor]
         return correctKeycode === userInput
     },

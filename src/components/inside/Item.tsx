@@ -48,7 +48,7 @@ const ComposableItem = styled.div<{ color: string; animation: string }>`
     ${({ animation }) => animation === 'drop' && dropItem}
 `
 
-const Item = ({ color, animation, id }: { color: string; animation: string; id: string }) => {
+const Item = ({ color, animation, id }: { color: string; animation: string; id: string; }) => {
     const determineArrowSVG = () => {
         switch (color) {
             case 'green':
@@ -65,7 +65,7 @@ const Item = ({ color, animation, id }: { color: string; animation: string; id: 
     const isUpOrDownArrow = () => color === 'green' || color === 'red'
 
     return (
-        <ComposableItem color={color} animation={animation} id={id} style={{ stroke: color }}>
+        <ComposableItem id={id} color={color} animation={animation} style={{ stroke: color }}>
             <Arrow
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 512 512"

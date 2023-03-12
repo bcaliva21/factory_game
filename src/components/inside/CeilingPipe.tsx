@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useQuery } from '@apollo/client'
 
+import { GET_ITEMS } from '../../cache/queries' 
 // components
 import Item from './Item'
 
@@ -116,6 +118,12 @@ const PipeWindow = styled.div`
 `
 
 const CeilingPipe = ({ gameInProgress }: { gameInProgress: boolean }) => {
+	const { data, error, loading } = useQuery(GET_ITEMS)
+
+	if (error) console.log('oops, there is an error')
+	if (loading) console.log('sorry, still loading')
+
+	const [ itemInQueueLast, itemInQueueNext ] = data.items
     return (
 		<>
 			<VerticalPipingContainer>
@@ -129,12 +137,12 @@ const CeilingPipe = ({ gameInProgress }: { gameInProgress: boolean }) => {
                 <>
                     <PipeSection>
 				        <PipeWindow>
-			                <Item color="red" animation={''} />
+			                <Item color={itemInQueueLast.color} animation={itemInQueueLast.animation} />
 		                </PipeWindow>
 	                </PipeSection>
                     <PipeSection>
 						<PipeWindow>
-					        <Item color="blue" animation={''} />
+					        <Item color={itemInQueueNext.color} animation={itemInQueueNext.animation} />
 				        </PipeWindow>
 			        </PipeSection>
 		        </>

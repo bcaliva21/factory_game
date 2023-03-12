@@ -31,15 +31,22 @@ export const GET_IS_INSIDE = gql`
     }
 `
 
+export const GET_ITEMS = gql`
+	query GetItems {
+		items @client
+	}
+`
+
 export const GET_ITEMS_REMOVED_COUNT = gql`
 	query GetItemsRemovedCount {
 		getItemsRemovedCount @client
 	}
 `
 
-export const GET_GAME_STATE_AND_IS_INSIDE = gql`
-	query GetGameStateAndIsInside {
+export const GET_GAME_STATE_IS_INSIDE_AND_ITEMS = gql`
+	query GetGameStateIsInsideAndItems {
 		isInside @client
+		items @client
 		gameState @client
 	}
 `

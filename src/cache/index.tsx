@@ -1,6 +1,5 @@
 import { InMemoryCache, ReactiveVar, makeVar } from "@apollo/client"
-import { argv0 } from "process"
-import { GAME_STATE_TYPES } from "../components/inside/utils"
+import { GAME_STATE_TYPES, ItemProps } from "../components/inside/utils"
 
 // add a difficulty variable that is tied to the ANIMATION_TIMINGS array
 //     difficulty: number
@@ -37,6 +36,11 @@ export const cache: InMemoryCache = new InMemoryCache({
 						return itemsRemovedCountVar()
 					}
 				},
+				items: {
+					read() {
+						return itemsVar()
+					}
+				},
            }
         }
     }
@@ -48,6 +52,7 @@ const gameStateVarInitialValue = GAME_STATE_TYPES.NOT_STARTED
 const gameScoreVarInitialValue = 0
 const difficultyVarInitialValue = 0
 const itemsRemovedCountVarInitialValue = 0
+const itemsVarInitialValue: ItemProps[] = []
 
 // helpers
 export const isInsideVar: ReactiveVar<boolean> = makeVar<boolean>(isInsideVarIntialValue)
@@ -55,4 +60,5 @@ export const gameStateVar: ReactiveVar<GAME_STATE_TYPES> = makeVar<GAME_STATE_TY
 export const gameScoreVar: ReactiveVar<number> = makeVar<number>(gameScoreVarInitialValue)
 export const difficultyVar: ReactiveVar<number> = makeVar<number>(difficultyVarInitialValue)
 export const itemsRemovedCountVar: ReactiveVar<number> = makeVar<number>(itemsRemovedCountVarInitialValue)
+export const itemsVar: ReactiveVar<ItemProps[]> = makeVar<ItemProps[]>(itemsVarInitialValue)
 

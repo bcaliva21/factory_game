@@ -4,11 +4,11 @@ import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_GAME_STATE_AND_IS_INSIDE } from '../../cache/queries'
+import { GET_GAME_STATE_IS_INSIDE_AND_ITEMS } from '../../cache/queries'
 import { isInsideVar } from '../../cache/'
 
 // helpers
-import { game, isGameInProgress, isGameOver, startGame } from './utils'
+import { game, isGameInProgress, isGameOver, startGame, ItemProps } from './utils'
 
 // components
 import ConveyorBelt from './conveyor-belt'
@@ -115,35 +115,33 @@ const ResetButton = styled.div`
 `
 
 const Inside = () => {
-    const { data, loading, error } = useQuery(GET_GAME_STATE_AND_IS_INSIDE)
+    const { data, loading, error } = useQuery(GET_GAME_STATE_IS_INSIDE_AND_ITEMS)
 
     if (error) console.log('We need to...')
     if (loading) console.log('think of what to do for these cases')
 
     const isInside = data.isInside
 	const gameState = data.gameState
+	const items = data.items
 
 	const gameInProgress: boolean = isGameInProgress(gameState)
 	const gameIsOver: boolean = isGameOver(gameState)
 	const resetClick = () => startGame(gameInProgress)
+	const handleClose = () => isInsideVar(!isInside)
 
     useEffect(() => {
         if (gameInProgress) {
             window.addEventListener('keydown', (event) => {
                 const userInput = event.keyCode
-                const itemInPlay = document.getElementById('in-play')
     
-                if (game.userInputIsCorrect(itemInPlay, userInput)) {
-					game.resetCycle(itemInPlay)
-					return
+                if (game.userInputIsCorrect(userInput)) {
+					game.resetCycle()
 				} else {
 					game.breakCycle()
 				} 
             })
         }
     }, [gameInProgress])
-
-    const handleClose = () => isInsideVar(!isInside)
 
     return (
 		<>
@@ -176,7 +174,8 @@ const Inside = () => {
                 <Scaffolding top={'15%'} left={'40%'} />
                 <CeilingPipe gameInProgress={gameInProgress} />
                 <DropArea>
-                    {gameInProgress && <Item color="green" animation="drop" id="in-play"/>}
+					{ /* consume the itemProps from cache */ }
+					{gameInProgress && <Item color={items[2].color} animation={'drop'} id={'in-play'} className={'drop'} />}
                 </DropArea>
 				</Backdrop>
 			</Container>
