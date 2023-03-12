@@ -3,15 +3,29 @@ import { useQuery } from '@apollo/client'
 import { unmountComponentAtNode } from 'react-dom'
 
 // cache
-// import { GET_GAME_STATE } from '../../../cache/queries'
 import { gameStateVar, gameScoreVar, difficultyVar, itemsVar, itemsRemovedCountVar } from '../../../cache'
-
-// constants
-import { COLORS_TO_KEYCODES, COLORS } from '../../constants'
 
 // components
 import Item from '../Item'
 import { renderToStaticMarkup, renderToStaticNodeStream } from 'react-dom/server'
+
+export const KEYCODES = {
+    DOWN: 40,
+    LEFT: 37,
+    RIGHT: 39,
+    UP:  38,
+}
+
+export const COLORS = ['red', 'blue', 'green', 'yellow']
+
+export const COLORS_TO_KEYCODES: {[index: string]:number} = {
+    red: 40,
+    yellow: 37,
+    blue: 39,
+    green: 38,
+}
+
+export const ANIMATION_TIMINGS: string[] = ['9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s', '1s', '0.75s', '0.5s', '0.25s', '0.2s', '0.15s', '0.1s']
 
 // styled components
 export const TinyItem = styled.div<{ color: string; }>`
@@ -49,7 +63,6 @@ export interface ItemProps {
 	animation: string;
 }
 
-const ANIMATION_TIMINGS: string[] = ['9s', '8s', '7s', '6s', '5s', '4s', '3s', '2s', '1s', '0.75s', '0.5s', '0.25s', '0.2s', '0.15s', '0.1s']
 
 // helper functions
 export const isGameInProgress = (gameState: GAME_STATE_TYPES) => {
