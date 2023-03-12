@@ -90,6 +90,10 @@ export const generateRandomColor = () => {
     return COLORS[randomIndex]
 }
 
+export const convertAnimationTimingToMS = (difficulty: number) => {
+	return 1000 * parseFloat(ANIMATION_TIMINGS[difficulty].split('s')[0])
+}
+
 const generateItemProps = (animation: string) => ({
 	animation,
 	color: generateRandomColor(),
@@ -111,20 +115,23 @@ export const game: IGame = {
 		gameStateVar(GAME_STATE_TYPES.IN_PROGRESS)
 		game.id = setInterval(() => {
             const score = Date.now() - startTime
-            // console.log('score: ', score)
 			gameScoreVar(score)
         }, 10)
     },
-	// MAKE CHANGES TO THE CACHE TO TRIGGER RERENDER
     resetCycle: () => {
-        // add a function to cycle through itemsInQueue
-		// increment itemsCorrectCount
-		// check if conditions are met to increment difficulty
 		incrementItemsRemovedCount()
+		if (difficultyNeedsIncrement()) {
+			incrementDifficulty()
+		}
+
 		const [ itemInQueueLast, itemInQueueNext, ] = itemsVar()
 		const removeMe = document.getElementById('in-play')
+		if (!removeMe) {
+			console.log('panic')
+			return
+		}
 		removeMe.style.animation = 'none'
-		void removeMe?.offsetWidth
+		void removeMe.offsetWidth
 		removeMe.style.animation = ''
 
 		itemsVar([].concat([generateItemProps(''), itemInQueueLast, itemInQueueNext]))
