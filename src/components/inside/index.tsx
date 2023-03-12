@@ -147,7 +147,7 @@ const ResetButton = styled.div`
 `
 
 const Inside = () => {
-    const [intervalId, setIntervalId] = useState(null)
+	const [intervalId, setIntervalId] = useState<ReturnType<typeof setTimeout> | undefined>(undefined)
     const { data, loading, error } = useQuery(
         GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS
     )
@@ -162,14 +162,6 @@ const Inside = () => {
     const resetClick = () => startGame(gameInProgress)
     const handleClose = () => isInsideVar(!isInside)
     const timeUntilGameOver = convertAnimationTimingToMS(difficulty)
-
-    const setTimingInterval = () => {
-        setIntervalId(
-            setTimeout(() => {
-                game.breakCycle()
-            }, timeUntilGameOver)
-        )
-    }
 
     const killTimingInterval = () => {
         clearTimeout(intervalId)

@@ -67,7 +67,7 @@ export interface IGame {
     resetCycle: () => void
     breakCycle: () => void
     clearState: () => void
-    userInputIsCorrect: (userInput: number) => boolean
+    userInputIsCorrect: (userInput: string) => boolean
 }
 
 export interface ItemProps {
