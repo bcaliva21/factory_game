@@ -13,6 +13,19 @@ const resolvers = {
             })
         },
     },
+    Mutation: {
+        async addUser(_: any, { name, email }: any) {
+            const user = await prisma.user.create({
+                data: {
+                    name,
+                    email,
+                    highScore: 0
+                }
+            })
+
+            return user
+        }
+    }
 }
 
 export default resolvers
