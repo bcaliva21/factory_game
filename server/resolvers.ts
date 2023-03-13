@@ -2,6 +2,10 @@ import { PrismaClient, User } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+type UserQueryInput = {
+    id: number
+}
+
 type AddUserPayload = {
     name: string,
     email: string
@@ -17,7 +21,7 @@ const resolvers = {
         users: async (): Promise<User[]> => {
             return prisma.user.findMany()
         },
-        user: async (_: any, { id }: any): Promise<User | null> => {
+        user: async (_: any, { id }: UserQueryInput): Promise<User | null> => {
             return prisma.user.findUnique({
                 where: { id },
             })
