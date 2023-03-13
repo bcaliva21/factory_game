@@ -2,6 +2,16 @@ import { PrismaClient, User } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+type AddUserPayload = {
+    name: string,
+    email: string
+}
+
+type HighScoreUpdatePayload = {
+    id: number,
+    highScore: number
+}
+
 const resolvers = {
     Query: {
         users: async (): Promise<User[]> => {
@@ -14,12 +24,24 @@ const resolvers = {
         },
     },
     Mutation: {
-        async addUser(_: any, { name, email }: any) {
+        async addUser(_: any, { name, email }: AddUserPayload) {
             const user = await prisma.user.create({
                 data: {
                     name,
                     email,
                     highScore: 0
+                }
+            })
+
+            return user
+        },
+        async updateHighScore(_: any, { id, highScore }: HighScoreUpdatePayload) {
+            const user = await prisma.user.update({
+                where: {
+                    id
+                }, 
+                data: {
+                    highScore
                 }
             })
 

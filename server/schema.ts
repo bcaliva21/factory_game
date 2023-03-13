@@ -13,5 +13,6 @@ export const typeDefs = `
 
     type Mutation {
         addUser(name: String, email: String): User
+        updateHighScore(id: Int!, highScore: Int): User
     }
 `
