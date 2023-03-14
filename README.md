@@ -2,6 +2,18 @@
 
 > This repo is for a simple scroll timing game.
 
+TODO:
+- I figure making this is now worth it
+- how to force game.over if a user enters no input
+- finish incinerator designs
+- any way for background-assets to not rerender on a correct user input?
+- update DB on game.over
+- setup user auth, from the research I've done, auth0 should be "easy"
+- imlpement difficulty scaling
+- implemmtn the animationTimings array in the drop animation
+- UI for user login
+
+
 ## Development
 
 1. Clone the repo

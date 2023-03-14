@@ -151,11 +151,13 @@ const Inside = () => {
     const { data, loading, error } = useQuery(
         GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS
     )
-
+    console.log('data: ', data)
     if (error) console.log('We need to...')
-    if (loading) console.log('think of what to do for these cases')
 
-    const { difficulty, gameState, isInside, items } = data
+	const difficulty = data?.difficulty
+	const gameState = data?.gameState
+	const isInside = data?.isInside
+	const items = data?.items
 
     const gameInProgress: boolean = isGameInProgress(gameState)
     const gameIsOver: boolean = isGameOver(gameState)
@@ -204,10 +206,6 @@ const Inside = () => {
         }
     }, [gameInProgress])
 
-    // useEffect(() => {
-    // window.removeEventListener('keydown', handleKeydownEvent, true)
-    // }, [])
-
     return (
         <>
             <Container>
@@ -237,7 +235,6 @@ const Inside = () => {
                     <Scaffolding top={'15%'} left={'40%'} />
                     <CeilingPipe />
                     <DropArea>
-                        {/* consume the itemProps from cache */}
                         {gameInProgress && (
                             <Item
                                 color={items[2].color}

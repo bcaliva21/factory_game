@@ -49,5 +49,5 @@ export const GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS = gql`
         isInside @client
         items @client
         gameState @client
-    }
+   }
 `

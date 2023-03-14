@@ -10,6 +10,7 @@ import {
     itemsVar,
     itemsRemovedCountVar,
 } from '../../../cache'
+import { createSpreadAssignment } from 'typescript'
 
 export const COLORS = ['red', 'blue', 'green', 'yellow']
 
@@ -62,7 +63,7 @@ export enum GAME_STATE_TYPES {
 }
 
 export interface IGame {
-    id: number
+	id: ReturnType<typeof setInterval> | number
     start: () => void
     resetCycle: () => void
     breakCycle: () => void
@@ -151,7 +152,6 @@ export const game: IGame = {
         removeMe.style.animation = 'none'
         void removeMe.offsetWidth
         removeMe.style.animation = ''
-
         itemsVar(
             [].concat([generateItemProps(''), itemInQueueLast, itemInQueueNext])
         )
@@ -169,8 +169,7 @@ export const game: IGame = {
         gameStateVar(GAME_STATE_TYPES.IN_PROGRESS)
         itemsVar([])
     },
-    userInputIsCorrect: (userInput: number): boolean => {
-        console.log('userinputiscorrect itemsVar: ', itemsVar())
+    userInputIsCorrect: (userInput: string) => {
         if (itemsVar()[2] === undefined) return false
         const upperCaseItemColor = itemsVar()[2].color
         const correctKeycode = COLORS_TO_KEYCODES[upperCaseItemColor]
