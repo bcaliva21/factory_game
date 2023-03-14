@@ -1,16 +1,5 @@
 import { gql } from '@apollo/client'
 
-export const TEST_QUERY = gql`
-    query TestQuery {
-        users {
-            email
-            highScore
-            id
-            name
-        }
-    }
-`
-
 export const GET_DIFFICULTY = gql`
     query GetDifficulty {
         difficulty @client
