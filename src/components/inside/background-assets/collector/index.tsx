@@ -111,8 +111,7 @@ const Collector = () => {
 
     return (
         <CollectorContainer>
-            <CollectorBottomSection>
-           </CollectorBottomSection>
+            <CollectorBottomSection></CollectorBottomSection>
             <BuildingStripe />
             <BuildingStripeTwo />
             <ItemSectionGlass />

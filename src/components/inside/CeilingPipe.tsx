@@ -138,7 +138,7 @@ const CeilingPipe = () => {
                                 <Item
                                     color={items[0].color}
                                     animation={items[0].animation}
-									id={'none'}
+                                    id={'none'}
                                 />
                             </PipeWindow>
                         </PipeSection>
@@ -147,7 +147,7 @@ const CeilingPipe = () => {
                                 <Item
                                     color={items[1].color}
                                     animation={items[1].animation}
-									id={'none'}
+                                    id={'none'}
                                 />
                             </PipeWindow>
                         </PipeSection>

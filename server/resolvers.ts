@@ -7,12 +7,12 @@ type UserQueryInput = {
 }
 
 type AddUserPayload = {
-    name: string,
+    name: string
     email: string
 }
 
 type HighScoreUpdatePayload = {
-    id: number,
+    id: number
     highScore: number
 }
 
@@ -33,25 +33,28 @@ const resolvers = {
                 data: {
                     name,
                     email,
-                    highScore: 0
-                }
+                    highScore: 0,
+                },
             })
 
             return user
         },
-        async updateHighScore(_: any, { id, highScore }: HighScoreUpdatePayload) {
+        async updateHighScore(
+            _: any,
+            { id, highScore }: HighScoreUpdatePayload
+        ) {
             const user = await prisma.user.update({
                 where: {
-                    id
-                }, 
+                    id,
+                },
                 data: {
-                    highScore
-                }
+                    highScore,
+                },
             })
 
             return user
-        }
-    }
+        },
+    },
 }
 
 export default resolvers

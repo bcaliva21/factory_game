@@ -63,7 +63,7 @@ export enum GAME_STATE_TYPES {
 }
 
 export interface IGame {
-	id: ReturnType<typeof setInterval> | number
+    id: ReturnType<typeof setInterval> | number
     start: () => void
     resetCycle: () => void
     breakCycle: () => void

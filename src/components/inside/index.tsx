@@ -147,17 +147,19 @@ const ResetButton = styled.div`
 `
 
 const Inside = () => {
-	const [intervalId, setIntervalId] = useState<ReturnType<typeof setTimeout> | undefined>(undefined)
+    const [intervalId, setIntervalId] = useState<
+        ReturnType<typeof setTimeout> | undefined
+    >(undefined)
     const { data, loading, error } = useQuery(
         GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS
     )
     console.log('data: ', data)
     if (error) console.log('We need to...')
 
-	const difficulty = data?.difficulty
-	const gameState = data?.gameState
-	const isInside = data?.isInside
-	const items = data?.items
+    const difficulty = data?.difficulty
+    const gameState = data?.gameState
+    const isInside = data?.isInside
+    const items = data?.items
 
     const gameInProgress: boolean = isGameInProgress(gameState)
     const gameIsOver: boolean = isGameOver(gameState)
@@ -186,15 +188,14 @@ const Inside = () => {
     useEffect(() => {
         if (intervalId) killTimingInterval()
 
-		if (gameInProgress) {
-			const id = setTimeout(() => {
-				game.breakCycle()
+        if (gameInProgress) {
+            const id = setTimeout(() => {
+                game.breakCycle()
+            }, timeUntilGameOver)
 
-			}, timeUntilGameOver)
-
-			setIntervalId(id)
-		}
-            }, [items])
+            setIntervalId(id)
+        }
+    }, [items])
 
     useEffect(() => {
         if (gameInProgress) {
