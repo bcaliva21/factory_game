@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 import { TinyItem, generateRandomColor } from '../../utils'
@@ -97,7 +97,7 @@ const Collector = () => {
         )
     }
 
-    const populateContainer = () => {
+    const rows = useMemo(() => {
         return [
             populateRow(7),
             populateRow(11),
@@ -107,7 +107,7 @@ const Collector = () => {
             populateRow(20),
             populateRow(21),
         ]
-    }
+    }, [])
 
     return (
         <CollectorContainer>
@@ -115,7 +115,7 @@ const Collector = () => {
             <BuildingStripe />
             <BuildingStripeTwo />
             <ItemSectionGlass />
-            <CollectorItemSection>{populateContainer()}</CollectorItemSection>
+            <CollectorItemSection>{rows}</CollectorItemSection>
         </CollectorContainer>
     )
 }
