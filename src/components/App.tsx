@@ -4,10 +4,11 @@ import { useQuery } from '@apollo/client'
 
 import Outside from './outside'
 import Inside from './inside'
+import Login from './login'
 
 import { GET_IS_INSIDE } from '../cache/queries'
 
-const AppBody = styled.div`
+const Game = styled.div`
     position: relative;
     height: 98vh;
     width: 98vw;
@@ -21,6 +22,8 @@ const AppBody = styled.div`
 
 function App() {
     const { data, loading, error } = useQuery(GET_IS_INSIDE)
+    // isUserAuth will come from data?
+    const isUserAuthenticated: boolean = true
 
     if (error) console.log('panic!')
     if (loading) console.log('think of what to do for these cases')
@@ -28,12 +31,22 @@ function App() {
     const isInside = data.isInside
 
     return (
-        <AppBody>
-            {isInside
-                ? <Inside />
-                : <Outside />
+        <>
+            {
+                isUserAuthenticated ?
+                    <Game>
+                        {
+                            isInside
+                                ? <Inside />
+                                : <Outside />
+                        }
+                    </Game>
+                    :
+                    <Login />
             }
-        </AppBody>
+
+
+        </>
     )
 }
 

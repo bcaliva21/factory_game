@@ -54,6 +54,14 @@ export const GET_ITEMS_REMOVED_COUNT = gql`
 	}
 `
 
+export const LOGIN_MUTATION = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+    }
+  }
+`;
+
 export const GET_GAME_STATE_IS_INSIDE_AND_ITEMS = gql`
 	query GetGameStateIsInsideAndItems {
 		isInside @client

@@ -1,4 +1,6 @@
 import { PrismaClient, User } from '@prisma/client'
+import jwt from 'jsonwebtoken';
+import { compare } from 'bcryptjs';
 
 const prisma = new PrismaClient()
 
@@ -43,13 +45,32 @@ const resolvers = {
             const user = await prisma.user.update({
                 where: {
                     id
-                }, 
+                },
                 data: {
                     highScore
                 }
             })
 
             return user
+        },
+        async login(_, { email, password }) {
+            const user = await prisma.user.findUnique({ where: { email } });
+
+            if (!user) {
+                throw new Error('Invalid email or password');
+            }
+
+            // TODO: add password
+            const passwordMatch = await compare(password, user.password);
+
+            if (!passwordMatch) {
+                throw new Error('Invalid email or password');
+            }
+
+            // what is this secret?
+            const token = jwt.sign({ userId: user.id }, 'your-secret-key-here');
+
+            return { token };
         }
     }
 }
