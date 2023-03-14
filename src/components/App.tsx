@@ -27,14 +27,7 @@ function App() {
 
     const isInside = data.isInside
 
-    return (
-        <AppBody>
-            {isInside
-                ? <Inside />
-                : <Outside />
-            }
-        </AppBody>
-    )
+    return <AppBody>{isInside ? <Inside /> : <Outside />}</AppBody>
 }
 
 export default App

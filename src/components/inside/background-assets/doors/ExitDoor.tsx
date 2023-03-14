@@ -2,8 +2,8 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 const ExitDoorContainer = styled.div`
-    width: calc(100vw/ 16);
-    height: calc(100vh/ 8);
+    width: calc(100vw / 16);
+    height: calc(100vh / 8);
     position: absolute;
     left: 10%;
     bottom: 0;
@@ -213,7 +213,6 @@ const HorizontalBot = styled.div`
 `
 
 const ExitDoor = ({ handleClose }: { handleClose: () => void }) => {
-
     return (
         <ExitDoorContainer>
             <DoorFrame onClick={handleClose}>

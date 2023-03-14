@@ -29,7 +29,9 @@ export const populateRow = () => {
     }
     return (
         <CargoRow>
-            {row.map(item => <TinyItem key={item} color={generateRandomColor()} />)}
+            {row.map((item) => (
+                <TinyItem key={item} color={generateRandomColor()} />
+            ))}
         </CargoRow>
     )
 }
