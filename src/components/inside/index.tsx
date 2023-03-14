@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
@@ -8,7 +8,7 @@ import { GET_GAME_STATE_IS_INSIDE_AND_ITEMS } from '../../cache/queries'
 import { isInsideVar } from '../../cache/'
 
 // helpers
-import { game, isGameInProgress, isGameOver, startGame, ItemProps } from './utils'
+import { game, isGameInProgress, isGameOver, startGame } from './utils'
 
 // components
 import ConveyorBelt from './conveyor-belt'
@@ -116,29 +116,40 @@ const ResetButton = styled.div`
 
 const Inside = () => {
     const { data, loading, error } = useQuery(GET_GAME_STATE_IS_INSIDE_AND_ITEMS)
+    console.log('data: ', data)
 
     if (error) console.log('We need to...')
     if (loading) console.log('think of what to do for these cases')
 
-    const isInside = data.isInside
-	const gameState = data.gameState
-	const items = data.items
+    let isInside: boolean
+    let gameState
+    let items
+    let gameInProgress: boolean
+    let gameIsOver: boolean
+    let resetClick
+    let handleClose
 
-	const gameInProgress: boolean = isGameInProgress(gameState)
-	const gameIsOver: boolean = isGameOver(gameState)
-	const resetClick = () => startGame(gameInProgress)
-	const handleClose = () => isInsideVar(!isInside)
+    if (!loading) {
+        isInside = data.isInside
+        gameState = data.gameState
+        items = data.items
+        gameInProgress = isGameInProgress(gameState)
+        gameIsOver = isGameOver(gameState)
+        resetClick = () => startGame(gameInProgress)
+        handleClose =() => isInsideVar(!isInside)
+    }
+
 
     useEffect(() => {
         if (gameInProgress) {
             window.addEventListener('keydown', (event) => {
                 const userInput = event.keyCode
-    
+
                 if (game.userInputIsCorrect(userInput)) {
 					game.resetCycle()
 				} else {
 					game.breakCycle()
-				} 
+				}
             })
         }
     }, [gameInProgress])

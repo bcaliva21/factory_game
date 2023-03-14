@@ -1,5 +1,16 @@
 import { gql } from '@apollo/client'
 
+export const TEST_QUERY = gql`
+	query TestQuery {
+		users {
+			email
+			highScore
+			id
+			name
+		}
+	}
+`
+
 export const GET_DIFFICULTY = gql`
 	query GetDifficulty {
 		difficulty @client
@@ -48,6 +59,12 @@ export const GET_GAME_STATE_IS_INSIDE_AND_ITEMS = gql`
 		isInside @client
 		items @client
 		gameState @client
+		users {
+			email
+			highScore
+			id
+			name
+		}
 	}
 `
 

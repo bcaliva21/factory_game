@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useQuery } from '@apollo/client'
+import { TEST_QUERY } from '../../cache/queries'
 
 const WindowsContainer = styled.div`
     height: 20%;
@@ -22,6 +24,8 @@ const Window = styled.div`
 `
 
 const Windows = () => {
+    const { data } = useQuery(TEST_QUERY)
+    console.log('data: ', data)
 
     return(
         <WindowsContainer>
