@@ -96,41 +96,33 @@ const Scaffolding = ({ top, left }: { top: string; left: string }) => {
         )
     }
 
-	const rows = useMemo(() => {
-		const repeat = (times: number) => {
-			const rows = []
-			for (let i = 1; i < times; i+=1) {
-				rows.push(populateRow())	
-			}
-			return rows 
-		}
+    const rows = useMemo(() => {
+        const repeat = (times: number) => {
+            const rows = []
+            for (let i = 1; i < times; i += 1) {
+                rows.push(populateRow())
+            }
+            return rows
+        }
 
-		return (
-			<>
-	            <ItemsContainer bottom={'6%'}>
-			{repeat(5)}
-           </ItemsContainer>
-            <ItemsContainer bottom={'26%'}>
-			{repeat(5)}
-           </ItemsContainer>
-            <ItemsContainer bottom={'46%'}>
-			{repeat(5)}
-           </ItemsContainer>
-            <ItemsContainer bottom={'66%'}>
-			{repeat(5)}
-           </ItemsContainer>
-			<ItemsContainer bottom={'86%'}>
-                {populateRow()}
-                {populateRow()}
-           </ItemsContainer>
-			</>
-		)
-	}, [])
+        return (
+            <>
+                <ItemsContainer bottom={'6%'}>{repeat(5)}</ItemsContainer>
+                <ItemsContainer bottom={'26%'}>{repeat(5)}</ItemsContainer>
+                <ItemsContainer bottom={'46%'}>{repeat(5)}</ItemsContainer>
+                <ItemsContainer bottom={'66%'}>{repeat(5)}</ItemsContainer>
+                <ItemsContainer bottom={'86%'}>
+                    {populateRow()}
+                    {populateRow()}
+                </ItemsContainer>
+            </>
+        )
+    }, [])
 
     return (
         <ScaffoldingContainer top={top} left={left}>
-		{renderLadderRungs()}
-		{rows}
+            {renderLadderRungs()}
+            {rows}
             <HorizontalBar bottom={'0'} />
             <RowOnScaffolding />
             <HorizontalBar bottom={'5%'} />
