@@ -52,9 +52,7 @@ const PileOfItems = ({ left }: { left: string }) => {
     }, [])
 
     return (
-        <PileOfItemsContainer left={left}>
-            {pileOfItems}
-        </PileOfItemsContainer>
+        <PileOfItemsContainer left={left}>{pileOfItems}</PileOfItemsContainer>
     )
 }
 
