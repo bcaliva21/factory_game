@@ -148,22 +148,14 @@ const Inside = () => {
     console.log('data: ', data)
 
     if (error) console.log('We need to...')
-
-    let isInside: boolean
-    let gameState = GAME_STATE_TYPES.NOT_STARTED
-    let items = []
-    let gameInProgress = false
-    let gameIsOver = false
+	
+	let isInside = data?.isInside
+    let gameState = data?.gameState
+    let items = data?.items
+    let gameInProgress = isGameInProgress(gameState)
+    let gameIsOver = isGameOver(gameState) 
     const resetClick = () => startGame(gameInProgress)
     const handleClose = () => isInsideVar(!isInside)
-
-    if (!loading) {
-        isInside = data.isInside
-        gameState = data.gameState
-        items = data.items
-        gameInProgress = isGameInProgress(gameState)
-        gameIsOver = isGameOver(gameState)
-    }
 
     useEffect(() => {
         if (gameInProgress) {
