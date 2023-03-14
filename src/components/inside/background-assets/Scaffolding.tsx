@@ -99,7 +99,7 @@ const Scaffolding = ({ top, left }: { top: string; left: string }) => {
     const rows = useMemo(() => {
         const repeat = (times: number) => {
             const rows = []
-            for (let i = 1; i < times; i += 1) {
+            for (let i = 0; i < times; i += 1) {
                 rows.push(populateRow())
             }
             return rows
@@ -111,10 +111,7 @@ const Scaffolding = ({ top, left }: { top: string; left: string }) => {
                 <ItemsContainer bottom={'26%'}>{repeat(5)}</ItemsContainer>
                 <ItemsContainer bottom={'46%'}>{repeat(5)}</ItemsContainer>
                 <ItemsContainer bottom={'66%'}>{repeat(5)}</ItemsContainer>
-                <ItemsContainer bottom={'86%'}>
-                    {populateRow()}
-                    {populateRow()}
-                </ItemsContainer>
+                <ItemsContainer bottom={'86%'}>{repeat(2)}</ItemsContainer>
             </>
         )
     }, [])
