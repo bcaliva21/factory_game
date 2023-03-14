@@ -148,12 +148,12 @@ const Inside = () => {
     console.log('data: ', data)
 
     if (error) console.log('We need to...')
-	
-	let isInside = data?.isInside
+
+    let isInside = data?.isInside
     let gameState = data?.gameState
     let items = data?.items
     let gameInProgress = isGameInProgress(gameState)
-    let gameIsOver = isGameOver(gameState) 
+    let gameIsOver = isGameOver(gameState)
     const resetClick = () => startGame(gameInProgress)
     const handleClose = () => isInsideVar(!isInside)
 

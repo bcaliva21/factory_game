@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react'
 import styled, { keyframes } from 'styled-components'
 
-import { setRemoveCargoTimeout ,setAppendCargoTimeout, CargoContainer, populateRow } from './helpers'
+import {
+    setRemoveCargoTimeout,
+    setAppendCargoTimeout,
+    CargoContainer,
+    populateRow,
+} from './helpers'
 import Wheels from './Wheels'
 
 const travel = keyframes`
@@ -70,7 +75,7 @@ const LiftComponent = styled.div`
 `
 
 const LiftToBodyConnector = styled.div`
-    width:  10%;
+    width: 10%;
     border: 2px solid black;
     position: absolute;
     bottom: 15%;
@@ -191,8 +196,8 @@ const ForkLift = () => {
                         {populateRow()}
                     </CargoContainer>
                     <LiftToBodyConnector />
-                        <LiftVerticalSection />
-                        <LiftHorizontalSeciton />
+                    <LiftVerticalSection />
+                    <LiftHorizontalSeciton />
                 </LiftComponent>
                 <CoverTopFront />
                 <ForkLiftCab>

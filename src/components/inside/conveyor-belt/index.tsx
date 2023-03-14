@@ -51,7 +51,7 @@ const BeltContainer = styled.div`
     width: 100%;
 `
 
-const Belt = styled.div<{ top: string; gameInProgress: boolean; }>`
+const Belt = styled.div<{ top: string; gameInProgress: boolean }>`
     position: absolute;
     border: 5px dashed #000a13;
     width: 90%;
@@ -59,7 +59,10 @@ const Belt = styled.div<{ top: string; gameInProgress: boolean; }>`
     left: 6%;
     z-index: 1;
     background-color: grey;
-    ${({ gameInProgress, top }) => gameInProgress && top === '55%' ? moveBeltForward : gameInProgress && moveBeltBackward }
+    ${({ gameInProgress, top }) =>
+        gameInProgress && top === '55%'
+            ? moveBeltForward
+            : gameInProgress && moveBeltBackward}
 `
 
 const WheelsContainer = styled.div`
@@ -82,7 +85,7 @@ const rotateWheel = css`
     animation-duration: 2s;
 `
 
-const Wheel = styled.div<{ gameInProgress: boolean; right: string; }>`
+const Wheel = styled.div<{ gameInProgress: boolean; right: string }>`
     width: calc(100vh / 40);
     height: calc(100vh / 40);
     position: absolute;
@@ -109,8 +112,8 @@ const ConveyorBelt = () => {
     if (loading) console.log('loading...')
 
     const gameState = data.gameState
-	
-	const gameInProgress = isGameInProgress(gameState)
+
+    const gameInProgress = isGameInProgress(gameState)
 
     const populateRightPositions = () => {
         const positions: string[] = []
@@ -126,14 +129,18 @@ const ConveyorBelt = () => {
     return (
         <ConveyorBeltContainer>
             <BeltContainer>
-                <Leg side="right"/>
-                <Leg side="left"/>
+                <Leg side="right" />
+                <Leg side="left" />
                 <Belt top="55%" gameInProgress={gameInProgress} />
                 <WheelsContainer>
-                    {RIGHT_POSITIONS.map(position => (
-                    <Wheel gameInProgress={gameInProgress} right={position} key={`wheel_${position}`}>
-                        <Spoke />
-                    </Wheel>
+                    {RIGHT_POSITIONS.map((position) => (
+                        <Wheel
+                            gameInProgress={gameInProgress}
+                            right={position}
+                            key={`wheel_${position}`}
+                        >
+                            <Spoke />
+                        </Wheel>
                     ))}
                 </WheelsContainer>
                 <Belt top="80%" gameInProgress={gameInProgress} />

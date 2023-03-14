@@ -28,7 +28,7 @@ const glowFillAndStroke = keyframes`
 const makePowerGlow = css`
     animation: ${glowFillAndStroke} infinite linear;
     animation-duration: 2s;
-` 
+`
 
 const glowBorder = keyframes`
     0%, 100% {
@@ -155,20 +155,21 @@ const PowerContainer = styled.div<{ gameInProgress: boolean }>`
     width: 50%;
     height: 60%;
     background-color: #6c6c6c;
-    border: 2px solid ${({ gameInProgress }) => gameInProgress ? '#004b00' : 'black' };
+    border: 2px solid
+        ${({ gameInProgress }) => (gameInProgress ? '#004b00' : 'black')};
     z-index: 5;
     display: flex;
     align-items: center;
     justify-content: center;
-    ${({ gameInProgress }) => !gameInProgress && makeBorderGlow }
+    ${({ gameInProgress }) => !gameInProgress && makeBorderGlow}
 `
 
 const PowerButton = styled.svg<{ gameInProgress: boolean }>`
     width: 70%;
     height: 70%;
-    ${({ gameInProgress }) => !gameInProgress && makePowerGlow }
-    stroke: ${({ gameInProgress }) => gameInProgress ? '#004b00' : 'black' };
-    fill: ${({ gameInProgress }) => gameInProgress ? '#004b00' : 'black' };
+    ${({ gameInProgress }) => !gameInProgress && makePowerGlow}
+    stroke: ${({ gameInProgress }) => (gameInProgress ? '#004b00' : 'black')};
+    fill: ${({ gameInProgress }) => (gameInProgress ? '#004b00' : 'black')};
     stoke-width: 10px;
     &: hover {
         cursor: pointer;
@@ -183,90 +184,87 @@ const CaseLine = styled.div`
 `
 
 const ScoreContainer = styled.div`
-	height: 20%;
-	width: 100%;
-	position: absolute;
-	bottom: 30%;
-	display: flex;
-	align-content: center;
-	justify-content: center;
+    height: 20%;
+    width: 100%;
+    position: absolute;
+    bottom: 30%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
 `
 
 const Score = styled.div`
-	color: #dcdcdc;    
-	box-shadow: 1px 2px 8px 0 rgba(0, 0, 0, 0.25),
-    -6px -6px 8px 0 rgba(50, 50, 50, 0,25); 
-	background: linear-gradient(-45deg, rgba(0,0,0,0.22), rgba(100,100,100,0.25));
-	border: 1px outset #6c6c6c;
-	border-radius: 5%;
-	width: 70%;
-	height: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    color: #dcdcdc;
+    box-shadow: 1px 2px 8px 0 rgba(0, 0, 0, 0.25),
+        -6px -6px 8px 0 rgba(50, 50, 50, 0, 25);
+    background: linear-gradient(
+        -45deg,
+        rgba(0, 0, 0, 0.22),
+        rgba(100, 100, 100, 0.25)
+    );
+    border: 1px outset #6c6c6c;
+    border-radius: 5%;
+    width: 70%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
 const Screen = styled.div`
-	width: 90%;
-	height: 90%;
-	background-color: black;
-	font-family: 'Press Start 2P', cursive;
-	font-size: 12px;
-	border: 1px inset #6c6c6c;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+    width: 90%;
+    height: 90%;
+    background-color: black;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 12px;
+    border: 1px inset #6c6c6c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `
 
-const Leg = ({ side }: { side: string; }) => {
+const Leg = ({ side }: { side: string }) => {
     const { data, loading, error } = useQuery(GET_GAME_SCORE_AND_GAME_STATE)
 
     if (error) console.log('oops...')
     if (loading) console.log('loading...')
 
-	const gameState = data.gameState
-	const gameScore = data.gameScore
+    const gameState = data.gameState
+    const gameScore = data.gameScore
 
-    const gameInProgress: boolean = isGameInProgress(gameState) 
+    const gameInProgress: boolean = isGameInProgress(gameState)
 
-	const powerButtonClick = () => startGame(gameInProgress)
+    const powerButtonClick = () => startGame(gameInProgress)
 
-    return (
-        side === 'left'
-            ? (
-                <LeftLeg>
-                    <Foot />
-                    <ControlsContainer>
-                        <PowerContainer gameInProgress={gameInProgress}>
-                            <PowerButton
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 512 512"
-								onClick={powerButtonClick}
-                                gameInProgress={gameInProgress}
-                            >
-                                <path d={power} />
-                            </PowerButton>
-                        </PowerContainer>
-                            {/* <CaseLine />
+    return side === 'left' ? (
+        <LeftLeg>
+            <Foot />
+            <ControlsContainer>
+                <PowerContainer gameInProgress={gameInProgress}>
+                    <PowerButton
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 512 512"
+                        onClick={powerButtonClick}
+                        gameInProgress={gameInProgress}
+                    >
+                        <path d={power} />
+                    </PowerButton>
+                </PowerContainer>
+                {/* <CaseLine />
                             <BlinkingLightGreen />
                             <BlinkingLightYellow />
                             <BlinkingLightRed /> */}
-                    </ControlsContainer>
-						<ScoreContainer>
-							<Score>
-								<Screen>
-									{gameScore}
-								</Screen>
-							</Score>
-						</ScoreContainer>
-
-                </LeftLeg>
-            )
-            : (
-            <RightLeg>
-                <Foot />
-            </RightLeg>
-            )
+            </ControlsContainer>
+            <ScoreContainer>
+                <Score>
+                    <Screen>{gameScore}</Screen>
+                </Score>
+            </ScoreContainer>
+        </LeftLeg>
+    ) : (
+        <RightLeg>
+            <Foot />
+        </RightLeg>
     )
 }
 

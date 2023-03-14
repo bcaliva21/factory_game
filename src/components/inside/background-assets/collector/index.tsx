@@ -13,7 +13,7 @@ const CollectorContainer = styled.div`
     align-items: center;
     justify-content: end;
     flex-direction: column-reverse;
-	z-index: 10;
+    z-index: 10;
 `
 
 const CollectorBottomSection = styled.div`
@@ -80,8 +80,13 @@ const STRONGSIDE = styled.div`
 `
 
 const WEAKSIDE = styled.div`
-    background: rgb(255,255,255);
-    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(232,232,232,1) 47%, rgba(196,192,192,1) 100%);
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 1) 0%,
+        rgba(232, 232, 232, 1) 47%,
+        rgba(196, 192, 192, 1) 100%
+    );
     height: 100%;
     width: 15%;
     z-index: 0;
@@ -100,34 +105,39 @@ const BuildingStripeTwo = styled.div`
     height: 2%;
     background-color: slategrey;
     position: absolute;
-	top: 48%;
+    top: 48%;
 `
 
 const Collector = () => {
-	let keyMultiplier: number = 0
+    let keyMultiplier: number = 0
     const populateRow = (n: number) => {
         const row: number[] = []
-        for (let i = 0; i < n; i ++) {
+        for (let i = 0; i < n; i++) {
             row.push(i)
         }
-		keyMultiplier += 1
+        keyMultiplier += 1
         return (
             <ItemCollectorRow key={`collector-row_${keyMultiplier}`}>
-                {row.map(item => <TinyItem color={generateRandomColor()} key={`${item}-item`} />)}
+                {row.map((item) => (
+                    <TinyItem
+                        color={generateRandomColor()}
+                        key={`${item}-item`}
+                    />
+                ))}
             </ItemCollectorRow>
         )
     }
 
     const populateContainer = () => {
-        return([
+        return [
             populateRow(7),
             populateRow(11),
             populateRow(18),
             populateRow(19),
             populateRow(20),
             populateRow(20),
-			populateRow(21)
-        ])
+            populateRow(21),
+        ]
     }
 
     return (
@@ -141,9 +151,7 @@ const Collector = () => {
             <BuildingStripe />
             <BuildingStripeTwo />
             <ItemSectionGlass />
-            <CollectorItemSection>
-                {populateContainer()}
-            </CollectorItemSection>
+            <CollectorItemSection>{populateContainer()}</CollectorItemSection>
         </CollectorContainer>
     )
 }

@@ -1,15 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 
-
-const WheelHole = styled.div<{ left: string; }>`
+const WheelHole = styled.div<{ left: string }>`
     position: absolute;
     bottom: -20%;
     left: ${({ left }) => left};
     height: 45%;
     width: 30%;
-    background: rgb(68,68,68);
-    background: linear-gradient(180deg, rgba(68,68,68,1) 0%, rgba(85,85,85,1) 25%, rgba(102,102,102,1) 51%, rgba(119,119,119,1) 75%, rgba(136,136,136,1) 100%);
+    background: rgb(68, 68, 68);
+    background: linear-gradient(
+        180deg,
+        rgba(68, 68, 68, 1) 0%,
+        rgba(85, 85, 85, 1) 25%,
+        rgba(102, 102, 102, 1) 51%,
+        rgba(119, 119, 119, 1) 75%,
+        rgba(136, 136, 136, 1) 100%
+    );
     border-radius: 50%;
     display: flex;
     align-items: center;

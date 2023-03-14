@@ -12,7 +12,7 @@ const WindowsContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
-	z-index: 1;
+    z-index: 1;
 `
 
 const Window = styled.div`
@@ -27,7 +27,7 @@ const Windows = () => {
     const { data } = useQuery(TEST_QUERY)
     console.log('data: ', data)
 
-    return(
+    return (
         <WindowsContainer>
             <Window />
             <Window />
