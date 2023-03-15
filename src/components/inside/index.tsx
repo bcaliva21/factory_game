@@ -55,14 +55,6 @@ const Foreground = styled.div`
     align-items: center;
     justify-content: center;
     background: rgb(136, 136, 136);
-    background: linear-gradient(
-        180deg,
-        rgba(136, 136, 136, 0.5004595588235294) 0%,
-        rgba(153, 153, 153, 0.6657256652661064) 25%,
-        rgba(170, 170, 170, 1) 51%,
-        rgba(187, 187, 187, 1) 75%,
-        rgba(204, 204, 204, 1) 100%
-    );
 `
 
 const Midground = styled.div`
@@ -70,10 +62,9 @@ const Midground = styled.div`
     top: 30%;
     width: 100%;
     height: 30%;
-    background: rgb(68, 68, 68);
     background: linear-gradient(
         180deg,
-        rgba(68, 68, 68, 1) 0%,
+        rgba(60, 60, 60, 1) 0%,
         rgba(85, 85, 85, 1) 25%,
         rgba(102, 102, 102, 1) 51%,
         rgba(119, 119, 119, 1) 75%,
@@ -103,7 +94,7 @@ const Backdrop = styled.div`
     position: absolute;
     top: 10%;
     // background-color: #3d3d3d;
-    background-color: lightgrey;
+    background-color: rgba(0,0,0,1);
     display: flex;
     justify-content: center;
 `

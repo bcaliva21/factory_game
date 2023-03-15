@@ -112,7 +112,7 @@ const BlinkingLightRed = styled.div`
 
 const LeftLeg = styled.div`
     position: absolute;
-    background-color: grey;
+    background-color: #4D4D4D;
     width: 10%;
     height: 160%;
     left: 0;
@@ -122,7 +122,7 @@ const LeftLeg = styled.div`
 
 const RightLeg = styled.div`
     position: absolute;
-    background-color: grey;
+    background-color: #4D4D4D;
     width: 10%;
     height: 120%;
     right: 0;
