@@ -141,7 +141,7 @@ const Inside = () => {
     )
     console.log('data: ', data)
     if (error) console.log('We need to...')
-	if (loading) console.log('load')
+    if (loading) console.log('load')
 
     const difficulty = data?.difficulty
     const gameState = data?.gameState
@@ -159,18 +159,15 @@ const Inside = () => {
         console.log('killed')
     }
 
-    const handleKeydownEvent = useCallback(
-        (event: KeyboardEvent): void => {
-            const userInput = event.key
-            console.log(userInput)
-            if (game.userInputIsCorrect(userInput)) {
-                game.resetCycle()
-            } else {
-                game.breakCycle()
-            }
-        },
-        []
-    )
+    const handleKeydownEvent = useCallback((event: KeyboardEvent): void => {
+        const userInput = event.key
+        console.log(userInput)
+        if (game.userInputIsCorrect(userInput)) {
+            game.resetCycle()
+        } else {
+            game.breakCycle()
+        }
+    }, [])
 
     useEffect(() => {
         if (intervalId) killTimingInterval()

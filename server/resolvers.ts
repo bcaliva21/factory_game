@@ -21,7 +21,10 @@ const resolvers = {
         users: async (): Promise<User[]> => {
             return prisma.user.findMany()
         },
-        user: async (_: object, { id }: UserQueryInput): Promise<User | null> => {
+        user: async (
+            _: object,
+            { id }: UserQueryInput
+        ): Promise<User | null> => {
             return prisma.user.findUnique({
                 where: { id },
             })
