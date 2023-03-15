@@ -29,7 +29,9 @@ export const ANIMATION_TIMINGS: string[] = [
     '5s',
     '4s',
     '3s',
+    '2.5s',
     '2s',
+    '1.5s',
     '1s',
     '0.75s',
     '0.5s',
@@ -105,7 +107,7 @@ export const generateRandomColor = () => {
 }
 
 export const convertAnimationTimingToMS = (difficulty: number) => {
-    return 1250 * parseFloat(ANIMATION_TIMINGS[difficulty].split('s')[0])
+    return 1050 * parseFloat(ANIMATION_TIMINGS[difficulty].split('s')[0])
 }
 
 const generateItemProps = (animation: string) => ({
