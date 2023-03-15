@@ -16,7 +16,7 @@ const STRONGSIDE = styled.div`
     width: 75%;
     z-index: 20;
     background: linear-gradient(-45deg, rgba(144, 36, 0), rgba(144, 16, 0));
-	border-right: 10px solid black;
+    border-right: 10px solid black;
 `
 
 const WEAKSIDE = styled.div`

@@ -94,7 +94,7 @@ const Backdrop = styled.div`
     position: absolute;
     top: 10%;
     // background-color: #3d3d3d;
-    background-color: rgba(0,0,0,1);
+    background-color: rgba(0, 0, 0, 1);
     display: flex;
     justify-content: center;
 `
