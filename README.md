@@ -1,7 +1,8 @@
 # Factory Game
 
 > This repo is for a simple scroll timing game.
-> This is a mono repo. To get it up and running you must build and run both FE/BE simultaneously 
+> This is a mono repo built with vite utilizing React/Typescript backed by Apollo/Graphql. 
+> To get it up and running you must build and run both FE/BE simultaneously 
 
 ## Development
 
