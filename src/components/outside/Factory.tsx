@@ -22,7 +22,7 @@ const FactoryContainer = styled.div`
 
 const FactoryRoofSection = styled.div`
     position: relative;
-    border-right: calc(100vw / 16.75) solid transparent;
+    border-right: calc(100vw / 15.6) solid transparent;
     border-left: calc(100vw / 16.75) solid #901000;
     border-bottom: calc(100vw / 36) solid #901000;
     border-top: calc(100vw / 36) solid transparent;
@@ -71,8 +71,9 @@ const FactoryBody = styled.div`
     margin: auto;
     margin-top: 25%;
     background-color: #ebebeb;
-    height: 40%;
     position: relative;
+    height: 60%;
+    width: 90%;
 `
 
 const grow = keyframes`
@@ -171,8 +172,8 @@ const Placard = styled.div`
     border: medium inset #ffd700;
     font-size: larger;
     padding: 0.5% 1.5%;
-    top: 20.5vh;
-    left: 22vw;
+    bottom: 20.5vh;
+    right: 8vw;
 `
 
 const Factory = () => {
@@ -204,6 +205,7 @@ const Factory = () => {
                     <HalfSecDelaySmoke />
                     <OneSecDelaySmoke />
                 </FactoryRoofStackTwo>
+                <FactoryRoofSection />
                 <FactoryRoofSection />
                 <FactoryRoofSection />
                 <FactoryRoofSection />
