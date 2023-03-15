@@ -1,6 +1,7 @@
 import { PrismaClient, User } from '@prisma/client'
-import jwt from 'jsonwebtoken';
-import { compare } from 'bcryptjs';
+import jwt from 'jsonwebtoken'
+import pkg from 'bcryptjs'
+const { compare } = pkg
 
 const prisma = new PrismaClient()
 
@@ -53,24 +54,24 @@ const resolvers = {
 
             return user
         },
-        async login(_, { email, password }) {
-            const user = await prisma.user.findUnique({ where: { email } });
+        async login(_: any, { email, password }: any) {
+            const user = await prisma.user.findUnique({ where: { email } })
 
             if (!user) {
-                throw new Error('Invalid email or password');
+                throw new Error('Invalid email or password')
             }
 
             // TODO: add password
-            const passwordMatch = await compare(password, user.password);
+            const passwordMatch = await compare(password, 'password here')
 
             if (!passwordMatch) {
-                throw new Error('Invalid email or password');
+                throw new Error('Invalid email or password')
             }
 
             // what is this secret?
-            const token = jwt.sign({ userId: user.id }, 'your-secret-key-here');
+            const token = jwt.sign({ userId: user.id }, 'your-secret-key-here')
 
-            return { token };
+            return { token }
         }
     }
 }

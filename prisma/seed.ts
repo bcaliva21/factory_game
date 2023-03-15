@@ -2,6 +2,7 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
+// TODO: add password
 async function main() {
   const walter = await prisma.user.upsert({
     where: { email: 'walter@prisma.io' },
