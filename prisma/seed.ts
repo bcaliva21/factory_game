@@ -2,13 +2,13 @@
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-// TODO: add password
 async function main() {
   const walter = await prisma.user.upsert({
     where: { email: 'walter@prisma.io' },
     update: {},
     create: {
       email: 'walter@prisma.io',
+      password: 'password',
       name: 'Walter',
       highScore: 0 // he hasnt gotten to it yet
     },
@@ -18,6 +18,7 @@ async function main() {
     update: {},
     create: {
       email: 'aj@prisma.io',
+      password: 'password',
       name: 'AJ',
       highScore: 100
     },
@@ -27,6 +28,7 @@ async function main() {
     update: {},
     create: {
       email: 'bradley@prisma.io',
+      password: 'password',
       name: 'Bradley',
       highScore: 200
     }

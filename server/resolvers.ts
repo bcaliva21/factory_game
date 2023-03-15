@@ -11,7 +11,8 @@ type UserQueryInput = {
 
 type AddUserPayload = {
     name: string,
-    email: string
+    email: string,
+    password: string
 }
 
 type HighScoreUpdatePayload = {
@@ -31,16 +32,27 @@ const resolvers = {
         },
     },
     Mutation: {
-        async addUser(_: any, { name, email }: AddUserPayload) {
-            const user = await prisma.user.create({
+        async signUp(_: any, { name, email, password }: AddUserPayload) {
+            const userWithMatchingEmail = await prisma.user.findUnique({ where: { email } })
+
+            if (userWithMatchingEmail) {
+                throw new Error('email already exists, try logging in')
+            }
+
+            const newUser = await prisma.user.create({
                 data: {
                     name,
                     email,
-                    highScore: 0
+                    highScore: 0,
+                    password
                 }
             })
 
-            return user
+            const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET!, {
+                expiresIn: process.env.JWT_EXPIRES_IN,
+            })
+
+            return { token }
         },
         async updateHighScore(_: any, { id, highScore }: HighScoreUpdatePayload) {
             const user = await prisma.user.update({
@@ -61,15 +73,16 @@ const resolvers = {
                 throw new Error('Invalid email or password')
             }
 
-            // TODO: add password
-            const passwordMatch = await compare(password, 'password here')
+            // TODO: use bcrypt compare when SSL is added
+            const passwordMatch = password === user.password
 
             if (!passwordMatch) {
                 throw new Error('Invalid email or password')
             }
 
-            // what is this secret?
-            const token = jwt.sign({ userId: user.id }, 'your-secret-key-here')
+            const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
+                expiresIn: process.env.JWT_EXPIRES_IN,
+            })
 
             return { token }
         }
