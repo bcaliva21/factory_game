@@ -21,14 +21,14 @@ const resolvers = {
         users: async (): Promise<User[]> => {
             return prisma.user.findMany()
         },
-        user: async (_: any, { id }: UserQueryInput): Promise<User | null> => {
+        user: async (_: object, { id }: UserQueryInput): Promise<User | null> => {
             return prisma.user.findUnique({
                 where: { id },
             })
         },
     },
     Mutation: {
-        async addUser(_: any, { name, email }: AddUserPayload) {
+        async addUser(_: object, { name, email }: AddUserPayload) {
             const user = await prisma.user.create({
                 data: {
                     name,
@@ -40,7 +40,7 @@ const resolvers = {
             return user
         },
         async updateHighScore(
-            _: any,
+            _: object,
             { id, highScore }: HighScoreUpdatePayload
         ) {
             const user = await prisma.user.update({

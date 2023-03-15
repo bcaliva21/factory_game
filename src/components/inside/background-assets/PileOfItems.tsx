@@ -23,7 +23,7 @@ const Row = styled.div`
 `
 
 const PileOfItems = ({ left }: { left: string }) => {
-    let keyMultiplier: number = 0
+    let keyMultiplier = 0
     const populateRow = (numberOfItems: number) => {
         const row = []
         for (let i = 0; i < numberOfItems; i++) {

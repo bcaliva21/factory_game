@@ -131,7 +131,7 @@ const CeilingPipe = () => {
                 <PipeSectionExtentionReversed />
             </VerticalPipingContainer>
             <PipeContainer>
-                {!!items.length ? (
+		{items.length > 0 ? (
                     <>
                         <PipeSection>
                             <PipeWindow>

@@ -78,7 +78,7 @@ const BuildingStripeTwo = styled.div`
 `
 
 const Collector = () => {
-    let keyMultiplier: number = 0
+    let keyMultiplier = 0
     const populateRow = (n: number) => {
         const row: number[] = []
         for (let i = 0; i < n; i++) {

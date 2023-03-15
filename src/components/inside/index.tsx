@@ -13,13 +13,8 @@ import {
     isGameInProgress,
     isGameOver,
     startGame,
-    ItemProps,
     convertAnimationTimingToMS,
 } from './utils'
-
-interface Listener<T> {
-    (event: T): any
-}
 
 // components
 import ConveyorBelt from './conveyor-belt'
@@ -146,6 +141,7 @@ const Inside = () => {
     )
     console.log('data: ', data)
     if (error) console.log('We need to...')
+	if (loading) console.log('load')
 
     const difficulty = data?.difficulty
     const gameState = data?.gameState
@@ -164,7 +160,7 @@ const Inside = () => {
     }
 
     const handleKeydownEvent = useCallback(
-        (event: React.KeyboardEvent<HTMLInputElement>): void => {
+        (event: KeyboardEvent): void => {
             const userInput = event.key
             console.log(userInput)
             if (game.userInputIsCorrect(userInput)) {

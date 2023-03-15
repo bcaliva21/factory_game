@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import { useQuery } from '@apollo/client'
-import { unmountComponentAtNode } from 'react-dom'
 
 // cache
 import {
@@ -10,7 +8,6 @@ import {
     itemsVar,
     itemsRemovedCountVar,
 } from '../../../cache'
-import { createSpreadAssignment } from 'typescript'
 
 export const COLORS = ['red', 'blue', 'green', 'yellow']
 
@@ -64,7 +61,7 @@ export enum GAME_STATE_TYPES {
     OVER = 'over',
 }
 
-export interface IGame {
+export type IGame = {
     id: ReturnType<typeof setInterval> | number
     start: () => void
     resetCycle: () => void
@@ -73,7 +70,7 @@ export interface IGame {
     userInputIsCorrect: (userInput: string) => boolean
 }
 
-export interface ItemProps {
+export type ItemProps = {
     color: string
     animation: string
 }

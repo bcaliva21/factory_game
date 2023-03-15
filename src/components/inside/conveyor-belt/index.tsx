@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client'
 import { GET_GAME_STATE } from '../../../cache/queries'
 
 import Leg from './Leg'
-import { GAME_STATE_TYPES, isGameInProgress } from '../utils'
+import { isGameInProgress } from '../utils'
 
 const ConveyorBeltContainer = styled.div`
     position: absolute;
@@ -117,7 +117,7 @@ const ConveyorBelt = () => {
 
     const populateRightPositions = () => {
         const positions: string[] = []
-        const multiplier: number = 7
+        const multiplier = 7
         for (let i = 1; i < 14; i++) {
             positions.push(`${i * multiplier}%`)
         }
