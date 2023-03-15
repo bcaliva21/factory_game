@@ -6,7 +6,7 @@ const EnterDoorContainer = styled.div`
     height: calc(100vh / 4.5);
     position: absolute;
     bottom: 1.5%;
-    left: 23vw;
+    right: 10vw;
 `
 
 const LeftDoor = styled.div`
