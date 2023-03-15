@@ -1,9 +1,6 @@
 import styled from 'styled-components'
-import { useQuery } from '@apollo/client'
-import { unmountComponentAtNode } from 'react-dom'
 
 // cache
-// import { GET_GAME_STATE } from '../../../cache/queries'
 import {
     gameStateVar,
     gameScoreVar,
@@ -12,15 +9,34 @@ import {
     itemsRemovedCountVar,
 } from '../../../cache'
 
-// constants
-import { COLORS_TO_KEYCODES, COLORS } from '../../constants'
+export const COLORS = ['red', 'blue', 'green', 'yellow']
 
-// components
-import Item from '../Item'
-import {
-    renderToStaticMarkup,
-    renderToStaticNodeStream,
-} from 'react-dom/server'
+export const COLORS_TO_KEYCODES: { [index: string]: string } = {
+    red: 'ArrowDown',
+    yellow: 'ArrowLeft',
+    blue: 'ArrowRight',
+    green: 'ArrowUp',
+}
+
+export const ANIMATION_TIMINGS: string[] = [
+    '9s',
+    '8s',
+    '7s',
+    '6s',
+    '5s',
+    '4s',
+    '3s',
+    '2.5s',
+    '2s',
+    '1.5s',
+    '1s',
+    '0.75s',
+    '0.5s',
+    '0.25s',
+    '0.2s',
+    '0.15s',
+    '0.1s',
+]
 
 // styled components
 export const TinyItem = styled.div<{ color: string }>`
@@ -45,36 +61,19 @@ export enum GAME_STATE_TYPES {
     OVER = 'over',
 }
 
-export interface IGame {
-    id: number
+export type IGame = {
+    id: ReturnType<typeof setInterval> | number
     start: () => void
     resetCycle: () => void
     breakCycle: () => void
-    userInputIsCorrect: (userInput: number) => boolean
+    clearState: () => void
+    userInputIsCorrect: (userInput: string) => boolean
 }
 
-export interface ItemProps {
+export type ItemProps = {
     color: string
     animation: string
 }
-
-const ANIMATION_TIMINGS: string[] = [
-    '9s',
-    '8s',
-    '7s',
-    '6s',
-    '5s',
-    '4s',
-    '3s',
-    '2s',
-    '1s',
-    '0.75s',
-    '0.5s',
-    '0.25s',
-    '0.2s',
-    '0.15s',
-    '0.1s',
-]
 
 // helper functions
 export const isGameInProgress = (gameState: GAME_STATE_TYPES) => {
@@ -104,6 +103,10 @@ export const generateRandomColor = () => {
     return COLORS[randomIndex]
 }
 
+export const convertAnimationTimingToMS = (difficulty: number) => {
+    return 1050 * parseFloat(ANIMATION_TIMINGS[difficulty].split('s')[0])
+}
+
 const generateItemProps = (animation: string) => ({
     animation,
     color: generateRandomColor(),
@@ -122,6 +125,7 @@ const generateItemsForGameStart = () => {
 export const game: IGame = {
     id: 0,
     start: () => {
+        game.clearState()
         itemsVar(generateItemsForGameStart())
         console.log('|----------Game Start-----------|')
         console.log('init items: ', itemsVar())
@@ -129,22 +133,24 @@ export const game: IGame = {
         gameStateVar(GAME_STATE_TYPES.IN_PROGRESS)
         game.id = setInterval(() => {
             const score = Date.now() - startTime
-            // console.log('score: ', score)
-            gameScoreVar(score)
+            gameScoreVar(score + itemsRemovedCountVar() * 1000)
         }, 10)
     },
-    // MAKE CHANGES TO THE CACHE TO TRIGGER RERENDER
     resetCycle: () => {
-        // add a function to cycle through itemsInQueue
-        // increment itemsCorrectCount
-        // check if conditions are met to increment difficulty
         incrementItemsRemovedCount()
+        if (difficultyNeedsIncrement()) {
+            incrementDifficulty()
+        }
+
         const [itemInQueueLast, itemInQueueNext] = itemsVar()
         const removeMe = document.getElementById('in-play')
+        if (!removeMe) {
+            console.log('panic')
+            return
+        }
         removeMe.style.animation = 'none'
-        void removeMe?.offsetWidth
+        void removeMe.offsetWidth
         removeMe.style.animation = ''
-
         itemsVar(
             [].concat([generateItemProps(''), itemInQueueLast, itemInQueueNext])
         )
@@ -155,10 +161,16 @@ export const game: IGame = {
         console.log('|________final score________| ', gameScoreVar())
         // save game score
     },
-    userInputIsCorrect: (userInput: number): boolean => {
-        const items = itemsVar()
-        if (items[2] === undefined) return false
-        const upperCaseItemColor = items[2].color
+    clearState: () => {
+        gameScoreVar(0)
+        itemsRemovedCountVar(0)
+        difficultyVar(0)
+        gameStateVar(GAME_STATE_TYPES.IN_PROGRESS)
+        itemsVar([])
+    },
+    userInputIsCorrect: (userInput: string) => {
+        if (itemsVar()[2] === undefined) return false
+        const upperCaseItemColor = itemsVar()[2].color
         const correctKeycode = COLORS_TO_KEYCODES[upperCaseItemColor]
         return correctKeycode === userInput
     },

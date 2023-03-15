@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 import { MiniItem, generateRandomColor } from '../utils'
@@ -23,7 +23,7 @@ const Row = styled.div`
 `
 
 const PileOfItems = ({ left }: { left: string }) => {
-    let keyMultiplier: number = 0
+    let keyMultiplier = 0
     const populateRow = (numberOfItems: number) => {
         const row = []
         for (let i = 0; i < numberOfItems; i++) {
@@ -43,18 +43,16 @@ const PileOfItems = ({ left }: { left: string }) => {
         )
     }
 
-    const populatePileOfItemsContainer = () => {
+    const pileOfItems = useMemo(() => {
         const rowAccumulator = []
         for (let i = 41; i > 0; i -= 2) {
             rowAccumulator.push(populateRow(i))
         }
         return <>{rowAccumulator.map((row) => row)}</>
-    }
+    }, [])
 
     return (
-        <PileOfItemsContainer left={left}>
-            {populatePileOfItemsContainer()}
-        </PileOfItemsContainer>
+        <PileOfItemsContainer left={left}>{pileOfItems}</PileOfItemsContainer>
     )
 }
 

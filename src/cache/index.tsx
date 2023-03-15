@@ -1,12 +1,6 @@
 import { InMemoryCache, ReactiveVar, makeVar } from '@apollo/client'
 import { GAME_STATE_TYPES, ItemProps } from '../components/inside/utils'
 
-// add a difficulty variable that is tied to the ANIMATION_TIMINGS array
-//     difficulty: number
-//
-//     if a component needs to use a timing based on difficulty
-//     they can use it like so: ANIMATION_TIMINGS[difficulty]
-
 export const cache: InMemoryCache = new InMemoryCache({
     typePolicies: {
         Query: {

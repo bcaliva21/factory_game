@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 import { TinyItem, generateRandomColor } from '../utils'
@@ -96,41 +96,30 @@ const Scaffolding = ({ top, left }: { top: string; left: string }) => {
         )
     }
 
+    const rows = useMemo(() => {
+        const repeat = (times: number) => {
+            const rows = []
+            for (let i = 0; i < times; i += 1) {
+                rows.push(populateRow())
+            }
+            return rows
+        }
+
+        return (
+            <>
+                <ItemsContainer bottom={'6%'}>{repeat(5)}</ItemsContainer>
+                <ItemsContainer bottom={'26%'}>{repeat(5)}</ItemsContainer>
+                <ItemsContainer bottom={'46%'}>{repeat(5)}</ItemsContainer>
+                <ItemsContainer bottom={'66%'}>{repeat(5)}</ItemsContainer>
+                <ItemsContainer bottom={'86%'}>{repeat(2)}</ItemsContainer>
+            </>
+        )
+    }, [])
+
     return (
         <ScaffoldingContainer top={top} left={left}>
             {renderLadderRungs()}
-            <ItemsContainer bottom={'6%'}>
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-            </ItemsContainer>
-            <ItemsContainer bottom={'26%'}>
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-            </ItemsContainer>
-            <ItemsContainer bottom={'46%'}>
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-            </ItemsContainer>
-            <ItemsContainer bottom={'66%'}>
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-                {populateRow()}
-            </ItemsContainer>
-            <ItemsContainer bottom={'86%'}>
-                {populateRow()}
-                {populateRow()}
-            </ItemsContainer>
+            {rows}
             <HorizontalBar bottom={'0'} />
             <RowOnScaffolding />
             <HorizontalBar bottom={'5%'} />

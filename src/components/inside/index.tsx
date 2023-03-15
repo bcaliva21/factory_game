@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_GAME_STATE_IS_INSIDE_AND_ITEMS } from '../../cache/queries'
+import { GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS } from '../../cache/queries'
 import { isInsideVar } from '../../cache/'
 
 // helpers
@@ -13,7 +13,7 @@ import {
     isGameInProgress,
     isGameOver,
     startGame,
-    GAME_STATE_TYPES,
+    convertAnimationTimingToMS,
 } from './utils'
 
 // components
@@ -50,14 +50,6 @@ const Foreground = styled.div`
     align-items: center;
     justify-content: center;
     background: rgb(136, 136, 136);
-    background: linear-gradient(
-        180deg,
-        rgba(136, 136, 136, 0.5004595588235294) 0%,
-        rgba(153, 153, 153, 0.6657256652661064) 25%,
-        rgba(170, 170, 170, 1) 51%,
-        rgba(187, 187, 187, 1) 75%,
-        rgba(204, 204, 204, 1) 100%
-    );
 `
 
 const Midground = styled.div`
@@ -65,10 +57,9 @@ const Midground = styled.div`
     top: 30%;
     width: 100%;
     height: 30%;
-    background: rgb(68, 68, 68);
     background: linear-gradient(
         180deg,
-        rgba(68, 68, 68, 1) 0%,
+        rgba(60, 60, 60, 1) 0%,
         rgba(85, 85, 85, 1) 25%,
         rgba(102, 102, 102, 1) 51%,
         rgba(119, 119, 119, 1) 75%,
@@ -98,7 +89,7 @@ const Backdrop = styled.div`
     position: absolute;
     top: 10%;
     // background-color: #3d3d3d;
-    background-color: lightgrey;
+    background-color: rgba(0, 0, 0, 1);
     display: flex;
     justify-content: center;
 `
@@ -142,32 +133,61 @@ const ResetButton = styled.div`
 `
 
 const Inside = () => {
+    const [intervalId, setIntervalId] = useState<
+        ReturnType<typeof setTimeout> | undefined
+    >(undefined)
     const { data, loading, error } = useQuery(
-        GET_GAME_STATE_IS_INSIDE_AND_ITEMS
+        GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS
     )
     console.log('data: ', data)
-
     if (error) console.log('We need to...')
+    if (loading) console.log('load')
 
-    let isInside = data?.isInside
-    let gameState = data?.gameState
-    let items = data?.items
-    let gameInProgress = isGameInProgress(gameState)
-    let gameIsOver = isGameOver(gameState)
+    const difficulty = data?.difficulty
+    const gameState = data?.gameState
+    const isInside = data?.isInside
+    const items = data?.items
+
+    const gameInProgress: boolean = isGameInProgress(gameState)
+    const gameIsOver: boolean = isGameOver(gameState)
     const resetClick = () => startGame(gameInProgress)
     const handleClose = () => isInsideVar(!isInside)
+    const timeUntilGameOver = convertAnimationTimingToMS(difficulty)
+
+    const killTimingInterval = () => {
+        clearTimeout(intervalId)
+        console.log('killed')
+    }
+
+    const handleKeydownEvent = useCallback((event: KeyboardEvent): void => {
+        const userInput = event.key
+        console.log(userInput)
+        if (game.userInputIsCorrect(userInput)) {
+            game.resetCycle()
+        } else {
+            game.breakCycle()
+        }
+    }, [])
+
+    useEffect(() => {
+        if (intervalId) killTimingInterval()
+
+        if (gameInProgress) {
+            const id = setTimeout(() => {
+                game.breakCycle()
+            }, timeUntilGameOver)
+
+            setIntervalId(id)
+        }
+    }, [items])
 
     useEffect(() => {
         if (gameInProgress) {
-            window.addEventListener('keydown', (event) => {
-                const userInput = event.keyCode
+            window.addEventListener('keydown', handleKeydownEvent, true)
+        }
 
-                if (game.userInputIsCorrect(userInput)) {
-                    game.resetCycle()
-                } else {
-                    game.breakCycle()
-                }
-            })
+        return () => {
+            window.removeEventListener('keydown', handleKeydownEvent, true)
         }
     }, [gameInProgress])
 
@@ -198,15 +218,13 @@ const Inside = () => {
                     <Scaffolding top={'15%'} left={'20%'} />
                     <Scaffolding top={'15%'} left={'0'} />
                     <Scaffolding top={'15%'} left={'40%'} />
-                    <CeilingPipe gameInProgress={gameInProgress} />
+                    <CeilingPipe />
                     <DropArea>
-                        {/* consume the itemProps from cache */}
                         {gameInProgress && (
                             <Item
                                 color={items[2].color}
                                 animation={'drop'}
                                 id={'in-play'}
-                                className={'drop'}
                             />
                         )}
                     </DropArea>

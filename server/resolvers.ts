@@ -7,12 +7,12 @@ type UserQueryInput = {
 }
 
 type AddUserPayload = {
-    name: string,
+    name: string
     email: string
 }
 
 type HighScoreUpdatePayload = {
-    id: number,
+    id: number
     highScore: number
 }
 
@@ -21,37 +21,43 @@ const resolvers = {
         users: async (): Promise<User[]> => {
             return prisma.user.findMany()
         },
-        user: async (_: any, { id }: UserQueryInput): Promise<User | null> => {
+        user: async (
+            _: object,
+            { id }: UserQueryInput
+        ): Promise<User | null> => {
             return prisma.user.findUnique({
                 where: { id },
             })
         },
     },
     Mutation: {
-        async addUser(_: any, { name, email }: AddUserPayload) {
+        async addUser(_: object, { name, email }: AddUserPayload) {
             const user = await prisma.user.create({
                 data: {
                     name,
                     email,
-                    highScore: 0
-                }
+                    highScore: 0,
+                },
             })
 
             return user
         },
-        async updateHighScore(_: any, { id, highScore }: HighScoreUpdatePayload) {
+        async updateHighScore(
+            _: object,
+            { id, highScore }: HighScoreUpdatePayload
+        ) {
             const user = await prisma.user.update({
                 where: {
-                    id
-                }, 
+                    id,
+                },
                 data: {
-                    highScore
-                }
+                    highScore,
+                },
             })
 
             return user
-        }
-    }
+        },
+    },
 }
 
 export default resolvers

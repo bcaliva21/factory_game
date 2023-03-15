@@ -1,5 +1,12 @@
 import React from 'react'
+import { useQuery } from '@apollo/client'
 import styled, { keyframes, css } from 'styled-components'
+
+// queries
+import { GET_DIFFICULTY } from '../../cache/queries'
+
+// helpers
+import { ANIMATION_TIMINGS } from './utils'
 
 import down from '../../assets/arrow-down'
 import left from '../../assets/arrow-left'
@@ -27,7 +34,6 @@ const dropToBelt = keyframes`
 
 const dropItem = css`
     animation: ${dropToBelt} linear;
-    animation-duration: 8s;
     animation-fill-mode: forwards;
 `
 
@@ -37,7 +43,11 @@ const Arrow = styled.svg<{ upOrDown: boolean }>`
     padding-left: ${({ upOrDown }) => (upOrDown ? '8px' : '0')};
 `
 
-const ComposableItem = styled.div<{ color: string; animation: string }>`
+const ComposableItem = styled.div<{
+    color: string
+    animation: string
+    animationDuration: string
+}>`
     position: absolute;
     width: 35px;
     height: 35px;
@@ -46,6 +56,7 @@ const ComposableItem = styled.div<{ color: string; animation: string }>`
     align-items: center;
     justify-content: center;
     ${({ animation }) => animation === 'drop' && dropItem}
+    animation-duration: ${({ animationDuration }) => animationDuration};
 `
 
 const Item = ({
@@ -57,6 +68,14 @@ const Item = ({
     animation: string
     id: string
 }) => {
+    const { data, loading, error } = useQuery(GET_DIFFICULTY)
+
+    if (error) console.log('handle error')
+    if (loading) console.log('still loading...')
+
+    const difficulty = data.difficulty
+    const animationDuration = ANIMATION_TIMINGS[difficulty]
+
     const determineArrowSVG = () => {
         switch (color) {
             case 'green':
@@ -74,6 +93,7 @@ const Item = ({
 
     return (
         <ComposableItem
+            animationDuration={animationDuration}
             id={id}
             color={color}
             animation={animation}
