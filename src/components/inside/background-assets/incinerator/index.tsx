@@ -48,14 +48,13 @@ const ExhaustPipeLeft = styled.div`
 `
 
 const Incinerator = () => {
-
     return (
         <IncineratorContainer>
             <IncineratorRoofDecor />
             <ExhaustPipeRight />
             <ExhaustPipeLeft />
             <IncineratorDoor />
-			<IncineratorDecor />
+            <IncineratorDecor />
         </IncineratorContainer>
     )
 }

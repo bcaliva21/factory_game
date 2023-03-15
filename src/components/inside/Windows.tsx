@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useQuery } from '@apollo/client'
-import { TEST_QUERY } from '../../cache/queries'
 
 const WindowsContainer = styled.div`
     height: 20%;
@@ -12,7 +10,7 @@ const WindowsContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
-	z-index: 1;
+    z-index: 1;
 `
 
 const Window = styled.div`
@@ -24,10 +22,8 @@ const Window = styled.div`
 `
 
 const Windows = () => {
-    const { data } = useQuery(TEST_QUERY)
-    console.log('data: ', data)
 
-    return(
+    return (
         <WindowsContainer>
             <Window />
             <Window />
