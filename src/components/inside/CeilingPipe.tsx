@@ -115,13 +115,13 @@ const PipeWindow = styled.div`
     justify-content: center;
 `
 
-const CeilingPipe = ({ gameInProgress }: { gameInProgress: boolean }) => {
+const CeilingPipe = () => {
     const { data, error, loading } = useQuery(GET_ITEMS)
 
     if (error) console.log('oops, there is an error')
     if (loading) console.log('sorry, still loading')
 
-    const [itemInQueueLast, itemInQueueNext] = data.items
+    const items = data.items
     return (
         <>
             <VerticalPipingContainer>
@@ -131,21 +131,23 @@ const CeilingPipe = ({ gameInProgress }: { gameInProgress: boolean }) => {
                 <PipeSectionExtentionReversed />
             </VerticalPipingContainer>
             <PipeContainer>
-                {gameInProgress ? (
+                {items.length > 0 ? (
                     <>
                         <PipeSection>
                             <PipeWindow>
                                 <Item
-                                    color={itemInQueueLast.color}
-                                    animation={itemInQueueLast.animation}
+                                    color={items[0].color}
+                                    animation={items[0].animation}
+                                    id={'none'}
                                 />
                             </PipeWindow>
                         </PipeSection>
                         <PipeSection>
                             <PipeWindow>
                                 <Item
-                                    color={itemInQueueNext.color}
-                                    animation={itemInQueueNext.animation}
+                                    color={items[1].color}
+                                    animation={items[1].animation}
+                                    id={'none'}
                                 />
                             </PipeWindow>
                         </PipeSection>

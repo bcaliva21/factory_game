@@ -22,7 +22,6 @@ const Window = styled.div`
 `
 
 const Windows = () => {
-
     return (
         <WindowsContainer>
             <Window />

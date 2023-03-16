@@ -16,7 +16,7 @@ type AddUserPayload = {
 }
 
 type HighScoreUpdatePayload = {
-    id: number,
+    id: number
     highScore: number
 }
 
@@ -25,7 +25,10 @@ const resolvers = {
         users: async (): Promise<User[]> => {
             return prisma.user.findMany()
         },
-        user: async (_: object, { id }: UserQueryInput): Promise<User | null> => {
+        user: async (
+            _: object,
+            { id }: UserQueryInput
+        ): Promise<User | null> => {
             return prisma.user.findUnique({
                 where: { id },
             })
@@ -54,19 +57,22 @@ const resolvers = {
 
             return { token }
         },
-        async updateHighScore(_: object, { id, highScore }: HighScoreUpdatePayload) {
+        async updateHighScore(
+            _: object,
+            { id, highScore }: HighScoreUpdatePayload
+        ) {
             const user = await prisma.user.update({
                 where: {
-                    id
+                    id,
                 },
                 data: {
-                    highScore
-                }
+                    highScore,
+                },
             })
 
             return user
         },
-        async login(_: object, { email, password }: any) {
+        async login(_: object, { email, password }: AddUserPayload) {
             const user = await prisma.user.findUnique({ where: { email } })
 
             if (!user) {

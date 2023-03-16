@@ -51,16 +51,11 @@ export const LOGIN_MUTATION = gql`
   }
 `;
 
-export const GET_GAME_STATE_IS_INSIDE_AND_ITEMS = gql`
-    query GetGameStateIsInsideAndItems {
+export const GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS = gql`
+    query GetDifficultyGameStateIsInsideAndItems {
+        difficulty @client
         isInside @client
         items @client
         gameState @client
-        users {
-            email
-            highScore
-            id
-            name
-        }
     }
 `

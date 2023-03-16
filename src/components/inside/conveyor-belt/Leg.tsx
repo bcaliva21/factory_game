@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { useQuery } from '@apollo/client'
 
@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/client'
 import { GET_GAME_SCORE_AND_GAME_STATE } from '../../../cache/queries'
 
 // helpers
-import { game, isGameInProgress, startGame } from '../utils'
+import { isGameInProgress, startGame } from '../utils'
 
 // svg
 import power from '../../../assets/power-btn'
@@ -71,48 +71,48 @@ const blinkRed = keyframes`
     }
 `
 
-const BlinkingLightGreen = styled.div`
-    width: 7%;
-    height: 5%;
-    background-color: black;
-    position: absolute;
-    bottom: 10%;
-    right: 20%;
-    border: 1px solid #001f3a;
-    border-radius: 5%;
-    // animation: ${blinkGreen} infinite;
-    // animation-duration: 1s;
-`
+// const BlinkingLightGreen = styled.div`
+//     width: 7%;
+//     height: 5%;
+//     background-color: black;
+//     position: absolute;
+//     bottom: 10%;
+//     right: 20%;
+//     border: 1px solid #001f3a;
+//     border-radius: 5%;
+//     // animation: ${blinkGreen} infinite;
+//     // animation-duration: 1s;
+// `
 
-const BlinkingLightYellow = styled.div`
-    width: 7%;
-    height: 5%;
-    background-color: black;
-    position: absolute;
-    bottom: 10%;
-    right: 30%;
-    border: 1px solid #001f3a;
-    border-radius: 5%;
-    // animation: ${blinkYellow} infinite;
-    // animation-duration: 1.5s;
-`
+// const BlinkingLightYellow = styled.div`
+//     width: 7%;
+//     height: 5%;
+//     background-color: black;
+//     position: absolute;
+//     bottom: 10%;
+//     right: 30%;
+//     border: 1px solid #001f3a;
+//     border-radius: 5%;
+//     // animation: ${blinkYellow} infinite;
+//     // animation-duration: 1.5s;
+// `
 
-const BlinkingLightRed = styled.div`
-    width: 7%;
-    height: 5%;
-    background-color: black;
-    position: absolute;
-    bottom: 10%;
-    right: 9%;
-    border: 1px solid #001f3a;
-    border-radius: 5%;
-    // animation: ${blinkRed} infinite;
-    // animation-duration: 1.5s;
-`
+// const BlinkingLightRed = styled.div`
+//     width: 7%;
+//     height: 5%;
+//     background-color: black;
+//     position: absolute;
+//     bottom: 10%;
+//     right: 9%;
+//     border: 1px solid #001f3a;
+//     border-radius: 5%;
+//     // animation: ${blinkRed} infinite;
+//     // animation-duration: 1.5s;
+// `
 
 const LeftLeg = styled.div`
     position: absolute;
-    background-color: grey;
+    background-color: #4d4d4d;
     width: 10%;
     height: 160%;
     left: 0;
@@ -122,7 +122,7 @@ const LeftLeg = styled.div`
 
 const RightLeg = styled.div`
     position: absolute;
-    background-color: grey;
+    background-color: #4d4d4d;
     width: 10%;
     height: 120%;
     right: 0;
@@ -174,13 +174,6 @@ const PowerButton = styled.svg<{ gameInProgress: boolean }>`
     &: hover {
         cursor: pointer;
     }
-`
-
-const CaseLine = styled.div`
-    width: 98%;
-    position: absolute;
-    bottom: 25%;
-    border: 3px solid black;
 `
 
 const ScoreContainer = styled.div`

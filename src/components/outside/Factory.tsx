@@ -41,17 +41,6 @@ const WindowContainer = styled.div`
     justify-content: space-evenly;
 `
 
-const DoorText = styled.div`
-    width: 50%;
-    height 30%;
-    background-color: transparent;
-    color: transparent;
-    position: absolute;
-    top: 25%;
-    left: calc(100vw / 30);
-    transition: 0.5s ease-in-out;
-`
-
 const FactoryWindow = styled.div`
     height: 100%;
     width: 10%;
