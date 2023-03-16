@@ -35,15 +35,13 @@ function App() {
     }
 
     return (
-        <>
-            <Game>
-                {
-                    isInside
-                        ? <Inside />
-                        : <Outside />
-                }
-            </Game>
-        </>
+        <Game>
+            {
+                isInside
+                    ? <Inside />
+                    : <Outside />
+            }
+        </Game>
     )
 }
 
