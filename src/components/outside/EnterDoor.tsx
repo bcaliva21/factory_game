@@ -212,10 +212,41 @@ const HorizontalBot = styled.div`
     border: 8px solid black;
 `
 
+const DoorBarLock = styled.div`
+	position: absolute;
+	top: 40%;
+	height: 20px;
+	width: 112%;
+	background-color: black;
+	z-index: 50;
+`
+
+const DoorToBuildingAttachmentLeft = styled.div`
+	height: 160%;
+	width: 10px;
+	background-color: red;
+	position: absolute;
+	left: -4%;
+	top: -30%;
+`
+
+const DoorToBuildingAttachmentRight = styled.div`
+	height: 160%;
+	width: 10px;
+	background-color: red;
+	position: absolute;
+	right: -4%; 
+	top: -30%;
+`
+
 const EnterDoor = ({ handleEnter }: { handleEnter: () => void }) => {
     return (
         <EnterDoorContainer>
             <DoorFrame onClick={handleEnter}>
+				<DoorBarLock >
+					<DoorToBuildingAttachmentLeft />
+					<DoorToBuildingAttachmentRight />
+				</DoorBarLock >
                 <InsideMiddle />
                 <InsideTop />
                 <InsideBot />
