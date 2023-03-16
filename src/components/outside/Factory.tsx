@@ -173,7 +173,7 @@ const Placard = styled.div`
     font-size: larger;
     padding: 0.5% 1.5%;
     bottom: 20.5vh;
-    right: 8vw;
+    right: 7vw;
 `
 
 const Factory = () => {
