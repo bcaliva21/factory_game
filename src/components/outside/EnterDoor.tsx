@@ -95,20 +95,18 @@ const InsideBot = styled.div`
     display: none;
 `
 
-const DoorFrame = styled.div`
-    position: absolute;
-    bottom: 0;
-    left: 10%;
-    width: 80%;
-    height: 60%;
-    border: 2px solid black;
-    border-bottom: none;
-    background-color: #ffd700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+const LoginOrSignup = styled.div`
+	width: 100%;
+	margin-top: 5%;
+	height: 100%;
+	z-index: 50;
+	opacity: 0.5;
+	display: none;
+	flex-direction: column;
+`
 
-    &:hover {
+const hoverMagic = css`
+	    &:hover {
         cursor: pointer;
         ${LeftDoor} {
             display: block;
@@ -129,7 +127,31 @@ const DoorFrame = styled.div`
             display: block;
         }
     }
+
 `
+
+const loginSetup = css`
+	&:hover {
+		${LoginOrSignup} {
+			display: flex;
+		}
+	}
+`
+
+const DoorFrame = styled.div<{ hasAuth: boolean }>`
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 100%;
+    height: 80%;
+    border: 2px solid black;
+    border-bottom: none;
+    background-color: #ffd700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	${({ hasAuth }) => hasAuth ? hoverMagic : loginSetup }
+ `
 
 const KnobCase = styled.div`
     width: 40%;
@@ -215,7 +237,7 @@ const HorizontalBot = styled.div`
 const DoorBarLock = styled.div`
     position: absolute;
     top: 40%;
-    height: 20px;
+    height: 30px;
     width: 112%;
     background-color: black;
     z-index: 50;
@@ -239,7 +261,35 @@ const DoorToBuildingAttachmentRight = styled.div`
     top: -30%;
 `
 
+
+const Barrier = styled.div`
+	height: 30%;
+	width: 100%;
+`
+
+const ActionContainer = styled.div`
+	width: 100%;
+	height: 30%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+`
+
+const DoorButton = styled.button`
+	width: 79%;
+	height: 80%;
+	&:hover {
+		cursor: pointer;
+	}
+	color: white;
+	font-size: 16px;
+	background-color: transparent;
+	border: none;
+`
+
 const EnterDoor = ({ handleEnter }: { handleEnter: () => void }) => {
+	const userHasAuth = false
 	// const userHasAuth: boolean = someMagicFromApollo() 
     // if (userHasAuth) {
     // 	disable onMouseEnter
@@ -254,9 +304,23 @@ const EnterDoor = ({ handleEnter }: { handleEnter: () => void }) => {
     return (
         <EnterDoorContainer>
             <DoorFrame
-                onClick={handleEnter}
-                onMouseEnter={() => console.log('onMouseEnter')}
+				hasAuth={userHasAuth}
+				onClick={() => userHasAuth ? handleEnter : () => console.log('no auth')}
+				onMouseEnter={() => userHasAuth ? console.log('click to enter signup') : console.log('has auth')}
             >
+		<LoginOrSignup >
+			<ActionContainer>
+				<DoorButton>
+					Login
+				</DoorButton>
+			</ActionContainer>
+			<Barrier />
+			<ActionContainer>
+				<DoorButton>
+					Signup
+				</DoorButton>
+			</ActionContainer>
+		</LoginOrSignup >
                 <DoorBarLock>
                     <DoorToBuildingAttachmentLeft />
                     <DoorToBuildingAttachmentRight />
