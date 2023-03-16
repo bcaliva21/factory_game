@@ -2,14 +2,17 @@ import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { LOGIN_MUTATION } from '../../cache/queries'
 
-const Login = () => {
+interface LoginProps {
+    setToken: (token: string) => void;
+}
+
+const Login = ({ setToken }: LoginProps) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
         onCompleted: ({ login }) => {
-            // Save the JWT token to a cookie or other persistent storage
-            document.cookie = `jwt=${login.token}`
+            setToken(login.token)
         },
     })
 
