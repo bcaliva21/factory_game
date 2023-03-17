@@ -3,6 +3,7 @@ export const typeDefs = `
         id: Int!
         name: String!
         email: String!
+        password: String!
         highScore: Int!
     }    
 
@@ -12,7 +13,12 @@ export const typeDefs = `
     }
 
     type Mutation {
-        addUser(name: String, email: String): User
         updateHighScore(id: Int!, highScore: Int): User
+        login(email: String!, password: String!): AuthPayload!
+        signUp(name: String, email: String, password: String!): AuthPayload!
+    }
+
+    type AuthPayload {
+        token: String!
     }
 `

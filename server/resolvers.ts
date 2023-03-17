@@ -1,4 +1,7 @@
 import { PrismaClient, User } from '@prisma/client'
+import jwt from 'jsonwebtoken'
+import pkg from 'bcryptjs'
+const { compare } = pkg
 
 const prisma = new PrismaClient()
 
@@ -7,8 +10,9 @@ type UserQueryInput = {
 }
 
 type AddUserPayload = {
-    name: string
-    email: string
+    name: string,
+    email: string,
+    password: string
 }
 
 type HighScoreUpdatePayload = {
@@ -31,16 +35,27 @@ const resolvers = {
         },
     },
     Mutation: {
-        async addUser(_: object, { name, email }: AddUserPayload) {
-            const user = await prisma.user.create({
+        async signUp(_: object, { name, email, password }: AddUserPayload) {
+            const userWithMatchingEmail = await prisma.user.findUnique({ where: { email } })
+
+            if (userWithMatchingEmail) {
+                throw new Error('email already exists, try logging in')
+            }
+
+            const newUser = await prisma.user.create({
                 data: {
                     name,
                     email,
                     highScore: 0,
-                },
+                    password
+                }
             })
 
-            return user
+            const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET!, {
+                expiresIn: process.env.JWT_EXPIRES_IN,
+            })
+
+            return { token }
         },
         async updateHighScore(
             _: object,
@@ -57,7 +72,27 @@ const resolvers = {
 
             return user
         },
-    },
+        async login(_: object, { email, password }: AddUserPayload) {
+            const user = await prisma.user.findUnique({ where: { email } })
+
+            if (!user) {
+                throw new Error('Invalid email or password')
+            }
+
+            // TODO: use bcrypt compare when SSL is added
+            const passwordMatch = password === user.password
+
+            if (!passwordMatch) {
+                throw new Error('Invalid email or password')
+            }
+
+            const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
+                expiresIn: process.env.JWT_EXPIRES_IN,
+            })
+
+            return { token }
+        }
+    }
 }
 
 export default resolvers
