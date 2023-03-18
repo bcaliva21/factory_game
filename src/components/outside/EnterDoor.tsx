@@ -65,7 +65,7 @@ const InsideMiddle = styled.div`
     background-color: black;
     position: absolute;
     left: 40%;
-    z-index: 100;
+    z-index: 40;
     display: none;
 `
 
@@ -78,7 +78,7 @@ const InsideTop = styled.div`
     border-bottom: calc(100vw / 180) solid black;
     border-top: calc(100vw / 180) solid transparent;
     transform: rotate(180deg);
-    z-index: 100;
+    z-index: 40;
     display: none;
 `
 
@@ -91,7 +91,7 @@ const InsideBot = styled.div`
     border-bottom: calc(100vw / 160) solid black;
     border-top: calc(100vw / 160) solid transparent;
     transform: scaleX(-1);
-    z-index: 100;
+    z-index: 40;
     display: none;
 `
 
@@ -99,13 +99,14 @@ const LoginOrSignup = styled.div`
 	width: 100%;
 	margin-top: 5%;
 	height: 100%;
-	z-index: 50;
-	opacity: 0.5;
+    background-color: transparent;
 	display: none;
 	flex-direction: column;
+    z-index: 101;
+    position: absolute;
 `
 
-const hoverMagic = css`
+const openDoor = css`
 	    &:hover {
         cursor: pointer;
         ${LeftDoor} {
@@ -150,7 +151,7 @@ const DoorFrame = styled.div<{ hasAuth: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
-	${({ hasAuth }) => hasAuth ? hoverMagic : loginSetup }
+	${({ hasAuth }) => hasAuth ? openDoor : loginSetup}
  `
 
 const KnobCase = styled.div`
@@ -217,7 +218,7 @@ const VerticalLine = styled.div<{ right?: string; left?: string }>`
     border: 2px solid black;
     ${({ right }) => right && adjustRight}
     ${({ left }) => left && adjustLeft}
-    z-index: 200;
+    z-index: 50;
 `
 
 const HorizontalTop = styled.div`
@@ -246,7 +247,7 @@ const DoorBarLock = styled.div`
 const DoorToBuildingAttachmentLeft = styled.div`
     height: 160%;
     width: 10px;
-    background-color: red;
+    background-color: #901000;
     position: absolute;
     left: -4%;
     top: -30%;
@@ -255,21 +256,15 @@ const DoorToBuildingAttachmentLeft = styled.div`
 const DoorToBuildingAttachmentRight = styled.div`
     height: 160%;
     width: 10px;
-    background-color: red;
+    background-color: #901000;
     position: absolute;
     right: -4%;
     top: -30%;
 `
 
-
-const Barrier = styled.div`
-	height: 30%;
-	width: 100%;
-`
-
 const ActionContainer = styled.div`
 	width: 100%;
-	height: 30%;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -278,49 +273,25 @@ const ActionContainer = styled.div`
 
 const DoorButton = styled.button`
 	width: 79%;
-	height: 80%;
+	height: 20%;
 	&:hover {
 		cursor: pointer;
 	}
-	color: white;
+	color: red;
 	font-size: 16px;
-	background-color: transparent;
+	background-color: yellow;
 	border: none;
+    z-index: 102;
 `
 
-const EnterDoor = ({ handleEnter }: { handleEnter: () => void }) => {
-	const userHasAuth = false
-	// const userHasAuth: boolean = someMagicFromApollo() 
-    // if (userHasAuth) {
-    // 	disable onMouseEnter
-    // 	enable onClick
-    // }
-
-    // if (!userHasNoAuth) {
-    // 	disbable onClick
-    // 	enable onMouseEnter
-    // }
-
+const EnterDoor = ({ handleEnter, handleSignInUp, hasToken }: { hasToken: boolean; handleEnter: () => void; handleSignInUp: () => void }) => {
+    console.log(handleEnter)
     return (
         <EnterDoorContainer>
             <DoorFrame
-				hasAuth={userHasAuth}
-				onClick={() => userHasAuth ? handleEnter : () => console.log('no auth')}
-				onMouseEnter={() => userHasAuth ? console.log('click to enter signup') : console.log('has auth')}
+                hasAuth={hasToken}
+                onClick={() => false && handleEnter()}
             >
-		<LoginOrSignup >
-			<ActionContainer>
-				<DoorButton>
-					Login
-				</DoorButton>
-			</ActionContainer>
-			<Barrier />
-			<ActionContainer>
-				<DoorButton>
-					Signup
-				</DoorButton>
-			</ActionContainer>
-		</LoginOrSignup >
                 <DoorBarLock>
                     <DoorToBuildingAttachmentLeft />
                     <DoorToBuildingAttachmentRight />
@@ -328,6 +299,13 @@ const EnterDoor = ({ handleEnter }: { handleEnter: () => void }) => {
                 <InsideMiddle />
                 <InsideTop />
                 <InsideBot />
+                <LoginOrSignup >
+                    <ActionContainer>
+                        <DoorButton onClick={handleSignInUp}>
+                            Signin/Signup
+                        </DoorButton>
+                    </ActionContainer>
+                </LoginOrSignup >
                 <LeftDoorMask />
                 <LeftDoor>
                     <LeftDoorVerticalLine />
