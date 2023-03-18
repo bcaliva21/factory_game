@@ -290,7 +290,7 @@ const EnterDoor = ({ handleEnter, handleSignInUp, hasToken }: { hasToken: boolea
         <EnterDoorContainer>
             <DoorFrame
                 hasAuth={hasToken}
-                onClick={() => false && handleEnter()}
+                onClick={() => hasToken && handleEnter()}
             >
                 <DoorBarLock>
                     <DoorToBuildingAttachmentLeft />
