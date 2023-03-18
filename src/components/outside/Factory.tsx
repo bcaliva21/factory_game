@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components'
 // components
 import Worker from './Worker'
 import EnterDoor from './EnterDoor'
-import Login from '../login'
+import Access from '../access'
 
 // cache
 import { GET_FACTORY_VARIABLES } from '../../cache/queries'
@@ -190,14 +190,14 @@ const Factory = () => {
     const registerOrSignIn = data.registerOrSignIn
 
     const handleDoorClick = () => isInsideVar(!isInside)
-    const handleSignInUpClick = () => registerOrSignInVar(!registerOrSignIn)
+    const handleAccessClick = () => registerOrSignInVar(!registerOrSignIn)
 
     return (
         <FactoryContainer>
             <FactoryBody>
                 {registerOrSignIn ? (
                     <>
-                        <Login setToken={setToken} />
+                        <Access setToken={setToken} />
                     </>
                 ) : (
                     <>
@@ -219,8 +219,8 @@ const Factory = () => {
                             <OneSecDelaySmoke />
                         </FactoryRoofStackTwo>
                         <FactoryRoofSection />
-                        <FactoryRoofSection />
-                        <FactoryRoofSection />
+					<FactoryRoofSection />
+					<FactoryRoofSection />
                         <FactoryRoofSection />
                         <FactoryRoofSection />
                         <WindowContainer>
@@ -234,7 +234,7 @@ const Factory = () => {
                         <EnterDoor
                             hasToken={!!token}
                             handleEnter={handleDoorClick}
-                            handleSignInUp={handleSignInUpClick}
+                            handleSignInUp={handleAccessClick}
                         />
                     </>
                 )}

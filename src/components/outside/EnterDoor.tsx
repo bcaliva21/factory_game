@@ -95,7 +95,7 @@ const InsideBot = styled.div`
     display: none;
 `
 
-const LoginOrSignup = styled.div`
+const AccessContainer = styled.div`
     width: 100%;
     margin-top: 5%;
     height: 100%;
@@ -130,9 +130,9 @@ const openDoor = css`
     }
 `
 
-const loginSetup = css`
+const access = css`
     &:hover {
-        ${LoginOrSignup} {
+        ${AccessContainer} {
             display: flex;
         }
     }
@@ -150,7 +150,7 @@ const DoorFrame = styled.div<{ hasAuth: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
-    ${({ hasAuth }) => (hasAuth ? openDoor : loginSetup)}
+    ${({ hasAuth }) => (hasAuth ? openDoor : access)}
 `
 
 const KnobCase = styled.div`
@@ -306,13 +306,13 @@ const EnterDoor = ({
                 <InsideMiddle />
                 <InsideTop />
                 <InsideBot />
-                <LoginOrSignup>
+                <AccessContainer>
                     <ActionContainer>
                         <DoorButton onClick={handleSignInUp}>
                             Signin/Signup
                         </DoorButton>
                     </ActionContainer>
-                </LoginOrSignup>
+                </AccessContainer>
                 <LeftDoorMask />
                 <LeftDoor>
                     <LeftDoorVerticalLine />
