@@ -1,5 +1,11 @@
 import { gql } from '@apollo/client'
 
+export const GET_FACTORY_VARIABLES = gql`
+    query GetFactoryVariables {
+        isInside @client
+        registerOrSignIn @client
+    }
+`
 export const GET_DIFFICULTY = gql`
     query GetDifficulty {
         difficulty @client
