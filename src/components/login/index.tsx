@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { LOGIN_MUTATION } from '../../cache/queries'
+import { registerOrSignInVar } from '../../cache'
 
 interface LoginProps {
     setToken: (token: string) => void;
@@ -24,6 +25,7 @@ const Login = ({ setToken }: LoginProps) => {
         })
     }
 
+    const handleSignInUpClick = () => registerOrSignInVar(!registerOrSignInVar())
     return (
         <form onSubmit={handleSubmit}>
             <input
@@ -38,6 +40,9 @@ const Login = ({ setToken }: LoginProps) => {
             />
             <button type="submit" disabled={loading}>
                 {loading ? 'Logging in...' : 'Log in'}
+            </button>
+            <button onClick={handleSignInUpClick}>
+                back
             </button>
             {error && <p>{error.message}</p>}
         </form>
