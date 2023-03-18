@@ -35,6 +35,11 @@ export const cache: InMemoryCache = new InMemoryCache({
                         return itemsVar()
                     },
                 },
+                registerOrSignIn: {
+                    read() {
+                        return registerOrSignInVar()
+                    },
+                },
             },
         },
     },
@@ -42,6 +47,7 @@ export const cache: InMemoryCache = new InMemoryCache({
 
 // init values
 const isInsideVarIntialValue = false
+const registerOrSignInVarInitialValue = false
 const gameStateVarInitialValue = GAME_STATE_TYPES.NOT_STARTED
 const gameScoreVarInitialValue = 0
 const difficultyVarInitialValue = 0
@@ -65,3 +71,7 @@ export const itemsRemovedCountVar: ReactiveVar<number> = makeVar<number>(
 )
 export const itemsVar: ReactiveVar<ItemProps[]> =
     makeVar<ItemProps[]>(itemsVarInitialValue)
+
+export const registerOrSignInVar: ReactiveVar<boolean> = makeVar<boolean>(
+    registerOrSignInVarInitialValue
+)
