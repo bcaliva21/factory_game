@@ -3,11 +3,11 @@ import { useMutation } from '@apollo/client'
 import { LOGIN_MUTATION } from '../../cache/queries'
 import { registerOrSignInVar } from '../../cache'
 
-interface LoginProps {
+interface AccessProps {
     setToken: (token: string) => void
 }
 
-const Login = ({ setToken }: LoginProps) => {
+const Access = ({ setToken }: AccessProps) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
@@ -25,7 +25,7 @@ const Login = ({ setToken }: LoginProps) => {
         })
     }
 
-    const handleSignInUpClick = () =>
+    const handleAccessClick = () =>
         registerOrSignInVar(!registerOrSignInVar())
     return (
         <form onSubmit={handleSubmit}>
@@ -42,10 +42,10 @@ const Login = ({ setToken }: LoginProps) => {
             <button type="submit" disabled={loading}>
                 {loading ? 'Logging in...' : 'Log in'}
             </button>
-            <button onClick={handleSignInUpClick}>back</button>
+            <button onClick={handleAccessClick}>back</button>
             {error && <p>{error.message}</p>}
         </form>
     )
 }
 
-export default Login
+export default Access 
