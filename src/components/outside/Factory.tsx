@@ -180,7 +180,7 @@ const Placard = styled.div`
 `
 
 const Factory = () => {
-    const { token, setToken } = useToken();
+    const { token, setToken } = useToken()
     const { data, loading, error } = useQuery(GET_FACTORY_VARIABLES)
 
     if (loading) console.log('what to do...')
@@ -195,47 +195,49 @@ const Factory = () => {
     return (
         <FactoryContainer>
             <FactoryBody>
-                {
-                    registerOrSignIn
-                        ?
-                        <>
-                            <Login setToken={setToken} />
-                        </>
-                        :
-                        <>
-                            <Placard>Bradley's Component Factory</Placard>
-                            <FactoryRoofStackOne>
-                                <DramaticSmoke />
-                                <SlowestSmoke />
-                                <SlowSmoke />
-                                <NoDelaySmoke />
-                                <HalfSecDelaySmoke />
-                                <OneSecDelaySmoke />
-                            </FactoryRoofStackOne>
-                            <FactoryRoofStackTwo>
-                                <DramaticSmoke />
-                                <SlowestSmoke />
-                                <SlowSmoke />
-                                <NoDelaySmoke />
-                                <HalfSecDelaySmoke />
-                                <OneSecDelaySmoke />
-                            </FactoryRoofStackTwo>
-                            <FactoryRoofSection />
-                            <FactoryRoofSection />
-                            <FactoryRoofSection />
-                            <FactoryRoofSection />
-                            <FactoryRoofSection />
-                            <WindowContainer>
-                                <FactoryWindow>
-                                    <Worker />
-                                </FactoryWindow>
-                                <FactoryWindow />
-                                <FactoryWindow />
-                                <FactoryWindow />
-                            </WindowContainer>
-                            <EnterDoor hasToken={!!token} handleEnter={handleDoorClick} handleSignInUp={handleSignInUpClick} />
-                        </>
-                }
+                {registerOrSignIn ? (
+                    <>
+                        <Login setToken={setToken} />
+                    </>
+                ) : (
+                    <>
+                        <Placard>Bradley's Component Factory</Placard>
+                        <FactoryRoofStackOne>
+                            <DramaticSmoke />
+                            <SlowestSmoke />
+                            <SlowSmoke />
+                            <NoDelaySmoke />
+                            <HalfSecDelaySmoke />
+                            <OneSecDelaySmoke />
+                        </FactoryRoofStackOne>
+                        <FactoryRoofStackTwo>
+                            <DramaticSmoke />
+                            <SlowestSmoke />
+                            <SlowSmoke />
+                            <NoDelaySmoke />
+                            <HalfSecDelaySmoke />
+                            <OneSecDelaySmoke />
+                        </FactoryRoofStackTwo>
+                        <FactoryRoofSection />
+                        <FactoryRoofSection />
+                        <FactoryRoofSection />
+                        <FactoryRoofSection />
+                        <FactoryRoofSection />
+                        <WindowContainer>
+                            <FactoryWindow>
+                                <Worker />
+                            </FactoryWindow>
+                            <FactoryWindow />
+                            <FactoryWindow />
+                            <FactoryWindow />
+                        </WindowContainer>
+                        <EnterDoor
+                            hasToken={!!token}
+                            handleEnter={handleDoorClick}
+                            handleSignInUp={handleSignInUpClick}
+                        />
+                    </>
+                )}
             </FactoryBody>
         </FactoryContainer>
     )

@@ -10,8 +10,8 @@ type UserQueryInput = {
 }
 
 type AddUserPayload = {
-    name: string,
-    email: string,
+    name: string
+    email: string
     password: string
 }
 
@@ -36,7 +36,9 @@ const resolvers = {
     },
     Mutation: {
         async signUp(_: object, { name, email, password }: AddUserPayload) {
-            const userWithMatchingEmail = await prisma.user.findUnique({ where: { email } })
+            const userWithMatchingEmail = await prisma.user.findUnique({
+                where: { email },
+            })
 
             if (userWithMatchingEmail) {
                 throw new Error('email already exists, try logging in')
@@ -47,13 +49,17 @@ const resolvers = {
                     name,
                     email,
                     highScore: 0,
-                    password
-                }
+                    password,
+                },
             })
 
-            const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET!, {
-                expiresIn: process.env.JWT_EXPIRES_IN,
-            })
+            const token = jwt.sign(
+                { userId: newUser.id },
+                process.env.JWT_SECRET!,
+                {
+                    expiresIn: process.env.JWT_EXPIRES_IN,
+                }
+            )
 
             return { token }
         },
@@ -86,13 +92,17 @@ const resolvers = {
                 throw new Error('Invalid email or password')
             }
 
-            const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET!, {
-                expiresIn: process.env.JWT_EXPIRES_IN,
-            })
+            const token = jwt.sign(
+                { userId: user.id },
+                process.env.JWT_SECRET!,
+                {
+                    expiresIn: process.env.JWT_EXPIRES_IN,
+                }
+            )
 
             return { token }
-        }
-    }
+        },
+    },
 }
 
 export default resolvers

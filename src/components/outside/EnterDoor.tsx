@@ -96,18 +96,18 @@ const InsideBot = styled.div`
 `
 
 const LoginOrSignup = styled.div`
-	width: 100%;
-	margin-top: 5%;
-	height: 100%;
+    width: 100%;
+    margin-top: 5%;
+    height: 100%;
     background-color: transparent;
-	display: none;
-	flex-direction: column;
+    display: none;
+    flex-direction: column;
     z-index: 101;
     position: absolute;
 `
 
 const openDoor = css`
-	    &:hover {
+    &:hover {
         cursor: pointer;
         ${LeftDoor} {
             display: block;
@@ -128,15 +128,14 @@ const openDoor = css`
             display: block;
         }
     }
-
 `
 
 const loginSetup = css`
-	&:hover {
-		${LoginOrSignup} {
-			display: flex;
-		}
-	}
+    &:hover {
+        ${LoginOrSignup} {
+            display: flex;
+        }
+    }
 `
 
 const DoorFrame = styled.div<{ hasAuth: boolean }>`
@@ -151,8 +150,8 @@ const DoorFrame = styled.div<{ hasAuth: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
-	${({ hasAuth }) => hasAuth ? openDoor : loginSetup}
- `
+    ${({ hasAuth }) => (hasAuth ? openDoor : loginSetup)}
+`
 
 const KnobCase = styled.div`
     width: 40%;
@@ -263,28 +262,36 @@ const DoorToBuildingAttachmentRight = styled.div`
 `
 
 const ActionContainer = styled.div`
-	width: 100%;
-	height: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 `
 
 const DoorButton = styled.button`
-	width: 79%;
-	height: 20%;
-	&:hover {
-		cursor: pointer;
-	}
-	color: red;
-	font-size: 16px;
-	background-color: yellow;
-	border: none;
+    width: 79%;
+    height: 20%;
+    &:hover {
+        cursor: pointer;
+    }
+    color: red;
+    font-size: 16px;
+    background-color: yellow;
+    border: none;
     z-index: 102;
 `
 
-const EnterDoor = ({ handleEnter, handleSignInUp, hasToken }: { hasToken: boolean; handleEnter: () => void; handleSignInUp: () => void }) => {
+const EnterDoor = ({
+    handleEnter,
+    handleSignInUp,
+    hasToken,
+}: {
+    hasToken: boolean
+    handleEnter: () => void
+    handleSignInUp: () => void
+}) => {
     console.log(handleEnter)
     return (
         <EnterDoorContainer>
@@ -299,13 +306,13 @@ const EnterDoor = ({ handleEnter, handleSignInUp, hasToken }: { hasToken: boolea
                 <InsideMiddle />
                 <InsideTop />
                 <InsideBot />
-                <LoginOrSignup >
+                <LoginOrSignup>
                     <ActionContainer>
                         <DoorButton onClick={handleSignInUp}>
                             Signin/Signup
                         </DoorButton>
                     </ActionContainer>
-                </LoginOrSignup >
+                </LoginOrSignup>
                 <LeftDoorMask />
                 <LeftDoor>
                     <LeftDoorVerticalLine />

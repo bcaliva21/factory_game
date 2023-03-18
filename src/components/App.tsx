@@ -26,15 +26,7 @@ function App() {
 
     const isInside = data.isInside
 
-    return (
-        <Game>
-            {
-                isInside
-                    ? <Inside />
-                    : <Outside />
-            }
-        </Game>
-    )
+    return <Game>{isInside ? <Inside /> : <Outside />}</Game>
 }
 
 export default App
