@@ -285,14 +285,13 @@ const DoorButton = styled.button`
 
 const EnterDoor = ({
     handleEnter,
-    handleSignInUp,
+    handleAccess,
     hasToken,
 }: {
     hasToken: boolean
     handleEnter: () => void
-    handleSignInUp: () => void
+    handleAccess: () => void
 }) => {
-    console.log(handleEnter)
     return (
         <EnterDoorContainer>
             <DoorFrame
@@ -308,8 +307,8 @@ const EnterDoor = ({
                 <InsideBot />
                 <AccessContainer>
                     <ActionContainer>
-                        <DoorButton onClick={handleSignInUp}>
-                            Signin/Signup
+                        <DoorButton onClick={handleAccess}>
+							Login/Register
                         </DoorButton>
                     </ActionContainer>
                 </AccessContainer>

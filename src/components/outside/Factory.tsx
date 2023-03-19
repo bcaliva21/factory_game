@@ -9,7 +9,7 @@ import Access from '../access'
 
 // cache
 import { GET_FACTORY_VARIABLES } from '../../cache/queries'
-import { isInsideVar, registerOrSignInVar } from '../../cache/'
+import { isInsideVar, accessPageVar } from '../../cache/'
 
 import useToken from '../hooks/useToken'
 
@@ -187,15 +187,15 @@ const Factory = () => {
     if (error) console.log('with these.')
 
     const isInside = data.isInside
-    const registerOrSignIn = data.registerOrSignIn
+    const accessPage = data.accessPage
 
     const handleDoorClick = () => isInsideVar(!isInside)
-    const handleAccessClick = () => registerOrSignInVar(!registerOrSignIn)
+    const handleAccessClick = () => accessPageVar(!accessPage)
 
     return (
         <FactoryContainer>
             <FactoryBody>
-                {registerOrSignIn ? (
+                {accessPage ? (
                     <>
                         <Access setToken={setToken} />
                     </>
@@ -234,7 +234,7 @@ const Factory = () => {
                         <EnterDoor
                             hasToken={!!token}
                             handleEnter={handleDoorClick}
-                            handleSignInUp={handleAccessClick}
+                            handleAccess={handleAccessClick}
                         />
                     </>
                 )}

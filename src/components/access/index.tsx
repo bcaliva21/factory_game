@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { LOGIN_MUTATION } from '../../cache/queries'
-import { registerOrSignInVar } from '../../cache'
+import { accessPageVar } from '../../cache'
 
 interface AccessProps {
     setToken: (token: string) => void
@@ -26,7 +26,7 @@ const Access = ({ setToken }: AccessProps) => {
     }
 
     const handleAccessClick = () =>
-        registerOrSignInVar(!registerOrSignInVar())
+        accessPageVar(!accessPageVar())
     return (
         <form onSubmit={handleSubmit}>
             <input

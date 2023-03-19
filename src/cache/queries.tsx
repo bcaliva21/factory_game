@@ -3,7 +3,7 @@ import { gql } from '@apollo/client'
 export const GET_FACTORY_VARIABLES = gql`
     query GetFactoryVariables {
         isInside @client
-        registerOrSignIn @client
+        accessPage @client
     }
 `
 export const GET_DIFFICULTY = gql`
