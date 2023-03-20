@@ -35,7 +35,7 @@ const resolvers = {
         },
     },
     Mutation: {
-        async signUp(_: object, { name, email, password }: AddUserPayload) {
+        async register(_: object, { name, email, password }: AddUserPayload) {
             const userWithMatchingEmail = await prisma.user.findUnique({
                 where: { email },
             })

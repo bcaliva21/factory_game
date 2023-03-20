@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { useMutation } from '@apollo/client'
-import { LOGIN_MUTATION } from '../../cache/queries'
+import { LOGIN_MUTATION, REGISTER_MUTATION } from '../../cache/queries'
 import { accessPageVar } from '../../cache'
 
 interface AccessProps {
@@ -115,26 +115,46 @@ const Access = ({ setToken }: AccessProps) => {
     const [name, setName] = useState('')
     const [loginView, setLoginView] = useState(true)
 
-    const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
+	const [login, { loading: logInLoading, error: logInError }] = useMutation(LOGIN_MUTATION, {
         onCompleted: ({ login }) => {
             setToken(login.token)
         },
     })
 
-    const handleSubmit = (event: { preventDefault: () => void }) => {
+	const [register, { loading: registrationLoading, error: registrationError }] = useMutation(REGISTER_MUTATION, {
+		onCompleted: ({ register }) => {
+			setToken(register.token)
+		},
+	})
+
+    const handleLoginSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault()
 
         login({
             variables: { email, password },
         })
+
+
+		accessPageVar(false)
+
+    }
+
+	const handleRegisterSubmit = (event: { preventDefault: () => void }) => {
+        event.preventDefault()
+
+        register({
+            variables: { email, name, password },
+        })
+
+		accessPageVar(false)
     }
 
     const handleViewChange = () => setLoginView(!loginView)
-    const handleAccessClick = () => accessPageVar(!accessPageVar())
+
     return (
         <AccessContainer>
             {loginView ? (
-                <LoginForm onSubmit={handleSubmit}>
+                <LoginForm onSubmit={handleLoginSubmit}>
                     <FormHeader>login</FormHeader>
                     <InputHeader>email</InputHeader>
                     <StyledInput
@@ -149,8 +169,8 @@ const Access = ({ setToken }: AccessProps) => {
                         onChange={(event) => setPassword(event.target.value)}
                     />
                     <ActionContainer>
-                        <ActionButton type="submit" disabled={loading}>
-                            {loading ? 'Logging in...' : 'Log in'}
+                        <ActionButton type="submit" disabled={logInLoading}>
+                            {logInLoading ? 'Logging in...' : 'Log in'}
                         </ActionButton>
                     </ActionContainer>
                     <ViewQuestion>
@@ -159,14 +179,14 @@ const Access = ({ setToken }: AccessProps) => {
                             Register
                         </ViewControl>
                     </ViewQuestion>
-                    {error && (
-                        <AccessErrorMessage error={!!error}>
-                            {error.message}
+                    {logInError && (
+                        <AccessErrorMessage error={!!logInError}>
+                            {logInError.message}
                         </AccessErrorMessage>
                     )}
                 </LoginForm>
             ) : (
-                <RegistrationForm onSubmit={handleSubmit}>
+                <RegistrationForm onSubmit={handleRegisterSubmit}>
                     <FormHeader>register</FormHeader>
                     <InputHeader>name</InputHeader>
                     <StyledInput
@@ -177,18 +197,18 @@ const Access = ({ setToken }: AccessProps) => {
                     <InputHeader>email</InputHeader>
                     <StyledInput
                         type="email"
-                        // value={email}
-                        // onChange={(event) => setEmail(event.target.value)}
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
                     />
                     <InputHeader>password</InputHeader>
                     <StyledInput
                         type="password"
                         value={password}
-                        // onChange={(event) => setPassword(event.target.value)}
+                        onChange={(event) => setPassword(event.target.value)}
                     />
                     <ActionContainer>
-                        <ActionButton type="submit" disabled={loading}>
-                            {loading ? 'Logging in...' : 'Register'}
+                        <ActionButton type="submit" disabled={registrationLoading}>
+                            {registrationLoading ? 'Logging in...' : 'Register'}
                         </ActionButton>
                     </ActionContainer>
                     <ViewQuestion>
@@ -197,9 +217,9 @@ const Access = ({ setToken }: AccessProps) => {
                             Login
                         </ViewControl>
                     </ViewQuestion>
-                    {error && (
-                        <AccessErrorMessage error={!!error}>
-                            {error.message}
+                    {registrationError && (
+                        <AccessErrorMessage error={!!registrationError}>
+                            {registrationError.message}
                         </AccessErrorMessage>
                     )}
                 </RegistrationForm>
