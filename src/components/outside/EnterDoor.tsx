@@ -69,43 +69,6 @@ const InsideMiddle = styled.div`
     display: none;
 `
 
-const InsideTop = styled.div`
-    position: absolute;
-    top: 5%;
-    left: 3%;
-    border-right: calc(100vw / 50) solid transparent;
-    border-left: calc(100vw / 50) solid black;
-    border-bottom: calc(100vw / 180) solid black;
-    border-top: calc(100vw / 180) solid transparent;
-    transform: rotate(180deg);
-    z-index: 40;
-    display: none;
-`
-
-const InsideBot = styled.div`
-    position: absolute;
-    bottom: 5%;
-    left: 1%;
-    border-right: calc(100vw / 45) solid transparent;
-    border-left: calc(100vw / 45) solid black;
-    border-bottom: calc(100vw / 160) solid black;
-    border-top: calc(100vw / 160) solid transparent;
-    transform: scaleX(-1);
-    z-index: 40;
-    display: none;
-`
-
-const AccessContainer = styled.div`
-    width: 100%;
-    margin-top: 5%;
-    height: 100%;
-    background-color: transparent;
-    display: none;
-    flex-direction: column;
-    z-index: 101;
-    position: absolute;
-`
-
 const openDoor = css`
     &:hover {
         cursor: pointer;
@@ -118,22 +81,8 @@ const openDoor = css`
         ${LeftDoorVerticalLine} {
             display: block;
         }
-        ${InsideTop} {
-            display: block;
-        }
         ${InsideMiddle} {
             display: block;
-        }
-        ${InsideBot} {
-            display: block;
-        }
-    }
-`
-
-const access = css`
-    &:hover {
-        ${AccessContainer} {
-            display: flex;
         }
     }
 `
@@ -150,7 +99,7 @@ const DoorFrame = styled.div<{ hasAuth: boolean }>`
     display: flex;
     align-items: center;
     justify-content: center;
-    ${({ hasAuth }) => (hasAuth ? openDoor : access)}
+    ${({ hasAuth }) => hasAuth && openDoor}
 `
 
 const KnobCase = styled.div`
@@ -234,13 +183,16 @@ const HorizontalBot = styled.div`
     border: 8px solid black;
 `
 
-const DoorBarLock = styled.div`
+const DoorBarLock = styled.div<{ hasAuth: boolean; }>`
     position: absolute;
     top: 40%;
-    height: 30px;
-    width: 112%;
+    height: 40px;
+    width: 114%;
     background-color: black;
-    z-index: 50;
+    z-index: 100;
+	display: ${({ hasAuth }) => hasAuth ? 'none' : 'flex' };
+    align-items: center;
+    justify-content: center;
 `
 
 const DoorToBuildingAttachmentLeft = styled.div`
@@ -261,24 +213,14 @@ const DoorToBuildingAttachmentRight = styled.div`
     top: -30%;
 `
 
-const ActionContainer = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-`
-
 const DoorButton = styled.button`
-    width: 79%;
-    height: 20%;
     &:hover {
         cursor: pointer;
     }
-    color: red;
+    color: white;
+    background-color: black;
     font-size: 16px;
-    background-color: yellow;
+    font-weight: bold;
     border: none;
     z-index: 102;
 `
@@ -298,20 +240,15 @@ const EnterDoor = ({
                 hasAuth={hasToken}
                 onClick={() => hasToken && handleEnter()}
             >
-                <DoorBarLock>
+                <DoorBarLock hasAuth={hasToken}>
+                    <DoorButton onClick={handleAccess}>
+                        Login/Register
+                    </DoorButton>
+
                     <DoorToBuildingAttachmentLeft />
                     <DoorToBuildingAttachmentRight />
                 </DoorBarLock>
                 <InsideMiddle />
-                <InsideTop />
-                <InsideBot />
-                <AccessContainer>
-                    <ActionContainer>
-                        <DoorButton onClick={handleAccess}>
-                            Login/Register
-                        </DoorButton>
-                    </ActionContainer>
-                </AccessContainer>
                 <LeftDoorMask />
                 <LeftDoor>
                     <LeftDoorVerticalLine />

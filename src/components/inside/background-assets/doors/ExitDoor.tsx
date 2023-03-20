@@ -61,36 +61,10 @@ const KnobContainer = styled.div`
 
 const OutsideMiddle = styled.div`
     width: 10%;
-    height: 68%;
+    height: 80%;
     background-color: skyblue;
     position: absolute;
     left: 40%;
-    z-index: 100;
-    display: none;
-`
-
-const OutsideTop = styled.div`
-    position: absolute;
-    top: 11%;
-    left: 4%;
-    border-right: calc(100vw / 82) solid transparent;
-    border-left: calc(100vw / 100) solid skyblue;
-    border-bottom: calc(100vw / 475) solid skyblue;
-    border-top: calc(100vw / 475) solid transparent;
-    transform: rotate(180deg);
-    z-index: 100;
-    display: none;
-`
-
-const OutsideBot = styled.div`
-    position: absolute;
-    bottom: 16%;
-    left: 4%;
-    border-right: calc(100vw / 82) solid transparent;
-    border-left: calc(100vw / 100) solid skyblue;
-    border-bottom: calc(100vw / 450) solid skyblue;
-    border-top: calc(100vw / 450) solid transparent;
-    transform: scaleX(-1);
     z-index: 100;
     display: none;
 `
@@ -119,13 +93,7 @@ const DoorFrame = styled.div`
         ${LeftDoorVerticalLine} {
             display: block;
         }
-        ${OutsideTop} {
-            display: block;
-        }
         ${OutsideMiddle} {
-            display: block;
-        }
-        ${OutsideBot} {
             display: block;
         }
     }
@@ -217,8 +185,6 @@ const ExitDoor = ({ handleClose }: { handleClose: () => void }) => {
         <ExitDoorContainer>
             <DoorFrame onClick={handleClose}>
                 <OutsideMiddle />
-                <OutsideTop />
-                <OutsideBot />
                 <LeftDoorMask />
                 <LeftDoor>
                     <LeftDoorVerticalLine />
