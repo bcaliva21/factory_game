@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { useMutation } from '@apollo/client'
 import { LOGIN_MUTATION } from '../../cache/queries'
 import { accessPageVar } from '../../cache'
@@ -9,55 +9,110 @@ interface AccessProps {
 }
 
 const AccessContainer = styled.div`
-	position: relative;
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+    position: absolute;
+	top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const LoginForm = styled.form`
-	height: 100%;
-	width: 50%;
-	display: flex;
-	justify-content: center;
-	// align-items: center;
-	flex-direction: column;
+    height: 70%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    background-color: #f0f0f0;
+    flex-direction: column;
+	background: linear-gradient(
+        -45deg,
+        rgba(0, 0, 0, 0.22),
+        rgba(100, 100, 100, 0.25)
+    );
 `
 
 const FormHeader = styled.div`
-	text-transform: uppercase;
-	font-size: 16px;
+    text-transform: uppercase;
+    font-size: 16px;
+	margin-left: 10%;
+	margin-bottom: 20px;
 `
 
 const InputHeader = styled.div`
-	text-transform: capitalize;	
-	font-size: 15px;
+    text-transform: capitalize;
+    font-size: 15px;
+	margin: 10px 0 10px 10%;
 `
 
 const StyledInput = styled.input`
-	width: 50%;
-	font-size: 14px;
+    width: 76%;
+    font-size: 14px;
+	margin-left: 10%;
+	padding: 5px;
 `
 
-const RegistrationForm = styled.form`
-	height: 100%;
-	width: 50%;
+const ActionContainer = styled.div`
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
 `
 
-const ViewQuestion = styled.div``
-const ViewControl = styled.div`
+const ActionButton = styled.button`
+	width: 30%;
+	font-size: 16px;
+	padding: 5px;
+
 	&:hover {
 		cursor: pointer;
 	}
+`
+
+const RegistrationForm = styled.form`
+    height: 70%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    background-color: #f0f0f0;
+    flex-direction: column;
+	background: linear-gradient(
+        -45deg,
+        rgba(0, 0, 0, 0.22),
+        rgba(100, 100, 100, 0.25)
+    );
+`
+
+const ViewQuestion = styled.div`
+	margin-left: 10%;
+	margin-bottom: 10px;
+	display: inline-flex;
+`
+const ViewControl = styled.div`
+    &:hover {
+        cursor: pointer;
+    }
+    text-decoration: underline;
+	padding-left: 5px;
+`
+
+const errorState = css`
 	text-decoration: underline;
+	text-decoration-color: #901000;
+`
+
+const AccessErrorMessage = styled.div<{ error: boolean; }>`
+	margin-left: 10%;
+	width: fit-content;
+	${({error }) => error && errorState }
 `
 
 const Access = ({ setToken }: AccessProps) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-	const [loginView, setLoginView] = useState(true)
+    const [loginView, setLoginView] = useState(true)
 
     const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
         onCompleted: ({ login }) => {
@@ -73,61 +128,69 @@ const Access = ({ setToken }: AccessProps) => {
         })
     }
 
-	const handleViewChange = () => setLoginView(!loginView)
-    const handleAccessClick = () =>
-        accessPageVar(!accessPageVar())
+    const handleViewChange = () => setLoginView(!loginView)
+    const handleAccessClick = () => accessPageVar(!accessPageVar())
     return (
-		<AccessContainer>
-		{loginView 
-			?
-        <LoginForm onSubmit={handleSubmit}>
-			<FormHeader>login</FormHeader>	
-			<InputHeader>email</InputHeader>
-            <StyledInput
-                type="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-            />
-			<InputHeader>password</InputHeader>
-            <StyledInput
-                type="password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-            />
-            <button type="submit" disabled={loading}>
-                {loading ? 'Logging in...' : 'Log in'}
-            </button>
-			<ViewQuestion>Need an Account? 
-				<ViewControl onClick={handleViewChange}>Register</ViewControl>
-			</ViewQuestion>
-            {error && <p>{error.message}</p>}
-        </LoginForm>
-
-			:
-        <RegistrationForm onSubmit={handleSubmit}>
-			REGISTER
-            <input
-                type="email"
-                // value={email}
-                // onChange={(event) => setEmail(event.target.value)}
-            />
-            <input
-                type="password"
-                value={password}
-                // onChange={(event) => setPassword(event.target.value)}
-            />
-            <button type="submit" disabled={loading}>
-                {loading ? 'Logging in...' : 'Register'}
-            </button>
-				<ViewQuestion>Already a user? 
-				<ViewControl onClick={handleViewChange}>Login</ViewControl>
-			</ViewQuestion>
-            {error && <p>{error.message}</p>}
-        </RegistrationForm>
-
-		}
-	</AccessContainer>
+        <AccessContainer>
+            {loginView ? (
+                <LoginForm onSubmit={handleSubmit}>
+                    <FormHeader>login</FormHeader>
+                    <InputHeader>email</InputHeader>
+                    <StyledInput
+                        type="email"
+                        value={email}
+                        onChange={(event) => setEmail(event.target.value)}
+                    />
+                    <InputHeader>password</InputHeader>
+                    <StyledInput
+                        type="password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                    />
+					<ActionContainer>
+                    <ActionButton type="submit" disabled={loading}>
+                        {loading ? 'Logging in...' : 'Log in'}
+                    </ActionButton>
+					</ActionContainer>
+                    <ViewQuestion>
+                        Need an Account?
+                        <ViewControl onClick={handleViewChange}>
+                            Register
+                        </ViewControl>
+                    </ViewQuestion>
+				{error && <AccessErrorMessage error={!!error}>{error.message}</AccessErrorMessage>}
+                </LoginForm>
+            ) : (
+                <RegistrationForm onSubmit={handleSubmit}>
+				<FormHeader>register</FormHeader>
+					<InputHeader>email</InputHeader>
+                    <StyledInput
+                        type="email"
+                        // value={email}
+                        // onChange={(event) => setEmail(event.target.value)}
+                    />
+					<InputHeader>password</InputHeader>
+                    <StyledInput
+                        type="password"
+                        value={password}
+                        // onChange={(event) => setPassword(event.target.value)}
+                    />
+					<ActionContainer>
+                    <ActionButton type="submit" disabled={loading}>
+                        {loading ? 'Logging in...' : 'Register'}
+                    </ActionButton>
+				</ActionContainer>
+                    <ViewQuestion>
+                        Already a user?
+                        <ViewControl onClick={handleViewChange}>
+                            Login
+                        </ViewControl>
+                    </ViewQuestion>
+                    {error && <AccessErrorMessage error ={!!error}>{error.message}</AccessErrorMessage>}
+                </RegistrationForm>
+            )}
+        </AccessContainer>
     )
 }
 
-export default Access 
+export default Access
