@@ -308,7 +308,7 @@ const EnterDoor = ({
                 <AccessContainer>
                     <ActionContainer>
                         <DoorButton onClick={handleAccess}>
-							Login/Register
+                            Login/Register
                         </DoorButton>
                     </ActionContainer>
                 </AccessContainer>
