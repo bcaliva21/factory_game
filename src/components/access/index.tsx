@@ -12,11 +12,33 @@ const AccessContainer = styled.div`
 	position: relative;
 	width: 100%;
 	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `
 
 const LoginForm = styled.form`
 	height: 100%;
 	width: 50%;
+	display: flex;
+	justify-content: center;
+	// align-items: center;
+	flex-direction: column;
+`
+
+const FormHeader = styled.div`
+	text-transform: uppercase;
+	font-size: 16px;
+`
+
+const InputHeader = styled.div`
+	text-transform: capitalize;	
+	font-size: 15px;
+`
+
+const StyledInput = styled.input`
+	width: 50%;
+	font-size: 14px;
 `
 
 const RegistrationForm = styled.form`
@@ -59,13 +81,15 @@ const Access = ({ setToken }: AccessProps) => {
 		{loginView 
 			?
         <LoginForm onSubmit={handleSubmit}>
-			LOGIN
-            <input
+			<FormHeader>login</FormHeader>	
+			<InputHeader>email</InputHeader>
+            <StyledInput
                 type="email"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
             />
-            <input
+			<InputHeader>password</InputHeader>
+            <StyledInput
                 type="password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
@@ -73,7 +97,6 @@ const Access = ({ setToken }: AccessProps) => {
             <button type="submit" disabled={loading}>
                 {loading ? 'Logging in...' : 'Log in'}
             </button>
-            <button onClick={handleAccessClick}>back</button>
 			<ViewQuestion>Need an Account? 
 				<ViewControl onClick={handleViewChange}>Register</ViewControl>
 			</ViewQuestion>
@@ -96,7 +119,6 @@ const Access = ({ setToken }: AccessProps) => {
             <button type="submit" disabled={loading}>
                 {loading ? 'Logging in...' : 'Register'}
             </button>
-            <button onClick={handleAccessClick}>back</button>
 				<ViewQuestion>Already a user? 
 				<ViewControl onClick={handleViewChange}>Login</ViewControl>
 			</ViewQuestion>
