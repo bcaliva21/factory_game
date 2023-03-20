@@ -195,6 +195,27 @@ const Factory = () => {
     return (
         <FactoryContainer>
             <FactoryBody>
+                <FactoryRoofStackOne>
+                    <DramaticSmoke />
+                    <SlowestSmoke />
+                    <SlowSmoke />
+                    <NoDelaySmoke />
+                    <HalfSecDelaySmoke />
+                    <OneSecDelaySmoke />
+                </FactoryRoofStackOne>
+                <FactoryRoofStackTwo>
+                    <DramaticSmoke />
+                    <SlowestSmoke />
+                    <SlowSmoke />
+                    <NoDelaySmoke />
+                    <HalfSecDelaySmoke />
+                    <OneSecDelaySmoke />
+                </FactoryRoofStackTwo>
+                <FactoryRoofSection />
+                <FactoryRoofSection />
+                <FactoryRoofSection />
+                <FactoryRoofSection />
+                <FactoryRoofSection />
                 {accessPage ? (
                     <>
                         <Access setToken={setToken} />
@@ -202,27 +223,6 @@ const Factory = () => {
                 ) : (
                     <>
                         <Placard>Bradley's Component Factory</Placard>
-                        <FactoryRoofStackOne>
-                            <DramaticSmoke />
-                            <SlowestSmoke />
-                            <SlowSmoke />
-                            <NoDelaySmoke />
-                            <HalfSecDelaySmoke />
-                            <OneSecDelaySmoke />
-                        </FactoryRoofStackOne>
-                        <FactoryRoofStackTwo>
-                            <DramaticSmoke />
-                            <SlowestSmoke />
-                            <SlowSmoke />
-                            <NoDelaySmoke />
-                            <HalfSecDelaySmoke />
-                            <OneSecDelaySmoke />
-                        </FactoryRoofStackTwo>
-                        <FactoryRoofSection />
-					<FactoryRoofSection />
-					<FactoryRoofSection />
-                        <FactoryRoofSection />
-                        <FactoryRoofSection />
                         <WindowContainer>
                             <FactoryWindow>
                                 <Worker />
