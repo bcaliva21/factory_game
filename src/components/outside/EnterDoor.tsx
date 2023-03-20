@@ -183,14 +183,14 @@ const HorizontalBot = styled.div`
     border: 8px solid black;
 `
 
-const DoorBarLock = styled.div<{ hasAuth: boolean; }>`
+const DoorBarLock = styled.div<{ hasAuth: boolean }>`
     position: absolute;
     top: 40%;
     height: 40px;
     width: 114%;
     background-color: black;
     z-index: 100;
-	display: ${({ hasAuth }) => hasAuth ? 'none' : 'flex' };
+    display: ${({ hasAuth }) => (hasAuth ? 'none' : 'flex')};
     align-items: center;
     justify-content: center;
 `
