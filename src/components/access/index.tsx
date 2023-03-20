@@ -72,7 +72,7 @@ const ActionButton = styled.button`
 `
 
 const RegistrationForm = styled.form`
-    height: 70%;
+    height: 80%;
     width: 30%;
     display: flex;
     justify-content: center;
@@ -112,6 +112,7 @@ const AccessErrorMessage = styled.div<{ error: boolean }>`
 const Access = ({ setToken }: AccessProps) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+	const [name, setName] = useState('')
     const [loginView, setLoginView] = useState(true)
 
     const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
@@ -167,6 +168,12 @@ const Access = ({ setToken }: AccessProps) => {
             ) : (
                 <RegistrationForm onSubmit={handleSubmit}>
                     <FormHeader>register</FormHeader>
+					<InputHeader>name</InputHeader>
+					<StyledInput
+						type='name'
+						value={name}
+						onChange={(event) => setName(event.target.value)}
+					/>
                     <InputHeader>email</InputHeader>
                     <StyledInput
                         type="email"
