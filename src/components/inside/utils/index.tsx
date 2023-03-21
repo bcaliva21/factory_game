@@ -75,6 +75,9 @@ export type ItemProps = {
     animation: string
 }
 
+type ItemVars = ItemProps[]
+const itemVarsArray: ItemVars = []
+
 // helper functions
 export const isGameInProgress = (gameState: GAME_STATE_TYPES) => {
     return gameState === GAME_STATE_TYPES.IN_PROGRESS
@@ -121,6 +124,7 @@ const generateItemsForGameStart = () => {
     return initialItems
 }
 
+
 // game object
 export const game: IGame = {
     id: 0,
@@ -152,7 +156,7 @@ export const game: IGame = {
         void removeMe.offsetWidth
         removeMe.style.animation = ''
         itemsVar(
-            [].concat([generateItemProps(''), itemInQueueLast, itemInQueueNext])
+            itemVarsArray.concat([generateItemProps(''), itemInQueueLast, itemInQueueNext])
         )
     },
     breakCycle: () => {
