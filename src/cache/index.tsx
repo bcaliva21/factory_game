@@ -35,6 +35,11 @@ export const cache: InMemoryCache = new InMemoryCache({
                         return itemsVar()
                     },
                 },
+                accessPage: {
+                    read() {
+                        return accessPageVar()
+                    },
+                },
             },
         },
     },
@@ -42,6 +47,7 @@ export const cache: InMemoryCache = new InMemoryCache({
 
 // init values
 const isInsideVarIntialValue = false
+const accessPageVarInitialValue = false
 const gameStateVarInitialValue = GAME_STATE_TYPES.NOT_STARTED
 const gameScoreVarInitialValue = 0
 const difficultyVarInitialValue = 0
@@ -65,3 +71,7 @@ export const itemsRemovedCountVar: ReactiveVar<number> = makeVar<number>(
 )
 export const itemsVar: ReactiveVar<ItemProps[]> =
     makeVar<ItemProps[]>(itemsVarInitialValue)
+
+export const accessPageVar: ReactiveVar<boolean> = makeVar<boolean>(
+    accessPageVarInitialValue
+)

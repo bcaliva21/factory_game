@@ -5,10 +5,13 @@ import styled, { keyframes } from 'styled-components'
 // components
 import Worker from './Worker'
 import EnterDoor from './EnterDoor'
+import Access from '../access'
 
 // cache
-import { GET_IS_INSIDE } from '../../cache/queries'
-import { isInsideVar } from '../../cache/'
+import { GET_FACTORY_VARIABLES } from '../../cache/queries'
+import { isInsideVar, accessPageVar } from '../../cache/'
+
+import useToken from '../hooks/useToken'
 
 const FactoryContainer = styled.div`
     width: 70%;
@@ -22,7 +25,7 @@ const FactoryContainer = styled.div`
 
 const FactoryRoofSection = styled.div`
     position: relative;
-    border-right: calc(100vw / 16.75) solid transparent;
+    border-right: calc(100vw / 15.6) solid transparent;
     border-left: calc(100vw / 16.75) solid #901000;
     border-bottom: calc(100vw / 36) solid #901000;
     border-top: calc(100vw / 36) solid transparent;
@@ -71,8 +74,9 @@ const FactoryBody = styled.div`
     margin: auto;
     margin-top: 25%;
     background-color: #ebebeb;
-    height: 40%;
     position: relative;
+    height: 60%;
+    width: 90%;
 `
 
 const grow = keyframes`
@@ -171,23 +175,26 @@ const Placard = styled.div`
     border: medium inset #ffd700;
     font-size: larger;
     padding: 0.5% 1.5%;
-    top: 20.5vh;
-    left: 22vw;
+    bottom: 20.5vh;
+    right: 7vw;
 `
 
 const Factory = () => {
-    const { data, loading, error } = useQuery(GET_IS_INSIDE)
+    const { token, setToken } = useToken()
+    const { data, loading, error } = useQuery(GET_FACTORY_VARIABLES)
 
     if (loading) console.log('what to do...')
     if (error) console.log('with these.')
 
     const isInside = data.isInside
+    const accessPage = data.accessPage
+
     const handleDoorClick = () => isInsideVar(!isInside)
+    const handleAccessClick = () => accessPageVar(!accessPage)
 
     return (
         <FactoryContainer>
             <FactoryBody>
-                <Placard>Bradley's Component Factory</Placard>
                 <FactoryRoofStackOne>
                     <DramaticSmoke />
                     <SlowestSmoke />
@@ -208,15 +215,29 @@ const Factory = () => {
                 <FactoryRoofSection />
                 <FactoryRoofSection />
                 <FactoryRoofSection />
-                <WindowContainer>
-                    <FactoryWindow>
-                        <Worker />
-                    </FactoryWindow>
-                    <FactoryWindow />
-                    <FactoryWindow />
-                    <FactoryWindow />
-                </WindowContainer>
-                <EnterDoor handleEnter={handleDoorClick} />
+                <FactoryRoofSection />
+                {accessPage ? (
+                    <>
+                        <Access setToken={setToken} />
+                    </>
+                ) : (
+                    <>
+                        <Placard>Bradley's Component Factory</Placard>
+                        <WindowContainer>
+                            <FactoryWindow>
+                                <Worker />
+                            </FactoryWindow>
+                            <FactoryWindow />
+                            <FactoryWindow />
+                            <FactoryWindow />
+                        </WindowContainer>
+                        <EnterDoor
+                            hasToken={!!token}
+                            handleEnter={handleDoorClick}
+                            handleAccess={handleAccessClick}
+                        />
+                    </>
+                )}
             </FactoryBody>
         </FactoryContainer>
     )

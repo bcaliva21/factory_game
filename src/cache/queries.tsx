@@ -1,5 +1,11 @@
 import { gql } from '@apollo/client'
 
+export const GET_FACTORY_VARIABLES = gql`
+    query GetFactoryVariables {
+        isInside @client
+        accessPage @client
+    }
+`
 export const GET_DIFFICULTY = gql`
     query GetDifficulty {
         difficulty @client
@@ -43,13 +49,20 @@ export const GET_ITEMS_REMOVED_COUNT = gql`
     }
 `
 
+export const REGISTER_MUTATION = gql`
+	mutation Register($email: String!, $name: String!, $password: String!) {
+		register(email: $email, name: $name, password: $password) {
+			token
+		}
+	}
+`
 export const LOGIN_MUTATION = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
+    mutation Login($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
+            token
+        }
     }
-  }
-`;
+`
 
 export const GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS = gql`
     query GetDifficultyGameStateIsInsideAndItems {

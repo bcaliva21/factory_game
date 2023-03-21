@@ -6,7 +6,7 @@ const EnterDoorContainer = styled.div`
     height: calc(100vh / 4.5);
     position: absolute;
     bottom: 1.5%;
-    left: 23vw;
+    right: 10vw;
 `
 
 const LeftDoor = styled.div`
@@ -65,49 +65,11 @@ const InsideMiddle = styled.div`
     background-color: black;
     position: absolute;
     left: 40%;
-    z-index: 100;
+    z-index: 40;
     display: none;
 `
 
-const InsideTop = styled.div`
-    position: absolute;
-    top: 5%;
-    left: 3%;
-    border-right: calc(100vw / 50) solid transparent;
-    border-left: calc(100vw / 50) solid black;
-    border-bottom: calc(100vw / 180) solid black;
-    border-top: calc(100vw / 180) solid transparent;
-    transform: rotate(180deg);
-    z-index: 100;
-    display: none;
-`
-
-const InsideBot = styled.div`
-    position: absolute;
-    bottom: 5%;
-    left: 1%;
-    border-right: calc(100vw / 45) solid transparent;
-    border-left: calc(100vw / 45) solid black;
-    border-bottom: calc(100vw / 160) solid black;
-    border-top: calc(100vw / 160) solid transparent;
-    transform: scaleX(-1);
-    z-index: 100;
-    display: none;
-`
-
-const DoorFrame = styled.div`
-    position: absolute;
-    bottom: 0;
-    left: 10%;
-    width: 80%;
-    height: 60%;
-    border: 2px solid black;
-    border-bottom: none;
-    background-color: #ffd700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+const openDoor = css`
     &:hover {
         cursor: pointer;
         ${LeftDoor} {
@@ -119,16 +81,25 @@ const DoorFrame = styled.div`
         ${LeftDoorVerticalLine} {
             display: block;
         }
-        ${InsideTop} {
-            display: block;
-        }
         ${InsideMiddle} {
             display: block;
         }
-        ${InsideBot} {
-            display: block;
-        }
     }
+`
+
+const DoorFrame = styled.div<{ hasAuth: boolean }>`
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    width: 100%;
+    height: 80%;
+    border: 2px solid black;
+    border-bottom: none;
+    background-color: #ffd700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ${({ hasAuth }) => hasAuth && openDoor}
 `
 
 const KnobCase = styled.div`
@@ -195,7 +166,7 @@ const VerticalLine = styled.div<{ right?: string; left?: string }>`
     border: 2px solid black;
     ${({ right }) => right && adjustRight}
     ${({ left }) => left && adjustLeft}
-    z-index: 200;
+    z-index: 50;
 `
 
 const HorizontalTop = styled.div`
@@ -212,13 +183,72 @@ const HorizontalBot = styled.div`
     border: 8px solid black;
 `
 
-const EnterDoor = ({ handleEnter }: { handleEnter: () => void }) => {
+const DoorBarLock = styled.div<{ hasAuth: boolean }>`
+    position: absolute;
+    top: 40%;
+    height: 40px;
+    width: 114%;
+    background-color: black;
+    z-index: 100;
+    display: ${({ hasAuth }) => (hasAuth ? 'none' : 'flex')};
+    align-items: center;
+    justify-content: center;
+`
+
+const DoorToBuildingAttachmentLeft = styled.div`
+    height: 160%;
+    width: 10px;
+    background-color: #901000;
+    position: absolute;
+    left: -4%;
+    top: -30%;
+`
+
+const DoorToBuildingAttachmentRight = styled.div`
+    height: 160%;
+    width: 10px;
+    background-color: #901000;
+    position: absolute;
+    right: -4%;
+    top: -30%;
+`
+
+const DoorButton = styled.button`
+    &:hover {
+        cursor: pointer;
+    }
+    color: white;
+    background-color: black;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    z-index: 102;
+`
+
+const EnterDoor = ({
+    handleEnter,
+    handleAccess,
+    hasToken,
+}: {
+    hasToken: boolean
+    handleEnter: () => void
+    handleAccess: () => void
+}) => {
     return (
         <EnterDoorContainer>
-            <DoorFrame onClick={handleEnter}>
+            <DoorFrame
+                hasAuth={hasToken}
+                onClick={() => hasToken && handleEnter()}
+            >
+                <DoorBarLock hasAuth={hasToken}>
+                    <DoorButton onClick={handleAccess}>
+                        Login/Register
+                    </DoorButton>
+
+                    <DoorToBuildingAttachmentLeft />
+                    <DoorToBuildingAttachmentRight />
+                </DoorBarLock>
                 <InsideMiddle />
-                <InsideTop />
-                <InsideBot />
                 <LeftDoorMask />
                 <LeftDoor>
                     <LeftDoorVerticalLine />
