@@ -54,7 +54,6 @@ export const MiniItem = styled.div<{ color: string }>`
     margin-top: 1px;
 `
 
-// types
 export enum GAME_STATE_TYPES {
     NOT_STARTED = 'not_started',
     IN_PROGRESS = 'in_progress',
@@ -74,6 +73,9 @@ export type ItemProps = {
     color: string
     animation: string
 }
+
+type ItemVars = ItemProps[]
+const itemVarsArray: ItemVars = []
 
 // helper functions
 export const isGameInProgress = (gameState: GAME_STATE_TYPES) => {
@@ -121,6 +123,7 @@ const generateItemsForGameStart = () => {
     return initialItems
 }
 
+
 // game object
 export const game: IGame = {
     id: 0,
@@ -152,7 +155,7 @@ export const game: IGame = {
         void removeMe.offsetWidth
         removeMe.style.animation = ''
         itemsVar(
-            [].concat([generateItemProps(''), itemInQueueLast, itemInQueueNext])
+            itemVarsArray.concat([generateItemProps(''), itemInQueueLast, itemInQueueNext])
         )
     },
     breakCycle: () => {
