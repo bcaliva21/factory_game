@@ -54,6 +54,7 @@ export const MiniItem = styled.div<{ color: string }>`
     margin-top: 1px;
 `
 
+// types
 export enum GAME_STATE_TYPES {
     NOT_STARTED = 'not_started',
     IN_PROGRESS = 'in_progress',
