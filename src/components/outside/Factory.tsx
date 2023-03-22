@@ -176,7 +176,7 @@ const Placard = styled.div`
     font-size: larger;
     padding: 0.5% 1.5%;
     bottom: 20.5vh;
-    right: 7vw;
+    right: 8vw;
 `
 
 const Factory = () => {
@@ -222,7 +222,6 @@ const Factory = () => {
                     </>
                 ) : (
                     <>
-                        <Placard>Bradley's Component Factory</Placard>
                         <WindowContainer>
                             <FactoryWindow>
                                 <Worker />
