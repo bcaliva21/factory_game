@@ -88,17 +88,17 @@ const RegistrationForm = styled.form`
 `
 
 const PasswordContainer = styled.div`
-	width: 100%;
-	height: 10%;
-	position: relative;
+    width: 100%;
+    height: 10%;
+    position: relative;
 `
 
 const ShowPassword = styled.input`
-	height: 20px;
-	width: 25px;
-	position: absolute;
-	right: 12%;
-	top: 12%;
+    height: 20px;
+    width: 25px;
+    position: absolute;
+    right: 12%;
+    top: 12%;
 `
 
 const ViewQuestion = styled.div`
@@ -130,40 +130,46 @@ const Access = ({ setToken }: AccessProps) => {
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
     const [loginView, setLoginView] = useState(true)
-	const [passwordState, setPasswordState] = useState('password')
+    const [passwordState, setPasswordState] = useState('password')
 
-	const [login, { loading: loginLoading, error: loginError }] = useMutation(LOGIN_MUTATION, {
-        onCompleted: ({ login }) => {
-            setToken(login.token)
+    const [login, { loading: loginLoading, error: loginError }] = useMutation(
+        LOGIN_MUTATION,
+        {
+            onCompleted: ({ login }) => {
+                setToken(login.token)
+            },
+        }
+    )
+
+    const [
+        register,
+        { loading: registrationLoading, error: registrationError },
+    ] = useMutation(REGISTER_MUTATION, {
+        onCompleted: ({ register }) => {
+            setToken(register.token)
         },
     })
 
-	const [register, { loading: registrationLoading, error: registrationError }] = useMutation(REGISTER_MUTATION, {
-		onCompleted: ({ register }) => {
-			setToken(register.token)
-		},
-	})
-
-    const handleLoginSubmit = async (event: { preventDefault: () => void }) => {
+    const handleLoginSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault()
 
         login({
             variables: { email, password },
-		}).then((data: any) => {
-			const { token } = data.data.login
-			if (token) accessPageVar(false)
-		})
+        }).then((data: any) => {
+            const { token } = data.data.login
+            if (token) accessPageVar(false)
+        })
     }
 
-	const handleRegisterSubmit = (event: { preventDefault: () => void }) => {
+    const handleRegisterSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault()
 
         register({
             variables: { email, name, password },
-		}).then((data: any) => {
-			const { token } = data.data.register
-			if (token) accessPageVar(false)
-		})
+        }).then((data: any) => {
+            const { token } = data.data.register
+            if (token) accessPageVar(false)
+        })
     }
 
     const handleViewChange = () => setLoginView(!loginView)
@@ -210,31 +216,44 @@ const Access = ({ setToken }: AccessProps) => {
                         type="name"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
-						required
-						maxLength={20}
+                        required
+                        maxLength={20}
                     />
                     <InputHeader>email</InputHeader>
                     <StyledInput
                         type="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
-						required
-						maxLength={30}
+                        required
+                        maxLength={30}
                     />
                     <InputHeader>password</InputHeader>
-				<PasswordContainer>
-                    <StyledInput
-                        type={passwordState}
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-						minLength={8}
-						maxLength={20}
-						required
-					/>
-					<ShowPassword type='image' src={eye} onClick={() => passwordState === 'password' ? setPasswordState('text') : setPasswordState('password')} />
-				</PasswordContainer>
+                    <PasswordContainer>
+                        <StyledInput
+                            type={passwordState}
+                            value={password}
+                            onChange={(event) =>
+                                setPassword(event.target.value)
+                            }
+                            minLength={8}
+                            maxLength={20}
+                            required
+                        />
+                        <ShowPassword
+                            type="image"
+                            src={eye}
+                            onClick={() =>
+                                passwordState === 'password'
+                                    ? setPasswordState('text')
+                                    : setPasswordState('password')
+                            }
+                        />
+                    </PasswordContainer>
                     <ActionContainer>
-                        <ActionButton type="submit" disabled={registrationLoading}>
+                        <ActionButton
+                            type="submit"
+                            disabled={registrationLoading}
+                        >
                             {registrationLoading ? 'Logging in...' : 'Register'}
                         </ActionButton>
                     </ActionContainer>
