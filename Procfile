@@ -1,2 +1,2 @@
-web: vite preview --port 4173
+web: npm run serve-heroku
 api: cd server && ts-node --esm index.ts
