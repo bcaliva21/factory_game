@@ -210,12 +210,16 @@ const Access = ({ setToken }: AccessProps) => {
                         type="name"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
+						required
+						maxLength={20}
                     />
                     <InputHeader>email</InputHeader>
                     <StyledInput
                         type="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
+						required
+						maxLength={30}
                     />
                     <InputHeader>password</InputHeader>
 				<PasswordContainer>
@@ -224,6 +228,7 @@ const Access = ({ setToken }: AccessProps) => {
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
 						minLength={8}
+						maxLength={20}
 						required
 					/>
 					<ShowPassword type='image' src={eye} onClick={() => passwordState === 'password' ? setPasswordState('text') : setPasswordState('password')} />
