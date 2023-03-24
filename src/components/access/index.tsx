@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components'
 import { useMutation } from '@apollo/client'
+
+import eye from '../../assets/eye.svg'
 import { LOGIN_MUTATION, REGISTER_MUTATION } from '../../cache/queries'
 import { accessPageVar } from '../../cache'
 
@@ -85,6 +87,20 @@ const RegistrationForm = styled.form`
     );
 `
 
+const PasswordContainer = styled.div`
+    width: 100%;
+    height: 10%;
+    position: relative;
+`
+
+const ShowPassword = styled.input`
+    height: 20px;
+    width: 25px;
+    position: absolute;
+    right: 12%;
+    top: 12%;
+`
+
 const ViewQuestion = styled.div`
     margin-left: 10%;
     margin-bottom: 10px;
@@ -114,39 +130,46 @@ const Access = ({ setToken }: AccessProps) => {
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
     const [loginView, setLoginView] = useState(true)
+    const [passwordState, setPasswordState] = useState('password')
 
-	const [login, { loading: logInLoading, error: logInError }] = useMutation(LOGIN_MUTATION, {
-        onCompleted: ({ login }) => {
-            setToken(login.token)
+    const [login, { loading: loginLoading, error: loginError }] = useMutation(
+        LOGIN_MUTATION,
+        {
+            onCompleted: ({ login }) => {
+                setToken(login.token)
+            },
+        }
+    )
+
+    const [
+        register,
+        { loading: registrationLoading, error: registrationError },
+    ] = useMutation(REGISTER_MUTATION, {
+        onCompleted: ({ register }) => {
+            setToken(register.token)
         },
     })
-
-	const [register, { loading: registrationLoading, error: registrationError }] = useMutation(REGISTER_MUTATION, {
-		onCompleted: ({ register }) => {
-			setToken(register.token)
-		},
-	})
 
     const handleLoginSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault()
 
         login({
             variables: { email, password },
+        }).then((data: any) => {
+            const { token } = data.data.login
+            if (token) accessPageVar(false)
         })
-
-
-		accessPageVar(false)
-
     }
 
-	const handleRegisterSubmit = (event: { preventDefault: () => void }) => {
+    const handleRegisterSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault()
 
         register({
             variables: { email, name, password },
+        }).then((data: any) => {
+            const { token } = data.data.register
+            if (token) accessPageVar(false)
         })
-
-		accessPageVar(false)
     }
 
     const handleViewChange = () => setLoginView(!loginView)
@@ -169,8 +192,8 @@ const Access = ({ setToken }: AccessProps) => {
                         onChange={(event) => setPassword(event.target.value)}
                     />
                     <ActionContainer>
-                        <ActionButton type="submit" disabled={logInLoading}>
-                            {logInLoading ? 'Logging in...' : 'Log in'}
+                        <ActionButton type="submit" disabled={loginLoading}>
+                            {loginLoading ? 'Logging in...' : 'Log in'}
                         </ActionButton>
                     </ActionContainer>
                     <ViewQuestion>
@@ -179,9 +202,9 @@ const Access = ({ setToken }: AccessProps) => {
                             Register
                         </ViewControl>
                     </ViewQuestion>
-                    {logInError && (
-                        <AccessErrorMessage error={!!logInError}>
-                            {logInError.message}
+                    {loginError && (
+                        <AccessErrorMessage error={!!loginError}>
+                            {loginError.message}
                         </AccessErrorMessage>
                     )}
                 </LoginForm>
@@ -193,21 +216,44 @@ const Access = ({ setToken }: AccessProps) => {
                         type="name"
                         value={name}
                         onChange={(event) => setName(event.target.value)}
+                        required
+                        maxLength={20}
                     />
                     <InputHeader>email</InputHeader>
                     <StyledInput
                         type="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
+                        required
+                        maxLength={30}
                     />
                     <InputHeader>password</InputHeader>
-                    <StyledInput
-                        type="password"
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                    />
+                    <PasswordContainer>
+                        <StyledInput
+                            type={passwordState}
+                            value={password}
+                            onChange={(event) =>
+                                setPassword(event.target.value)
+                            }
+                            minLength={8}
+                            maxLength={20}
+                            required
+                        />
+                        <ShowPassword
+                            type="image"
+                            src={eye}
+                            onClick={() =>
+                                passwordState === 'password'
+                                    ? setPasswordState('text')
+                                    : setPasswordState('password')
+                            }
+                        />
+                    </PasswordContainer>
                     <ActionContainer>
-                        <ActionButton type="submit" disabled={registrationLoading}>
+                        <ActionButton
+                            type="submit"
+                            disabled={registrationLoading}
+                        >
                             {registrationLoading ? 'Logging in...' : 'Register'}
                         </ActionButton>
                     </ActionContainer>
