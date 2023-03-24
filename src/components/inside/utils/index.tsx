@@ -124,7 +124,6 @@ const generateItemsForGameStart = () => {
     return initialItems
 }
 
-
 // game object
 export const game: IGame = {
     id: 0,
@@ -156,7 +155,11 @@ export const game: IGame = {
         void removeMe.offsetWidth
         removeMe.style.animation = ''
         itemsVar(
-            itemVarsArray.concat([generateItemProps(''), itemInQueueLast, itemInQueueNext])
+            itemVarsArray.concat([
+                generateItemProps(''),
+                itemInQueueLast,
+                itemInQueueNext,
+            ])
         )
     },
     breakCycle: () => {

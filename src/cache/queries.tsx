@@ -50,11 +50,11 @@ export const GET_ITEMS_REMOVED_COUNT = gql`
 `
 
 export const REGISTER_MUTATION = gql`
-	mutation Register($email: String!, $name: String!, $password: String!) {
-		register(email: $email, name: $name, password: $password) {
-			token
-		}
-	}
+    mutation Register($email: String!, $name: String!, $password: String!) {
+        register(email: $email, name: $name, password: $password) {
+            token
+        }
+    }
 `
 export const LOGIN_MUTATION = gql`
     mutation Login($email: String!, $password: String!) {

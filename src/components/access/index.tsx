@@ -115,17 +115,23 @@ const Access = ({ setToken }: AccessProps) => {
     const [name, setName] = useState('')
     const [loginView, setLoginView] = useState(true)
 
-	const [login, { loading: logInLoading, error: logInError }] = useMutation(LOGIN_MUTATION, {
-        onCompleted: ({ login }) => {
-            setToken(login.token)
+    const [login, { loading: logInLoading, error: logInError }] = useMutation(
+        LOGIN_MUTATION,
+        {
+            onCompleted: ({ login }) => {
+                setToken(login.token)
+            },
+        }
+    )
+
+    const [
+        register,
+        { loading: registrationLoading, error: registrationError },
+    ] = useMutation(REGISTER_MUTATION, {
+        onCompleted: ({ register }) => {
+            setToken(register.token)
         },
     })
-
-	const [register, { loading: registrationLoading, error: registrationError }] = useMutation(REGISTER_MUTATION, {
-		onCompleted: ({ register }) => {
-			setToken(register.token)
-		},
-	})
 
     const handleLoginSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault()
@@ -134,19 +140,17 @@ const Access = ({ setToken }: AccessProps) => {
             variables: { email, password },
         })
 
-
-		accessPageVar(false)
-
+        accessPageVar(false)
     }
 
-	const handleRegisterSubmit = (event: { preventDefault: () => void }) => {
+    const handleRegisterSubmit = (event: { preventDefault: () => void }) => {
         event.preventDefault()
 
         register({
             variables: { email, name, password },
         })
 
-		accessPageVar(false)
+        accessPageVar(false)
     }
 
     const handleViewChange = () => setLoginView(!loginView)
@@ -207,7 +211,10 @@ const Access = ({ setToken }: AccessProps) => {
                         onChange={(event) => setPassword(event.target.value)}
                     />
                     <ActionContainer>
-                        <ActionButton type="submit" disabled={registrationLoading}>
+                        <ActionButton
+                            type="submit"
+                            disabled={registrationLoading}
+                        >
                             {registrationLoading ? 'Logging in...' : 'Register'}
                         </ActionButton>
                     </ActionContainer>
