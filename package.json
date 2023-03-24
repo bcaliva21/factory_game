@@ -10,14 +10,14 @@
     "seed": "ts-node prisma/seed.ts"
   },
   "scripts": {
-    "dev": "vite --host",
+    "dev": "vite",
+	"prod": "vite preview --host",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "serve": "cd server && ts-node --esm index.ts",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' 'src/**/*.tsx' 'server/**/*.ts' --write",
     "lint": "eslint --ext .js,.ts,.tsx .",
-    "postinstall": "npm run build",
-    "serve-heroku": "vite --host 0.0.0.0 --port $PORT preview"
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@apollo/client": "^3.7.9",
