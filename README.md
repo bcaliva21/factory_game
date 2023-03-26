@@ -1,11 +1,14 @@
 # Factory Game
 
 > This repo is for a simple scroll timing game.
-> This is a mono repo built with vite
-> This repo is seperated into three micro services:
-  > Frontend -- React/Typescript/prisma
-  > Backend -- Apollo/Graphql
-  > Database -- Postgres/prisma
+> This is a mono repo built with vite and is seperated into three micro services:
+>
+>- Frontend -- React/Typescript/prisma
+>
+>- Backend -- Apollo/Graphql
+>
+>- Database -- Postgres/prisma
+>
 > To get it up and running you must build and run both FE/BE simultaneously
 
 ## Development
