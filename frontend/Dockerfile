@@ -1,16 +1,16 @@
 # Declare the base image
-FROM node:lts-alpine3.17
+FROM node:18.15.0
+RUN npm install -g npm@9.5.0
 # Build step
 # 1. copy package.json and package-lock.json to /app dir
 RUN mkdir /app
-COPY package*.json /app
 # 2. Change working directory to newly created app dir
 WORKDIR /app
+
+COPY . /app
 # 3 . Install dependencies
-RUN npm ci
-# 4. Copy the source code to /app dir
-COPY . .
+RUN npm i
 # 5. Expose port 3000 on the container
-EXPOSE 3000
+EXPOSE 4173
 # 6. Run the app
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "prod"]

@@ -12,6 +12,15 @@ services:
       - postgres:/var/lib/postgresql/data
     ports:
       - '5432:5432'
-  
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: factory_frontend
+    # enviornment:
+    ports:
+      - 4173:4173
+    #links:
+
 volumes:
   postgres:
