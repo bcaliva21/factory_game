@@ -14,6 +14,7 @@
 ## Development
 
 ### Env setup
+***node must be >= 18.15.0 and npm must be >= 9.5.0***
 
 1. Clone the repo
 ```git clone https://github.com/bcaliva21/factory_game.git```
