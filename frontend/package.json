@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "frontend for factory_game",
   "main": "index.html",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "dev": "vite",
 	  "prod": "vite preview --host",
