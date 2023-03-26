@@ -1,32 +1,39 @@
 # Factory Game
 
 > This repo is for a simple scroll timing game.
-> This is a mono repo built with vite utilizing React/Typescript backed by Apollo/Graphql. 
-> To get it up and running you must build and run both FE/BE simultaneously 
+> This is a mono repo built with vite
+> This repo is seperated into three micro services:
+  > Frontend -- React/Typescript/prisma
+  > Backend -- Apollo/Graphql
+  > Database -- Postgres/prisma
+> To get it up and running you must build and run both FE/BE simultaneously
 
 ## Development
 
-### Env setup 
+### Env setup
 
 1. Clone the repo
 ```git clone https://github.com/bcaliva21/factory_game.git```
 
-2. Enter repo and install dependencies
-```cd factory_game && npm i```
+2. Enter repo
+```cd factory_game```
 
 3. Install Docker
 
 ### Front-end
 
-1. Once dependencies are installed
+1. Install frontend dependencies
+```cd frontend && npm i```
+
+2. Once dependencies are installed
 ```npm run dev```
 
 ### Back-end
 
-1. Spin up local db with docker
-```docker-compose up -d```
+1. Install backend dependencies
+```cd server && npm i```
 
-2. Generate prisma client locally    
+2. Generate prisma client locally
 ```npx prisma generate```
 
 3. Sync prisma client with local schemas
