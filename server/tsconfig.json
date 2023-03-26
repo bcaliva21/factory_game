@@ -18,16 +18,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
   },
   "ts-node": {
     // Tell ts-node CLI to install the --loader automatically
     "esm": true
   },
-  "include": [
-    "src",
-    "index.d.ts"
-  ],
   "references": [
     {
       "path": "./tsconfig.node.json"
