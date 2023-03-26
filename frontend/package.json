@@ -1,0 +1,42 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "frontend for factory_game",
+  "main": "index.html",
+  "engines": {
+    "node": "18.x"
+  },
+  "scripts": {
+    "dev": "vite",
+	  "prod": "vite preview --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' 'src/**/*.tsx' --write",
+    "lint": "eslint --ext .js,.ts,.tsx .",
+    "postinstall": "npm run build"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.9",
+    "@prisma/client": "^4.11.0",
+    "docker-compose": "^0.23.19",
+    "graphql": "^16.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "styled-components": "^5.3.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "@types/styled-components": "^5.1.26",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "@vitejs/plugin-react": "^3.1.0",
+    "eslint": "^8.35.0",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "^2.8.4",
+    "typescript": "^4.9.3"
+  },
+  "author": "Bradley Caliva",
+  "license": "ISC"
+}

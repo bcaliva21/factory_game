@@ -10,7 +10,7 @@ import { setContext } from '@apollo/client/link/context'
 
 import App from './components/App'
 import { cache } from './cache/'
-import { typeDefs } from '../server/schema'
+import { typeDefs } from './cache/schema'
 
 const http = new HttpLink({ uri: 'http://localhost:4000/' })
 const httpLink = ApolloLink.from([http])
