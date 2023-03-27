@@ -1,5 +1,13 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import styled, { keyframes } from 'styled-components'
+
+import { TinyItem, generateRandomColor } from '../../utils'
+
+const FireItem = styled(TinyItem)`
+    position: absolute;
+    margin-bottom: 2px;
+    // z-index: 10;
+`
 
 const firewave = keyframes`
 	0%, 100% {
@@ -139,13 +147,66 @@ const ScorePlate = styled.div`
     text-justify: center;
 `
 
+const ItemRowIncinerator = styled.div`
+    width: 100%;
+    height: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+`
+
+const ItemsContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    margin-left: 1px;
+`
+
 const IncineratorDecor = () => {
+    const populateRow = () => {
+        const row = []
+        for (let i = 0; i < 16; i++) {
+            row.push(i)
+        }
+        return (
+            <ItemRowIncinerator>
+                {row.map((item) => (
+                    <TinyItem key={item} color={generateRandomColor()} />
+                ))}
+            </ItemRowIncinerator>
+        )
+    }
+
+    const rows = useMemo(() => {
+        const repeat = (times: number) => {
+            const rows = []
+            for (let i = 0; i < times; i += 1) {
+                rows.push(populateRow())
+            }
+            return rows
+        }
+
+        return (
+            <>
+                <ItemsContainer>{repeat(5)}</ItemsContainer>
+            </>
+        )
+    }, [])
+
+    const generateItemsBackDrop = () => {
+
+    }
     return (
         <DecorContainer>
             <FireContainer>
                 <FireWindow>
                     <FireWindowGlass />
+                    {rows}
                     <Fire size={'25px'} />
+                    <FireItem color={generateRandomColor()} />
                     <Fire size={'27px'} />
                     <Fire size={'25px'} />
                 </FireWindow>
