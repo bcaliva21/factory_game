@@ -1,16 +1,15 @@
-# Declare the base image
+# setup env
 FROM node:18.15.0
-RUN npm install -g npm@9.5.0
-# Build step
-# 1. copy package.json and package-lock.json to /app dir
+# make dir
 RUN mkdir /app
-# 2. Change working directory to newly created app dir
+# nav to dir
 WORKDIR /app
-
+# copy project contents
 COPY . /app
-# 3 . Install dependencies
+# install deps
+# postinstall builds
 RUN npm i
-# 5. Expose port 3000 on the container
+# expose port
 EXPOSE 4173
-# 6. Run the app
+# run prod
 CMD ["npm", "run", "prod"]
