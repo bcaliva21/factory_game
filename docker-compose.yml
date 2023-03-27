@@ -3,6 +3,7 @@
 version: '3.8'
 services:
   postgres:
+    container_name: postgres
     image: postgres:13
     restart: always
     environment:
@@ -11,6 +12,33 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - 5432:5432
+
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: factory_frontend
+    ports:
+      - 4173:4173
+
+  server:
+    platform: linux/x86_64
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: factory_server
+    ports:
+      - 4000:4000
+    environment:
+      - DATABASE_URL=postgresql://db_user:db_password@postgres:5432/mydb?schema=public
+      - POSTGRES_USER=db_user
+      - POSTGRES_PASSWORD=db_password
+    depends_on:
+      - postgres
+    # restart: always
+
 volumes:
   postgres:
+  frontend:
+  server:

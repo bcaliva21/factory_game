@@ -49,6 +49,20 @@
 5. Start Back-end
 ```npm run serve``
 
+### MIGRATION
+
+0. Make sure the postgres container is running
+```docker ps```
+
+1. Start docker container
+```docker-compose up --build```
+
+2. Open side terminal and execute the following command to enter a bash terminal inside the prisma container
+```docker exec -it "factory_server" sh```
+
+3. Inside the factory_server container run the migration command
+```npx prisma migrate dev --name migration-name```
+
 #### Helpful Commands
 
 - lint repo
