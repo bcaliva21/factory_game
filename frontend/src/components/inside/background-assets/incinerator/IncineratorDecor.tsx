@@ -27,6 +27,7 @@ const innerFirewave = keyframes`
 	{
 `
 
+
 const DecorContainer = styled.div`
     width: 100%;
     height: 45%;
@@ -49,12 +50,26 @@ const FireContainer = styled.div`
 `
 
 const FireWindow = styled.div`
-    background-color: white;
+    background-color: orange;
     width: 45%;
     height: 80%;
+    position: relative;
     display: flex;
     align-items: end;
     justify-content: center;
+    border: 2px solid #282828;
+    z-index: 100;
+    box-shadow: 1px 2px 8px 0 rgba(0, 0, 0, 0.25),
+    -6px -6px 8px 0 rgba(145, 20, 0, 1);
+`
+
+const FireWindowGlass = styled.div`
+    width: 100%;
+    height:100%;
+    position: absolute;
+    z-index: 124;
+    background-color: skyblue;
+    opacity: 0.4;
 `
 
 const Fire = styled.div<{ size: string }>`
@@ -69,7 +84,7 @@ const Fire = styled.div<{ size: string }>`
     border-top: 15px solid red;
     overflow: hidden;
     background-color: orange;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 
     animation: ${firewave} infinite linear;
     animation-duration: 5s;
@@ -129,9 +144,10 @@ const IncineratorDecor = () => {
         <DecorContainer>
             <FireContainer>
                 <FireWindow>
-                    <Fire size={'30px'} />
-                    <Fire size={'30px'} />
-                    <Fire size={'30px'} />
+                    <FireWindowGlass />
+                    <Fire size={'25px'} />
+                    <Fire size={'27px'} />
+                    <Fire size={'25px'} />
                 </FireWindow>
             </FireContainer>
             <HighScoreContainer>
