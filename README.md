@@ -13,7 +13,7 @@
 
 ## Development
 
-### Env setup
+### Local Env setup
 ***node must be >= 18.15.0 and npm must be >= 9.5.0***
 
 1. Clone the repo
@@ -24,7 +24,7 @@
 
 3. Install Docker
 
-### Front-end
+#### Front-end
 
 1. Install frontend dependencies
 ```cd frontend && npm i```
@@ -32,24 +32,30 @@
 2. Once dependencies are installed
 ```npm run dev```
 
-### Back-end
+#### Back-end
 
 1. Install backend dependencies
 ```cd server && npm i```
 
-2. Generate prisma client locally
+2. Spin up docker for database access
+```docker-compose up -d```
+
+3. Generate prisma client locally
 ```npx prisma generate```
 
-3. Sync prisma client with local schemas
+4. Sync prisma client with local schemas
 ```npx prisma migrate dev```
-
-4. Build local files
-```npm run build```
 
 5. Start Back-end
 ```npm run serve``
 
-### MIGRATION
+### Docker setup
+
+1. Complete docker migration as described below
+
+2. Navigate to localhost:4173 to view project
+
+#### Docker Migration
 
 0. Make sure the postgres container is running
 ```docker ps```
