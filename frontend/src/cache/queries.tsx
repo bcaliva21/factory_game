@@ -12,6 +12,15 @@ export const GET_DIFFICULTY = gql`
     }
 `
 
+export const GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS = gql`
+    query GetDifficultyGameStateIsInsideAndItems {
+        difficulty @client
+        isInside @client
+        items @client
+        gameState @client
+    }
+`
+
 export const GET_GAME_SCORE = gql`
     query GetGameScore {
         gameScore @client
@@ -62,6 +71,7 @@ export const REGISTER_MUTATION = gql`
     mutation Register($email: String!, $name: String!, $password: String!) {
         register(email: $email, name: $name, password: $password) {
             token
+            id
         }
     }
 `
@@ -69,15 +79,17 @@ export const LOGIN_MUTATION = gql`
     mutation Login($email: String!, $password: String!) {
         login(email: $email, password: $password) {
             token
+            user(email: $email) {
+                id
+            }
         }
     }
 `
 
-export const GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS = gql`
-    query GetDifficultyGameStateIsInsideAndItems {
-        difficulty @client
-        isInside @client
-        items @client
-        gameState @client
+export const UPDATE_HIGH_SCORE_MUTATION = gql`
+    mutation UpdateHighScore($id: Int!, $highScore: Int!) {
+        updateHighScore(id: $id, highScore: $highScore) {
+            user
+        }
     }
 `
