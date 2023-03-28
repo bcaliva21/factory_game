@@ -223,10 +223,10 @@ const Factory = () => {
                 ) : (
                     <>
                         <WindowContainer>
+                            <FactoryWindow />
                             <FactoryWindow>
                                 <Worker />
                             </FactoryWindow>
-                            <FactoryWindow />
                             <FactoryWindow />
                             <FactoryWindow />
                         </WindowContainer>
