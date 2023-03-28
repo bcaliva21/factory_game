@@ -11,7 +11,7 @@ import Access from '../access'
 import { GET_FACTORY_VARIABLES } from '../../cache/queries'
 import { isInsideVar, accessPageVar } from '../../cache/'
 
-import useToken from '../hooks/useToken'
+import { useToken, useUser } from '../hooks'
 
 const FactoryContainer = styled.div`
     width: 70%;
@@ -181,7 +181,9 @@ const Placard = styled.div`
 
 const Factory = () => {
     const { token, setToken } = useToken()
+    const { user, setUser } = useUser()
     const { data, loading, error } = useQuery(GET_FACTORY_VARIABLES)
+    console.log('user: ', user)
 
     if (loading) console.log('what to do...')
     if (error) console.log('with these.')
@@ -218,7 +220,7 @@ const Factory = () => {
                 <FactoryRoofSection />
                 {accessPage ? (
                     <>
-                        <Access setToken={setToken} />
+                        <Access setToken={setToken} setUser={setUser} />
                     </>
                 ) : (
                     <>

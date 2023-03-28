@@ -154,14 +154,11 @@ const Inside = () => {
     const handleClose = () => isInsideVar(!isInside)
     const timeUntilGameOver = convertAnimationTimingToMS(difficulty)
 
-    const killTimingInterval = () => {
-        clearTimeout(intervalId)
-        console.log('killed')
-    }
+    const killTimingInterval = () => clearTimeout(intervalId)
+    
 
     const handleKeydownEvent = useCallback((event: KeyboardEvent): void => {
         const userInput = event.key
-        console.log(userInput)
         if (game.userInputIsCorrect(userInput)) {
             game.resetCycle()
         } else {

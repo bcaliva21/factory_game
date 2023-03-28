@@ -8,6 +8,7 @@ import { accessPageVar } from '../../cache'
 
 interface AccessProps {
     setToken: (token: string) => void
+    setUser: (user: any) => void
 }
 
 const AccessContainer = styled.div`
@@ -125,7 +126,7 @@ const AccessErrorMessage = styled.div<{ error: boolean }>`
     ${({ error }) => error && errorState}
 `
 
-const Access = ({ setToken }: AccessProps) => {
+const Access = ({ setToken, setUser }: AccessProps) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
@@ -137,6 +138,7 @@ const Access = ({ setToken }: AccessProps) => {
         {
             onCompleted: ({ login }) => {
                 setToken(login.token)
+                setUser(login.user.id)
             },
         }
     )
@@ -147,6 +149,7 @@ const Access = ({ setToken }: AccessProps) => {
     ] = useMutation(REGISTER_MUTATION, {
         onCompleted: ({ register }) => {
             setToken(register.token)
+            setUser(register.id)
         },
     })
 
@@ -173,6 +176,12 @@ const Access = ({ setToken }: AccessProps) => {
     }
 
     const handleViewChange = () => setLoginView(!loginView)
+    const handleShowPassword = (e: any) => {
+        e.preventDefault()
+        return passwordState === 'password'
+            ? setPasswordState('text')
+            : setPasswordState('password')
+    }
 
     return (
         <AccessContainer>
@@ -242,11 +251,7 @@ const Access = ({ setToken }: AccessProps) => {
                         <ShowPassword
                             type="image"
                             src={eye}
-                            onClick={() =>
-                                passwordState === 'password'
-                                    ? setPasswordState('text')
-                                    : setPasswordState('password')
-                            }
+                            onClick={e => handleShowPassword(e)}
                         />
                     </PasswordContainer>
                     <ActionContainer>
