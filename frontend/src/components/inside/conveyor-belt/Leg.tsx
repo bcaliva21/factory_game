@@ -197,7 +197,7 @@ const Score = styled.div`
     );
     border: 1px outset #6c6c6c;
     border-radius: 5%;
-    width: 70%;
+    width: 80%;
     height: 50%;
     display: flex;
     align-items: center;
