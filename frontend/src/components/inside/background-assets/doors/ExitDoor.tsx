@@ -1,5 +1,12 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import { useQuery } from '@apollo/client'
+
+// cache
+import { GET_GAME_STATE } from '../../../../cache/queries'
+
+// helpers
+import { GAME_STATE_TYPES } from '../../utils'
 
 const ExitDoorContainer = styled.div`
     width: calc(100vw / 16);
@@ -181,9 +188,20 @@ const HorizontalBot = styled.div`
 `
 
 const ExitDoor = ({ handleClose }: { handleClose: () => void }) => {
+    const { data, loading, error } = useQuery(GET_GAME_STATE)
+
+    const gameState = data.gameState
+    const gameInProgress = gameState === GAME_STATE_TYPES.IN_PROGRESS
+
+    const handleClick = () => {
+        if (gameInProgress) return
+        handleClose()
+    }
+
+    console.log(gameState)
     return (
         <ExitDoorContainer>
-            <DoorFrame onClick={handleClose}>
+            <DoorFrame onClick={handleClick}>
                 <OutsideMiddle />
                 <LeftDoorMask />
                 <LeftDoor>
