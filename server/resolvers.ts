@@ -54,15 +54,17 @@ const resolvers = {
                 },
             })
 
+            const userId = newUser.id
+
             const token = jwt.sign(
-                { userId: newUser.id },
+                { userId },
                 process.env.JWT_SECRET!,
                 {
                     expiresIn: process.env.JWT_EXPIRES_IN,
                 }
             )
 
-            return { token }
+            return { token, id: userId }
         },
         async updateHighScore(
             _: object,
@@ -93,15 +95,17 @@ const resolvers = {
                 throw new Error('Invalid email or password')
             }
 
+            const userId = user.id
+
             const token = jwt.sign(
-                { userId: user.id },
+                { userId },
                 process.env.JWT_SECRET!,
                 {
                     expiresIn: process.env.JWT_EXPIRES_IN,
                 }
             )
 
-            return { token }
+            return { token, userId }
         },
     },
 }
