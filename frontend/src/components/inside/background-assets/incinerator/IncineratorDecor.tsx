@@ -1,13 +1,12 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import styled, { keyframes } from 'styled-components'
+import { useQuery } from '@apollo/client'
 
+// cache
+import { GET_HIGH_SCORES_AND_NAMES } from '../../../../cache/queries'
+
+// components
 import { TinyItem, generateRandomColor } from '../../utils'
-
-const FireItem = styled(TinyItem)`
-    position: absolute;
-    margin-bottom: 2px;
-    // z-index: 10;
-`
 
 const firewave = keyframes`
 	0%, 100% {
@@ -46,6 +45,11 @@ const DecorContainer = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
+
+    &:hover {
+        cursor: pointer;
+    }
+    z-index: 150;
 `
 
 const FireContainer = styled.div`
@@ -125,6 +129,7 @@ const HighScoreContainer = styled.div`
     );
     border: 1px outset #901000;
     border-radius: 5%;
+    z-index: 50;
 `
 
 const NamePlate = styled.div`
@@ -165,7 +170,44 @@ const ItemsContainer = styled.div`
     margin-left: 1px;
 `
 
+const HighScoreTable = styled.table`
+    width: 90%;
+    height: 100%;
+`
+
+const HighScoreHead = styled.thead`
+    background-color: navy;
+    color: #fff;
+`
+const HighScoreHeaderRow = styled.tr``
+const HighScoreTableHeader = styled.th``
+const HighScoreBody = styled.tbody``
+const HighScoreBodyRow = styled.tr``
+const HighScoreCell = styled.td<{ color: string; }>`
+    border: 1px outset ${({ color }) => color };
+    background-color: ${({ color }) => color };
+    color: black;
+`
+const HighScoreCellRank = styled.td<{ color: string; }>`
+    border: 1px outset ${({ color }) => color };
+    background-color: ${({ color }) => color };
+    width: 20%;
+    color: black;
+    text-align: start;
+`
+
 const IncineratorDecor = () => {
+    const { data, loading, error } = useQuery(GET_HIGH_SCORES_AND_NAMES)
+    const [showTopScorersTable, setShowTopScorersTable] = useState(false)
+    
+    const users = loading ? [] : data.users
+    const topScorers = users.slice(0,4).map((user: any) => {
+        return {
+            name: user.name,
+            score: user.highScore,
+        }
+    })
+
     const populateRow = () => {
         const row = []
         for (let i = 0; i < 16; i++) {
@@ -196,25 +238,63 @@ const IncineratorDecor = () => {
         )
     }, [])
 
-    const generateItemsBackDrop = () => {
+    const handleHighScoreClick = () => setShowTopScorersTable(!showTopScorersTable)
 
-    }
+    const getName = user => user.name
+    const getScore = user => user.score
+
     return (
-        <DecorContainer>
-            <FireContainer>
+        <DecorContainer onClick={handleHighScoreClick}>
+            {showTopScorersTable
+                ? 
+                <HighScoreTable>
+                    <HighScoreHead>
+                        <HighScoreHeaderRow>
+                            <HighScoreTableHeader colSpan={'3'}>
+                                High Scores
+                            </HighScoreTableHeader>
+                        </HighScoreHeaderRow>
+                    </HighScoreHead>
+                    <HighScoreBody>
+                        <HighScoreBodyRow>
+                            <HighScoreCellRank color={'#fdfdfd'}>Rank</HighScoreCellRank>
+                            <HighScoreCell color={'#fdfdfd'}>Username</HighScoreCell>
+                            <HighScoreCell color={'#fdfdfd'}>Score</HighScoreCell>
+                        </HighScoreBodyRow>
+                        <HighScoreBodyRow>
+                            <HighScoreCellRank color={'gold'}>1</HighScoreCellRank>
+                            <HighScoreCell color={'gold'}>{getName(topScorers[0])}</HighScoreCell>
+                            <HighScoreCell color={'gold'}>{getScore(topScorers[0])}</HighScoreCell>
+                        </HighScoreBodyRow>
+                        <HighScoreBodyRow>
+                            <HighScoreCellRank color={'silver'}>2</HighScoreCellRank>
+                            <HighScoreCell color={'silver'}>{getName(topScorers[1])}</HighScoreCell>
+                            <HighScoreCell color={'silver'}>{getScore(topScorers[1])}</HighScoreCell>
+                        </HighScoreBodyRow>
+                        <HighScoreBodyRow>
+                            <HighScoreCellRank color={'#cd7f32'}>3</HighScoreCellRank>
+                            <HighScoreCell color={'#cd7f32'}>{getName(topScorers[2])}</HighScoreCell>
+                            <HighScoreCell color={'#cd7f32'}>{getScore(topScorers[2])}</HighScoreCell>
+                        </HighScoreBodyRow>
+                    </HighScoreBody>
+                </HighScoreTable>
+                :
+                <>
+                <FireContainer>
                 <FireWindow>
                     <FireWindowGlass />
                     {rows}
                     <Fire size={'25px'} />
-                    <FireItem color={generateRandomColor()} />
                     <Fire size={'27px'} />
                     <Fire size={'25px'} />
                 </FireWindow>
             </FireContainer>
             <HighScoreContainer>
-                <NamePlate>Bradley</NamePlate>
-                <ScorePlate>1000000</ScorePlate>
+                <NamePlate>{loading ? '' : getName(topScorers[0])}</NamePlate>
+                <ScorePlate>{loading ? '' : getScore(topScorers[0])}</ScorePlate>
             </HighScoreContainer>
+            </>
+            }
         </DecorContainer>
     )
 }
