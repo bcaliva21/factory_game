@@ -240,8 +240,8 @@ const IncineratorDecor = () => {
 
     const handleHighScoreClick = () => setShowTopScorersTable(!showTopScorersTable)
 
-    const getName = user => user.name
-    const getScore = user => user.score
+    const getName = (user: { name: string; score: number; }) => user.name
+    const getScore = (user: { name: string; score: number; }) => user.score
 
     return (
         <DecorContainer onClick={handleHighScoreClick}>
@@ -250,7 +250,7 @@ const IncineratorDecor = () => {
                 <HighScoreTable>
                     <HighScoreHead>
                         <HighScoreHeaderRow>
-                            <HighScoreTableHeader colSpan={'3'}>
+                            <HighScoreTableHeader colSpan={3}>
                                 High Scores
                             </HighScoreTableHeader>
                         </HighScoreHeaderRow>

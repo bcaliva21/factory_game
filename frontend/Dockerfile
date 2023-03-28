@@ -1,5 +1,5 @@
 # setup env
-FROM node:18-alpine
+FROM node:18.15.0
 # make dir
 RUN mkdir /app
 # nav to dir
