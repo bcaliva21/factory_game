@@ -31,6 +31,15 @@ export const GET_GAME_STATE = gql`
     }
 `
 
+export const GET_HIGH_SCORES_AND_NAMES = gql`
+    query GetHighScoresAndNames {
+        users {
+            highScore
+            name
+        }
+    }
+`
+
 export const GET_IS_INSIDE = gql`
     query GetIsInside {
         isInside @client

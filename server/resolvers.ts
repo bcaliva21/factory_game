@@ -23,7 +23,8 @@ type HighScoreUpdatePayload = {
 const resolvers = {
     Query: {
         users: async (): Promise<User[]> => {
-            return prisma.user.findMany()
+            const users = await prisma.user.findMany()
+            return users.sort((a, b) => b.highScore - a.highScore )
         },
         user: async (
             _: object,

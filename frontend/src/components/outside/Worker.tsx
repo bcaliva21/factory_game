@@ -4,6 +4,8 @@ import styled, { keyframes } from 'styled-components'
 const WorkerContainer = styled.div`
     width: 100%;
     height: 100%;
+    position: relative;
+    margin-top: 10%;
 `
 const Head = styled.div`
     background-color: white;
