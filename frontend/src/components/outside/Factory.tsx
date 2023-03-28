@@ -168,22 +168,21 @@ const OneSecDelaySmoke = styled.div`
     animation-delay: 1s;
 `
 
-const Placard = styled.div`
-    position: absolute;
-    color: #ffd700;
-    background-color: #901000;
-    border: medium inset #ffd700;
-    font-size: larger;
-    padding: 0.5% 1.5%;
-    bottom: 20.5vh;
-    right: 8vw;
-`
+// const Placard = styled.div`
+//     position: absolute;
+//     color: #ffd700;
+//     background-color: #901000;
+//     border: medium inset #ffd700;
+//     font-size: larger;
+//     padding: 0.5% 1.5%;
+//     bottom: 20.5vh;
+//     right: 8vw;
+// `
 
 const Factory = () => {
     const { token, setToken } = useToken()
-    const { user, setUser } = useUser()
+    const { setUser } = useUser()
     const { data, loading, error } = useQuery(GET_FACTORY_VARIABLES)
-    console.log('user: ', user)
 
     if (loading) console.log('what to do...')
     if (error) console.log('with these.')

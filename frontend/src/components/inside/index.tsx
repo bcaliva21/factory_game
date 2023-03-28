@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react'
-
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS } from '../../cache/queries'
+import { GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS, GET_USER_HIGH_SCORE } from '../../cache/queries'
 import { isInsideVar } from '../../cache/'
 
 // helpers
@@ -15,6 +14,7 @@ import {
     startGame,
     convertAnimationTimingToMS,
 } from './utils'
+import { useUser } from '../hooks'
 
 // components
 import ConveyorBelt from './conveyor-belt'
@@ -133,13 +133,21 @@ const ResetButton = styled.div`
 `
 
 const Inside = () => {
+    const { user } = useUser()
+    console.log('user: ', user)
     const [intervalId, setIntervalId] = useState<
         ReturnType<typeof setTimeout> | undefined
     >(undefined)
     const { data, loading, error } = useQuery(
         GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS
     )
-    console.log('data: ', data)
+
+    const { data: userData, loading: highScoreLoading, error: highScoreError } = useQuery(GET_USER_HIGH_SCORE, {
+        variables: {
+            id: Number(user)
+        }
+    })
+
     if (error) console.log('We need to...')
     if (loading) console.log('load')
 
@@ -162,7 +170,9 @@ const Inside = () => {
         if (game.userInputIsCorrect(userInput)) {
             game.resetCycle()
         } else {
-            game.breakCycle()
+            if (game.breakCycle(userData.highScore)) {
+                // use mutation to change userHighScore
+            }
         }
     }, [])
 
@@ -171,7 +181,9 @@ const Inside = () => {
 
         if (gameInProgress) {
             const id = setTimeout(() => {
-                game.breakCycle()
+                if (game.breakCycle(userData.highScore)) {
+                    // use mutation to change userHighScore
+                }
             }, timeUntilGameOver)
 
             setIntervalId(id)

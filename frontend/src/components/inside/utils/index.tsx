@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { useQuery } from '@apollo/client'
 
 // cache
 import {
@@ -65,7 +66,7 @@ export type IGame = {
     id: ReturnType<typeof setInterval> | number
     start: () => void
     resetCycle: () => void
-    breakCycle: () => void
+    breakCycle: (userHighScore: number) => boolean
     clearState: () => void
     userInputIsCorrect: (userInput: string) => boolean
 }
@@ -162,11 +163,12 @@ export const game: IGame = {
             ])
         )
     },
-    breakCycle: () => {
+    breakCycle: (userHighScore: number) => {
         gameStateVar(GAME_STATE_TYPES.OVER)
         clearInterval(game.id)
         console.log('|________final score________| ', gameScoreVar())
-        // save game score
+        if (userHighScore > gameScoreVar()) return true
+        return false
     },
     clearState: () => {
         gameScoreVar(0)
