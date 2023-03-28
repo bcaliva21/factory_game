@@ -171,16 +171,17 @@ const ItemsContainer = styled.div`
 `
 
 const HighScoreTable = styled.table`
-    width: 90%;
+    width: 85%;
     height: 100%;
 `
-
 const HighScoreHead = styled.thead`
     background-color: navy;
     color: #fff;
 `
 const HighScoreHeaderRow = styled.tr``
-const HighScoreTableHeader = styled.th``
+const HighScoreTableHeader = styled.th`
+    border: 1px outset navy;
+`
 const HighScoreBody = styled.tbody``
 const HighScoreBodyRow = styled.tr``
 const HighScoreCell = styled.td<{ color: string; }>`
