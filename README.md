@@ -37,8 +37,8 @@
 1. Install backend dependencies
 ```cd server && npm i```
 
-2. Spin up docker for database access
-```docker-compose up -d```
+2. Spin up docker database
+```docker-compose up -d postgres```
 
 3. Generate prisma client locally
 ```npx prisma generate```
