@@ -12,12 +12,17 @@ export const GET_DIFFICULTY = gql`
     }
 `
 
-export const GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS = gql`
+export const GET_INSIDE_VARIABLES = gql`
     query GetDifficultyGameStateIsInsideAndItems {
         difficulty @client
         isInside @client
         items @client
         gameState @client
+        gameScore @client
+        users {
+            highScore
+            name
+        }
     }
 `
 
@@ -67,14 +72,6 @@ export const GET_ITEMS_REMOVED_COUNT = gql`
     }
 `
 
-export const GET_USER_HIGH_SCORE = gql`
-    query GetUserHighScore($id: Int!) {
-        user(id: $id) {
-            highScore
-        }
-    }
-`
-
 export const REGISTER_MUTATION = gql`
     mutation Register($email: String!, $name: String!, $password: String!) {
         register(email: $email, name: $name, password: $password) {
@@ -90,6 +87,7 @@ export const LOGIN_MUTATION = gql`
             token
             user(email: $email) {
                 id
+                highScore
             }
         }
     }
@@ -98,7 +96,11 @@ export const LOGIN_MUTATION = gql`
 export const UPDATE_HIGH_SCORE_MUTATION = gql`
     mutation UpdateHighScore($id: Int!, $highScore: Int!) {
         updateHighScore(id: $id, highScore: $highScore) {
-            user
+            highScore
+            user(id: $id) {
+                id
+                highScore
+            }
         }
     }
 `
