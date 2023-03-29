@@ -13,9 +13,14 @@ export const typeDefs = `
     }
 
     type Mutation {
-        updateHighScore(id: Int!, highScore: Int): User
+        updateHighScore(id: Int!, highScore: Int!): UpdateHighScorePayload
         login(email: String!, password: String!): LoginPayload!
         register(name: String, email: String, password: String!): RegistrationPayload!
+    }
+
+    type UpdateHighScorePayload {
+        highScore: Int!
+        user(id: Int!): User!
     }
 
     type LoginPayload {

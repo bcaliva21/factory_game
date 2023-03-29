@@ -79,7 +79,7 @@ const resolvers = {
                 },
             })
 
-            return user
+            return { user, highScore: user.highScore }
         },
         async login(_: object, { email, password }: AddUserPayload) {
             const user = await prisma.user.findUnique({ where: { email } })
@@ -105,7 +105,7 @@ const resolvers = {
                 }
             )
 
-            return { token, userId }
+            return { token, user }
         },
     },
 }
