@@ -152,6 +152,7 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
         onCompleted: ({ register }) => {
             setToken(register.token)
             setUser(register.id)
+            setUserHighScore('0')
         },
     })
 
