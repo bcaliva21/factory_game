@@ -66,7 +66,7 @@ export type IGame = {
     id: ReturnType<typeof setInterval> | number
     start: () => void
     resetCycle: () => void
-    breakCycle: (userHighScore: number) => boolean
+    breakCycle: (userHighScore: number) => number
     clearState: () => void
     userInputIsCorrect: (userInput: string) => boolean
 }
@@ -166,9 +166,10 @@ export const game: IGame = {
     breakCycle: (userHighScore: number) => {
         gameStateVar(GAME_STATE_TYPES.OVER)
         clearInterval(game.id)
+        console.log('userHighScore: ', userHighScore)
         console.log('|________final score________| ', gameScoreVar())
-        if (userHighScore > gameScoreVar()) return true
-        return false
+        if (gameScoreVar() > userHighScore) return gameScoreVar()
+        return userHighScore
     },
     clearState: () => {
         gameScoreVar(0)
