@@ -1,9 +1,12 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { useQuery } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 
 // cache
-import { GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS, GET_USER_HIGH_SCORE } from '../../cache/queries'
+import { 
+    GET_INSIDE_VARIABLES,
+    UPDATE_HIGH_SCORE_MUTATION,
+} from '../../cache/queries'
 import { isInsideVar } from '../../cache/'
 
 // helpers
@@ -14,7 +17,7 @@ import {
     startGame,
     convertAnimationTimingToMS,
 } from './utils'
-import { useUser } from '../hooks'
+import { useUser, useUserHighScore } from '../hooks'
 
 // components
 import ConveyorBelt from './conveyor-belt'
@@ -95,8 +98,8 @@ const Backdrop = styled.div`
 `
 
 const GameoverModal = styled.div<{ gameIsOver: boolean }>`
-    width: 20%;
-    height: 15%;
+    width: 30%;
+    height: 30%;
     opacity: 0.75;
     background-color: black;
     color: white;
@@ -121,6 +124,7 @@ const ModalContainer = styled.div`
 `
 
 const ResetButton = styled.div`
+    font-size: 20px;
     width: 20%;
     height: 50%;
     text-align: center;
@@ -132,21 +136,27 @@ const ResetButton = styled.div`
     padding-top: 5px;
 `
 
-const Inside = () => {
-    const { user } = useUser()
-    console.log('user: ', user)
-    const [intervalId, setIntervalId] = useState<
-        ReturnType<typeof setTimeout> | undefined
-    >(undefined)
-    const { data, loading, error } = useQuery(
-        GET_DIFFICULTY_GAME_STATE_IS_INSIDE_AND_ITEMS
-    )
+const PersonalHighscore = styled.div`
+    width: 100%;
+    text-align: center;
+`
 
-    const { data: userData, loading: highScoreLoading, error: highScoreError } = useQuery(GET_USER_HIGH_SCORE, {
-        variables: {
-            id: Number(user)
-        }
-    })
+const NewHighScorer = styled.div`
+    width: 100%;
+    text-align: center;
+`
+
+const Inside = () => {
+    const [newHighScore, setNewHighScore] = useState(false)
+    const { user } = useUser()
+    const { setUserHighScore, userHighScore } = useUserHighScore()
+    const [
+        intervalId, 
+        setIntervalId
+    ] = useState<ReturnType<typeof setTimeout> | undefined>(undefined)
+    const { data, loading, error } = useQuery(
+        GET_INSIDE_VARIABLES
+    )
 
     if (error) console.log('We need to...')
     if (loading) console.log('load')
@@ -155,24 +165,35 @@ const Inside = () => {
     const gameState = data?.gameState
     const isInside = data?.isInside
     const items = data?.items
+    const gameScore = data?.gameScore
+    const topScores = data?.users.slice(0, 3).map((user: any) => user.highScore)
+    const normalizedHighScore = Number(userHighScore)
 
     const gameInProgress: boolean = isGameInProgress(gameState)
     const gameIsOver: boolean = isGameOver(gameState)
     const resetClick = () => startGame(gameInProgress)
     const handleClose = () => isInsideVar(!isInside)
-    const timeUntilGameOver = convertAnimationTimingToMS(difficulty)
+    const timeUntilGameOver = convertAnimationTimingToMS(difficulty || 0)
+
+    const [
+        updateUserHighScore, { data: updateUserData }
+    ] = useMutation(UPDATE_HIGH_SCORE_MUTATION, {
+        onCompleted: ({ updateHighScore }) => {
+            setUserHighScore(updateHighScore.highScore)
+        }
+    })
 
     const killTimingInterval = () => clearTimeout(intervalId)
-    
-
     const handleKeydownEvent = useCallback((event: KeyboardEvent): void => {
         const userInput = event.key
         if (game.userInputIsCorrect(userInput)) {
             game.resetCycle()
         } else {
-            if (game.breakCycle(userData.highScore)) {
-                // use mutation to change userHighScore
-            }
+            if (intervalId) killTimingInterval()
+            const newScore = game.breakCycle(normalizedHighScore)
+            updateUserHighScore({
+                variables: { id: Number(user), highScore: newScore },
+            })
         }
     }, [])
 
@@ -181,9 +202,10 @@ const Inside = () => {
 
         if (gameInProgress) {
             const id = setTimeout(() => {
-                if (game.breakCycle(userData.highScore)) {
-                    // use mutation to change userHighScore
-                }
+                const newScore = game.breakCycle(normalizedHighScore)
+                updateUserHighScore({
+                    variables: { id: Number(user), highScore: newScore },
+                })
             }, timeUntilGameOver)
 
             setIntervalId(id)
@@ -200,12 +222,25 @@ const Inside = () => {
         }
     }, [gameInProgress])
 
+    // const isTopScorer = () => {
+    //     if (topScores?.length > 0) {
+    //         for (const [,score] of Object.entries(topScores)) {
+    //             if (gameScore > score) {
+    //                 return true
+    //             }
+    //         }
+    //     }
+    //     return false
+    // }
+
     return (
         <>
             <Container>
                 <ModalContainer>
                     <GameoverModal gameIsOver={gameIsOver}>
                         You Lose
+                        {newHighScore && <PersonalHighscore>Congratulation! New Personal High Score! {gameScore}</PersonalHighscore>}
+                        {/* {isTopScorer() && <NewHighScorer>Congratulation! New Top Score!</NewHighScorer>} */}
                         <ResetButton onClick={resetClick}>Reset</ResetButton>
                     </GameoverModal>
                 </ModalContainer>

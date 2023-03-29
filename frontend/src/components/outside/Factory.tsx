@@ -11,7 +11,7 @@ import Access from '../access'
 import { GET_FACTORY_VARIABLES } from '../../cache/queries'
 import { isInsideVar, accessPageVar } from '../../cache/'
 
-import { useToken, useUser } from '../hooks'
+import { useToken, useUser, useUserHighScore } from '../hooks'
 
 const FactoryContainer = styled.div`
     width: 70%;
@@ -182,6 +182,7 @@ const OneSecDelaySmoke = styled.div`
 const Factory = () => {
     const { token, setToken } = useToken()
     const { setUser } = useUser()
+    const { setUserHighScore } = useUserHighScore()
     const { data, loading, error } = useQuery(GET_FACTORY_VARIABLES)
 
     if (loading) console.log('what to do...')
@@ -219,7 +220,7 @@ const Factory = () => {
                 <FactoryRoofSection />
                 {accessPage ? (
                     <>
-                        <Access setToken={setToken} setUser={setUser} />
+                        <Access  setToken={setToken} setUser={setUser} setUserHighScore={setUserHighScore} />
                     </>
                 ) : (
                     <>

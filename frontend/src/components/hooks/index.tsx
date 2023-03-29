@@ -35,3 +35,21 @@ export function useUser () {
         user,
     }
 }
+
+export function useUserHighScore() {
+    const getUserHighScore = () => {
+        return sessionStorage.getItem('userHighScore')
+    }
+
+    const [userHighScore, setUserHighScore] = useState(getUserHighScore())
+
+    const saveUserHighScore = (userHighScore: string) => {
+        sessionStorage.setItem('userHighScore', userHighScore)
+        setUserHighScore(userHighScore)
+    }
+
+    return {
+        setUserHighScore: saveUserHighScore,
+        userHighScore,
+    }
+}

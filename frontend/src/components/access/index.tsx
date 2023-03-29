@@ -8,7 +8,8 @@ import { accessPageVar } from '../../cache'
 
 interface AccessProps {
     setToken: (token: string) => void
-    setUser: (user: any) => void
+    setUser: (user: string) => void
+    setUserHighScore: (userHighScore: string) => void
 }
 
 const AccessContainer = styled.div`
@@ -126,7 +127,7 @@ const AccessErrorMessage = styled.div<{ error: boolean }>`
     ${({ error }) => error && errorState}
 `
 
-const Access = ({ setToken, setUser }: AccessProps) => {
+const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
@@ -139,6 +140,7 @@ const Access = ({ setToken, setUser }: AccessProps) => {
             onCompleted: ({ login }) => {
                 setToken(login.token)
                 setUser(login.user.id)
+                setUserHighScore(login.user.highScore)
             },
         }
     )
