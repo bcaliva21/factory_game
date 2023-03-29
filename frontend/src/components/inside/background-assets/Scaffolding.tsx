@@ -88,7 +88,7 @@ const Scaffolding = ({ top, left }: { top: string; left: string }) => {
             row.push(i)
         }
         return (
-            <RowOnScaffolding>
+            <RowOnScaffolding key={Math.floor(Math.random() * 200000) + 'c'}>
                 {row.map((item) => (
                     <TinyItem key={item} color={generateRandomColor()} />
                 ))}

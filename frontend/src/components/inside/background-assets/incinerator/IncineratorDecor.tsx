@@ -215,9 +215,9 @@ const IncineratorDecor = () => {
             row.push(i)
         }
         return (
-            <ItemRowIncinerator>
-                {row.map((item) => (
-                    <TinyItem key={item} color={generateRandomColor()} />
+            <ItemRowIncinerator key={Math.floor(Math.random() * 100000) + 'a'}>
+                {row.map((item, index) => (
+                    <TinyItem key={Math.floor(Math.random() * 100000) + 'b'} color={generateRandomColor()} />
                 ))}
             </ItemRowIncinerator>
         )
