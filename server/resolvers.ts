@@ -24,7 +24,7 @@ const resolvers = {
     Query: {
         users: async (): Promise<User[]> => {
             const users = await prisma.user.findMany()
-            return users.sort((a, b) => b.highScore - a.highScore )
+            return users.sort((a, b) => b.highScore - a.highScore)
         },
         user: async (
             _: object,
@@ -56,13 +56,9 @@ const resolvers = {
 
             const userId = newUser.id
 
-            const token = jwt.sign(
-                { userId },
-                process.env.JWT_SECRET!,
-                {
-                    expiresIn: process.env.JWT_EXPIRES_IN,
-                }
-            )
+            const token = jwt.sign({ userId }, process.env.JWT_SECRET!, {
+                expiresIn: process.env.JWT_EXPIRES_IN,
+            })
 
             return { token, id: userId }
         },
@@ -97,13 +93,9 @@ const resolvers = {
 
             const userId = user.id
 
-            const token = jwt.sign(
-                { userId },
-                process.env.JWT_SECRET!,
-                {
-                    expiresIn: process.env.JWT_EXPIRES_IN,
-                }
-            )
+            const token = jwt.sign({ userId }, process.env.JWT_SECRET!, {
+                expiresIn: process.env.JWT_EXPIRES_IN,
+            })
 
             return { token, user }
         },
