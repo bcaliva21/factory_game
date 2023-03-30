@@ -147,7 +147,6 @@ const NewHighScorer = styled.div`
 `
 
 const Inside = () => {
-    const [newHighScore, setNewHighScore] = useState(false)
     const { user } = useUser()
     const { setUserHighScore, userHighScore } = useUserHighScore()
     const [
@@ -191,6 +190,8 @@ const Inside = () => {
         } else {
             if (intervalId) killTimingInterval()
             const newScore = game.breakCycle(normalizedHighScore)
+            if (newScore === normalizedHighScore) return
+
             updateUserHighScore({
                 variables: { id: Number(user), highScore: newScore },
             })
@@ -203,6 +204,8 @@ const Inside = () => {
         if (gameInProgress) {
             const id = setTimeout(() => {
                 const newScore = game.breakCycle(normalizedHighScore)
+                if (newScore === normalizedHighScore) return
+
                 updateUserHighScore({
                     variables: { id: Number(user), highScore: newScore },
                 })
@@ -239,8 +242,6 @@ const Inside = () => {
                 <ModalContainer>
                     <GameoverModal gameIsOver={gameIsOver}>
                         You Lose
-                        {newHighScore && <PersonalHighscore>Congratulation! New Personal High Score! {gameScore}</PersonalHighscore>}
-                        {/* {isTopScorer() && <NewHighScorer>Congratulation! New Top Score!</NewHighScorer>} */}
                         <ResetButton onClick={resetClick}>Reset</ResetButton>
                     </GameoverModal>
                 </ModalContainer>
