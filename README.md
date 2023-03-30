@@ -34,6 +34,9 @@
 
 #### Back-end
 
+0. Ensure .env database url points to localhost
+```postgresql://USER:PASSWORD@localhost:5432/DBNAME?schema=public```
+
 1. Install backend dependencies
 ```cd server && npm i```
 
@@ -59,6 +62,9 @@
 
 0. Make sure the postgres container is running
 ```docker ps```
+
+0. Ensure .env database url points to docker postgres
+```postgresql://USER:PASSWORD@postgres:5432/DBNAME?schema=public```
 
 1. Start docker container
 ```docker-compose up --build```
