@@ -74,4 +74,3 @@ export const itemsRemovedCountVar: ReactiveVar<number> = makeVar<number>(
 )
 export const itemsVar: ReactiveVar<ItemProps[]> =
     makeVar<ItemProps[]>(itemsVarInitialValue)
-

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useQuery, useMutation } from '@apollo/client'
 
 // cache
-import { 
+import {
     GET_INSIDE_VARIABLES,
     UPDATE_HIGH_SCORE_MUTATION,
 } from '../../cache/queries'
@@ -149,13 +149,10 @@ const NewHighScorer = styled.div`
 const Inside = () => {
     const { user } = useUser()
     const { setUserHighScore, userHighScore } = useUserHighScore()
-    const [
-        intervalId, 
-        setIntervalId
-    ] = useState<ReturnType<typeof setTimeout> | undefined>(undefined)
-    const { data, loading, error } = useQuery(
-        GET_INSIDE_VARIABLES
-    )
+    const [intervalId, setIntervalId] = useState<
+        ReturnType<typeof setTimeout> | undefined
+    >(undefined)
+    const { data, loading, error } = useQuery(GET_INSIDE_VARIABLES)
 
     if (error) console.log('We need to...')
     if (loading) console.log('load')
@@ -174,13 +171,14 @@ const Inside = () => {
     const handleClose = () => isInsideVar(!isInside)
     const timeUntilGameOver = convertAnimationTimingToMS(difficulty || 0)
 
-    const [
-        updateUserHighScore, { data: updateUserData }
-    ] = useMutation(UPDATE_HIGH_SCORE_MUTATION, {
-        onCompleted: ({ updateHighScore }) => {
-            setUserHighScore(updateHighScore.highScore)
+    const [updateUserHighScore, { data: updateUserData }] = useMutation(
+        UPDATE_HIGH_SCORE_MUTATION,
+        {
+            onCompleted: ({ updateHighScore }) => {
+                setUserHighScore(updateHighScore.highScore)
+            },
         }
-    })
+    )
 
     const killTimingInterval = () => clearTimeout(intervalId)
     const handleKeydownEvent = useCallback((event: KeyboardEvent): void => {

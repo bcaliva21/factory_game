@@ -220,7 +220,11 @@ const Factory = () => {
                 <FactoryRoofSection />
                 {accessPage ? (
                     <>
-                        <Access  setToken={setToken} setUser={setUser} setUserHighScore={setUserHighScore} />
+                        <Access
+                            setToken={setToken}
+                            setUser={setUser}
+                            setUserHighScore={setUserHighScore}
+                        />
                     </>
                 ) : (
                     <>

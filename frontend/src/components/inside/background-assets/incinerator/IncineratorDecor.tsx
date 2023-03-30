@@ -34,7 +34,6 @@ const innerFirewave = keyframes`
 	{
 `
 
-
 const DecorContainer = styled.div`
     width: 100%;
     height: 45%;
@@ -72,12 +71,12 @@ const FireWindow = styled.div`
     border: 2px solid #282828;
     z-index: 100;
     box-shadow: 1px 2px 8px 0 rgba(0, 0, 0, 0.25),
-    -6px -6px 8px 0 rgba(145, 20, 0, 1);
+        -6px -6px 8px 0 rgba(145, 20, 0, 1);
 `
 
 const FireWindowGlass = styled.div`
     width: 100%;
-    height:100%;
+    height: 100%;
     position: absolute;
     z-index: 124;
     background-color: skyblue;
@@ -184,14 +183,14 @@ const HighScoreTableHeader = styled.th`
 `
 const HighScoreBody = styled.tbody``
 const HighScoreBodyRow = styled.tr``
-const HighScoreCell = styled.td<{ color: string; }>`
-    border: 1px outset ${({ color }) => color };
-    background-color: ${({ color }) => color };
+const HighScoreCell = styled.td<{ color: string }>`
+    border: 1px outset ${({ color }) => color};
+    background-color: ${({ color }) => color};
     color: black;
 `
-const HighScoreCellRank = styled.td<{ color: string; }>`
-    border: 1px outset ${({ color }) => color };
-    background-color: ${({ color }) => color };
+const HighScoreCellRank = styled.td<{ color: string }>`
+    border: 1px outset ${({ color }) => color};
+    background-color: ${({ color }) => color};
     width: 20%;
     color: black;
     text-align: start;
@@ -202,9 +201,9 @@ const IncineratorDecor = () => {
         pollInterval: 500,
     })
     const [showTopScorersTable, setShowTopScorersTable] = useState(false)
-    
+
     const users = loading ? [] : data.users
-    const topScorers = users.slice(0,4).map((user: any) => {
+    const topScorers = users.slice(0, 4).map((user: any) => {
         return {
             name: user.name,
             score: user.highScore,
@@ -219,7 +218,10 @@ const IncineratorDecor = () => {
         return (
             <ItemRowIncinerator key={Math.floor(Math.random() * 100000) + 'a'}>
                 {row.map((item, index) => (
-                    <TinyItem key={Math.floor(Math.random() * 100000) + 'b'} color={generateRandomColor()} />
+                    <TinyItem
+                        key={Math.floor(Math.random() * 100000) + 'b'}
+                        color={generateRandomColor()}
+                    />
                 ))}
             </ItemRowIncinerator>
         )
@@ -241,15 +243,15 @@ const IncineratorDecor = () => {
         )
     }, [])
 
-    const handleHighScoreClick = () => setShowTopScorersTable(!showTopScorersTable)
+    const handleHighScoreClick = () =>
+        setShowTopScorersTable(!showTopScorersTable)
 
-    const getName = (user: { name: string; score: number; }) => user?.name
-    const getScore = (user: { name: string; score: number; }) => user?.score
+    const getName = (user: { name: string; score: number }) => user?.name
+    const getScore = (user: { name: string; score: number }) => user?.score
 
     return (
         <DecorContainer onClick={handleHighScoreClick}>
-            {showTopScorersTable
-                ? 
+            {showTopScorersTable ? (
                 <HighScoreTable>
                     <HighScoreHead>
                         <HighScoreHeaderRow>
@@ -260,44 +262,72 @@ const IncineratorDecor = () => {
                     </HighScoreHead>
                     <HighScoreBody>
                         <HighScoreBodyRow>
-                            <HighScoreCellRank color={'#fdfdfd'}>Rank</HighScoreCellRank>
-                            <HighScoreCell color={'#fdfdfd'}>Username</HighScoreCell>
-                            <HighScoreCell color={'#fdfdfd'}>Score</HighScoreCell>
+                            <HighScoreCellRank color={'#fdfdfd'}>
+                                Rank
+                            </HighScoreCellRank>
+                            <HighScoreCell color={'#fdfdfd'}>
+                                Username
+                            </HighScoreCell>
+                            <HighScoreCell color={'#fdfdfd'}>
+                                Score
+                            </HighScoreCell>
                         </HighScoreBodyRow>
                         <HighScoreBodyRow>
-                            <HighScoreCellRank color={'gold'}>1</HighScoreCellRank>
-                            <HighScoreCell color={'gold'}>{getName(topScorers[0])}</HighScoreCell>
-                            <HighScoreCell color={'gold'}>{getScore(topScorers[0])}</HighScoreCell>
+                            <HighScoreCellRank color={'gold'}>
+                                1
+                            </HighScoreCellRank>
+                            <HighScoreCell color={'gold'}>
+                                {getName(topScorers[0])}
+                            </HighScoreCell>
+                            <HighScoreCell color={'gold'}>
+                                {getScore(topScorers[0])}
+                            </HighScoreCell>
                         </HighScoreBodyRow>
                         <HighScoreBodyRow>
-                            <HighScoreCellRank color={'silver'}>2</HighScoreCellRank>
-                            <HighScoreCell color={'silver'}>{getName(topScorers[1])}</HighScoreCell>
-                            <HighScoreCell color={'silver'}>{getScore(topScorers[1])}</HighScoreCell>
+                            <HighScoreCellRank color={'silver'}>
+                                2
+                            </HighScoreCellRank>
+                            <HighScoreCell color={'silver'}>
+                                {getName(topScorers[1])}
+                            </HighScoreCell>
+                            <HighScoreCell color={'silver'}>
+                                {getScore(topScorers[1])}
+                            </HighScoreCell>
                         </HighScoreBodyRow>
                         <HighScoreBodyRow>
-                            <HighScoreCellRank color={'#cd7f32'}>3</HighScoreCellRank>
-                            <HighScoreCell color={'#cd7f32'}>{getName(topScorers[2])}</HighScoreCell>
-                            <HighScoreCell color={'#cd7f32'}>{getScore(topScorers[2])}</HighScoreCell>
+                            <HighScoreCellRank color={'#cd7f32'}>
+                                3
+                            </HighScoreCellRank>
+                            <HighScoreCell color={'#cd7f32'}>
+                                {getName(topScorers[2])}
+                            </HighScoreCell>
+                            <HighScoreCell color={'#cd7f32'}>
+                                {getScore(topScorers[2])}
+                            </HighScoreCell>
                         </HighScoreBodyRow>
                     </HighScoreBody>
                 </HighScoreTable>
-                :
+            ) : (
                 <>
-                <FireContainer>
-                <FireWindow>
-                    <FireWindowGlass />
-                    {rows}
-                    <Fire size={'25px'} />
-                    <Fire size={'27px'} />
-                    <Fire size={'25px'} />
-                </FireWindow>
-            </FireContainer>
-            <HighScoreContainer>
-                <NamePlate>{loading ? '' : getName(topScorers[0])}</NamePlate>
-                <ScorePlate>{loading ? '' : getScore(topScorers[0])}</ScorePlate>
-            </HighScoreContainer>
-            </>
-            }
+                    <FireContainer>
+                        <FireWindow>
+                            <FireWindowGlass />
+                            {rows}
+                            <Fire size={'25px'} />
+                            <Fire size={'27px'} />
+                            <Fire size={'25px'} />
+                        </FireWindow>
+                    </FireContainer>
+                    <HighScoreContainer>
+                        <NamePlate>
+                            {loading ? '' : getName(topScorers[0])}
+                        </NamePlate>
+                        <ScorePlate>
+                            {loading ? '' : getScore(topScorers[0])}
+                        </ScorePlate>
+                    </HighScoreContainer>
+                </>
+            )}
         </DecorContainer>
     )
 }

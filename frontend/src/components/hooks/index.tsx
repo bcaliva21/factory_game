@@ -18,7 +18,7 @@ export function useToken() {
     }
 }
 
-export function useUser () {
+export function useUser() {
     const getUser = () => {
         return sessionStorage.getItem('user')
     }

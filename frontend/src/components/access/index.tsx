@@ -254,7 +254,7 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
                         <ShowPassword
                             type="image"
                             src={eye}
-                            onClick={e => handleShowPassword(e)}
+                            onClick={(e) => handleShowPassword(e)}
                         />
                     </PasswordContainer>
                     <ActionContainer>
