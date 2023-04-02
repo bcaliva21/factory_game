@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import {
@@ -185,16 +185,22 @@ const ForkLift = () => {
         setAppendCargoTimeout()
     }, [])
 
+    const renderCargo = useMemo(() => {
+        return (
+            <CargoContainer id={'cargo-container'}>
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+                {populateRow()}
+            </CargoContainer>
+        )
+    }, [])
+
     return (
         <ForkLiftContainer>
             <ForkLiftBody>
                 <LiftComponent id={'lift-component'}>
-                    <CargoContainer id={'cargo-container'}>
-                        {populateRow()}
-                        {populateRow()}
-                        {populateRow()}
-                        {populateRow()}
-                    </CargoContainer>
+                    {renderCargo}
                     <LiftToBodyConnector />
                     <LiftVerticalSection />
                     <LiftHorizontalSeciton />
