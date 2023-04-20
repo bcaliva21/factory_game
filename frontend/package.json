@@ -44,14 +44,16 @@
 	"url": "github.com/bcaliva21"
   },
   "contributors": [
-	  {
-		"name": "antoniojcaporicci",
-		"url": "github.com/antoniojcaporicci"
-	  },
-	  {
-		"name": "bcaliva21",
-		"url": "github.com/bcaliva21"
-	  }
+	{
+	  "name": "antoniojcaporicci",
+	  "url": "github.com/antoniojcaporicci"
+	},
+	{
+	  "email": "bcaliva21@gmail.com",
+	  "name": "bcaliva21",
+	  "url": "github.com/bcaliva21"
+	}
   ],
   "license": "ISC"
 }
+
