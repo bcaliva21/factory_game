@@ -40,6 +40,22 @@
       "prisma": "^4.11.0",
       "typescript": "^4.9.3"
     },
-    "author": "Bradley Caliva",
+  "author": {
+	"email": "bcaliva21@gmail.com",
+	"name": "bcaliva21",
+	"url": "github.com/bcaliva21"
+  },
+  "contributors": [
+	{
+	  "name": "antoniojcaporicci",
+	  "url": "github.com/antoniojcaporicci"
+	},
+	{
+	  "email": "bcaliva21@gmail.com",
+	  "name": "bcaliva21",
+	  "url": "github.com/bcaliva21"
+	}
+  ],
     "license": "ISC"
   }
+
