@@ -1,8 +1,8 @@
-import type { Config } from 'jest
+import type { Config } from 'jest'
 
-exoprt default async (): Promise<Config> => {
+export default async (): Promise<Config> => {
 	return {
 		verbose: true,
-	},
-}
+	};
+};
 
