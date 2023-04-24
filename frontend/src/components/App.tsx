@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/client'
 import Outside from './outside'
 import Inside from './inside'
 
-import { GET_IS_INSIDE } from '../cache/queries'
+import { GET_IS_INSIDE } from '../graphql/queries'
 
 const Game = styled.div`
     position: relative;

@@ -3,10 +3,10 @@ import { useQuery } from '@apollo/client'
 import styled, { keyframes, css } from 'styled-components'
 
 // queries
-import { GET_DIFFICULTY } from '../../cache/queries'
+import { GET_DIFFICULTY } from '../../graphql/queries'
 
 // helpers
-import { ANIMATION_TIMINGS } from './utils'
+import { ANIMATION_TIMINGS } from '../utils'
 
 import down from '../../assets/arrow-down'
 import left from '../../assets/arrow-left'

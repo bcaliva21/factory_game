@@ -6,8 +6,8 @@ import { useQuery, useMutation } from '@apollo/client'
 import {
     GET_INSIDE_VARIABLES,
     UPDATE_HIGH_SCORE_MUTATION,
-} from '../../cache/queries'
-import { isInsideVar } from '../../cache/'
+} from '../../graphql/queries'
+import { isInsideVar } from '../../graphql/cache'
 
 // helpers
 import {
@@ -16,7 +16,7 @@ import {
     isGameOver,
     startGame,
     convertAnimationTimingToMS,
-} from './utils'
+} from '../utils'
 import { useUser, useUserHighScore } from '../hooks'
 
 // components

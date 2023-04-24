@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { renderToStaticMarkup } from 'react-dom/server'
 
-import { TinyItem, generateRandomColor } from '../../utils/'
+import { TinyItem, generateRandomColor } from '../../../utils/'
 
 export const CargoRow = styled.div`
     display: flex;

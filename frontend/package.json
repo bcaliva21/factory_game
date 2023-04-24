@@ -13,7 +13,8 @@
     "preview": "vite preview",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' 'src/**/*.tsx' --write",
     "lint": "eslint --ext .js,.ts,.tsx .",
-    "postinstall": "npm run build"
+    "postinstall": "npm run build",
+    "test": "jest"
   },
   "dependencies": {
     "@apollo/client": "^3.7.9",
@@ -23,10 +24,15 @@
     "graphql": "^16.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "ts-node": "^10.9.1"
   },
   "devDependencies": {
+    "@apollo/server": "^4.7.0",
+    "@graphql-tools/mock": "^8.7.20",
+    "@graphql-tools/schema": "^9.0.19",
     "@types/cors": "^2.8.13",
+    "@types/jest": "^29.5.1",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@types/styled-components": "^5.1.26",
@@ -35,25 +41,26 @@
     "@vitejs/plugin-react": "^3.1.0",
     "eslint": "^8.35.0",
     "eslint-plugin-react": "^7.32.2",
+    "jest": "^29.5.0",
     "prettier": "^2.8.4",
+    "ts-jest": "^29.1.0",
     "typescript": "^4.9.3"
   },
   "author": {
-	"email": "bcaliva21@gmail.com",
-	"name": "bcaliva21",
-	"url": "github.com/bcaliva21"
+    "email": "bcaliva21@gmail.com",
+    "name": "bcaliva21",
+    "url": "github.com/bcaliva21"
   },
   "contributors": [
-	{
-	  "name": "antoniojcaporicci",
-	  "url": "github.com/antoniojcaporicci"
-	},
-	{
-	  "email": "bcaliva21@gmail.com",
-	  "name": "bcaliva21",
-	  "url": "github.com/bcaliva21"
-	}
+    {
+      "name": "antoniojcaporicci",
+      "url": "github.com/antoniojcaporicci"
+    },
+    {
+      "email": "bcaliva21@gmail.com",
+      "name": "bcaliva21",
+      "url": "github.com/bcaliva21"
+    }
   ],
   "license": "ISC"
 }
-

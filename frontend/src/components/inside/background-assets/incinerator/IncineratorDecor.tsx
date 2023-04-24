@@ -3,10 +3,10 @@ import styled, { keyframes } from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_HIGH_SCORES_AND_NAMES } from '../../../../cache/queries'
+import { GET_HIGH_SCORES_AND_NAMES } from '../../../../graphql/queries'
 
 // components
-import { TinyItem, generateRandomColor } from '../../utils'
+import { TinyItem, generateRandomColor } from '../../../utils'
 
 const firewave = keyframes`
 	0%, 100% {

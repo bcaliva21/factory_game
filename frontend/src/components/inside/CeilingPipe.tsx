@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 
-import { GET_ITEMS } from '../../cache/queries'
+import { GET_ITEMS } from '../../graphql/queries'
 // components
 import Item from './Item'
 

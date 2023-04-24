@@ -8,8 +8,8 @@ import EnterDoor from './EnterDoor'
 import Access from '../access'
 
 // cache
-import { GET_FACTORY_VARIABLES } from '../../cache/queries'
-import { isInsideVar, accessPageVar } from '../../cache/'
+import { GET_FACTORY_VARIABLES } from '../../graphql/queries'
+import { isInsideVar, accessPageVar } from '../../graphql/cache'
 
 import { useToken, useUser, useUserHighScore } from '../hooks'
 

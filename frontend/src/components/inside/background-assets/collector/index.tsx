@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
-import { TinyItem, generateRandomColor } from '../../utils'
+import { TinyItem, generateRandomColor } from '../../../utils'
 
 const CollectorContainer = styled.div`
     width: 18%;

@@ -9,8 +9,8 @@ import {
 import { setContext } from '@apollo/client/link/context'
 
 import App from './components/App'
-import { cache } from './cache/'
-import { typeDefs } from './cache/schema'
+import { cache } from './graphql/cache'
+import { typeDefs } from './graphql/schema'
 
 const http = new HttpLink({ uri: 'http://localhost:4000/' })
 const httpLink = ApolloLink.from([http])

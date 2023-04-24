@@ -3,8 +3,8 @@ import styled, { css } from 'styled-components'
 import { useMutation } from '@apollo/client'
 
 import eye from '../../assets/eye.svg'
-import { LOGIN_MUTATION, REGISTER_MUTATION } from '../../cache/queries'
-import { accessPageVar } from '../../cache'
+import { LOGIN_MUTATION, REGISTER_MUTATION } from '../../graphql/queries'
+import { accessPageVar } from '../../graphql/cache'
 
 interface AccessProps {
     setToken: (token: string) => void
@@ -101,6 +101,9 @@ const ShowPassword = styled.input`
     position: absolute;
     right: 12%;
     top: 12%;
+	&:svg {
+		background-color: red;
+	}
 `
 
 const ViewQuestion = styled.div`

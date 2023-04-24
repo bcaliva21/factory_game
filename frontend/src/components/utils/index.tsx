@@ -8,7 +8,7 @@ import {
     difficultyVar,
     itemsVar,
     itemsRemovedCountVar,
-} from '../../../cache'
+} from '../../graphql/cache'
 
 export const COLORS = ['red', 'blue', 'green', 'yellow']
 
@@ -185,3 +185,4 @@ export const game: IGame = {
         return correctKeycode === userInput
     },
 }
+

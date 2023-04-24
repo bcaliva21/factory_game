@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
-import { MiniItem, generateRandomColor } from '../utils'
+import { MiniItem, generateRandomColor } from '../../utils'
 
 const PileOfItemsContainer = styled.div<{ left: string }>`
     width: 18%;

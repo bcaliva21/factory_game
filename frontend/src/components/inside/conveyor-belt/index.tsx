@@ -3,10 +3,10 @@ import styled, { css, keyframes } from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_GAME_STATE } from '../../../cache/queries'
+import { GET_GAME_STATE } from '../../../graphql/queries'
 
 import Leg from './Leg'
-import { isGameInProgress } from '../utils'
+import { isGameInProgress } from '../../utils'
 
 const ConveyorBeltContainer = styled.div`
     position: absolute;

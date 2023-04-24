@@ -3,10 +3,10 @@ import styled, { css } from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_GAME_STATE } from '../../../../cache/queries'
+import { GET_GAME_STATE } from '../../../../graphql/queries'
 
 // helpers
-import { GAME_STATE_TYPES } from '../../utils'
+import { GAME_STATE_TYPES } from '../../../utils'
 
 const ExitDoorContainer = styled.div`
     width: calc(100vw / 16);

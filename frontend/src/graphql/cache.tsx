@@ -1,5 +1,5 @@
 import { InMemoryCache, ReactiveVar, makeVar } from '@apollo/client'
-import { GAME_STATE_TYPES, ItemProps } from '../components/inside/utils'
+import { GAME_STATE_TYPES, ItemProps } from '../components/utils'
 
 export const cache: InMemoryCache = new InMemoryCache({
     typePolicies: {
@@ -74,3 +74,4 @@ export const itemsRemovedCountVar: ReactiveVar<number> = makeVar<number>(
 )
 export const itemsVar: ReactiveVar<ItemProps[]> =
     makeVar<ItemProps[]>(itemsVarInitialValue)
+

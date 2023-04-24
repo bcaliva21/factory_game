@@ -3,10 +3,10 @@ import styled, { css, keyframes } from 'styled-components'
 import { useQuery } from '@apollo/client'
 
 // cache
-import { GET_GAME_SCORE_AND_GAME_STATE } from '../../../cache/queries'
+import { GET_GAME_SCORE_AND_GAME_STATE } from '../../../graphql/queries'
 
 // helpers
-import { isGameInProgress, startGame } from '../utils'
+import { isGameInProgress, startGame } from '../../utils'
 
 // svg
 import power from '../../../assets/power-btn'
