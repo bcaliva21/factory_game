@@ -1,61 +1,67 @@
 {
-    "name": "server",
-    "version": "1.0.0",
-    "description": "backend for factory_game",
-    "main": "index.ts",
-    "type": "module",
-    "engines": {
-      "node": "18.x"
-    },
-    "prisma": {
-      "seed": "ts-node prisma/seed.ts"
-    },
-    "scripts": {
-      "serve": "ts-node --esm index.ts",
-      "postinstall": "prisma generate",
-      "prettier-format": "prettier --config .prettierrc '*.ts' --write",
-      "lint": "eslint --ext .js,.ts,.tsx ."
-    },
-    "dependencies": {
-      "@apollo/server": "^4.4.0",
-      "@prisma/client": "^4.11.0",
-      "bcryptjs": "^2.4.3",
-      "body-parser": "^1.20.2",
-      "cors": "^2.8.5",
-      "docker-compose": "^0.23.19",
-      "express": "^4.18.2",
-      "graphql": "^16.6.0",
-      "jsonwebtoken": "^9.0.0",
-      "ts-node": "^10.9.1"
-    },
-    "devDependencies": {
-      "@types/bcryptjs": "^2.4.2",
-      "@types/cors": "^2.8.13",
-      "@types/jsonwebtoken": "^9.0.1",
-      "@types/node": "^18.14.2",
-      "@typescript-eslint/eslint-plugin": "^5.54.0",
-      "@typescript-eslint/parser": "^5.54.0",
-      "eslint": "^8.35.0",
-      "prettier": "^2.8.4",
-      "prisma": "^4.11.0",
-      "typescript": "^4.9.3"
-    },
-  "author": {
-	"email": "bcaliva21@gmail.com",
-	"name": "bcaliva21",
-	"url": "github.com/bcaliva21"
-  },
-  "contributors": [
-	{
-	  "name": "antoniojcaporicci",
-	  "url": "github.com/antoniojcaporicci"
+	"name": "server",
+	"version": "1.0.0",
+	"description": "backend for factory_game",
+	"main": "index.ts",
+	"type": "module",
+	"engines": {
+		"node": "18.x"
 	},
-	{
-	  "email": "bcaliva21@gmail.com",
-	  "name": "bcaliva21",
-	  "url": "github.com/bcaliva21"
-	}
-  ],
-    "license": "ISC"
-  }
-
+	"prisma": {
+		"seed": "ts-node prisma/seed.ts"
+	},
+	"scripts": {
+		"serve": "ts-node --esm index.ts",
+		"postinstall": "prisma generate",
+		"prettier-format": "prettier --config .prettierrc '*.ts' --write",
+		"lint": "eslint --ext .js,.ts,.tsx .",
+		"test": "jest test"
+	},
+	"dependencies": {
+		"@apollo/server": "^4.4.0",
+		"@prisma/client": "^4.11.0",
+		"bcryptjs": "^2.4.3",
+		"body-parser": "^1.20.2",
+		"cors": "^2.8.5",
+		"docker-compose": "^0.23.19",
+		"express": "^4.18.2",
+		"jsonwebtoken": "^9.0.0",
+		"ts-node": "^10.9.1"
+	},
+	"devDependencies": {
+		"@graphql-tools/mock": "^8.7.20",
+		"@graphql-tools/schema": "^9.0.19",
+		"@types/bcryptjs": "^2.4.2",
+		"@types/cors": "^2.8.13",
+		"@types/jest": "^29.5.1",
+		"@types/jsonwebtoken": "^9.0.1",
+		"@types/node": "^18.14.2",
+		"@typescript-eslint/eslint-plugin": "^5.54.0",
+		"@typescript-eslint/parser": "^5.54.0",
+		"eslint": "^8.35.0",
+		"graphql": "^16.6.0",
+		"graphql-tools": "^8.3.20",
+		"jest": "^29.5.0",
+		"prettier": "^2.8.4",
+		"prisma": "^4.11.0",
+		"ts-jest": "^29.1.0",
+		"typescript": "^4.9.3"
+	},
+	"author": {
+		"email": "bcaliva21@gmail.com",
+		"name": "bcaliva21",
+		"url": "github.com/bcaliva21"
+	},
+	"contributors": [
+		{
+			"name": "antoniojcaporicci",
+			"url": "github.com/antoniojcaporicci"
+		},
+		{
+			"email": "bcaliva21@gmail.com",
+			"name": "bcaliva21",
+			"url": "github.com/bcaliva21"
+		}
+	],
+	"license": "ISC"
+}
