@@ -15,3 +15,4 @@ RUN npx prisma generate
 EXPOSE 4000
 # run server
 CMD ["npm", "run", "serve"]
+
