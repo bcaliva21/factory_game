@@ -12,7 +12,15 @@ import App from './components/App'
 import { cache } from './cache/'
 import { typeDefs } from './cache/schema'
 
-const http = new HttpLink({ uri: 'http://localhost:4000/' })
+const http = new HttpLink({ 
+    credentials: 'include',
+    headers: {
+        'content-type': 'application/json',
+        'x-apollo-operation-name': 'GraphQLRequest',
+    },
+    uri: 'https://factory-game.com/api',
+})
+
 const httpLink = ApolloLink.from([http])
 
 const authLink = setContext((_, { headers }) => {

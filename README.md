@@ -1,4 +1,4 @@
-# Factory Game
+
 
 > This repo is for a simple scroll timing game.
 > This is a mono repo built with vite and is seperated into three micro services:
