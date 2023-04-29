@@ -1,7 +1,6 @@
 import { PrismaClient, User } from '@prisma/client'
 import jwt from 'jsonwebtoken'
-import pkg from 'bcryptjs'
-const { compare } = pkg
+import bcrypt from 'bcryptjs'
 
 const prisma = new PrismaClient()
 
@@ -45,12 +44,15 @@ const resolvers = {
                 throw new Error('email already exists, try logging in')
             }
 
+	    const salt = await bcrypt.genSalt(10)
+	    const hash = await bcrypt.hash(password, salt)
+
             const newUser = await prisma.user.create({
                 data: {
                     name,
                     email,
                     highScore: 0,
-                    password,
+                    password: hash,
                 },
             })
 
@@ -85,7 +87,7 @@ const resolvers = {
             }
 
             // TODO: use bcrypt compare when SSL is added
-            const passwordMatch = password === user.password
+            const passwordMatch = await bcrypt.compare(password, user.password)
 
             if (!passwordMatch) {
                 throw new Error('Invalid email or password')
