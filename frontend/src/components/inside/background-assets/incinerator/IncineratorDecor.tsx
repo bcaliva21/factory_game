@@ -197,9 +197,7 @@ const HighScoreCellRank = styled.td<{ color: string }>`
 `
 
 const IncineratorDecor = () => {
-    const { data, loading, error } = useQuery(GET_HIGH_SCORES_AND_NAMES, {
-        pollInterval: 500,
-    })
+    const { data, loading, error, refetch } = useQuery(GET_HIGH_SCORES_AND_NAMES)
     const [showTopScorersTable, setShowTopScorersTable] = useState(false)
 
     const users = loading ? [] : data.users
@@ -243,9 +241,11 @@ const IncineratorDecor = () => {
         )
     }, [])
 
-    const handleHighScoreClick = () =>
+    const handleHighScoreClick = () => {
         setShowTopScorersTable(!showTopScorersTable)
-
+        refetch()
+    }
+        
     const getName = (user: { name: string; score: number }) => user?.name
     const getScore = (user: { name: string; score: number }) => user?.score
 
