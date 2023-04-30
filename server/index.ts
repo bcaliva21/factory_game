@@ -8,11 +8,13 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import { typeDefs } from './schema.js'
 import resolvers from './resolvers.js'
+import dotenv from 'dotenv'
+
+const env = process.env.NODE_ENV
+dotenv.config({ path: `./.env.${env}` })
 
 const app = express()
-const httpServer = http.createServer(
-	app
-)
+const httpServer = http.createServer(app)
 
 const server = new ApolloServer({
     typeDefs,
@@ -27,12 +29,15 @@ app.use(
     cors(),
     bodyParser.json(),
     expressMiddleware(server, {
-    	context: async ({ req }) => ({ token: req.headers.token})
+        context: async ({ req }) => ({ token: req.headers.token }),
     })
 )
-
 
 //@ts-ignore
 await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve))
 
-console.log(`🚀 Server ready at https://factory-game.com/api`)
+console.log(
+    env === 'prod'
+        ? `🚀 Server ready at https://factory-game.com/api`
+        : `🚀 Server ready at http://localhost:4000`
+)

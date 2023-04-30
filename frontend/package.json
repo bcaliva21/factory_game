@@ -7,10 +7,10 @@
     "node": "18.x"
   },
   "scripts": {
-    "dev": "vite",
-    "prod": "vite preview --host",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
+    "dev": "NODE_ENV=dev vite",
+    "prod": "NODE_ENV=prod vite preview --host",
+    "build": "NODE_ENV=prod tsc && vite build",
+    "preview": "NODE_ENV=prod vite preview",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' 'src/**/*.tsx' --write",
     "lint": "eslint --ext .js,.ts,.tsx .",
     "postinstall": "npm run build"
@@ -39,21 +39,20 @@
     "typescript": "^4.9.3"
   },
   "author": {
-	"email": "bcaliva21@gmail.com",
-	"name": "bcaliva21",
-	"url": "github.com/bcaliva21"
+    "email": "bcaliva21@gmail.com",
+    "name": "bcaliva21",
+    "url": "github.com/bcaliva21"
   },
   "contributors": [
-	{
-	  "name": "antoniojcaporicci",
-	  "url": "github.com/antoniojcaporicci"
-	},
-	{
-	  "email": "bcaliva21@gmail.com",
-	  "name": "bcaliva21",
-	  "url": "github.com/bcaliva21"
-	}
+    {
+      "name": "antoniojcaporicci",
+      "url": "github.com/antoniojcaporicci"
+    },
+    {
+      "email": "bcaliva21@gmail.com",
+      "name": "bcaliva21",
+      "url": "github.com/bcaliva21"
+    }
   ],
   "license": "ISC"
 }
-

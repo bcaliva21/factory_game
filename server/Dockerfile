@@ -14,4 +14,4 @@ RUN npx prisma generate
 # expose port
 EXPOSE 4000
 # run server
-CMD ["npm", "run", "serve"]
+CMD ["npm", "run", "serve-prod"]

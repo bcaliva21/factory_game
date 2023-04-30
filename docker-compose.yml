@@ -1,5 +1,3 @@
-# node-graphql-lesson-04/docker-compose.yml
-
 version: '3.8'
 services:
   postgres:

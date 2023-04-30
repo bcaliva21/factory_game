@@ -12,13 +12,15 @@ import App from './components/App'
 import { cache } from './cache/'
 import { typeDefs } from './cache/schema'
 
-const http = new HttpLink({ 
-    credentials: 'include',
+const devEnv = import.meta.env.VITE_API_URI.includes('localhost')
+
+const http = new HttpLink({
+    credentials: !devEnv && 'include',
     headers: {
         'content-type': 'application/json',
         'x-apollo-operation-name': 'GraphQLRequest',
     },
-    uri: 'https://factory-game.com/api',
+    uri: import.meta.env.VITE_API_URI,
 })
 
 const httpLink = ApolloLink.from([http])
