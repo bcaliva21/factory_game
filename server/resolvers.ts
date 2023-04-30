@@ -44,8 +44,8 @@ const resolvers = {
                 throw new Error('email already exists, try logging in')
             }
 
-	    const salt = await bcrypt.genSalt(10)
-	    const hash = await bcrypt.hash(password, salt)
+            const salt = await bcrypt.genSalt(10)
+            const hash = await bcrypt.hash(password, salt)
 
             const newUser = await prisma.user.create({
                 data: {
