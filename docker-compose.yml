@@ -30,7 +30,7 @@ services:
     ports:
       - 4000:4000
     environment:
-      - DATABASE_URL=postgresql://db_user:db_password@postgres:5432/mydb?schema=public
+      - DATABASE_URL=postgresql://db_user:db_password@postgres:5432/mydb
       - POSTGRES_USER=db_user
       - POSTGRES_PASSWORD=db_password
     depends_on:

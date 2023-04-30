@@ -8,6 +8,7 @@ WORKDIR /app
 
 COPY . /app
 
+ENV NODE_ENV=prod
 RUN npm ci
 # Generate prisma client, leave out if generating in `postinstall` script
 RUN npx prisma generate

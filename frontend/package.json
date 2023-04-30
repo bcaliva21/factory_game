@@ -13,7 +13,7 @@
     "preview": "NODE_ENV=prod vite preview",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' 'src/**/*.tsx' --write",
     "lint": "eslint --ext .js,.ts,.tsx .",
-    "postinstall": "npm run build"
+    "postinstall": "NODE_ENV=prod npm run build"
   },
   "dependencies": {
     "@apollo/client": "^3.7.9",

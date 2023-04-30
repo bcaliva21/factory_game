@@ -15,7 +15,7 @@ import { typeDefs } from './cache/schema'
 const devEnv = import.meta.env.VITE_API_URI.includes('localhost')
 
 const http = new HttpLink({
-    credentials: !devEnv && 'include',
+    credentials: devEnv ? undefined : 'include',
     headers: {
         'content-type': 'application/json',
         'x-apollo-operation-name': 'GraphQLRequest',
