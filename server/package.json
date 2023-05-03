@@ -5,41 +5,45 @@
     "main": "index.ts",
     "type": "module",
     "engines": {
-      "node": "18.x"
+        "node": "18.x"
     },
     "prisma": {
-      "seed": "ts-node prisma/seed.ts"
+        "seed": "ts-node prisma/seed.ts"
     },
     "scripts": {
-      "serve": "ts-node --esm index.ts",
-      "postinstall": "prisma generate",
-      "prettier-format": "prettier --config .prettierrc '*.ts' --write",
-      "lint": "eslint --ext .js,.ts,.tsx ."
+        "serve-prod": "NODE_ENV=prod ts-node --esm index.ts",
+        "serve-dev": "NODE_ENV=dev ts-node --esm index.ts",
+        "postinstall": "prisma generate",
+        "prettier-format": "prettier --config .prettierrc '*.ts' --write",
+        "lint": "eslint --ext .js,.ts,.tsx ."
     },
     "dependencies": {
-      "@apollo/server": "^4.4.0",
-      "@prisma/client": "^4.11.0",
-      "bcryptjs": "^2.4.3",
-      "body-parser": "^1.20.2",
-      "cors": "^2.8.5",
-      "docker-compose": "^0.23.19",
-      "express": "^4.18.2",
-      "graphql": "^16.6.0",
-      "jsonwebtoken": "^9.0.0",
-      "ts-node": "^10.9.1"
+        "@apollo/server": "^4.4.0",
+        "@prisma/client": "^4.11.0",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.20.2",
+        "cors": "^2.8.5",
+        "docker-compose": "^0.23.19",
+        "dotenv": "^16.0.3",
+        "express": "^4.18.2",
+        "graphql": "^16.6.0",
+        "jsonwebtoken": "^9.0.0",
+        "ts-node": "^10.9.1"
     },
     "devDependencies": {
-      "@types/bcryptjs": "^2.4.2",
-      "@types/cors": "^2.8.13",
-      "@types/jsonwebtoken": "^9.0.1",
-      "@types/node": "^18.14.2",
-      "@typescript-eslint/eslint-plugin": "^5.54.0",
-      "@typescript-eslint/parser": "^5.54.0",
-      "eslint": "^8.35.0",
-      "prettier": "^2.8.4",
-      "prisma": "^4.11.0",
-      "typescript": "^4.9.3"
+        "@types/bcryptjs": "^2.4.2",
+        "@types/cors": "^2.8.13",
+        "@types/global-agent": "^2.1.1",
+        "@types/jsonwebtoken": "^9.0.1",
+        "@types/node": "^18.14.2",
+        "@typescript-eslint/eslint-plugin": "^5.54.0",
+        "@typescript-eslint/parser": "^5.54.0",
+        "eslint": "^8.35.0",
+        "prettier": "^2.8.4",
+        "prisma": "^4.11.0",
+        "typescript": "^4.9.3"
     },
     "author": "Bradley Caliva",
     "license": "ISC"
-  }
+}
+

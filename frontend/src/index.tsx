@@ -12,7 +12,17 @@ import App from './components/App'
 import { cache } from './cache/'
 import { typeDefs } from './cache/schema'
 
-const http = new HttpLink({ uri: 'http://localhost:4000/' })
+const devEnv = import.meta.env.VITE_API_URI.includes('localhost')
+
+const http = new HttpLink({
+    credentials: devEnv ? undefined : 'include',
+    headers: {
+        'content-type': 'application/json',
+        'x-apollo-operation-name': 'GraphQLRequest',
+    },
+    uri: import.meta.env.VITE_API_URI,
+})
+
 const httpLink = ApolloLink.from([http])
 
 const authLink = setContext((_, { headers }) => {

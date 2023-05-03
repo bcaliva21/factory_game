@@ -8,6 +8,8 @@ WORKDIR /app
 COPY . /app
 # install deps
 # postinstall builds
+ENV NODE_ENV=prod
+
 RUN npm i
 # expose port
 EXPOSE 4173

@@ -33,9 +33,36 @@ const GroundContainer = styled.div<{ time: boolean }>`
     opacity: 0.9;
 `
 
+const sunrise = keyframes`
+    0% {
+        box-shadow: none;
+    }
+`
+
+const rays = keyframes`
+    0% {
+        box-shadow: 
+        0 0 0 0 #FFDE0080,
+        0 0 0 20px #FFDE0080,
+        0 0 0 40px #FFDE0040,
+        0 0 0 60px #FFDE0020,
+        0 0 0 80px #FFDE0010,
+        0 0 40px 100px #FFDE0010;
+    }
+    100% {
+        box-shadow: 
+        0 0 0 20px #FFDE0080,
+        0 0 0 40px #FFDE0040,
+        0 0 0 60px #FFDE0020,
+        0 0 0 80px #FFDE0010,
+        0 0 0 100px #FFDE0000,
+        0 0 40px 100px #FFDE0010;
+    }
+`
+
 const Sun = styled.div`
-    width: 8vw;
-    height: 8vw;
+    width: 160px;
+    height: 160px;
     background-color: yellow;
     position: absolute;
     border-radius: 50%;
@@ -44,6 +71,18 @@ const Sun = styled.div`
     &:hover {
         cursor: pointer;
     }
+	background-color: #FFDE00;
+	border-radius: 50%;
+	box-shadow:
+		0 0 0 20px #FFDE0080,
+		0 0 0 40px #FFDE0040,
+		0 0 0 60px #FFDE0020,
+		0 0 0 80px #FFDE0010,
+		0 0 0 100px #FFDE0000,
+		0 0 40px 100px #FFDE0010;
+	animation:
+		${sunrise} 2s infinite linear forwards,
+		${rays} 2s 2s infinite linear;
 `
 
 const Moon = styled.div`
@@ -176,116 +215,6 @@ const pulseNeg45 = keyframes`
     }
 `
 
-const SunRayBtm = styled.div`
-    width: 0.2vw;
-    height: 1.5vw;
-    background-color: yellow;
-    position: absolute;
-    top: 8.5vw;
-    left: 4vw;
-    border-radius: 25%;
-    animation: ${pulseVert} infinite ease-in-out;
-    animation-duration: 12s;
-    animation-delay: 1.2s;
-`
-
-const SunRayTop = styled.div`
-    width: 0.2vw;
-    height: 1.5vw;
-    background-color: yellow;
-    position: absolute;
-    top: -2vw;
-    left: 4vw;
-    border-radius: 25%;
-    animation: ${pulseVert} infinite ease-in-out;
-    animation-duration: 12s;
-    animation-delay: 1s;
-`
-
-const SunRayRgt = styled.div`
-    width: 0.2vw;
-    height: 1.5vw;
-    background-color: yellow;
-    position: absolute;
-    top: 3.5vw;
-    left: 9.5vw;
-    border-radius: 25%;
-    transform: rotate(90deg);
-    animation: ${pulseHori} infinite ease-in-out;
-    animation-duration: 12s;
-    animation-delay: 0.8s;
-`
-
-const SunRayLft = styled.div`
-    width: 0.2vw;
-    height: 1.5vw;
-    background-color: yellow;
-    position: absolute;
-    top: 3.5vw;
-    left: -1.5vw;
-    border-radius: 25%;
-    transform: rotate(90deg);
-    animation: ${pulseHori} infinite ease-in-out;
-    animation-duration: 12s;
-    animation-delay: 0.12s;
-`
-
-const SunRayBtmLft = styled.div`
-    width: 0.2vw;
-    height: 1.5vw;
-    background-color: yellow;
-    position: absolute;
-    top: 7vw;
-    left: 0vw;
-    transform: rotate(45deg);
-    border-radius: 25%;
-    animation: ${pulse45} infinite ease-in-out;
-    animation-duration: 12s;
-    animation-delay: 0.4s;
-`
-
-const SunRayTopRgt = styled.div`
-    width: 0.2vw;
-    height: 1.5vw;
-    background-color: yellow;
-    position: absolute;
-    top: -0.5vw;
-    left: 8vw;
-    transform: rotate(45deg);
-    border-radius: 25%;
-    animation: ${pulse45} infinite ease-in-out;
-    animation-duration: 12s;
-    animation-delay: 0.2s;
-`
-
-const SunRayBtmRgt = styled.div`
-    width: 0.2vw;
-    height: 1.5vw;
-    background-color: yellow;
-    position: absolute;
-    top: 7vw;
-    left: 8vw;
-    transform: rotate(-45deg);
-    border-radius: 25%;
-    animation: ${pulseNeg45} infinite ease-in-out;
-    animation-duration: 12s;
-    animation-delay: 1.4s;
-`
-
-const SunRayTopLft = styled.div`
-    width: 0.2vw;
-    height: 1.5vw;
-    background-color: yellow;
-    position: absolute;
-    top: -0.5vw;
-    left: 0vw;
-    transform: rotate(-45deg);
-    border-radius: 25%;
-    animation: ${pulseNeg45} infinite ease-in-out;
-    animation-duration: 12s;
-    animation-delay: 1.6s;
-`
-
 enum TimeOfDay {
     DAY = 'day',
     NIGHT = 'night',
@@ -303,16 +232,7 @@ const Environment = () => {
         if (time === TimeOfDay.DAY) {
             return (
                 <DaySkyContainer>
-                    <Sun onClick={flipTime}>
-                        <SunRayBtm />
-                        <SunRayTop />
-                        <SunRayRgt />
-                        <SunRayLft />
-                        <SunRayBtmLft />
-                        <SunRayTopRgt />
-                        <SunRayBtmRgt />
-                        <SunRayTopLft />
-                    </Sun>
+                    <Sun onClick={flipTime} />
                 </DaySkyContainer>
             )
         } else {

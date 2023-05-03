@@ -2,7 +2,8 @@ node_modules
 .DS_Store
 dist
 .env
-.env.test
+.env.prod
+.env.dev
 
 migration_lock.toml
 migration.sql

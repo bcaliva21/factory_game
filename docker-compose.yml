@@ -1,18 +1,17 @@
-# node-graphql-lesson-04/docker-compose.yml
-
 version: '3.8'
 services:
   postgres:
+    container_name: postgres
     image: postgres:13
-    container_name: factory_game_db_${ENV}
+    restart: always
     environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-    ports:
-      - ${POSTGRES_PORT}:5432
+      - POSTGRES_USER=db_user
+      - POSTGRES_PASSWORD=db_password
+      - POSTGRES_DB=mydb
     volumes:
-      - postgres_data_${ENV}:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
 
   frontend:
     build: 
@@ -31,15 +30,15 @@ services:
     ports:
       - 4000:4000
     environment:
-      DATABASE_URL: ${DATABASE_URL}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      - DATABASE_URL=postgresql://db_user:db_password@postgres:5432/mydb
+      - POSTGRES_USER=db_user
+      - POSTGRES_PASSWORD=db_password
     depends_on:
       - postgres
     # restart: always
 
 volumes:
+  postgres:
   frontend:
   server:
-  postgres_data_test:
-  postgres_data_prod:
+
