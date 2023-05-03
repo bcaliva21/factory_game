@@ -100,13 +100,14 @@ const PasswordLengthIndication = styled.div<{ enablePassword?: boolean }>`
     width: 76%;
     margin-left: 10%;
     padding: 5px;
+    font-size: 10px;
     ${({ enablePassword }) => enablePassword ?
         css`
-                border-bottom: 10px solid green;
+                color: #0000;
             `
         :
         css`
-                border-bottom: 10px solid red;
+                color: red;
             `
     }   
 `
@@ -148,7 +149,7 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
     const [loginView, setLoginView] = useState(true)
-    const [enablePassword, setEnablePassword] = useState(false)
+    const [enablePassword, setEnablePassword] = useState(true)
     const [passwordState, setPasswordState] = useState('password')
 
     const [login, { loading: loginLoading, error: loginError }] = useMutation(
@@ -204,9 +205,7 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
     }
 
     const verifyPassword = (value: string) => {
-        // TODO fix regex
         const eightCharRequirement = /^.{8,32}$/;
-        // TODO figure out how to make regex check work
         const passwordValid = eightCharRequirement.test(value)
 
         setEnablePassword(passwordValid)
@@ -276,6 +275,7 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
                             }
                             minLength={8}
                             maxLength={20}
+                            onFocus={(event) => verifyPassword(event.target.value)}
                             required
                         />
                         <ShowPassword
@@ -283,12 +283,14 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
                             src={eye}
                             onClick={(e) => handleShowPassword(e)}
                         />
-                        <PasswordLengthIndication enablePassword={enablePassword} />
+                        <PasswordLengthIndication enablePassword={enablePassword} >
+                            Password must be at least 8 characters
+                        </PasswordLengthIndication>
                     </PasswordContainer>
                     <ActionContainer>
                         <ActionButton
                             type="submit"
-                            disabled={registrationLoading}
+                            disabled={registrationLoading || !enablePassword}
                         >
                             {registrationLoading ? 'Logging in...' : 'Register'}
                         </ActionButton>
