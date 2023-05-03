@@ -93,6 +93,23 @@ const PasswordContainer = styled.div`
     width: 100%;
     height: 10%;
     position: relative;
+    
+`
+
+const PasswordLengthIndication = styled.div<{ enablePassword?: boolean }>`
+    width: 76%;
+    margin-left: 10%;
+    padding: 5px;
+    font-size: 10px;
+    ${({ enablePassword }) => enablePassword ?
+        css`
+                color: #0000;
+            `
+        :
+        css`
+                color: red;
+            `
+    }   
 `
 
 const ShowPassword = styled.input`
@@ -132,6 +149,7 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
     const [loginView, setLoginView] = useState(true)
+    const [enablePassword, setEnablePassword] = useState(true)
     const [passwordState, setPasswordState] = useState('password')
 
     const [login, { loading: loginLoading, error: loginError }] = useMutation(
@@ -184,6 +202,14 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
         return passwordState === 'password'
             ? setPasswordState('text')
             : setPasswordState('password')
+    }
+
+    const verifyPassword = (value: string) => {
+        const eightCharRequirement = /^.{8,32}$/;
+        const passwordValid = eightCharRequirement.test(value)
+
+        setEnablePassword(passwordValid)
+        setPassword(value)
     }
 
     return (
@@ -245,10 +271,11 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
                             type={passwordState}
                             value={password}
                             onChange={(event) =>
-                                setPassword(event.target.value)
+                                verifyPassword(event.target.value)
                             }
                             minLength={8}
                             maxLength={20}
+                            onFocus={(event) => verifyPassword(event.target.value)}
                             required
                         />
                         <ShowPassword
@@ -256,11 +283,14 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
                             src={eye}
                             onClick={(e) => handleShowPassword(e)}
                         />
+                        <PasswordLengthIndication enablePassword={enablePassword} >
+                            Password must be at least 8 characters
+                        </PasswordLengthIndication>
                     </PasswordContainer>
                     <ActionContainer>
                         <ActionButton
                             type="submit"
-                            disabled={registrationLoading}
+                            disabled={registrationLoading || !enablePassword}
                         >
                             {registrationLoading ? 'Logging in...' : 'Register'}
                         </ActionButton>

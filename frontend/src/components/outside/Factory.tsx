@@ -76,7 +76,7 @@ const FactoryBody = styled.div`
     background-color: #ebebeb;
     position: relative;
     height: 60%;
-    width: 90%;
+    width: 90.5%;
 `
 
 const grow = keyframes`
