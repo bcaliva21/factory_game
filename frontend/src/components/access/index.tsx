@@ -49,11 +49,22 @@ const InputHeader = styled.div`
     margin: 10px 0 10px 10%;
 `
 
-const StyledInput = styled.input`
+const StyledInput = styled.input<{ enablePassword?: boolean }>`
     width: 76%;
     font-size: 14px;
     margin-left: 10%;
     padding: 5px;
+    ${({ enablePassword }) => enablePassword ?
+        css`
+            text-decoration: none;
+            text-decoration-color: none;
+        `
+        :
+        css`
+            text-decoration: underline;
+            text-decoration-color: red;
+        `
+    }
 `
 
 const ActionContainer = styled.div`
@@ -132,6 +143,7 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
     const [password, setPassword] = useState('')
     const [name, setName] = useState('')
     const [loginView, setLoginView] = useState(true)
+    const [enablePassword, setEnablePassword] = useState(false)
     const [passwordState, setPasswordState] = useState('password')
 
     const [login, { loading: loginLoading, error: loginError }] = useMutation(
@@ -184,6 +196,16 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
         return passwordState === 'password'
             ? setPasswordState('text')
             : setPasswordState('password')
+    }
+
+    const verifyPassword = (value: string) => {
+        // TODO fix regex
+        const eightCharRequirement = /^.{8,32}$/;
+        // TODO figure out how to make regex check work
+        const passwordValid = eightCharRequirement.test(value)
+
+        setEnablePassword(passwordValid)
+        setPassword(value)
     }
 
     return (
@@ -245,11 +267,12 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
                             type={passwordState}
                             value={password}
                             onChange={(event) =>
-                                setPassword(event.target.value)
+                                verifyPassword(event.target.value)
                             }
                             minLength={8}
                             maxLength={20}
                             required
+                            enablePassword={enablePassword}
                         />
                         <ShowPassword
                             type="image"
