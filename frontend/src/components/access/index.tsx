@@ -49,22 +49,11 @@ const InputHeader = styled.div`
     margin: 10px 0 10px 10%;
 `
 
-const StyledInput = styled.input<{ enablePassword?: boolean }>`
+const StyledInput = styled.input`
     width: 76%;
     font-size: 14px;
     margin-left: 10%;
     padding: 5px;
-    ${({ enablePassword }) => enablePassword ?
-        css`
-            text-decoration: none;
-            text-decoration-color: none;
-        `
-        :
-        css`
-            text-decoration: underline;
-            text-decoration-color: red;
-        `
-    }
 `
 
 const ActionContainer = styled.div`
@@ -104,6 +93,22 @@ const PasswordContainer = styled.div`
     width: 100%;
     height: 10%;
     position: relative;
+    
+`
+
+const PasswordLengthIndication = styled.div<{ enablePassword?: boolean }>`
+    width: 76%;
+    margin-left: 10%;
+    padding: 5px;
+    ${({ enablePassword }) => enablePassword ?
+        css`
+                border-bottom: 10px solid green;
+            `
+        :
+        css`
+                border-bottom: 10px solid red;
+            `
+    }   
 `
 
 const ShowPassword = styled.input`
@@ -272,13 +277,13 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
                             minLength={8}
                             maxLength={20}
                             required
-                            enablePassword={enablePassword}
                         />
                         <ShowPassword
                             type="image"
                             src={eye}
                             onClick={(e) => handleShowPassword(e)}
                         />
+                        <PasswordLengthIndication enablePassword={enablePassword} />
                     </PasswordContainer>
                     <ActionContainer>
                         <ActionButton
