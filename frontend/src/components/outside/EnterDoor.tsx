@@ -1,5 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
+import useSound from 'use-sound'
+import doorSound from '../../assets/door_open.mp3'
+
 
 const EnterDoorContainer = styled.div`
     width: calc(100vw / 8);
@@ -234,14 +237,22 @@ const EnterDoor = ({
     handleEnter: () => void
     handleAccess: () => void
 }) => {
+    const [playSound] = useSound(doorSound)
     return (
         <EnterDoorContainer>
             <DoorFrame
                 hasAuth={hasToken}
-                onClick={() => hasToken && handleEnter()}
+                onClick={() => {
+                    playSound()
+                    hasToken && handleEnter()
+                }}
             >
                 <DoorBarLock hasAuth={hasToken}>
-                    <DoorButton onClick={handleAccess}>
+                    <DoorButton
+                        onClick={(e) => {
+                            handleAccess()
+                        }}
+                    >
                         Login/Register
                     </DoorButton>
 
