@@ -1,13 +1,13 @@
 
 
 > This repo is for a simple scroll timing game.
-> This is a mono repo built with vite and is seperated into three micro services:
+> There are three micro services running on docker containers:
 >
->- Frontend -- React/Typescript/prisma
+>- Frontend -- React/Typescript/vite
 >
->- Backend -- Apollo/Graphql
+>- Backend -- Apollo/Graphql/prisma
 >
->- Database -- Postgres/prisma
+>- Database -- Postgres
 >
 > To get it up and running you must build and run both FE/BE simultaneously
 
