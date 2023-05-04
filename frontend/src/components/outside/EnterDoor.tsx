@@ -249,9 +249,7 @@ const EnterDoor = ({
             >
                 <DoorBarLock hasAuth={hasToken}>
                     <DoorButton
-                        onClick={(e) => {
-                            handleAccess()
-                        }}
+                        onClick={handleAccess}
                     >
                         Login/Register
                     </DoorButton>
