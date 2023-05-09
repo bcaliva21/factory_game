@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 import { useMutation } from '@apollo/client'
 
 import eye from '../../assets/eye.svg'
+import magGlass from '../../assets/mag-glass.svg'
 import { LOGIN_MUTATION, REGISTER_MUTATION } from '../../cache/queries'
 import { accessPageVar } from '../../cache'
 
@@ -278,12 +279,21 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
                             onFocus={(event) => verifyPassword(event.target.value)}
                             required
                         />
-                        <ShowPassword
-                            type="image"
-                            src={eye}
-                            onClick={(e) => handleShowPassword(e)}
-                        />
-                        <PasswordLengthIndication enablePassword={enablePassword} >
+						{passwordState === 'text'
+						?
+							<ShowPassword
+								type="image"
+								src={magGlass}
+								onClick={(e) => handleShowPassword(e)}
+							/>
+						:
+							<ShowPassword
+								type="image"
+								src={eye}
+								onClick={(e) => handleShowPassword(e)}
+							/>
+						}
+                                                <PasswordLengthIndication enablePassword={enablePassword} >
                             Password must be at least 8 characters
                         </PasswordLengthIndication>
                     </PasswordContainer>
