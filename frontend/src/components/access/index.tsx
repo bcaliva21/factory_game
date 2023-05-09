@@ -94,7 +94,6 @@ const PasswordContainer = styled.div`
     width: 100%;
     height: 10%;
     position: relative;
-    
 `
 
 const PasswordLengthIndication = styled.div<{ enablePassword?: boolean }>`
@@ -102,15 +101,14 @@ const PasswordLengthIndication = styled.div<{ enablePassword?: boolean }>`
     margin-left: 10%;
     padding: 5px;
     font-size: 10px;
-    ${({ enablePassword }) => enablePassword ?
-        css`
-                color: #0000;
-            `
-        :
-        css`
-                color: red;
-            `
-    }   
+    ${({ enablePassword }) =>
+        enablePassword
+            ? css`
+                  color: #0000;
+              `
+            : css`
+                  color: red;
+              `}
 `
 
 const ShowPassword = styled.input`
@@ -206,7 +204,7 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
     }
 
     const verifyPassword = (value: string) => {
-        const eightCharRequirement = /^.{8,32}$/;
+        const eightCharRequirement = /^.{8,32}$/
         const passwordValid = eightCharRequirement.test(value)
 
         setEnablePassword(passwordValid)
@@ -276,24 +274,27 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
                             }
                             minLength={8}
                             maxLength={20}
-                            onFocus={(event) => verifyPassword(event.target.value)}
+                            onFocus={(event) =>
+                                verifyPassword(event.target.value)
+                            }
                             required
                         />
-						{passwordState === 'text'
-						?
-							<ShowPassword
-								type="image"
-								src={eyeSlash}
-								onClick={(e) => handleShowPassword(e)}
-							/>
-						:
-							<ShowPassword
-								type="image"
-								src={eye}
-								onClick={(e) => handleShowPassword(e)}
-							/>
-						}
-                                                <PasswordLengthIndication enablePassword={enablePassword} >
+                        {passwordState === 'text' ? (
+                            <ShowPassword
+                                type="image"
+                                src={eyeSlash}
+                                onClick={(e) => handleShowPassword(e)}
+                            />
+                        ) : (
+                            <ShowPassword
+                                type="image"
+                                src={eye}
+                                onClick={(e) => handleShowPassword(e)}
+                            />
+                        )}
+                        <PasswordLengthIndication
+                            enablePassword={enablePassword}
+                        >
                             Password must be at least 8 characters
                         </PasswordLengthIndication>
                     </PasswordContainer>

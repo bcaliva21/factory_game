@@ -186,11 +186,11 @@ const Inside = () => {
     const handleKeydownEvent = useCallback((event: KeyboardEvent): void => {
         const userInput = event.key
         if (game.userInputIsCorrect(userInput)) {
-			new Audio(correct).play()
+            new Audio(correct).play()
             game.resetCycle()
         } else {
             if (intervalId) killTimingInterval()
-			new Audio(invalid).play()
+            new Audio(invalid).play()
             const newScore = game.breakCycle(normalizedHighScore)
             if (newScore === normalizedHighScore) return
 

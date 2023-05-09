@@ -191,7 +191,7 @@ const HorizontalBot = styled.div`
 
 const ExitDoor = ({ handleClose }: { handleClose: () => void }) => {
     const { data, loading, error } = useQuery(GET_GAME_STATE)
-	const [playSound] = useSound(doorSound)
+    const [playSound] = useSound(doorSound)
 
     const gameState = data.gameState
     const gameInProgress = gameState === GAME_STATE_TYPES.IN_PROGRESS
@@ -202,9 +202,7 @@ const ExitDoor = ({ handleClose }: { handleClose: () => void }) => {
     }
 
     return (
-        <ExitDoorContainer
-			onMouseEnter={() => playSound()}
-		>
+        <ExitDoorContainer onMouseEnter={() => playSound()}>
             <DoorFrame onClick={handleClick}>
                 <OutsideMiddle />
                 <LeftDoorMask />
