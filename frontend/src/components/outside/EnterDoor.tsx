@@ -239,7 +239,9 @@ const EnterDoor = ({
 }) => {
     const [playSound] = useSound(doorSound)
     return (
-        <EnterDoorContainer>
+        <EnterDoorContainer
+			onMouseEnter={() => playSound() }
+		>
             <DoorFrame
                 hasAuth={hasToken}
                 onClick={() => {
@@ -258,9 +260,7 @@ const EnterDoor = ({
                 </DoorBarLock>
                 <InsideMiddle />
                 <LeftDoorMask />
-                <LeftDoor
-					onMouseOver={() => playSound()}
-				>
+                <LeftDoor>
                     <LeftDoorVerticalLine />
                     <OpenKnobContainer>
                         <OpenKnobCase>
