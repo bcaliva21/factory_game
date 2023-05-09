@@ -71,18 +71,12 @@ const Sun = styled.div`
     &:hover {
         cursor: pointer;
     }
-	background-color: #FFDE00;
-	border-radius: 50%;
-	box-shadow:
-		0 0 0 20px #FFDE0080,
-		0 0 0 40px #FFDE0040,
-		0 0 0 60px #FFDE0020,
-		0 0 0 80px #FFDE0010,
-		0 0 0 100px #FFDE0000,
-		0 0 40px 100px #FFDE0010;
-	animation:
-		${sunrise} 2s infinite linear forwards,
-		${rays} 2s 2s infinite linear;
+    background-color: #ffde00;
+    border-radius: 50%;
+    box-shadow: 0 0 0 20px #ffde0080, 0 0 0 40px #ffde0040, 0 0 0 60px #ffde0020,
+        0 0 0 80px #ffde0010, 0 0 0 100px #ffde0000, 0 0 40px 100px #ffde0010;
+    animation: ${sunrise} 2s infinite linear forwards,
+        ${rays} 2s 2s infinite linear;
 `
 
 const Moon = styled.div`

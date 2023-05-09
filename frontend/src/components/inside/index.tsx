@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { useQuery, useMutation } from '@apollo/client'
+import invalid from '../../assets/invalid.mp3'
+import correct from '../../assets/correct.mp3'
 
 // cache
 import {
@@ -184,9 +186,11 @@ const Inside = () => {
     const handleKeydownEvent = useCallback((event: KeyboardEvent): void => {
         const userInput = event.key
         if (game.userInputIsCorrect(userInput)) {
+            new Audio(correct).play()
             game.resetCycle()
         } else {
             if (intervalId) killTimingInterval()
+            new Audio(invalid).play()
             const newScore = game.breakCycle(normalizedHighScore)
             if (newScore === normalizedHighScore) return
 
