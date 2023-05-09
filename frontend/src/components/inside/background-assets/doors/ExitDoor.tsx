@@ -1,6 +1,8 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
 import { useQuery } from '@apollo/client'
+import useSound from 'use-sound'
+import doorSound from '../../../../assets/door_open.mp3'
 
 // cache
 import { GET_GAME_STATE } from '../../../../cache/queries'
@@ -189,6 +191,7 @@ const HorizontalBot = styled.div`
 
 const ExitDoor = ({ handleClose }: { handleClose: () => void }) => {
     const { data, loading, error } = useQuery(GET_GAME_STATE)
+	const [playSound] = useSound(doorSound)
 
     const gameState = data.gameState
     const gameInProgress = gameState === GAME_STATE_TYPES.IN_PROGRESS
@@ -198,9 +201,10 @@ const ExitDoor = ({ handleClose }: { handleClose: () => void }) => {
         handleClose()
     }
 
-    console.log(gameState)
     return (
-        <ExitDoorContainer>
+        <ExitDoorContainer
+			onMouseEnter={() => playSound()}
+		>
             <DoorFrame onClick={handleClick}>
                 <OutsideMiddle />
                 <LeftDoorMask />
