@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components'
 import { useMutation } from '@apollo/client'
 
 import eye from '../../assets/eye.svg'
-import magGlass from '../../assets/mag-glass.svg'
+import eyeSlash from '../../assets/eye-slash.svg'
 import { LOGIN_MUTATION, REGISTER_MUTATION } from '../../cache/queries'
 import { accessPageVar } from '../../cache'
 
@@ -283,7 +283,7 @@ const Access = ({ setToken, setUser, setUserHighScore }: AccessProps) => {
 						?
 							<ShowPassword
 								type="image"
-								src={magGlass}
+								src={eyeSlash}
 								onClick={(e) => handleShowPassword(e)}
 							/>
 						:
