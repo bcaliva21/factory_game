@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { useQuery, useMutation } from '@apollo/client'
+import useSound from 'use-sound'
+import invalid from '../../assets/invalid.mp3'
+import correct from '../../assets/correct.mp3'
 
 // cache
 import {
@@ -153,6 +156,8 @@ const Inside = () => {
         ReturnType<typeof setTimeout> | undefined
     >(undefined)
     const { data, loading, error } = useQuery(GET_INSIDE_VARIABLES)
+	const [invalidSound] = useSound(invalid)
+	const [correctSound] = useSound(correct)
 
     if (error) console.log('We need to...')
     if (loading) console.log('load')
@@ -184,9 +189,11 @@ const Inside = () => {
     const handleKeydownEvent = useCallback((event: KeyboardEvent): void => {
         const userInput = event.key
         if (game.userInputIsCorrect(userInput)) {
+			correctSound()
             game.resetCycle()
         } else {
             if (intervalId) killTimingInterval()
+			invalidSound()
             const newScore = game.breakCycle(normalizedHighScore)
             if (newScore === normalizedHighScore) return
 
