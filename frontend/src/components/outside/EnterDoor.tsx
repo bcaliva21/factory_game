@@ -243,7 +243,6 @@ const EnterDoor = ({
             <DoorFrame
                 hasAuth={hasToken}
                 onClick={() => {
-                    playSound()
                     hasToken && handleEnter()
                 }}
             >
@@ -259,7 +258,9 @@ const EnterDoor = ({
                 </DoorBarLock>
                 <InsideMiddle />
                 <LeftDoorMask />
-                <LeftDoor>
+                <LeftDoor
+					onMouseOver={() => playSound()}
+				>
                     <LeftDoorVerticalLine />
                     <OpenKnobContainer>
                         <OpenKnobCase>
